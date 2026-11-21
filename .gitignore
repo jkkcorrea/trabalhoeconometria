@@ -1,0 +1,21 @@
+# Dados baixados e derivados: regeneráveis pelos scripts e potencialmente grandes
+dados_brutos/
+dados_processados/
+resultados_econometricos/*.rds
+figuras_graficos/*.gif
+
+# Arquivos de sessão do R e do RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+# Arquivos temporários do Office e do sistema
+~$*
+Thumbs.db
+desktop.ini
+
+# Material de terceiros, backups e saídas de empacotamento
+Trabalhos Referencias/
+backup_antes_alteracoes/
+envio_professor.zip
+Rplots.pdf

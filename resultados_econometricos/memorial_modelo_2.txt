@@ -1,0 +1,161 @@
+MEMORIAL DE CÁLCULO DO MODELO 2 (MÍNIMOS QUADRADOS ORDINÁRIOS)
+ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + b6 X6 + u_it
+
+1. Dimensões: n = 290 observações; k = 6 parâmetros; n - k = 284 graus de liberdade.
+
+2. Matriz X'X e determinante
+   det(X'X) = 3,305e+21 (escala dos dados; o determinante da matriz de correlação dos regressores é a medida sem escala).
+   det(R) da matriz de correlação dos cinco regressores = 0,3252 (valor longe de zero indica ausência de quase-dependência linear).
+
+2b. Matriz X'X
+                           Intercepto X2 (ensino superior)
+Intercepto                   290,0000            4423,1712
+X2 (ensino superior)        4423,1712           77181,5399
+X3 (dominância industrial)  7444,4568          110570,5133
+X4 (diversificação)          768,8865           11877,7775
+X5 (Selic real)              658,4985            9766,7084
+X6 (distância a Curitiba)  13316,0380          190610,6400
+                           X3 (dominância industrial) X4 (diversificação)
+Intercepto                                  7444,4568            768,8865
+X2 (ensino superior)                      110570,5133          11877,7775
+X3 (dominância industrial)                269411,1527          20674,4502
+X4 (diversificação)                        20674,4502           2124,2864
+X5 (Selic real)                            16143,5214           1728,5864
+X6 (distância a Curitiba)                 326731,0387          32617,9746
+                           X5 (Selic real) X6 (distância a Curitiba)
+Intercepto                        658,4985                13316,0380
+X2 (ensino superior)             9766,7084               190610,6400
+X3 (dominância industrial)      16143,5214               326731,0387
+X4 (diversificação)              1728,5864                32617,9746
+X5 (Selic real)                  4985,5296                30236,5221
+X6 (distância a Curitiba)       30236,5221               765397,2028
+
+2c. Vetor X'y
+   Intercepto                   2279,6482
+   X2 (ensino superior)         34937,8796
+   X3 (dominância industrial)   58986,2352
+   X4 (diversificação)          6062,2127
+   X5 (Selic real)              5189,6689
+   X6 (distância a Curitiba)    103948,0077
+
+3. Inversa (X'X)^-1 (elementos multiplicados por 10^6)
+                            Intercepto X2 (ensino superior)
+Intercepto                 409750,8551           -2845,1564
+X2 (ensino superior)        -2845,1564             118,8286
+X3 (dominância industrial)    314,7228               5,6026
+X4 (diversificação)        -99962,8693             114,5711
+X5 (Selic real)             -1303,5616              11,2169
+X6 (distância a Curitiba)   -2242,9780              12,1890
+                           X3 (dominância industrial) X4 (diversificação)
+Intercepto                                   314,7228         -99962,8693
+X2 (ensino superior)                           5,6026            114,5711
+X3 (dominância industrial)                    15,6277           -260,1953
+X4 (diversificação)                         -260,1953          30527,1559
+X5 (Selic real)                                2,5590            103,8155
+X6 (distância a Curitiba)                     -2,5544            516,6099
+                           X5 (Selic real) X6 (distância a Curitiba)
+Intercepto                      -1303,5616                -2242,9780
+X2 (ensino superior)               11,2169                   12,1890
+X3 (dominância industrial)          2,5590                   -2,5544
+X4 (diversificação)               103,8155                  516,6099
+X5 (Selic real)                   288,4718                    2,9729
+X6 (distância a Curitiba)           2,9729                   16,2506
+
+4. Vetor de estimativas b = (X'X)^-1 X'y
+   Intercepto                   7,3341
+   X2 (ensino superior)         0,0159
+   X3 (dominância industrial)   0,0054
+   X4 (diversificação)          0,0762
+   X5 (Selic real)              0,0066
+   X6 (distância a Curitiba)    -0,0016
+
+5. Soma dos quadrados dos resíduos e variância estimada
+   SQR = y'y - b'X'y = 17932,0860 - 17927,7974 = 4,2886
+   s^2 = SQR/(n - k) = 4,2886/284 = 0,0151;  s = 0,1229
+
+6. Matriz de variância e covariância s^2 (X'X)^-1 (estimador clássico; elementos multiplicados por 10^6)
+                           Intercepto X2 (ensino superior)
+Intercepto                  6187,4999             -42,9637
+X2 (ensino superior)         -42,9637               1,7944
+X3 (dominância industrial)     4,7525               0,0846
+X4 (diversificação)        -1509,5032               1,7301
+X5 (Selic real)              -19,6846               0,1694
+X6 (distância a Curitiba)    -33,8704               0,1841
+                           X3 (dominância industrial) X4 (diversificação)
+Intercepto                                     4,7525          -1509,5032
+X2 (ensino superior)                           0,0846              1,7301
+X3 (dominância industrial)                     0,2360             -3,9291
+X4 (diversificação)                           -3,9291            460,9796
+X5 (Selic real)                                0,0386              1,5677
+X6 (distância a Curitiba)                     -0,0386              7,8011
+                           X5 (Selic real) X6 (distância a Curitiba)
+Intercepto                        -19,6846                  -33,8704
+X2 (ensino superior)                0,1694                    0,1841
+X3 (dominância industrial)          0,0386                   -0,0386
+X4 (diversificação)                 1,5677                    7,8011
+X5 (Selic real)                     4,3561                    0,0449
+X6 (distância a Curitiba)           0,0449                    0,2454
+
+7. Quadro de análise de variância
+   Regressão: gl = 5; SEC = 7,8112; SEC/gl = 1,5622
+   Resíduo:   gl = 284; SQR = 4,2886; s^2 = 0,0151
+   Total:     gl = 289; STC = 12,0998
+   R^2 = SEC/STC = 0,6456;  R^2 ajustado = 0,6393
+
+8. Teste F de significância global
+   H0: b2 = b3 = b4 = b5 = b6 = 0   contra   Ha: ao menos um bj diferente de zero
+   F = (SEC/(k-1))/s^2 = 103,4549; F crítico a 5% com (5; 284) gl = 2,2458; p-valor < 0,0001
+   Decisão: rejeita-se H0 a 5%.
+
+9. Testes t individuais (H0: bj = 0 contra Ha: bj diferente de zero) e intervalos de confiança de 95%
+   t crítico bilateral a 5% com 284 gl = 1,9684
+   Intercepto                   b =     7,3341  ep =   0,0787  t =    93,2368  p =  < 0,0001  IC95 = [7,1792; 7,4889]  rejeita H0
+   X2 (ensino superior)         b =     0,0159  ep =   0,0013  t =    11,8917  p =  < 0,0001  IC95 = [0,0133; 0,0186]  rejeita H0
+   X3 (dominância industrial)   b =     0,0054  ep =   0,0005  t =    11,1393  p =  < 0,0001  IC95 = [0,0045; 0,0064]  rejeita H0
+   X4 (diversificação)          b =     0,0762  ep =   0,0215  t =     3,5491  p =    0,0005  IC95 = [0,0339; 0,1185]  rejeita H0
+   X5 (Selic real)              b =     0,0066  ep =   0,0021  t =     3,1782  p =    0,0016  IC95 = [0,0025; 0,0107]  rejeita H0
+   X6 (distância a Curitiba)    b =    -0,0016  ep =   0,0005  t =    -3,1733  p =    0,0017  IC95 = [-0,0025; -0,0006]  rejeita H0
+
+10. Multicolinearidade: tolerância e fator de inflação da variância (regra de Gujarati e Porter: FIV > 10)
+   X2 (ensino superior)         R2_j = 0,1340  TOL = 0,8660  FIV = 1,1548  sem multicolinearidade severa
+   X3 (dominância industrial)   R2_j = 0,1829  TOL = 0,8171  FIV = 1,2238  sem multicolinearidade severa
+   X4 (diversificação)          R2_j = 0,6178  TOL = 0,3822  FIV = 2,6166  sem multicolinearidade severa
+   X5 (Selic real)              R2_j = 0,0068  TOL = 0,9932  FIV = 1,0068  sem multicolinearidade severa
+   X6 (distância a Curitiba)    R2_j = 0,6003  TOL = 0,3997  FIV = 2,5019  sem multicolinearidade severa
+
+11. Coeficientes de determinação parcial r2 = t^2/(t^2 + n - k)
+   X2 (ensino superior)         0,3324
+   X3 (dominância industrial)   0,3041
+   X4 (diversificação)          0,0425
+   X5 (Selic real)              0,0343
+   X6 (distância a Curitiba)    0,0342
+
+12. Teste F de contribuição incremental (F = ((SQR_r - SQR)/m)/s^2)
+   H0: os coeficientes do bloco são todos iguais a zero   contra   Ha: ao menos um coeficiente do bloco é diferente de zero
+   X2 (capital humano)              m = 1  F = 141,4124  F crítico = 3,8744  p = < 0,0001  rejeita H0 a 5%
+   X3 e X4 (estrutura produtiva)    m = 2  F = 96,9984  F crítico = 3,0276  p = < 0,0001  rejeita H0 a 5%
+   X5 (macroeconomia)               m = 1  F = 10,1012  F crítico = 3,8744  p = 0,0016  rejeita H0 a 5%
+   X6 (localização)                 m = 1  F = 10,0697  F crítico = 3,8744  p = 0,0017  rejeita H0 a 5%
+
+13. Previsão de ln(Y) com intervalo de 95% para a média e para o valor individual
+   médias amostrais dos regressores     ln previsto = 7,8609  média [7,8467; 7,8751]  individual [7,6186; 8,1032]
+   valores de Curitiba em 2021          ln previsto = 8,2381  média [8,1774; 8,2987]  individual [7,9887; 8,4874]
+
+14. Teste de Breusch-Pagan, passo a passo
+   H0: homocedasticidade   contra   Ha: a variância dos erros depende dos regressores
+   R^2 da regressão auxiliar de e^2 sobre X = 0,0450;  LM = n R^2 = 290 x 0,0450 = 13,0536
+   Qui-quadrado crítico a 5% com 5 gl = 11,0705; p-valor 0,0229. Decisão: rejeita-se H0.
+
+15. Estatística de Durbin-Watson, passo a passo (painel empilhado ordenado por município e ano)
+   H0: sem autocorrelação de primeira ordem   contra   Ha: autocorrelação de primeira ordem (rho diferente de zero, teste bilateral)
+   soma((e_t - e_t-1)^2) = 1,8127;  soma(e_t^2) = 4,2886;  d = 0,4227
+   rho aproximado = 1 - d/2 = 0,7887. p-valor de lmtest::dwtest = < 0,0001.
+   A decisão usa o p-valor exato, porque n = 290 não consta nas linhas usuais das tabelas de dL e dU. Como as linhas vizinhas de municípios diferentes entram como defasagem (28 pares), o valor é uma referência; a evidência válida está em calibracao_autocorrelacao.csv.
+
+16. Conferência contra stats::lm() (maior diferença absoluta)
+   coeficientes   3.27e-13
+   erros_padrao   1.80e-12
+   R2             1.62e-11
+   R2_ajustado    1.65e-11
+   F_global       7.34e-09
+   SQR            1.96e-10

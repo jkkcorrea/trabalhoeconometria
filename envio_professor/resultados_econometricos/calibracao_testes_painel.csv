@@ -1,0 +1,8 @@
+teste,hipotese_nula,estatistica,graus_liberdade,p_valor
+Teste F de efeitos individuais (pooling contra within),sem efeitos individuais,75.8927686572733,28; 257,1.0445932026356077e-107
+Breusch-Pagan de multiplicadores de Lagrange (efeitos individuais),sem efeitos individuais,648.1977521033945,1,5.50890651395097e-143
+Hausman (efeitos fixos contra efeitos aleatórios),efeitos aleatórios consistentes,30.945442204408902,4,3.140855458977071e-6
+Mundlak: médias por município = 0 (gl residuais),efeito do município não correlacionado com X,14.764146590177829,3; 281,5.924499524045947e-9
+Mundlak: médias por município = 0 (gl do denominador = G - 1),efeito do município não correlacionado com X,14.764146590177829,3; 28,5.919719048456458e-6
+Wooldridge de autocorrelação em painel (within),sem autocorrelação de primeira ordem,32.118296060566244,1; 259,3.857711957962593e-8
+"Breusch-Godfrey de painel, ordem 1 (within)",sem autocorrelação de ordem 1,25.573547692278062,1,4.258373139979714e-7

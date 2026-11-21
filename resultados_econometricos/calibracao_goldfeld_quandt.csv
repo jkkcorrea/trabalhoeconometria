@@ -1,0 +1,4 @@
+teste,ordenado_por,hipotese_nula,estatistica_f,gl_numerador,gl_denominador,p_valor,p_valor_bilateral
+Goldfeld-Quandt,vinculos_ativos,homocedasticidade,1.4317247281606347,110,110,0.03055362539998501,0.06110725079997002
+Goldfeld-Quandt,prop_superior,homocedasticidade,1.047943554498042,110,110,0.40322492891581035,0.8064498578316207
+Goldfeld-Quandt,dom_industrial,homocedasticidade,1.197357982264159,110,110,0.17315640631525844,0.3463128126305169

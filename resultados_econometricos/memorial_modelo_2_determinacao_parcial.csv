@@ -1,0 +1,6 @@
+variavel,estatistica_t,r2_parcial,leitura
+X2 (ensino superior),11.891694112740682,0.3324124839107012,fração da variação de ln(Y) não explicada pelas demais variáveis que X_j explica
+X3 (dominância industrial),11.139318912453145,0.30406557559737163,fração da variação de ln(Y) não explicada pelas demais variáveis que X_j explica
+X4 (diversificação),3.5490740756466073,0.04246830673152557,fração da variação de ln(Y) não explicada pelas demais variáveis que X_j explica
+X5 (Selic real),3.1782388467063973,0.034346007742558166,fração da variação de ln(Y) não explicada pelas demais variáveis que X_j explica
+X6 (distância a Curitiba),-3.173271875515509,0.03424241245368301,fração da variação de ln(Y) não explicada pelas demais variáveis que X_j explica

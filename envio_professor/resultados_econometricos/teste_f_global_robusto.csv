@@ -1,0 +1,16 @@
+modelo,matriz,hipotese,estatistica_f,gl_numerador,gl_denominador,p_valor
+Modelo 2,Clássico (MQO),todas as inclinações = 0,103.45494540653401,5,284,7.280339239540685e-62
+Modelo 2,White HC1,todas as inclinações = 0,86.67086749294732,5,284,4.386973872812233e-55
+Modelo 2,Newey-West,todas as inclinações = 0,22.417148569137524,5,284,6.092174307199554e-19
+Modelo 2,Agrupado por município,todas as inclinações = 0,23.654333739240588,5,284,7.134779351602425e-20
+Modelo 2,Agrupado por município e ano,todas as inclinações = 0,28.962308352397873,5,284,1.0036400575419552e-23
+Modelo 3,Clássico (MQO),todas as inclinações = 0,95.43520932663995,6,283,4.725778286990391e-65
+Modelo 3,White HC1,"inclinações = 0, exceto dummy_curitiba",73.77544998337612,5,283,2.9115163821779868e-49
+Modelo 3,Newey-West,"inclinações = 0, exceto dummy_curitiba",17.469238359172643,5,283,4.484047167782283e-15
+Modelo 3,Agrupado por município,"inclinações = 0, exceto dummy_curitiba",20.828296885449465,5,283,1.0219643855744e-17
+Modelo 3,Agrupado por município e ano,"inclinações = 0, exceto dummy_curitiba",27.134981532222746,5,283,2.069448077274794e-22
+Modelo 3b,Clássico (MQO),todas as inclinações = 0,82.018527045691,7,282,2.702923633684817e-64
+Modelo 3b,White HC1,"inclinações = 0, exceto dummy_curitiba",58.26977651157794,6,282,1.314568787291312e-46
+Modelo 3b,Newey-West,"inclinações = 0, exceto dummy_curitiba",19.053654713194064,6,282,1.2652690043753186e-18
+Modelo 3b,Agrupado por município,"inclinações = 0, exceto dummy_curitiba",19.927891589104497,6,282,2.1082195769494076e-19
+Modelo 3b,Agrupado por município e ano,"inclinações = 0, exceto dummy_curitiba",6.945304563463121,6,282,6.725517629408213e-7

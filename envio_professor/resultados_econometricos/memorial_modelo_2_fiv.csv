@@ -1,0 +1,6 @@
+variavel,R2_auxiliar,tolerancia,fiv,decisao
+X2 (ensino superior),0.13402628494698526,0.8659737150530147,1.154769460801452,sem multicolinearidade severa
+X3 (dominância industrial),0.18285472857824484,0.8171452714217552,1.2237726080946354,sem multicolinearidade severa
+X4 (diversificação),0.6178185817197872,0.3821814182802128,2.616558399149607,sem multicolinearidade severa
+X5 (Selic real),0.006802933286889301,0.9931970667131107,1.006849530183776,sem multicolinearidade severa
+X6 (distância a Curitiba),0.600310279478478,0.39968972052152196,2.501940752179423,sem multicolinearidade severa

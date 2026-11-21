@@ -1,0 +1,7 @@
+cenario,modelo,municipios,delta_pontos,variacao_pct,ic_inf_pct,ic_sup_pct,minimo_pct,maximo_pct,municipio_do_minimo,municipio_do_maximo
+Cenário 1: +10 pontos em X3,MQO empilhado (Modelo 2),NA,10,5.560416949666247,NA,NA,NA,NA,NA,NA
+Cenário 1: +10 pontos em X3,Efeitos fixos linear,NA,10,-0.48330011009083407,-1.824693612934336,0.8764211840851965,NA,NA,NA,NA
+Cenário 1: +10 pontos em X3,"Efeitos fixos com quadráticos (média dos dois municípios, base 2021)",2,10,-0.38151089913281977,NA,NA,-0.40448064842548703,-0.3585411498401525,Fazenda Rio Grande,Almirante Tamandaré
+Cenário 2: +5 pontos em X2,MQO empilhado (Modelo 2),NA,5,8.290523103751246,NA,NA,NA,NA,NA,NA
+Cenário 2: +5 pontos em X2,Efeitos fixos linear,NA,5,4.3984046244962105,2.4304199715117436,6.40419995516277,NA,NA,NA,NA
+Cenário 2: +5 pontos em X2,"Efeitos fixos com quadráticos (média dos 29 municípios, base 2021)",29,5,3.7479272184553105,NA,NA,-3.77926361158355,7.646813624898607,Curitiba,Bocaiúva do Sul
