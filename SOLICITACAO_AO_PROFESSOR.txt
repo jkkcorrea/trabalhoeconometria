@@ -38,7 +38,7 @@ PERGUNTAS
 
 4. Normalidade. Jarque-Bera rejeita nos dois modelos: Modelo 2, estatística 514,4 (gl 2), assimetria 1,74 e curtose 8,52; Modelo 4, estatística 615,9, assimetria −0,94 e curtose 9,89. Basta declarar como limitação?
 
-5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios (Modelo 4) tem p = 0,050. Só com as divisões com vínculo, p = 0,442. Entre municípios (Modelo 2), p = 0,0001 nas duas definições. Qual definição usar?
+5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios (Modelo 4) tem p = 0,050. Só com as divisões com vínculo, p = 0,442. Entre municípios (Modelo 2), p = 0,0001 com as 87 divisões e p = 0,001 só com as divisões com vínculo. Qual definição usar?
 
 6. Teste das carreiras (Gujarati, 4ª ed., pp. 493-494). Ele conta as sequências de sinais dos resíduos (+ ou −) em cada série. A aproximação normal exige N1 > 10 resíduos positivos e N2 > 10 negativos na mesma série. Cada município tem 10 anos, então a condição não se cumpre em nenhuma das 58 séries (29 municípios, 2 modelos). O teste não foi aplicado. Podemos declarar isso, ou há outro procedimento ensinado para séries curtas?
 
