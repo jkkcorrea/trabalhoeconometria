@@ -4,14 +4,13 @@
 
 | Fonte | Conteúdo usado |
 |---|---|
-| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação, variáveis dummy |
-| Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |
+| Gujarati, D. N.; Porter, D. C. Econometria Básica. Edição citada pelo professor: 5ª ed., AMGH, 2011. O PDF usado neste trabalho é a 4ª edição (McGraw-Hill, 2004); as páginas citadas são as do PDF. | fonte principal dos métodos (ver tabela abaixo) |
 | Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |
 | Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |
-| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU (a conferir) |
-| Hoffmann, R. Análise de regressão: uma introdução à econometria (livro aberto da USP, 2016, DOI 10.11606/9788592105709). Não é a edição citada pelo professor (1987). | capítulo 5 (variáveis binárias); tabela VI (Durbin-Watson, a partir de n = 15) |
+| Gujarati, Apêndice D, Tabela D.5A (PDF p. 995): n = 10, k = 5, 5%: dL = 0,243 e dU = 2,822 | Durbin-Watson por município (conferido no livro) |
 | Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |
-| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |
+| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação (Breusch-Godfrey, teste das carreiras, Durbin-Watson, medidas corretivas MQG e Newey-West, este último não aplicado ao painel), medidas de desigualdade | confirmação dos métodos ensinados |
+| Gujarati (PDF da 4ª ed.): cap. 5, seção 5.12 (Jarque-Bera, PDF pp. 176 e 177); cap. 8 (Chow, PDF pp. 303 a 309); cap. 9 (dummies, PDF pp. 332 a 352); cap. 11 (heterocedasticidade: Goldfeld-Quandt, Glejser, Park, White, MQP, PDF pp. 432 a 462); cap. 12 (autocorrelação: teste das carreiras PDF p. 493, Breusch-Godfrey PDF pp. 499 e 500, Durbin-Watson PDF pp. 495 a 499, Cochrane-Orcutt e Prais-Winsten PDF pp. 510 a 528, Newey-West, citado e não aplicado, PDF p. 503); cap. 13 (RESET PDF pp. 549 a 552, outliers, leverage e influência PDF pp. 568 e 569) | páginas citadas pelo trabalho |
 
 ## Dados
 

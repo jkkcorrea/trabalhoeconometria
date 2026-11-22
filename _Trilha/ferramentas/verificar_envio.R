@@ -27,6 +27,8 @@ esperado <- c("LEIAME.md",
                                         "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv", "especificacao_acrescimo_municipios.csv",
                                         "comparacao_selic_producao.csv", "comparacao_f_retirar_selic.csv",
                                         "projecao_selic_m4.csv", "efeito_selic_projecao.csv", "robustez_x4_definicao_gini.csv",
+                                        "normalidade_residuos.csv", "influencia_observacoes.csv", "influencia_sensibilidade.csv",
+                                        "autocorrelacao_correcao.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -47,8 +49,9 @@ registrar("A1b", "Sem saídas de métodos removidos nem arquivos antigos", lengt
 
 # Métodos fora do escopo ensinado: não podem aparecer nos scripts nem nos documentos.
 proibidos <- c("mundlak", "hausman", "plm::", "vcovCL", "clustered", "cluster", "bootstrap", "webb", "wild",
-               "rademacher", "prais", "neweywest", "newey", "smearing", "duan",
-               "boxcox", "box-cox", "jarque", "efeitos fixos", "within", "pbgtest", "pwartest", "vcovHAC")  # exp() sem correção é a retransformação autorizada (CLAUDE.md, seção 6); smearing e Duan já barrados
+               "rademacher", "neweywest", "newey", "smearing", "duan",
+               "boxcox", "box-cox", "efeitos fixos", "within", "pbgtest", "pwartest", "vcovHAC")
+# Newey-West não é aplicado ao painel (apenas citado como não aplicado, em bloco de "não aplicados").  # exp() sem correção é a retransformação autorizada (CLAUDE.md, seção 6); smearing e Duan já barrados
 arquivos_texto <- list.files(DIR, pattern = "\\.(R|md|csv|txt)$", recursive = TRUE, full.names = TRUE)
 arquivos_texto <- arquivos_texto[!grepl("08_verificacao.md$|/resultados_econometricos/.*\\.csv$|/dados_processados/", arquivos_texto)]
 achados <- character()
@@ -59,10 +62,12 @@ for (f in arquivos_texto) {
   dentro <- FALSE
   mantem <- logical(length(x))
   for (i in seq_along(x)) {
-    if (grepl("^## ", x[i])) dentro <- grepl("remov", x[i])
+    if (grepl("^## ", x[i])) dentro <- grepl("remov|não aplicad", x[i])
     mantem[i] <- !dentro
   }
   x <- x[mantem]
+  # Linha que nomeia um método só para dizer que ele não é aplicado não é uso (ex.: "Newey-West não é aplicado").
+  x <- x[!grepl("não (é )?aplicad", x)]
   for (p in proibidos) {
     h <- grep(p, x, fixed = !grepl("\\\\|\\(|\\[|::", p))
     if (length(h)) achados <- c(achados, sprintf("%s (%s)", sub(paste0("^", DIR, "/"), "", f), p))
@@ -216,6 +221,55 @@ registrar("C9", "Projeção da Selic recalculada (cenário base = ajuste de 2021
           nrow(base9) == 29 && nrow(mais9) == 29 && nrow(menos9) == 29 && d_base < 1e-8 && d_mais < 1e-8 &&
             d_menos < 1e-8 && d_exp < 1e-6 && abs(ef$efeito_ln_por_pp[1] - b_s) < 1e-8,
           sprintf("desvios: base %.1e; +1 p.p. %.1e; -1 p.p. %.1e; exp %.1e", d_base, d_mais, d_menos, d_exp))
+
+# ============================== C10 a C13: normalidade, correção e alavancagem ==============================
+# C10: Jarque-Bera do Modelo 4 recalculado a partir dos resíduos (Gujarati, cap. 5, seção 5.12).
+e4 <- stats::residuals(m4); n4 <- length(e4); e4c <- e4 - mean(e4)
+m2_ <- mean(e4c^2); S4 <- mean(e4c^3) / m2_^1.5; K4 <- mean(e4c^4) / m2_^2
+JB4 <- n4 * (S4^2 / 6 + (K4 - 3)^2 / 24)
+nor <- le("resultados_econometricos/normalidade_residuos.csv")
+jb_arq <- nor$estatistica[nor$modelo == "Modelo 4"]
+registrar("C10", "Jarque-Bera do Modelo 4 recalculado a partir dos resíduos", abs(JB4 - jb_arq) < 1e-6,
+          sprintf("calculado %.4f; no arquivo %.4f", JB4, jb_arq))
+
+# C11: Prais-Winsten do Modelo 2 recalculado: ρ do arquivo deve ser ponto fixo da regressão auxiliar
+# dos resíduos originais, e os coeficientes devem bater com a regressão transformada à mão.
+cor_arq <- le("resultados_econometricos/autocorrelacao_correcao.csv")
+pw2 <- cor_arq[cor_arq$modelo == "Modelo 2" & cor_arq$metodo == "Prais-Winsten", ]
+rho_pw <- pw2$rho[1]
+m2_ols <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + dist_curitiba_km, data = painel)
+Xo <- stats::model.matrix(m2_ols); yo <- painel$ln_salario_real
+prim <- !duplicated(painel$id_municipio); ant <- which(!prim) - 1L
+Xt <- Xo; yt <- yo
+Xt[!prim, ] <- Xo[!prim, ] - rho_pw * Xo[ant, ]; yt[!prim] <- yo[!prim] - rho_pw * yo[ant]
+Xt[prim, ] <- sqrt(1 - rho_pw^2) * Xo[prim, ]; yt[prim] <- sqrt(1 - rho_pw^2) * yo[prim]
+b_pw <- solve(t(Xt) %*% Xt, t(Xt) %*% yt)
+e_pw <- as.vector(yo - Xo %*% b_pw)
+rho_fp <- sum(e_pw[!prim] * e_pw[ant]) / sum(e_pw[ant]^2)
+pw_arq <- pw2$estimativa[pw2$termo == "prop_superior"]
+registrar("C11", "Prais-Winsten do Modelo 2 recalculado (coeficiente de X2 e ponto fixo de ρ)",
+          abs(b_pw[2] - pw_arq) < 1e-6 && abs(rho_fp - rho_pw) < 1e-6,
+          sprintf("X2 calculado %.6f, no arquivo %.6f; ρ ponto fixo %.6f, no arquivo %.6f", b_pw[2], pw_arq, rho_fp, rho_pw))
+
+# C12: decisão de Durbin-Watson conferida com as zonas do Guia P2 e com os valores da Tabela D.5A (n = 10, k = 5).
+aut <- le("resultados_econometricos/autocorrelacao_por_municipio.csv")
+aut2 <- aut[aut$modelo == "Modelo 2", ]
+dl <- 0.243; du <- 2.822
+esperado <- ifelse(aut2$durbin_watson < dl, "positiva",
+                   ifelse(aut2$durbin_watson > 4 - dl, "negativa", ifelse(aut2$durbin_watson > du & aut2$durbin_watson < 4 - du, "não rejeita", "inconclusiva")))
+obtido <- ifelse(grepl("^positiva", aut2$decisao_dw_tabela), "positiva",
+                 ifelse(grepl("^negativa", aut2$decisao_dw_tabela), "negativa",
+                        ifelse(aut2$decisao_dw_tabela == "não rejeita H0", "não rejeita", "inconclusiva")))
+registrar("C12", "Decisões de Durbin-Watson por município conferidas com dL = 0,243 e dU = 2,822 (Gujarati, Tabela D.5A)",
+          all(esperado == obtido) && abs(dl - 0.243) < 1e-12 && abs(du - 2.822) < 1e-12,
+          sprintf("%d de %d municípios com decisão igual à regra", sum(esperado == obtido), length(esperado)))
+
+# C13: traço da matriz chapéu igual ao número de parâmetros (alavancagens somam k).
+inf <- le("resultados_econometricos/influencia_observacoes.csv")
+soma2 <- sum(inf$alavancagem[inf$modelo == "Modelo 2"]); soma4 <- sum(inf$alavancagem[inf$modelo == "Modelo 4"])
+registrar("C13", "Alavancagens somam o número de parâmetros (traço da matriz chapéu)",
+          abs(soma2 - length(stats::coef(m2_ols))) < 1e-6 && abs(soma4 - length(stats::coef(m4))) < 1e-6,
+          sprintf("Modelo 2: %.4f (k = %d); Modelo 4: %.4f (k = %d)", soma2, length(stats::coef(m2_ols)), soma4, length(stats::coef(m4))))
 
 # ============================== E. Resumo final ==================================
 status_ok <- sum(resultado$situacao == "APROVADA"); total <- nrow(resultado)

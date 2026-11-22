@@ -124,7 +124,9 @@ testes_diagnostico <- function(modelos, painel) {
     bp <- lmtest::bptest(m)
     lista[[length(lista) + 1]] <- tibble::tibble(
       modelo = nome, teste = "Breusch-Pagan-Godfrey (bptest, studentized)",
-      hipotese_nula = "erros homocedásticos", estatistica = unname(bp$statistic),
+      hipotese_nula = "H0: Var(u_t) = sigma^2 para todo t (erros homocedásticos; inclinações da regressão auxiliar dos resíduos ao quadrado iguais a zero)",
+      hipotese_alternativa = "Ha: Var(u_t) depende de ao menos um regressor (heterocedasticidade); critério BP ~ qui-quadrado com k - 1 gl",
+      estatistica = unname(bp$statistic),
       gl = as.character(unname(bp$parameter)), p_valor = bp$p.value
     )
   }
@@ -134,7 +136,9 @@ testes_diagnostico <- function(modelos, painel) {
   gq <- lmtest::gqtest(m2, order.by = painel$dist_curitiba_km, fraction = 0.2, alternative = "greater")
   lista[[length(lista) + 1]] <- tibble::tibble(
     modelo = "Modelo 2", teste = "Goldfeld-Quandt (gqtest, unilateral; ordenado por dist_curitiba_km)",
-    hipotese_nula = "variância constante", estatistica = unname(gq$statistic),
+    hipotese_nula = "H0: sigma_1^2 = sigma_2^2 (variância constante entre os dois segmentos)",
+    hipotese_alternativa = "Ha: sigma_2^2 > sigma_1^2 (variância cresce com a distância); estatística F = SQR2/SQR1 com gl (n - omitidas)/2 - k",
+    estatistica = unname(gq$statistic),
     gl = paste(unname(gq$parameter), collapse = "; "), p_valor = gq$p.value
   )
   dplyr::bind_rows(lista) |>
@@ -186,6 +190,106 @@ gerar_figuras <- function(m2, painel) {
   invisible(TRUE)
 }
 
+
+# -----------------------------------------------------------------------------
+# 5b. Normalidade dos resíduos: Jarque-Bera (Gujarati, cap. 5, seção 5.12)
+# -----------------------------------------------------------------------------
+jarque_bera <- function(e) {
+  n <- length(e)
+  e <- e - mean(e)
+  m2 <- mean(e^2); m3 <- mean(e^3); m4 <- mean(e^4)
+  S <- m3 / m2^1.5
+  K <- m4 / m2^2
+  JB <- n * (S^2 / 6 + (K - 3)^2 / 24)
+  list(S = S, K = K, JB = JB, p = stats::pchisq(JB, df = 2, lower.tail = FALSE))
+}
+
+testes_normalidade <- function(modelos) {
+  purrr::imap_dfr(modelos[c("Modelo 2", "Modelo 4")], function(m, nome) {
+    jb <- jarque_bera(stats::residuals(m))
+    tibble::tibble(
+      modelo = nome, teste = "Jarque-Bera (Gujarati, cap. 5, seção 5.12)",
+      hipotese_nula = "H0: os resíduos têm distribuição normal (S = 0 e K = 3)",
+      hipotese_alternativa = "Ha: os resíduos não têm distribuição normal (S diferente de 0 ou K diferente de 3)",
+      estatistica = jb$JB, gl = "2", p_valor = jb$p, decisao_5pct = decisao(jb$p),
+      assimetria_S = jb$S, curtose_K = jb$K
+    )
+  })
+}
+
+# -----------------------------------------------------------------------------
+# 5c. Influência: outliers, alavancagem e pontos influentes (Gujarati, cap. 13, "Outliers, Leverage, and Influence")
+# -----------------------------------------------------------------------------
+# O Gujarati define os três conceitos e não apresenta teste formal (distância de Cook e DFBETAS não
+# constam do material). Aqui: alavancagem (diagonal da matriz chapéu H = X (X'X)^-1 X'), resíduo padronizado
+# e variação de cada coeficiente ao retirar a observação, em erros-padrão do modelo completo.
+# Limiares (2k/n para alavancagem, |r| > 2 para outlier, 1 erro-padrão para influência) são.
+diagnosticos_influencia <- function(modelo, nome, painel, variaveis_foco) {
+  n <- stats::nobs(modelo)
+  k <- length(stats::coef(modelo))
+  h <- stats::hatvalues(modelo)
+  r <- stats::rstandard(modelo)
+  b <- stats::coef(modelo)
+  ep <- sqrt(diag(stats::vcov(modelo)))
+  formula_m <- stats::formula(modelo)
+  var_maxima <- numeric(n); var_nome <- character(n)
+  for (i in seq_len(n)) {
+    bi <- stats::coef(stats::lm(formula_m, data = painel[-i, ]))
+    dif <- abs(bi[variaveis_foco] - b[variaveis_foco]) / ep[variaveis_foco]
+    var_maxima[i] <- max(dif)
+    var_nome[i] <- names(dif)[which.max(dif)]
+  }
+  tibble::tibble(
+    modelo = nome, id_municipio = painel$id_municipio, nome_municipio = painel$nome_municipio, ano = painel$ano,
+    alavancagem = unname(h), residuo_padronizado = unname(r),
+    alavancagem_alta = h > 2 * k / n, outlier = abs(r) > 2,
+    variacao_max_ep = var_maxima, coeficiente_mais_afetado = var_nome,
+    influente = var_maxima > 1
+  )
+}
+
+influencia_modelos <- function(modelos, painel) {
+  foco_m2 <- c("prop_superior", "dom_industrial", "gini_setorial", "selic_real", "dist_curitiba_km")
+  foco_m4 <- c("prop_superior", "dom_industrial", "gini_setorial", "selic_real")
+  dplyr::bind_rows(
+    diagnosticos_influencia(modelos[["Modelo 2"]], "Modelo 2", painel, foco_m2),
+    diagnosticos_influencia(modelos[["Modelo 4"]], "Modelo 4", painel, foco_m4)
+  )
+}
+
+# Sensibilidade: coeficientes com e sem as observações marcadas como influentes (Gujarati, cap. 13).
+sensibilidade_influentes <- function(modelos, painel, influencia) {
+  focais <- c("prop_superior", "dom_industrial", "gini_setorial", "selic_real", "dist_curitiba_km")
+  purrr::map_dfr(c("Modelo 2", "Modelo 4"), function(nome) {
+    inf <- influencia[influencia$modelo == nome & influencia$influente, ]
+    if (nrow(inf) == 0) return(NULL)
+    m <- modelos[[nome]]
+    retirar <- paste(painel$id_municipio, painel$ano) %in% paste(inf$id_municipio, inf$ano)
+    m_sem <- stats::update(m, data = painel[!retirar, ])
+    cc <- stats::coef(m); cs <- stats::coef(m_sem)
+    termos <- intersect(focais, names(cc))
+    tibble::tibble(
+      modelo = nome,
+      observacoes_retiradas = paste(paste(inf$nome_municipio, inf$ano, sep = " "), collapse = "; "),
+      termo = termos,
+      coef_completo = unname(cc[termos]),
+      coef_sem_influentes = unname(cs[termos]),
+      variacao_percentual = 100 * (unname(cs[termos]) - unname(cc[termos])) / abs(unname(cc[termos]))
+    )
+  })
+}
+
+figura_normalidade <- function(modelo4) {
+  g <- ggplot2::ggplot(data.frame(e = stats::residuals(modelo4)), ggplot2::aes(sample = e)) +
+    ggplot2::stat_qq(colour = "#5F7F62", alpha = 0.7) +
+    ggplot2::stat_qq_line(colour = "grey40") +
+    ggplot2::labs(title = "Gráfico de probabilidade normal dos resíduos (Modelo 4)",
+                  subtitle = "Pontos sobre a reta indicam resíduos aproximadamente normais (Gujarati, cap. 5)",
+                  x = "Quantis teóricos da normal", y = "Quantis dos resíduos") +
+    ggplot2::theme_bw(base_size = 11)
+  ggplot2::ggsave(file.path(DIR_FIGURAS, "diag5_normalidade_npp.png"), g, width = 7, height = 5, dpi = 200, bg = "white")
+}
+
 # -----------------------------------------------------------------------------
 # 6. Execução
 # -----------------------------------------------------------------------------
@@ -207,8 +311,18 @@ executar_etapa_4 <- function() {
 
   gerar_figuras(modelos[["Modelo 2"]], painel)
 
+  normalidade <- testes_normalidade(modelos)
+  readr::write_csv(normalidade, file.path(DIR_RESULTADOS, "normalidade_residuos.csv"))
+  figura_normalidade(modelos[["Modelo 4"]])
+
+  influencia <- influencia_modelos(modelos, painel)
+  readr::write_csv(influencia, file.path(DIR_RESULTADOS, "influencia_observacoes.csv"))
+  sensibilidade <- sensibilidade_influentes(modelos, painel, influencia)
+  readr::write_csv(sensibilidade, file.path(DIR_RESULTADOS, "influencia_sensibilidade.csv"))
+
   message("Etapa 4 concluída: coeficientes, testes, VIF, ANOVA e figuras de diagnóstico gravados.")
-  invisible(list(modelos = modelos, coeficientes = coeficientes, testes = testes, vif = vif, anova = anova))
+  invisible(list(modelos = modelos, coeficientes = coeficientes, testes = testes, vif = vif, anova = anova,
+                 normalidade = normalidade, influencia = influencia))
 }
 
 executar_etapa_4()

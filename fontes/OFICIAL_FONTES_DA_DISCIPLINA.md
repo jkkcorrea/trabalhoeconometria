@@ -38,8 +38,8 @@ Observação: o `Guia P2` diz que Gujarati e Porter (2011) é a regra de bolso d
 | Durbin-Watson e ρ por regressão auxiliar AR(1) | autocorrel; tabela_DW; provas 2024 e 2025 | Autocorrelação (aplicado a cada série de município) |
 | Breusch-Godfrey | autocorrel (lista de detecção) | Autocorrelação |
 | Teste das carreiras | autocorrel | Autocorrelação |
-| Cochrane-Orcutt e Prais-Winsten | autocorrel; Guia P2 | Correção de autocorrelação (série temporal) |
-| Newey-West (HAC) | autocorrel; Guia P2 | Correção, para série temporal |
+| Cochrane-Orcutt e Prais-Winsten | Guia P2; Gujarati cap. 12 (PDF pp. 510 a 528). Não aparecem nos slides `autocorrel` lidos. | Correção de autocorrelação, com ρ comum dentro de cada município [presunção da modelagem] |
+| Newey-West (HAC) | autocorrel, p. 97; Guia P2; Gujarati cap. 12 | Não aplicado: série temporal única; painel empilhado não atende |
 | RESET de Ramsey | especificao_diagnostico | Forma funcional |
 | Teste LM para acréscimo de variáveis | especificao_diagnostico | Omissão de variáveis |
 | Teste de Chow | teste_Chow; reglinmult4 | Quebra estrutural |
@@ -61,7 +61,7 @@ Observação: o `Guia P2` diz que Gujarati e Porter (2011) é a regra de bolso d
 | Teste de Wooldridge de autocorrelação em painel (`pbgtest`/`pwartest`) | R/05, R/06 | Não ensinado para painel |
 | Newey-West e Prais-Winsten aplicados ao painel empilhado | R/04, R/06 | O método é ensinado para série temporal; aplicá-lo ao painel empilhado não é válido. Sai do projeto. |
 | Box-Cox | R/08 | Não encontrado nas fontes lidas. Sai, a menos que apareça no Gujarati. |
-| Jarque-Bera | R/04, documentação | Não encontrado nas fontes lidas. Sai. |
+| Jarque-Bera | R/04, documentação | Volta ao escopo: Gujarati, cap. 5, seção 5.12 (PDF pp. 176 e 177). Não está nos slides lidos. Ver `VERIFICACAO_CORRECOES.md`. |
 | Entropia de Shannon (X4) | R/02, variável do painel | Não ensinada. Sai, e X4 é substituída (seção 4). |
 | Simulação com retransformação exp() | R/04 | Sai junto com o smearing. |
 

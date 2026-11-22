@@ -70,10 +70,10 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 
 - [x] 22/11/2026 **C. Manter a Selic ou retirá-la.** Decidido: manter (D-2026-11-22-06). Projeção e efeito documentados. Retirar piora o ajuste (F = 26,7 no Modelo 4). Trocar pela produção agrícola não melhora (AIC −943,7 contra −969,1 com a Selic; coeficiente da produção negativo e não significativo). Recomendação: manter a Selic e declarar a inferência como limitação. Decisão do pesquisador.
 - [ ] **D. Dummies de município no Modelo 4.** Os slides de `aulas` não trazem dummies, mas o trabalho de exemplo (seção 2.3), o Hoffmann (capítulo 5) e o Gujarati (capítulo 9) trazem (D-2026-11-22-07, mantidas). Falta a confirmação do professor. Se ele não aceitar, o modelo principal volta a ser o Modelo 2.
-- [ ] **F. Conferir visualmente dL = 0,243 e dU = 2,822** no PDF `tabela_DW.pdf` (lidos por OCR).
+- [x] 22/11/2026 **F. Conferir dL = 0,243 e dU = 2,822.** Conferidos na Tabela D.5A do Gujarati (PDF p. 995), que coincide com a leitura por OCR. A tabela do Hoffmann começa em n = 15 e não serve.
 - [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2). Robustez calculada (`robustez_x4_definicao_gini.csv`): com as divisões ativas, o efeito dentro dos municípios deixa de ser significativo (p = 0,44); entre municípios o sinal se mantém. Decisão do pesquisador sobre qual definição usar.
 - [ ] **H. Presunções a confirmar** (ver seção "Presunções" abaixo).
-- [ ] **I. Referências**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro (os slides citam ambos, com edição e páginas). Baixar os livros protegidos para `fontes/livros_artigos/`.
+- [x] 22/11/2026 **I. Referências.** Gujarati (PDF da 4ª edição) conferido e registrado em `fontes/PAGINAS_DE_REFERENCIA.md` e em `fontes/VERIFICACAO_CORRECOES.md`. A edição da disciplina é a 5ª (2011): páginas podem diferir. Hoffmann (1987) não localizado.
 - [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git) e de `Trabalhos Referencias/`. Mantidos (D-2026-11-22-08). Apagar exige pedido expresso.
 - [ ] **K. Artigo**: só depois de C, D e H e da aprovação do pesquisador.
 
@@ -84,3 +84,10 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 3. Tratamento das 87 divisões CNAE como indivíduos no Gini.
 4. Uso de dummies de município (item D).
 
+## Pendências abertas (22/11/2026, rodada de testes e correções)
+
+- [ ] **L. Conferir Adrianópolis 2012 e a industrialização de 2015.** Salto de 7% para 45% só nesse município; resíduo padronizado de −6,88. Conferir em `SIDRA 5938` (cache de `dados_brutos/pib_sidra.rds`) e corrigir se for erro de construção.
+- [ ] **M. Memorial matricial do Modelo 4 e da transformação de Prais-Winsten** (critério 3 da régua).
+- [ ] **N. Confirmação do professor** (texto em `SOLICITACAO_AO_PROFESSOR.txt`): dummies de município; correção com ρ comum no painel; procedimento para normalidade rejeitada; limiares de influência; teste das carreiras com dez observações; Gini de 87 divisões; quebra de 2016; projeção com exp() sem correção.
+- [ ] **O. Edição do Gujarati.** O PDF é a 4ª edição (2004); a disciplina cita a 5ª (2011). Conferir as páginas na 5ª quando possível.
+- [ ] **P. Modelo de referência.** Com Prais-Winsten, o Modelo 2 perde significância em X3 e X4. Decidir se o texto apresenta o Modelo 2 apenas como referência ou se X6 passa a ser estimada de outra forma.

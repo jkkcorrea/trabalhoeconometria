@@ -1,3 +1,3 @@
-modelo,municipios,durbin_watson_mediano,rho_auxiliar_mediano,positiva_pela_tabela,zona_inconclusao,breusch_godfrey_rejeita
-Modelo 2,29,0.2504,0.7337,14,15,3
-Modelo 4,29,1.333,0.186,0,0,4
+modelo,municipios,durbin_watson_mediano,rho_auxiliar_mediano,dw_positiva,dw_inconclusiva,dw_nao_rejeita,dw_nao_aplicavel,breusch_godfrey_rejeita,carreiras_nao_aplicavel
+Modelo 2,29,0.2504,0.7337,14,15,0,0,3,29
+Modelo 4,29,1.333,0.186,0,0,0,29,4,29

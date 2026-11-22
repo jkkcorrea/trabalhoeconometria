@@ -1,3 +1,3 @@
-modelo,teste,hipotese_nula,estatistica_f,gl,p_valor,decisao_5pct
-Modelo 2,RESET de Ramsey (potências 2 e 3 dos ajustados),forma funcional correta,14.485686321635688,2; 282,1.0269430768003566e-6,rejeita H0
-Modelo 4,RESET de Ramsey (potências 2 e 3 dos ajustados),forma funcional correta,0.2843923438084242,2; 255,0.7527097060152219,não rejeita H0
+modelo,teste,hipotese_nula,hipotese_alternativa,estatistica_f,gl,p_valor,decisao_5pct
+Modelo 2,RESET de Ramsey (potências 2 e 3 dos ajustados),H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero),Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero),14.485686321635688,2; 282,1.0269430768003566e-6,rejeita H0
+Modelo 4,RESET de Ramsey (potências 2 e 3 dos ajustados),H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero),Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero),0.2843923438084242,2; 255,0.7527097060152219,não rejeita H0

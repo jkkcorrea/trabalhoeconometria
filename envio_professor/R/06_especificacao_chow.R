@@ -52,7 +52,9 @@ modelo2 <- stats::lm(FORMULA, data = painel)
 reset <- lmtest::resettest(modelo2, power = 2:3, type = "fitted")
 tabela_reset <- tibble::tibble(
   modelo = "Modelo 2", teste = "RESET de Ramsey (potências 2 e 3 dos ajustados)",
-  hipotese_nula = "forma funcional correta", estatistica_f = unname(reset$statistic),
+  hipotese_nula = "H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero)",
+  hipotese_alternativa = "Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero)",
+  estatistica_f = unname(reset$statistic),
   gl = paste(unname(reset$parameter), collapse = "; "), p_valor = reset$p.value,
   decisao_5pct = ifelse(reset$p.value < 0.05, "rejeita H0", "não rejeita H0")
 )
@@ -62,7 +64,9 @@ modelo4 <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_set
 reset4 <- lmtest::resettest(modelo4, power = 2:3, type = "fitted")
 tabela_reset <- dplyr::bind_rows(tabela_reset, tibble::tibble(
   modelo = "Modelo 4", teste = "RESET de Ramsey (potências 2 e 3 dos ajustados)",
-  hipotese_nula = "forma funcional correta", estatistica_f = unname(reset4$statistic),
+  hipotese_nula = "H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero)",
+  hipotese_alternativa = "Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero)",
+  estatistica_f = unname(reset4$statistic),
   gl = paste(unname(reset4$parameter), collapse = "; "), p_valor = reset4$p.value,
   decisao_5pct = ifelse(reset4$p.value < 0.05, "rejeita H0", "não rejeita H0")
 ))
@@ -75,7 +79,8 @@ modelo4_restrito <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial +
 acrescimo <- stats::anova(modelo4_restrito, modelo4)
 tabela_acrescimo <- tibble::tibble(
   teste = "F de acréscimo das dummies de município (X2 a X5, sem e com as dummies)",
-  hipotese_nula = "dummies de município conjuntamente nulas",
+  hipotese_nula = "H0: beta(dummies de município) = 0 conjuntamente (modelo restrito, sem dummies)",
+  hipotese_alternativa = "Ha: ao menos uma dummy de município diferente de zero (modelo irrestrito, com dummies)",
   gl_numerador = acrescimo$Df[2], gl_denominador = acrescimo$Res.Df[2],
   estatistica_f = acrescimo$F[2], p_valor = acrescimo$`Pr(>F)`[2],
   decisao_5pct = ifelse(acrescimo$`Pr(>F)`[2] < 0.05, "rejeita H0", "não rejeita H0")
@@ -88,7 +93,9 @@ aux <- stats::lm(stats::residuals(modelo2) ~ prop_superior + dom_industrial + gi
 lm_stat <- nrow(painel) * summary(aux)$r.squared
 tabela_lm <- tibble::tibble(
   modelo = "Modelo 2", teste = "LM para acréscimo de tendência linear (ano)",
-  hipotese_nula = "coeficiente de ano = 0", estatistica = lm_stat, gl = 1L,
+  hipotese_nula = "H0: coeficiente de ano = 0 (sem tendência linear omitida); LM = n R^2 ~ qui-quadrado com 1 gl",
+  hipotese_alternativa = "Ha: coeficiente de ano diferente de zero (tendência linear omitida)",
+  estatistica = lm_stat, gl = 1L,
   p_valor = stats::pchisq(lm_stat, df = 1, lower.tail = FALSE),
   decisao_5pct = ifelse(stats::pchisq(lm_stat, df = 1, lower.tail = FALSE) < 0.05, "rejeita H0", "não rejeita H0")
 )
@@ -107,7 +114,9 @@ f_chow <- ((sqr_r - sqr_sr) / k) / (sqr_sr / (n1 + n2 - 2 * k))
 gl_1 <- k; gl_2 <- n1 + n2 - 2 * k
 tabela_chow <- tibble::tibble(
   modelo = "Modelo 2", teste = paste0("Chow: quebra estrutural entre 2012-", ANO_CORTE, " e ", ANO_CORTE + 1, "-2021"),
-  hipotese_nula = "coeficientes iguais nas duas partes", n1 = n1, n2 = n2, k = k,
+  hipotese_nula = "H0: beta(2012-2016) = beta(2017-2021) (sem quebra estrutural)",
+  hipotese_alternativa = "Ha: ao menos um coeficiente diferente entre os dois períodos (quebra estrutural)",
+  n1 = n1, n2 = n2, k = k,
   estatistica_f = f_chow, gl = paste(gl_1, gl_2, sep = "; "),
   p_valor = stats::pf(f_chow, gl_1, gl_2, lower.tail = FALSE),
   decisao_5pct = ifelse(stats::pf(f_chow, gl_1, gl_2, lower.tail = FALSE) < 0.05, "rejeita H0", "não rejeita H0")

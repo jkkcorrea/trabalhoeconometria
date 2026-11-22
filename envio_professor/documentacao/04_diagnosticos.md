@@ -1,5 +1,44 @@
 # Diagnósticos do modelo
 
+## Hipóteses formais (H0 e Ha) e critério de decisão a 5%
+
+Critério em todos os testes: rejeita-se H0 quando o p-valor é menor que 0,05 (ou quando a estatística passa do valor crítico).
+
+| Teste | Modelo | H0 | Ha | Estatística | p-valor | Decisão |
+|---|---|---|---|---|---|---|
+| Breusch-Pagan-Godfrey (bptest, studentized) | Modelo 2 | H0: Var(u_t) = sigma^2 para todo t (erros homocedásticos; inclinações da regressão auxiliar dos resíduos ao quadrado iguais a zero) | Ha: Var(u_t) depende de ao menos um regressor (heterocedasticidade); critério BP ~ qui-quadrado com k - 1 gl | 11,90 | 0,0363 | rejeita H0 |
+| Breusch-Pagan-Godfrey (bptest, studentized) | Modelo 3 | H0: Var(u_t) = sigma^2 para todo t (erros homocedásticos; inclinações da regressão auxiliar dos resíduos ao quadrado iguais a zero) | Ha: Var(u_t) depende de ao menos um regressor (heterocedasticidade); critério BP ~ qui-quadrado com k - 1 gl | 11,19 | 0,0826 | não rejeita H0 |
+| Breusch-Pagan-Godfrey (bptest, studentized) | Modelo 3b | H0: Var(u_t) = sigma^2 para todo t (erros homocedásticos; inclinações da regressão auxiliar dos resíduos ao quadrado iguais a zero) | Ha: Var(u_t) depende de ao menos um regressor (heterocedasticidade); critério BP ~ qui-quadrado com k - 1 gl | 12,61 | 0,0822 | não rejeita H0 |
+| Breusch-Pagan-Godfrey (bptest, studentized) | Modelo 4 | H0: Var(u_t) = sigma^2 para todo t (erros homocedásticos; inclinações da regressão auxiliar dos resíduos ao quadrado iguais a zero) | Ha: Var(u_t) depende de ao menos um regressor (heterocedasticidade); critério BP ~ qui-quadrado com k - 1 gl | 68,98 | 0,0002 | rejeita H0 |
+| Goldfeld-Quandt (gqtest, unilateral; ordenado por dist_curitiba_km) | Modelo 2 | H0: sigma_1^2 = sigma_2^2 (variância constante entre os dois segmentos) | Ha: sigma_2^2 > sigma_1^2 (variância cresce com a distância); estatística F = SQR2/SQR1 com gl (n - omitidas)/2 - k | 1,06 | 0,3885 | não rejeita H0 |
+| RESET de Ramsey (potências 2 e 3 dos ajustados) | Modelo 2 | H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero) | Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero) | 14,49 | < 0,0001 | rejeita H0 |
+| RESET de Ramsey (potências 2 e 3 dos ajustados) | Modelo 4 | H0: forma funcional correta (coeficientes de y^2 e y^3 na regressão auxiliar iguais a zero) | Ha: forma funcional incorreta (ao menos um dos coeficientes de y^2 e y^3 diferente de zero) | 0,28 | 0,7527 | não rejeita H0 |
+| F de acréscimo das dummies de município (X2 a X5, sem e com as dummies) | Modelo 4 | H0: beta(dummies de município) = 0 conjuntamente (modelo restrito, sem dummies) | Ha: ao menos uma dummy de município diferente de zero (modelo irrestrito, com dummies) | 76,13 | < 0,0001 | rejeita H0 |
+| LM para acréscimo de tendência linear (ano) | Modelo 2 | H0: coeficiente de ano = 0 (sem tendência linear omitida); LM = n R^2 ~ qui-quadrado com 1 gl | Ha: coeficiente de ano diferente de zero (tendência linear omitida) | 0,38 | 0,5393 | não rejeita H0 |
+| Chow: quebra estrutural entre 2012-2016 e 2017-2021 | Modelo 2 | H0: beta(2012-2016) = beta(2017-2021) (sem quebra estrutural) | Ha: ao menos um coeficiente diferente entre os dois períodos (quebra estrutural) | 1,79 | 0,1018 | não rejeita H0 |
+| Jarque-Bera (Gujarati, cap. 5, seção 5.12) | Modelo 2 | H0: os resíduos têm distribuição normal (S = 0 e K = 3) | Ha: os resíduos não têm distribuição normal (S diferente de 0 ou K diferente de 3) | 514,42 | < 0,0001 | rejeita H0 |
+| Jarque-Bera (Gujarati, cap. 5, seção 5.12) | Modelo 4 | H0: os resíduos têm distribuição normal (S = 0 e K = 3) | Ha: os resíduos não têm distribuição normal (S diferente de 0 ou K diferente de 3) | 615,88 | < 0,0001 | rejeita H0 |
+
+## Normalidade dos resíduos (Jarque-Bera)
+
+| Modelo | Estatística | gl | p-valor | Decisão | Assimetria S | Curtose K |
+|---|---|---|---|---|---|---|
+| Modelo 2 | 514,42 | 2 | < 0,0001 | rejeita H0 | 1,7377 | 8,5221 |
+| Modelo 4 | 615,88 | 2 | < 0,0001 | rejeita H0 | -0,9392 | 9,8877 |
+
+A normalidade dos resíduos é rejeitada nos dois modelos (p-valor < 0,0001 no Modelo 2 e < 0,0001 no Modelo 4). A distribuição tem caudas pesadas, sobretudo no Modelo 2 (S = 1,7377, K = 8,5221). Com 290 observações, os testes t e F são aproximadamente válidos pela teoria de amostras grandes; essa é uma limitação a declarar [a confirmar no Gujarati, cap. 5].
+
+## Influência e observações atípicas
+
+Conceitos do Gujarati (cap. 13): outlier (resíduo grande), ponto de alavancagem (valor extremo de um regressor) e ponto influente (sua retirada muda a inclinação). O livro não apresenta teste formal para esses pontos; distância de Cook e DFBETAS não fazem parte do material da disciplina. Usamos a alavancagem (diagonal da matriz chapéu), o resíduo padronizado e a variação de cada coeficiente ao retirar a observação, em erros-padrão. Limiares: alavancagem acima de 2k/n, resíduo padronizado maior que 2 em módulo, e variação maior que 1 erro-padrão [presunção da modelagem].
+
+| Modelo | Alavancagem acima de 2k/n | Outliers (resíduo padronizado acima de 2 em módulo) | Influentes |
+|---|---|---|---|
+| Modelo 2 | 23 | 12 | 0 |
+| Modelo 4 |  3 | 13 | 2 |
+
+Pontos influentes no Modelo 4: Adrianópolis 2012; Lapa 2016. Retirados esses pontos, o coeficiente de X4 (Gini) passa de 0,8653 para 1,1516, e o de X5 (Selic) varia 0,67%. A observação de Adrianópolis em 2012 tem o maior resíduo padronizado do painel; a participação industrial do município salta de 7,14% em 2014 para 45,47% em 2015, enquanto a mediana do RMC em 2015 é 22,39%. O dado deve ser conferido na fonte (SIDRA, tabela 5938) antes de qualquer conclusão [a confirmar].
+
 ## Heterogeneidade entre municípios
 
 | Teste | Estatística F | gl | p-valor | Decisão |
@@ -104,48 +143,85 @@ Retirar a Selic piora o ajuste: F = 26,70 no Modelo 4 (p-valor < 0,0001) e F = 9
 
 ## Autocorrelação dentro de cada município
 
-Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. Os valores de dL = 0,243 e dU = 2,822 para n = 10 e k' = 5 foram lidos por reconhecimento óptico de caracteres (OCR) do PDF da tabela da disciplina e ainda não foram conferidos em livro impresso. A tabela de Durbin-Watson do Hoffmann (2016) começa em n = 15, então não cobre n = 10; a conferência depende da tabela D.5A do Gujarati. Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.
+Os testes são aplicados à série de dez anos de cada um dos 29 municípios, com os resíduos do Modelo 2 e do Modelo 4 (Gujarati, cap. 12; Guia P2).
 
-| Modelo | Municípios | DW mediano | ρ mediano | DW positivo pela tabela | Breusch-Godfrey rejeita a 5% |
-|---|---|---|---|---|---|
-| Modelo 2 | 29 | 0,2504 | 0,7337 | 14 | 3 |
-| Modelo 4 | 29 | 1,3330 | 0,1860 |  0 | 4 |
+H0 do Durbin-Watson: ρ = 0 (ausência de autocorrelação de primeira ordem). Ha: ρ > 0 (positiva) ou ρ < 0 (negativa). Valores de dL = 0,243 e dU = 2,822 para n = 10 e k = 5, a 5%, da Tabela D.5A do Gujarati (PDF p. 995), conferidos no livro. Zonas do Guia P2: d < dL rejeita H0 (positiva); dL ≤ d ≤ dU inconclusiva; dU < d < 4 − dU não rejeita; 4 − dU ≤ d ≤ 4 − dL inconclusiva; d > 4 − dL rejeita H0 (negativa). Com dU maior que 2, a zona de não rejeição fica vazia: o teste só rejeita H0 com d < 0,243 ou d > 3,757.
 
-No Modelo 2, a autocorrelação positiva aparece em muitos municípios. No Modelo 4, a mediana do Durbin-Watson sobe para perto de 1,3 e o ρ auxiliar cai para 0,19: a maior parte da autocorrelação do Modelo 2 era heterogeneidade omitida entre municípios.
+H0 do Breusch-Godfrey (ordem 1): ausência de autocorrelação de primeira ordem. Estatística qui-quadrado com 1 gl; rejeita H0 se p < 0,05.
+
+H0 do teste das carreiras: os resíduos são aleatórios. Ha: não são aleatórios. A aproximação normal do Gujarati (cap. 12) exige N1 > 10 e N2 > 10; com dez anos por município isso não ocorre, e o teste é declarado não aplicável em cada série.
+
+| Modelo | Municípios | DW mediano | ρ mediano | DW positivo | DW inconclusivo | DW não aplicável | Breusch-Godfrey rejeita (5%) | Carreiras não aplicáveis |
+|---|---|---|---|---|---|---|---|---|
+| Modelo 2 | 29 | 0,2504 | 0,7337 | 14 | 15 |  0 | 3 | 29 |
+| Modelo 4 | 29 | 1,3330 | 0,1860 |  0 |  0 | 29 | 4 | 29 |
+
+No Modelo 2, o Durbin-Watson mediano é 0,2504 e o ρ auxiliar mediano é 0,7337: a autocorrelação positiva é forte. No Modelo 4, a mediana do Durbin-Watson é 1,3330, e o ρ auxiliar cai para 0,1860. A autocorrelação do Modelo 2 em boa parte reflete diferenças persistentes entre municípios.
+
+## Correção da autocorrelação: Prais-Winsten e Cochrane-Orcutt
+
+Métodos do Gujarati (cap. 12) e do Guia P2. O ρ é comum a todos os municípios e a transformação é feita dentro de cada município (a primeira observação de cada um é tratada por Prais-Winsten e descartada por Cochrane-Orcutt) [presunção da modelagem]. Newey-West não é aplicado: ver a nota de métodos não aplicados em 02_especificacao_e_metodos.md.
+
+| Modelo | Método | ρ estimado | Variável | Coef. antes (White) | Coef. corrigido | EP HC1 | p-valor HC1 | Obs. |
+|---|---|---|---|---|---|---|---|---|
+| Modelo 2 | Prais-Winsten | 0,9440 | X2 escolaridade | 0,0150 | 0,0038 | 0,0019 | 0,0514 | 290 |
+| Modelo 2 | Prais-Winsten | 0,9440 | X3 industrialização | 0,0055 | 0,0007 | 0,0006 | 0,2242 | 290 |
+| Modelo 2 | Prais-Winsten | 0,9440 | X4 Gini | -0,6548 | 0,0578 | 0,3869 | 0,8814 | 290 |
+| Modelo 2 | Prais-Winsten | 0,9440 | X5 Selic real | 0,0065 | 0,0019 | 0,0007 | 0,0123 | 290 |
+| Modelo 2 | Prais-Winsten | 0,9440 | X6 distância | -0,0016 | -0,0046 | 0,0015 | 0,0020 | 290 |
+| Modelo 2 | Cochrane-Orcutt | 0,9519 | X2 escolaridade | 0,0150 | 0,0016 | 0,0016 | 0,3245 | 261 |
+| Modelo 2 | Cochrane-Orcutt | 0,9519 | X3 industrialização | 0,0055 | 0,0003 | 0,0005 | 0,5727 | 261 |
+| Modelo 2 | Cochrane-Orcutt | 0,9519 | X4 Gini | -0,6548 | 1,0092 | 0,5143 | 0,0508 | 261 |
+| Modelo 2 | Cochrane-Orcutt | 0,9519 | X5 Selic real | 0,0065 | 0,0024 | 0,0008 | 0,0038 | 261 |
+| Modelo 2 | Cochrane-Orcutt | 0,9519 | X6 distância | -0,0016 | -0,0030 | 0,0031 | 0,3360 | 261 |
+| Modelo 4 | Prais-Winsten | 0,3677 | X2 escolaridade | 0,0084 | 0,0067 | 0,0022 | 0,0029 | 290 |
+| Modelo 4 | Prais-Winsten | 0,3677 | X3 industrialização | -0,0006 | -0,0004 | 0,0009 | 0,6678 | 290 |
+| Modelo 4 | Prais-Winsten | 0,3677 | X4 Gini | 0,8653 | 0,8409 | 0,5059 | 0,0977 | 290 |
+| Modelo 4 | Prais-Winsten | 0,3677 | X5 Selic real | 0,0039 | 0,0030 | 0,0009 | 0,0005 | 290 |
+| Modelo 4 | Cochrane-Orcutt | 0,3950 | X2 escolaridade | 0,0084 | 0,0006 | 0,0011 | 0,5824 | 261 |
+| Modelo 4 | Cochrane-Orcutt | 0,3950 | X3 industrialização | -0,0006 | -0,0015 | 0,0006 | 0,0132 | 261 |
+| Modelo 4 | Cochrane-Orcutt | 0,3950 | X4 Gini | 0,8653 | 1,5861 | 0,4140 | 0,0002 | 261 |
+| Modelo 4 | Cochrane-Orcutt | 0,3950 | X5 Selic real | 0,0039 | 0,0025 | 0,0007 | 0,0002 | 261 |
+
+Depois da correção, o ρ auxiliar dos resíduos transformados cai para -0,0148 no Modelo 2 e 0,0167 no Modelo 4 (Prais-Winsten). O ρ estimado é 0,9440 no Modelo 2 e 0,3677 no Modelo 4.
+
+Efeito sobre o Modelo 2: o coeficiente de X2 (escolaridade) passa de 0,0150, com erro de White, para 0,0038, com Prais-Winsten e erro de White (p-valor 0,0514). Leitura: a associação entre municípios no Modelo 2 depende da persistência dos dados, e não só da correção dos erros-padrão.
+
+No Modelo 4 corrigido, o coeficiente de X4 (Gini) é 0,8409, com p-valor 0,0977 pelo erro de White. Com a correção, o efeito do Gini dentro dos municípios não é significativo a 5%.
 
 <details><summary>Série por município</summary>
 
 | Modelo | Município | Durbin-Watson | Decisão pela tabela | ρ auxiliar | Breusch-Godfrey p |
 |---|---|---|---|---|---|
-| Modelo 2 | Adrianópolis | 0,0838 | autocorrelação positiva | 0,9234 | 0,0223 |
-| Modelo 2 | Agudos do Sul | 0,3703 | zona de inconclusão | 0,6308 | 0,8645 |
-| Modelo 2 | Almirante Tamandaré | 0,0776 | autocorrelação positiva | 0,9166 | 0,6644 |
-| Modelo 2 | Araucária | 0,1142 | autocorrelação positiva | 0,7538 | 0,0238 |
-| Modelo 2 | Balsa Nova | 0,7827 | zona de inconclusão | 0,6296 | 0,3380 |
-| Modelo 2 | Bocaiúva do Sul | 0,6941 | zona de inconclusão | 0,6469 | 0,4167 |
-| Modelo 2 | Campina Grande do Sul | 0,0909 | autocorrelação positiva | 0,9635 | 0,6055 |
-| Modelo 2 | Campo do Tenente | 0,5543 | zona de inconclusão | 0,6648 | 0,0506 |
-| Modelo 2 | Campo Largo | 0,0690 | autocorrelação positiva | 0,9554 | 0,4231 |
-| Modelo 2 | Campo Magro | 0,5339 | zona de inconclusão | 0,7337 | 0,1150 |
-| Modelo 2 | Cerro Azul | 0,2081 | autocorrelação positiva | 1,0028 | 0,0510 |
-| Modelo 2 | Colombo | 0,2745 | zona de inconclusão | 0,6810 | 0,2648 |
-| Modelo 2 | Contenda | 1,5334 | zona de inconclusão | 0,1792 | 0,8594 |
-| Modelo 2 | Curitiba | 0,0751 | autocorrelação positiva | 0,9420 | 0,1735 |
-| Modelo 2 | Fazenda Rio Grande | 0,2504 | zona de inconclusão | 0,6773 | 0,5214 |
-| Modelo 2 | Itaperuçu | 0,6567 | zona de inconclusão | 0,5107 | 0,3814 |
-| Modelo 2 | Lapa | 0,8421 | zona de inconclusão | 0,5635 | 0,7205 |
-| Modelo 2 | Mandirituba | 0,1438 | autocorrelação positiva | 0,7556 | 0,1361 |
-| Modelo 2 | Piên | 0,7010 | zona de inconclusão | 0,6372 | 0,0487 |
-| Modelo 2 | Pinhais | 0,7376 | zona de inconclusão | 0,6089 | 0,1666 |
-| Modelo 2 | Piraquara | 0,0850 | autocorrelação positiva | 0,8409 | 0,1142 |
-| Modelo 2 | Quatro Barras | 0,2012 | autocorrelação positiva | 0,9397 | 0,6800 |
-| Modelo 2 | Quitandinha | 0,1255 | autocorrelação positiva | 0,8984 | 0,5017 |
-| Modelo 2 | Rio Branco do Sul | 0,0853 | autocorrelação positiva | 0,8967 | 0,9413 |
-| Modelo 2 | Rio Negro | 0,0758 | autocorrelação positiva | 0,8976 | 0,3751 |
-| Modelo 2 | São José dos Pinhais | 0,0477 | autocorrelação positiva | 0,9529 | 0,1623 |
-| Modelo 2 | Tijucas do Sul | 1,2783 | zona de inconclusão | 0,2909 | 0,4325 |
-| Modelo 2 | Tunas do Paraná | 0,7583 | zona de inconclusão | 0,5594 | 0,0543 |
-| Modelo 2 | Doutor Ulysses | 0,6755 | zona de inconclusão | 0,6581 | 0,8327 |
+| Modelo 2 | Adrianópolis | 0,0838 | positiva (d < dL): rejeita H0 | 0,9234 | 0,0223 |
+| Modelo 2 | Agudos do Sul | 0,3703 | inconclusiva | 0,6308 | 0,8645 |
+| Modelo 2 | Almirante Tamandaré | 0,0776 | positiva (d < dL): rejeita H0 | 0,9166 | 0,6644 |
+| Modelo 2 | Araucária | 0,1142 | positiva (d < dL): rejeita H0 | 0,7538 | 0,0238 |
+| Modelo 2 | Balsa Nova | 0,7827 | inconclusiva | 0,6296 | 0,3380 |
+| Modelo 2 | Bocaiúva do Sul | 0,6941 | inconclusiva | 0,6469 | 0,4167 |
+| Modelo 2 | Campina Grande do Sul | 0,0909 | positiva (d < dL): rejeita H0 | 0,9635 | 0,6055 |
+| Modelo 2 | Campo do Tenente | 0,5543 | inconclusiva | 0,6648 | 0,0506 |
+| Modelo 2 | Campo Largo | 0,0690 | positiva (d < dL): rejeita H0 | 0,9554 | 0,4231 |
+| Modelo 2 | Campo Magro | 0,5339 | inconclusiva | 0,7337 | 0,1150 |
+| Modelo 2 | Cerro Azul | 0,2081 | positiva (d < dL): rejeita H0 | 1,0028 | 0,0510 |
+| Modelo 2 | Colombo | 0,2745 | inconclusiva | 0,6810 | 0,2648 |
+| Modelo 2 | Contenda | 1,5334 | inconclusiva | 0,1792 | 0,8594 |
+| Modelo 2 | Curitiba | 0,0751 | positiva (d < dL): rejeita H0 | 0,9420 | 0,1735 |
+| Modelo 2 | Fazenda Rio Grande | 0,2504 | inconclusiva | 0,6773 | 0,5214 |
+| Modelo 2 | Itaperuçu | 0,6567 | inconclusiva | 0,5107 | 0,3814 |
+| Modelo 2 | Lapa | 0,8421 | inconclusiva | 0,5635 | 0,7205 |
+| Modelo 2 | Mandirituba | 0,1438 | positiva (d < dL): rejeita H0 | 0,7556 | 0,1361 |
+| Modelo 2 | Piên | 0,7010 | inconclusiva | 0,6372 | 0,0487 |
+| Modelo 2 | Pinhais | 0,7376 | inconclusiva | 0,6089 | 0,1666 |
+| Modelo 2 | Piraquara | 0,0850 | positiva (d < dL): rejeita H0 | 0,8409 | 0,1142 |
+| Modelo 2 | Quatro Barras | 0,2012 | positiva (d < dL): rejeita H0 | 0,9397 | 0,6800 |
+| Modelo 2 | Quitandinha | 0,1255 | positiva (d < dL): rejeita H0 | 0,8984 | 0,5017 |
+| Modelo 2 | Rio Branco do Sul | 0,0853 | positiva (d < dL): rejeita H0 | 0,8967 | 0,9413 |
+| Modelo 2 | Rio Negro | 0,0758 | positiva (d < dL): rejeita H0 | 0,8976 | 0,3751 |
+| Modelo 2 | São José dos Pinhais | 0,0477 | positiva (d < dL): rejeita H0 | 0,9529 | 0,1623 |
+| Modelo 2 | Tijucas do Sul | 1,2783 | inconclusiva | 0,2909 | 0,4325 |
+| Modelo 2 | Tunas do Paraná | 0,7583 | inconclusiva | 0,5594 | 0,0543 |
+| Modelo 2 | Doutor Ulysses | 0,6755 | inconclusiva | 0,6581 | 0,8327 |
 | Modelo 4 | Adrianópolis | 0,9123 | tabela não cobre k' = 32 | 0,2190 | 0,4921 |
 | Modelo 4 | Agudos do Sul | 1,3328 | tabela não cobre k' = 32 | 0,0635 | 0,8535 |
 | Modelo 4 | Almirante Tamandaré | 1,6800 | tabela não cobre k' = 32 | -0,1358 | 0,6758 |

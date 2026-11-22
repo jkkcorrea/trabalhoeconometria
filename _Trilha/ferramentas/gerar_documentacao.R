@@ -23,6 +23,10 @@ vif <- res("vif_tolerancia.csv")
 anova <- res("anova_f_modelos.csv")
 aut <- res("autocorrelacao_por_municipio.csv")
 aut_res <- res("autocorrelacao_resumo.csv")
+corr <- res("autocorrelacao_correcao.csv")
+norm <- res("normalidade_residuos.csv")
+infl <- res("influencia_observacoes.csv")
+infl_sens <- res("influencia_sensibilidade.csv")
 reset <- res("especificacao_reset.csv")
 acresc <- res("especificacao_acrescimo_municipios.csv")
 lm_t <- res("especificacao_lm_tendencia.csv")
@@ -73,7 +77,7 @@ gravar("02_especificacao_e_metodos.md", c(
   "- **Modelos 3 e 3b:** Modelo 2 com a dummy de Curitiba; o 3b acrescenta a interação X3 x X6.",
   "- **Modelo 4 (principal):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + dummies de município + u_it.", "",
   "A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acréscimo das dummies rejeita e o RESET passa a não rejeitar. A forma funcional não era o problema; a heterogeneidade entre municípios era. Ver 04_diagnosticos.md.", "",
-  "Fontes do uso de variáveis dummy: Hoffmann (capítulo 5, variáveis binárias), Gujarati (capítulo 9, variáveis explicativas qualitativas) e o trabalho de exemplo da disciplina (seção 2.3). Os slides das aulas lidos não tratam de dummies.", "",
+  "Fontes do uso de variáveis dummy: Gujarati, cap. 9 (PDF pp. 332 a 352), e o trabalho de exemplo da disciplina (seção 2.3). Os slides das aulas lidos não tratam de dummies.", "",
   "## Métodos usados (todos ensinados na disciplina)", "",
   "| Método | Uso no projeto | Fonte oficial |", "|---|---|---|",
   "| MQO e álgebra matricial | estimação e memorial | notas de regressão múltipla |",
@@ -83,14 +87,18 @@ gravar("02_especificacao_e_metodos.md", c(
   "| Breusch-Pagan-Godfrey | heterocedasticidade | notas de heterocedasticidade; provas 2023 a 2025 |",
   "| Goldfeld-Quandt | heterocedasticidade | notas de heterocedasticidade |",
   "| Erros-padrão de White (HC1) | inferência robusta | notas de heterocedasticidade; Guia P2 |",
-  "| Durbin-Watson e ρ por regressão auxiliar AR(1) | autocorrelação, série de cada município | notas de autocorrelação; tabela de DW |",
-  "| Breusch-Godfrey | autocorrelação, série de cada município | notas de autocorrelação |",
+  "| Durbin-Watson e ρ por regressão auxiliar AR(1) | autocorrelação, série de cada município | Gujarati, cap. 12 (PDF pp. 495 a 499); Tabela D.5A (PDF p. 995); Guia P2 (cinco zonas) |",
+  "| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | Gujarati, cap. 12 (PDF pp. 499 e 500); slides autocorrel |",
+  "| Teste das carreiras (runs) | aleatoriedade dos resíduos por município | Gujarati, cap. 12 (PDF p. 493); slides autocorrel pp. 79 a 93 |",
+  "| Prais-Winsten e Cochrane-Orcutt | correção da autocorrelação, ρ comum, dentro de cada município | Gujarati, cap. 12 (PDF pp. 510 a 528); Guia P2 (não aparecem nos slides autocorrel) |",
+  "| Jarque-Bera | normalidade dos resíduos | Gujarati, cap. 5, seção 5.12 (PDF pp. 176 e 177) |",
+  "| Alavancagem e resíduo padronizado | observações atípicas e influentes (sem teste formal) | Gujarati, cap. 13, Outliers, Leverage, and Influence (PDF pp. 568 e 569) |",
   "| RESET de Ramsey | forma funcional | notas de especificação e diagnóstico |",
   "| LM para variável omitida | acréscimo de tendência linear | notas de especificação e diagnóstico |",
   "| Teste de Chow | quebra estrutural por período | notas do teste de Chow |", "",
   "## Métodos removidos do projeto (não ensinados nas fontes oficiais)", "",
-  "Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera e smearing de Duan.", "",
-  "A entropia de Shannon foi removida por engano: ela é ensinada (Hoffmann, cap. 17, slides de medidas de desigualdade, em `aulas`). A X4 continua sendo o Gini; a entropia fica disponível como medida alternativa.", "",
+  "Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap e Box-Cox. Newey-West não é aplicado ao painel empilhado: ele corrige erros-padrão de uma série temporal única, e o painel empilhado não atende a essa condição (não aplicado; ver 04_diagnosticos.md). Smearing de Duan também não é usado.", "",
+  "A entropia de Shannon foi removida por engano: ela é ensinada (slides de medidas de desigualdade, pasta `aulas`). A X4 continua sendo o Gini; a entropia fica disponível como medida alternativa.", "",
   "Fontes oficiais e IDs no Drive: `06_fontes.md`."))
 
 # ---- 03 resultados
@@ -120,10 +128,58 @@ tab_aut <- data.frame(Modelo = aut$modelo, Município = aut$nome_municipio, `Dur
                       `Breusch-Godfrey p` = fp(aut$breusch_godfrey_p), check.names = FALSE)
 tab_aut_res <- data.frame(Modelo = aut_res$modelo, Municípios = aut_res$municipios,
                           `DW mediano` = f4(aut_res$durbin_watson_mediano), `ρ mediano` = f4(aut_res$rho_auxiliar_mediano),
-                          `DW positivo pela tabela` = aut_res$positiva_pela_tabela,
-                          `Breusch-Godfrey rejeita a 5%` = aut_res$breusch_godfrey_rejeita, check.names = FALSE)
+                          `DW positivo` = aut_res$dw_positiva, `DW inconclusivo` = aut_res$dw_inconclusiva,
+                          `DW não aplicável` = aut_res$dw_nao_aplicavel,
+                          `Breusch-Godfrey rejeita (5%)` = aut_res$breusch_godfrey_rejeita,
+                          `Carreiras não aplicáveis` = aut_res$carreiras_nao_aplicavel, check.names = FALSE)
+focais_txt <- c(prop_superior = "X2 escolaridade", dom_industrial = "X3 industrialização", gini_setorial = "X4 Gini",
+                selic_real = "X5 Selic real", dist_curitiba_km = "X6 distância")
+corr_f <- corr[corr$termo %in% names(focais_txt), ]
+ref_white <- coef[coef$matriz == "white", ]
+tab_corr <- data.frame(Modelo = corr_f$modelo, Método = corr_f$metodo, `ρ estimado` = f4(corr_f$rho),
+                       Variável = unname(focais_txt[corr_f$termo]), `Coef. antes (White)` = f4(ref_white$estimativa[match(paste(corr_f$modelo, corr_f$termo), paste(ref_white$modelo, ref_white$termo))]),
+                       `Coef. corrigido` = f4(corr_f$estimativa), `EP HC1` = f4(corr_f$erro_padrao_HC1),
+                       `p-valor HC1` = fp(corr_f$p_valor_HC1), `Obs.` = corr_f$observacoes_usadas, check.names = FALSE)
+corr_pw <- function(modelo, termo) corr$p_valor_HC1[corr$modelo == modelo & corr$metodo == "Prais-Winsten" & corr$termo == termo]
+corr_est <- function(modelo, termo) corr$estimativa[corr$modelo == modelo & corr$metodo == "Prais-Winsten" & corr$termo == termo]
+rho_pw <- function(modelo) corr$rho[corr$modelo == modelo & corr$metodo == "Prais-Winsten"][1]
+rho_res_pw <- function(modelo) corr$rho_auxiliar_residuos_corrigidos[corr$modelo == modelo & corr$metodo == "Prais-Winsten"][1]
 gravar("04_diagnosticos.md", c(
   "# Diagnósticos do modelo", "",
+  "## Hipóteses formais (H0 e Ha) e critério de decisão a 5%", "",
+  "Critério em todos os testes: rejeita-se H0 quando o p-valor é menor que 0,05 (ou quando a estatística passa do valor crítico).", "",
+  md(rbind(
+    data.frame(Teste = testes$teste, Modelo = testes$modelo, H0 = testes$hipotese_nula, Ha = testes$hipotese_alternativa,
+               Estatística = f2(testes$estatistica), `p-valor` = fp(testes$p_valor), Decisão = testes$decisao_5pct, check.names = FALSE),
+    data.frame(Teste = reset$teste, Modelo = reset$modelo, H0 = reset$hipotese_nula, Ha = reset$hipotese_alternativa,
+               Estatística = f2(reset$estatistica_f), `p-valor` = fp(reset$p_valor), Decisão = reset$decisao_5pct, check.names = FALSE),
+    data.frame(Teste = acresc$teste, Modelo = "Modelo 4", H0 = acresc$hipotese_nula, Ha = acresc$hipotese_alternativa,
+               Estatística = f2(acresc$estatistica_f), `p-valor` = fp(acresc$p_valor), Decisão = acresc$decisao_5pct, check.names = FALSE),
+    data.frame(Teste = lm_t$teste, Modelo = lm_t$modelo, H0 = lm_t$hipotese_nula, Ha = lm_t$hipotese_alternativa,
+               Estatística = f2(lm_t$estatistica), `p-valor` = fp(lm_t$p_valor), Decisão = lm_t$decisao_5pct, check.names = FALSE),
+    data.frame(Teste = chow$teste, Modelo = chow$modelo, H0 = chow$hipotese_nula, Ha = chow$hipotese_alternativa,
+               Estatística = f2(chow$estatistica_f), `p-valor` = fp(chow$p_valor), Decisão = chow$decisao_5pct, check.names = FALSE),
+    data.frame(Teste = norm$teste, Modelo = norm$modelo, H0 = norm$hipotese_nula, Ha = norm$hipotese_alternativa,
+               Estatística = f2(norm$estatistica), `p-valor` = fp(norm$p_valor), Decisão = norm$decisao_5pct, check.names = FALSE))), "",
+  "## Normalidade dos resíduos (Jarque-Bera)", "",
+  md(data.frame(Modelo = norm$modelo, Estatística = f2(norm$estatistica), gl = norm$gl, `p-valor` = fp(norm$p_valor),
+                Decisão = norm$decisao_5pct, `Assimetria S` = f4(norm$assimetria_S), `Curtose K` = f4(norm$curtose_K), check.names = FALSE)), "",
+  sprintf("A normalidade dos resíduos é rejeitada nos dois modelos (p-valor %s no Modelo 2 e %s no Modelo 4). A distribuição tem caudas pesadas, sobretudo no Modelo 2 (S = %s, K = %s). Com 290 observações, os testes t e F são aproximadamente válidos pela teoria de amostras grandes; essa é uma limitação a declarar [a confirmar no Gujarati, cap. 5].",
+          fp(norm$p_valor[norm$modelo == "Modelo 2"]), fp(norm$p_valor[norm$modelo == "Modelo 4"]),
+          f4(norm$assimetria_S[norm$modelo == "Modelo 2"]), f4(norm$curtose_K[norm$modelo == "Modelo 2"])), "",
+  "## Influência e observações atípicas", "",
+  "Conceitos do Gujarati (cap. 13): outlier (resíduo grande), ponto de alavancagem (valor extremo de um regressor) e ponto influente (sua retirada muda a inclinação). O livro não apresenta teste formal para esses pontos; distância de Cook e DFBETAS não fazem parte do material da disciplina. Usamos a alavancagem (diagonal da matriz chapéu), o resíduo padronizado e a variação de cada coeficiente ao retirar a observação, em erros-padrão. Limiares: alavancagem acima de 2k/n, resíduo padronizado maior que 2 em módulo, e variação maior que 1 erro-padrão [presunção da modelagem].", "",
+  md(data.frame(Modelo = c("Modelo 2", "Modelo 4"),
+                `Alavancagem acima de 2k/n` = c(sum(infl$alavancagem_alta[infl$modelo == "Modelo 2"]), sum(infl$alavancagem_alta[infl$modelo == "Modelo 4"])),
+                `Outliers (resíduo padronizado acima de 2 em módulo)` = c(sum(infl$outlier[infl$modelo == "Modelo 2"]), sum(infl$outlier[infl$modelo == "Modelo 4"])),
+                `Influentes` = c(sum(infl$influente[infl$modelo == "Modelo 2"]), sum(infl$influente[infl$modelo == "Modelo 4"])), check.names = FALSE)), "",
+  sprintf("Pontos influentes no Modelo 4: %s. Retirados esses pontos, o coeficiente de X4 (Gini) passa de %s para %s, e o de X5 (Selic) varia %s%%. A observação de Adrianópolis em 2012 tem o maior resíduo padronizado do painel; a participação industrial do município salta de %s%% em 2014 para %s%% em 2015, enquanto a mediana do RMC em 2015 é %s%%. O dado deve ser conferido na fonte (SIDRA, tabela 5938) antes de qualquer conclusão [a confirmar].",
+          paste(paste(infl$nome_municipio, infl$ano)[infl$modelo == "Modelo 4" & infl$influente], collapse = "; "),
+          f4(infl_sens$coef_completo[infl_sens$termo == "gini_setorial"]), f4(infl_sens$coef_sem_influentes[infl_sens$termo == "gini_setorial"]),
+          f2(infl_sens$variacao_percentual[infl_sens$termo == "selic_real"]),
+          f2(painel$dom_industrial[painel$nome_municipio == "Adrianópolis" & painel$ano == 2014]),
+          f2(painel$dom_industrial[painel$nome_municipio == "Adrianópolis" & painel$ano == 2015]),
+          f2(stats::median(painel$dom_industrial[painel$ano == 2015]))), "",
   "## Heterogeneidade entre municípios", "",
   md(data.frame(Teste = acresc$teste, `Estatística F` = f2(acresc$estatistica_f),
                 gl = paste(acresc$gl_numerador, acresc$gl_denominador, sep = "; "),
@@ -175,9 +231,25 @@ gravar("04_diagnosticos.md", c(
           f2(comp_f$estatistica_f[1]), fp(comp_f$p_valor[1]), f2(comp_f$estatistica_f[2]), fp(comp_f$p_valor[2]),
           f2(comp$aic[3]), f2(comp$aic[1])), "",
   "## Autocorrelação dentro de cada município", "",
-  "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. Os valores de dL = 0,243 e dU = 2,822 para n = 10 e k' = 5 foram lidos por reconhecimento óptico de caracteres (OCR) do PDF da tabela da disciplina e ainda não foram conferidos em livro impresso. A tabela de Durbin-Watson do Hoffmann (2016) começa em n = 15, então não cobre n = 10; a conferência depende da tabela D.5A do Gujarati. Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
+  "Os testes são aplicados à série de dez anos de cada um dos 29 municípios, com os resíduos do Modelo 2 e do Modelo 4 (Gujarati, cap. 12; Guia P2).", "",
+  "H0 do Durbin-Watson: ρ = 0 (ausência de autocorrelação de primeira ordem). Ha: ρ > 0 (positiva) ou ρ < 0 (negativa). Valores de dL = 0,243 e dU = 2,822 para n = 10 e k = 5, a 5%, da Tabela D.5A do Gujarati (PDF p. 995), conferidos no livro. Zonas do Guia P2: d < dL rejeita H0 (positiva); dL ≤ d ≤ dU inconclusiva; dU < d < 4 − dU não rejeita; 4 − dU ≤ d ≤ 4 − dL inconclusiva; d > 4 − dL rejeita H0 (negativa). Com dU maior que 2, a zona de não rejeição fica vazia: o teste só rejeita H0 com d < 0,243 ou d > 3,757.", "",
+  "H0 do Breusch-Godfrey (ordem 1): ausência de autocorrelação de primeira ordem. Estatística qui-quadrado com 1 gl; rejeita H0 se p < 0,05.", "",
+  "H0 do teste das carreiras: os resíduos são aleatórios. Ha: não são aleatórios. A aproximação normal do Gujarati (cap. 12) exige N1 > 10 e N2 > 10; com dez anos por município isso não ocorre, e o teste é declarado não aplicável em cada série.", "",
   md(tab_aut_res), "",
-  "No Modelo 2, a autocorrelação positiva aparece em muitos municípios. No Modelo 4, a mediana do Durbin-Watson sobe para perto de 1,3 e o ρ auxiliar cai para 0,19: a maior parte da autocorrelação do Modelo 2 era heterogeneidade omitida entre municípios.", "",
+  sprintf("No Modelo 2, o Durbin-Watson mediano é %s e o ρ auxiliar mediano é %s: a autocorrelação positiva é forte. No Modelo 4, a mediana do Durbin-Watson é %s, e o ρ auxiliar cai para %s. A autocorrelação do Modelo 2 em boa parte reflete diferenças persistentes entre municípios.",
+          f4(aut_res$durbin_watson_mediano[aut_res$modelo == "Modelo 2"]), f4(aut_res$rho_auxiliar_mediano[aut_res$modelo == "Modelo 2"]),
+          f4(aut_res$durbin_watson_mediano[aut_res$modelo == "Modelo 4"]), f4(aut_res$rho_auxiliar_mediano[aut_res$modelo == "Modelo 4"])), "",
+  "## Correção da autocorrelação: Prais-Winsten e Cochrane-Orcutt", "",
+  "Métodos do Gujarati (cap. 12) e do Guia P2. O ρ é comum a todos os municípios e a transformação é feita dentro de cada município (a primeira observação de cada um é tratada por Prais-Winsten e descartada por Cochrane-Orcutt) [presunção da modelagem]. Newey-West não é aplicado: ver a nota de métodos não aplicados em 02_especificacao_e_metodos.md.", "",
+  md(tab_corr), "",
+  sprintf("Depois da correção, o ρ auxiliar dos resíduos transformados cai para %s no Modelo 2 e %s no Modelo 4 (Prais-Winsten). O ρ estimado é %s no Modelo 2 e %s no Modelo 4.",
+          f4(rho_res_pw("Modelo 2")), f4(rho_res_pw("Modelo 4")), f4(rho_pw("Modelo 2")), f4(rho_pw("Modelo 4"))), "",
+  sprintf("Efeito sobre o Modelo 2: o coeficiente de X2 (escolaridade) passa de %s, com erro de White, para %s, com Prais-Winsten e erro de White (p-valor %s). Leitura: a associação entre municípios no Modelo 2 depende da persistência dos dados, e não só da correção dos erros-padrão.",
+          f4(coef$estimativa[coef$modelo == "Modelo 2" & coef$matriz == "white" & coef$termo == "prop_superior"]),
+          f4(corr_est("Modelo 2", "prop_superior")), fp(corr_pw("Modelo 2", "prop_superior"))), "",
+  sprintf("No Modelo 4 corrigido, o coeficiente de X4 (Gini) é %s, com p-valor %s pelo erro de White. Com a correção, o efeito do Gini dentro dos municípios %s a 5%%.",
+          f4(corr_est("Modelo 4", "gini_setorial")), fp(corr_pw("Modelo 4", "gini_setorial")),
+          ifelse(corr_pw("Modelo 4", "gini_setorial") < 0.05, "continua significativo", "não é significativo")), "",
   "<details><summary>Série por município</summary>", "", md(tab_aut), "", "</details>"))
 
 # ---- 05 limitações
@@ -187,11 +259,13 @@ gravar("05_limitacoes.md", c(
   "- Com as dummies de município, X6 (distância) não é identificada. Seu efeito só aparece no Modelo 2, onde está confundido com as diferenças não observadas entre municípios.",
   "- Variáveis de nível de tempo (Selic) têm 10 valores distintos. A inferência do Modelo 4 para X5 trata 290 observações como independentes e superestima a precisão. É o ponto que mais limita a conclusão sobre juros.",
   "- O efeito de X4 muda de sinal entre o Modelo 2 (entre municípios) e o Modelo 4 (dentro dos municípios). A medida acompanha o número de setores com emprego (correlação -0,95).",
-  "- A autocorrelação dentro dos municípios cai com as dummies, mas o Breusch-Godfrey ainda rejeita em alguns municípios; não há correção ensinada aplicável ao painel para o resto.",
+  "- Autocorrelação dentro dos municípios: a correção Prais-Winsten e Cochrane-Orcutt com ρ comum é uma extensão do método de série temporal ao painel [presunção da modelagem]. Newey-West não é aplicado ao painel empilhado.",
   "- Heterocedasticidade: o Breusch-Pagan-Godfrey rejeita no Modelo 2 e no Modelo 4. A inferência usa erros de White.",
-  "- Autocorrelação positiva dentro dos municípios: aceita como limitação do trabalho (decisão registrada). Os erros-padrão, mesmo os de White, tendem a estar subestimados nessa parte.",
+  "- Os coeficientes com correção (Prais-Winsten) dependem do ρ estimado, que é alto no Modelo 2. O efeito de X2 entre municípios cai muito com a correção (ver 04_diagnosticos.md).",
+  "- Normalidade rejeitada nos dois modelos (Jarque-Bera). A assimetria e a curtose altas são reportadas; a inferência usa as aproximações assintóticas.",
+  "- Observações influentes no Modelo 4 (Adrianópolis 2012 e Lapa 2016). A sensibilidade do coeficiente de X4 a elas é alta; o dado de Adrianópolis deve ser conferido na fonte.",
   "- A definição da X4 altera o efeito dentro dos municípios (ver 04_diagnosticos.md, robustez da X4).",
-  "- O Modelo 4 usa variáveis dummy de município. Os slides de aulas lidos não trazem o capítulo 9 de Gujarati; o uso das dummies depende de confirmação com o professor.",
+  "- O Modelo 4 usa variáveis dummy de município (Gujarati, cap. 9). Os slides de aulas lidos não trazem dummies; o uso depende de confirmação com o professor.",
   "- A Selic tem 10 valores distintos; sua inferência é otimista, embora retirá-la piore o ajuste (ver 04_diagnosticos.md).",
   "- A divisão do teste de Chow no ano de 2016 é uma escolha, com duas partes de 145 observações.",
   "- Vínculos com divisão CNAE 'ignorada' ficam fora do cálculo do Gini."))
@@ -201,14 +275,13 @@ gravar("06_fontes.md", c(
   "# Fontes e referências", "",
   "## Fontes oficiais da disciplina (podem ser citadas)", "",
   "| Fonte | Conteúdo usado |", "|---|---|",
-  "| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação, variáveis dummy |",
-  "| Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |",
+  "| Gujarati, D. N.; Porter, D. C. Econometria Básica. Edição citada pelo professor: 5ª ed., AMGH, 2011. O PDF usado neste trabalho é a 4ª edição (McGraw-Hill, 2004); as páginas citadas são as do PDF. | fonte principal dos métodos (ver tabela abaixo) |",
   "| Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |",
   "| Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |",
-  "| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU (a conferir) |",
-  "| Hoffmann, R. Análise de regressão: uma introdução à econometria (livro aberto da USP, 2016, DOI 10.11606/9788592105709). Não é a edição citada pelo professor (1987). | capítulo 5 (variáveis binárias); tabela VI (Durbin-Watson, a partir de n = 15) |",
+  "| Gujarati, Apêndice D, Tabela D.5A (PDF p. 995): n = 10, k = 5, 5%: dL = 0,243 e dU = 2,822 | Durbin-Watson por município (conferido no livro) |",
   "| Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |",
-  "| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |", "",
+  "| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação (Breusch-Godfrey, teste das carreiras, Durbin-Watson, medidas corretivas MQG e Newey-West, este último não aplicado ao painel), medidas de desigualdade | confirmação dos métodos ensinados |",
+  "| Gujarati (PDF da 4ª ed.): cap. 5, seção 5.12 (Jarque-Bera, PDF pp. 176 e 177); cap. 8 (Chow, PDF pp. 303 a 309); cap. 9 (dummies, PDF pp. 332 a 352); cap. 11 (heterocedasticidade: Goldfeld-Quandt, Glejser, Park, White, MQP, PDF pp. 432 a 462); cap. 12 (autocorrelação: teste das carreiras PDF p. 493, Breusch-Godfrey PDF pp. 499 e 500, Durbin-Watson PDF pp. 495 a 499, Cochrane-Orcutt e Prais-Winsten PDF pp. 510 a 528, Newey-West, citado e não aplicado, PDF p. 503); cap. 13 (RESET PDF pp. 549 a 552, outliers, leverage e influência PDF pp. 568 e 569) | páginas citadas pelo trabalho |", "",
   "## Dados", "",
   "| Dado | Origem | Arquivo |", "|---|---|---|",
   "| PIB e VAB municipais | IBGE, SIDRA, tabela 5938 | dados_brutos/pib_sidra.rds |",

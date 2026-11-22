@@ -4,7 +4,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 56 arquivos |
+| A1 | Arquivos essenciais presentes | APROVADA | 60 arquivos |
 | A1b | Sem saídas de métodos removidos nem arquivos antigos | APROVADA | nenhuma saída antiga |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 21 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
@@ -23,5 +23,9 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C7 | Inferência agregada da Selic (n = 10) recalculada | APROVADA | p-valor recalculado 0.1886; no arquivo 0.1886 |
 | C8 | F de acréscimo das dummies de município recalculado (SQR restrita e irrestrita) | APROVADA | calculado 76.1264; no arquivo 76.1264 |
 | C9 | Projeção da Selic recalculada (cenário base = ajuste de 2021; ±1 p.p. = coeficiente) | APROVADA | desvios: base 1.8e-15; +1 p.p. 1.0e-15; -1 p.p. 1.0e-15; exp 0.0e+00 |
+| C10 | Jarque-Bera do Modelo 4 recalculado a partir dos resíduos | APROVADA | calculado 615.8789; no arquivo 615.8789 |
+| C11 | Prais-Winsten do Modelo 2 recalculado (coeficiente de X2 e ponto fixo de ρ) | APROVADA | X2 calculado 0.003755, no arquivo 0.003755; ρ ponto fixo 0.943971, no arquivo 0.943971 |
+| C12 | Decisões de Durbin-Watson por município conferidas com dL = 0,243 e dU = 2,822 (Gujarati, Tabela D.5A) | APROVADA | 29 de 29 municípios com decisão igual à regra |
+| C13 | Alavancagens somam o número de parâmetros (traço da matriz chapéu) | APROVADA | Modelo 2: 6.0000 (k = 6); Modelo 4: 33.0000 (k = 33) |
 
-19 de 19 verificações aprovadas.
+23 de 23 verificações aprovadas.
