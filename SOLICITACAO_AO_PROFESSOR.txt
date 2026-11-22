@@ -50,4 +50,4 @@ PERGUNTAS (responda cada uma)
 10. Dados. (a) Adrianópolis: a indústria passa de 7% (2014) para 45% (2015), confirmado na API do SIDRA; resíduo padronizado de −6,9 no Modelo 4. Mantemos com ressalva? (b) Araucária: VAB industrial negativo em 2012 e 2013, mantido com marca. Mantemos ou excluímos?
 
 REFERÊNCIA
-Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª edição (2004), páginas do PDF. A disciplina cita a 5ª edição; a paginação pode diferir.
+Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª edição (McGraw-Hill, 2004), páginas do PDF.

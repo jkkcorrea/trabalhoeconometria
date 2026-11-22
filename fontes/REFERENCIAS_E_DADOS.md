@@ -11,7 +11,7 @@ Nenhum livro é baixado para esta pasta pelo Claude: o conteúdo é protegido po
 
 | Arquivo | ID no Drive | Conteúdo declarado | Status |
 |---|---|---|---|
-| `Gujarati_Basic_Econometrics.pdf` | `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9` | Livro-base. A referência formal que aparece nas notas da disciplina é Gujarati, D. N.; Porter, D. C. *Econometria Básica*. 5ª ed. Porto Alegre: AMGH, 2011. | No Drive. Página do item a conferir no PDF (capítulos citados ao longo do texto). |
+| `Gujarati_Basic_Econometrics.pdf` | `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9` | Único livro de Gujarati usado no trabalho: Gujarati, D. N.; Porter, D. C. *Basic Econometrics*. 4ª ed. McGraw-Hill, 2004 (PDF único usado no projeto: `Gujarati_Basic_Econometrics.pdf`). Páginas conferidas no próprio PDF. | Na raiz do projeto e no Drive. |
 | `se614_ideias_basicas_notas.pdf` | `1Zl1QAFc53M2fIg8z6B07qbP6m8N4wfP3` | Notas de aula de Hasegawa (UFPR, 2023): regressão com duas variáveis, Gujarati (2011, cap. 2) | No Drive. Citar as notas só como material de aula, se o professor aceitar. |
 | `se614_ideias_basicas.pdf` | `1qvrw9MKHYHCs73Kqr4SO-WzWId9NzQMG` | Versão das ideias básicas | No Drive |
 | `se614_rls_est.pdf` | `1le4NZeK-WlTvPF-qKa6ozetjM88vW-Fi` | Estimação em regressão linear simples | No Drive |
@@ -36,7 +36,7 @@ Estes são os métodos e referências que aparecem em `R/` e em `envio_professor
 
 | Referência (como aparece no projeto) | Usada para | Status | Página para conferir |
 |---|---|---|---|
-| Gujarati e Porter (2011) | Critério FIV > 10 (`R/07`) | No Drive (livro) | Drive, item 1 |
+| Gujarati e Porter (2004, 4ª ed.) | Critério FIV > 10 (`R/07`) | Na raiz do projeto (livro) | Drive, item 1 |
 | Wooldridge (2002) e (2010) | Teste de autocorrelação em painel (`R/05`); exogeneidade estrita (`05_fragilidades.md`) | A verificar | busca de DOI e ISBN a fazer |
 | Cameron, Gelbach e Miller (2008) | Bootstrap wild cluster com pesos de Rademacher (`R/06`, `02_especificacao_e_metodos.md`) | A verificar | busca no Google Scholar a fazer |
 | Webb (pesos de seis pontos) | Pesos de Webb no bootstrap (`R/08`) | A verificar (nome e ano não confirmados no código) | busca a fazer |
@@ -88,7 +88,7 @@ Regra do projeto: não usar `basedosdados` (BigQuery pode gerar cobrança). Nenh
 
 | Referência | Página | Observação |
 |---|---|---|
-| Gujarati, D. N.; Porter, D. C. *Econometria Básica*. 5ª ed. AMGH, 2011 | Drive: `Gujarati_Basic_Econometrics.pdf` (ID `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9`). Também `Econometria - Damodar N. Gujarati.pdf` (compartilhado com você, ID `0Byigky4N9NBAQWFSWlZob3R6VTQ`) | Confirmar qual edição é a do PDF (o arquivo de 2024 pode ser a 5ª edição em inglês). |
+| Gujarati, D. N.; Porter, D. C. *Basic Econometrics*. 4ª ed. McGraw-Hill, 2004 (PDF único usado no projeto: `Gujarati_Basic_Econometrics.pdf`) | Drive: `Gujarati_Basic_Econometrics.pdf` (ID `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9`) | Único livro de Gujarati usado. Outros arquivos de Gujarati (edição em espanhol e versão em português sem texto) não são citados. |
 | Wooldridge, J. M. *Econometric Analysis of Cross Section and Panel Data*. 2ª ed. MIT Press, 2010. ISBN 9780262232586 | https://mitpressbookstore.mit.edu/book/9780262232586 | Pago. Você tem acesso pela biblioteca da UFPR, se houver. |
 | Mundlak, Y. (1978). On the pooling of time series and cross section data. *Econometrica*, 46(1), 69–85. DOI 10.2307/1913646 | https://www.econometricsociety.org/publications/econometrica/1978/01/01/pooling-time-series-and-cross-section-data | JSTOR (acesso pela UFPR). |
 | Hausman, J. A. (1978). Specification tests in econometrics. *Econometrica*, 46(6), 1251–1271. DOI 10.2307/1913827 | https://www.econometricsociety.org/publications/econometrica/1978/11/01/specification-tests-econometrics | JSTOR (acesso pela UFPR). |

@@ -37,7 +37,7 @@ Nota estimada: 77 de 100 (faixa provável de 72 a 80). Em escala de 10, cerca de
 - **R1. Prais-Winsten com ρ = 0,944 no Modelo 2** é um valor próximo de raiz unitária. A transformação remove quase toda a variação entre anos; o coeficiente de escolaridade passa de 0,0150 para 0,0038. Um examinador pode questionar se a estimativa ainda mede o que o trabalho pretende.
 - **R2. Teste das carreiras não aplicável** em todas as 58 séries. Um examinador pode perguntar por que não foi usado outro procedimento.
 - **R3. Gini e Modelo 4.** Com Prais-Winsten, o Gini deixa de ser significativo a 5% (p = 0,0977). Sem os dois pontos influentes, o coeficiente sobe para 1,15.
-- **R4. Edição do Gujarati.** O PDF é a 4ª edição. A disciplina cita a 5ª. As páginas podem diferir.
+- **R4. Edição do Gujarati.** Usamos só a 4ª edição (2004). A paginação pode diferir da edição citada pela disciplina.
 
 ## 5. Melhorias que faltam, por ganho
 

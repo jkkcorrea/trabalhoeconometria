@@ -3,7 +3,7 @@
 Conferência feita em 22/11/2026 contra três fontes:
 
 - **Slides da aula** (pasta `aulas` do Drive): `autocorrel.pdf` (lido por inteiro), `autocorrel2.pdf`, `autocorrel3.pdf`, `heterocedast.pdf`, `heterocedast2.pdf`, `especificao_diagnostico.pdf`, `multicolinear.pdf`. Os textos completos dos slides de `autocorrel2` e `autocorrel3` foram pesquisados por palavra-chave; não foram lidos página a página.
-- **Gujarati**: PDF `Gujarati_Basic_Econometrics.pdf` na pasta do projeto. É a **4ª edição** (McGraw-Hill, 2004). A disciplina cita a 5ª edição (AMGH, 2011); a numeração de páginas pode diferir. As páginas abaixo são **as do PDF**.
+- **Gujarati**: PDF `Gujarati_Basic_Econometrics.pdf` na pasta do projeto. É a **4ª edição** (McGraw-Hill, 2004), a única usada no trabalho. A disciplina cita a 5ª edição (AMGH, 2011); a numeração de páginas pode diferir. As páginas abaixo são **as do PDF**.
 - **Guia P2** (Google Doc do professor, `1Z8WubHPgJ3z9LmJC9CMbjqodpvmdRCEBnc1iVWEsdGs`).
 
 ## 1. Testes de autocorrelação

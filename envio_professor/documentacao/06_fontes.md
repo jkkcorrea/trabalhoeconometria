@@ -4,7 +4,7 @@
 
 | Fonte | Conteúdo usado |
 |---|---|
-| Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª ed. (McGraw-Hill, 2004), PDF local com texto completo; as páginas citadas são do PDF. A disciplina cita a 5ª ed. (AMGH, 2011); a paginação pode diferir. | fonte principal dos métodos (ver tabela abaixo) |
+| Gujarati, D. N.; Porter, D. C. *Basic Econometrics*. 4ª ed. McGraw-Hill, 2004 (PDF único usado no projeto: `Gujarati_Basic_Econometrics.pdf`). Páginas citadas são do PDF. | único livro de Gujarati usado; fonte principal dos métodos (ver tabela abaixo) |
 | Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |
 | Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |
 | Gujarati, Apêndice D, Tabela D.5A (PDF p. 995): n = 10, k = 5, 5%: dL = 0,243 e dU = 2,822 | Durbin-Watson por município (conferido no livro) |

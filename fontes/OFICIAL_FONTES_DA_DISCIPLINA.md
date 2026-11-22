@@ -6,7 +6,7 @@ Pasta de origem: Drive `Econometria` (ID `1sCBAPMV_VzeYUrTIEe2MzlT03gaWwbh0`), a
 
 | Fonte | Tipo | ID no Drive | Conteúdo relevante |
 |---|---|---|---|
-| Gujarati, D. N.; Porter, D. C. *Econometria Básica*. 5ª ed. AMGH, 2011 | Livro-base (bibliografia básica) | `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9` | Regressão, testes, heterocedasticidade, autocorrelação, multicolinearidade, especificação |
+| Gujarati, D. N.; Porter, D. C. *Basic Econometrics*. 4ª ed. McGraw-Hill, 2004 (PDF único usado no projeto: `Gujarati_Basic_Econometrics.pdf`). A disciplina cita a 5ª edição (AMGH, 2011); o projeto usa só a 4ª. | Livro-base (bibliografia básica) | `1AGHwTDPs20RjdJbAINAyUnOkUJqz__z9` | Regressão, testes, heterocedasticidade, autocorrelação, multicolinearidade, especificação |
 | Hoffmann, R.; Vieira, S. *Análise de Regressão: Introdução à Econometria*. 2ª ed. Hucitec, 1987 | Livro (bibliografia básica) | não está na pasta; citado no slide de Chow | Regressão linear múltipla e testes |
 | `notas_RLM.pdf` (Hasegawa, 2015) | Notas de aula | `1ryaHWys0XjbHRjcmQpfe8HQlrXzusmcV` | Regressão linear múltipla, matriz X'X, ANOVA, t e F, R² e R² parcial, F com restrição |
 | `se614_ideias_basicas.pdf`, `se614_rls_est.pdf`, `se614_rls_infer.pdf`, `se614_rls_notas.pdf` | Slides SE614 (Gujarati cap. 2, 3, 4) | `1qvrw9MKHYHCs73Kqr4SO-WzWId9NzQMG`, `1le4NZeK-WlTvPF-qKa6ozetjM88vW-Fi`, `1X-7lbv3RRjunciemYqlr6as_rufuy8Nn` | Regressão simples, estimação, inferência |

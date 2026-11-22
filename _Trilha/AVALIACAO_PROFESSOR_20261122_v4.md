@@ -21,6 +21,6 @@ Nota estimada: 80 de 100 (faixa provável de 77 a 82). Antes: 77.
 
 ## O que ainda limita a nota
 - Normalidade rejeitada nos dois modelos (critério 8) e sem procedimento de tratamento ensinado.
-- Capítulos da 5ª edição não conferidos no PDF completo (Cochrane-Orcutt, Prais-Winsten, Goldfeld-Quandt, Breusch-Pagan, Durbin-Watson D.5A).
+- Referências conferidas no PDF da 4ª edição (único livro de Gujarati usado).
 - Confirmação do professor pendente: dummies, correção com ρ comum no painel, limiares de influência, Gini e quebra de 2016.
 - O RESET do modelo principal, após a transformação de Prais-Winsten, não foi calculado. Deve entrar antes da entrega.

@@ -73,7 +73,7 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 - [x] 22/11/2026 **F. Conferir dL = 0,243 e dU = 2,822.** Conferidos na Tabela D.5A do Gujarati (PDF p. 995), que coincide com a leitura por OCR. A tabela do Hoffmann começa em n = 15 e não serve.
 - [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2). Robustez calculada (`robustez_x4_definicao_gini.csv`): com as divisões ativas, o efeito dentro dos municípios deixa de ser significativo (p = 0,44); entre municípios o sinal se mantém. Decisão do pesquisador sobre qual definição usar.
 - [ ] **H. Presunções a confirmar** (ver seção "Presunções" abaixo).
-- [x] 22/11/2026 **I. Referências.** Gujarati (PDF da 4ª edição) conferido e registrado em `fontes/PAGINAS_DE_REFERENCIA.md` e em `fontes/VERIFICACAO_CORRECOES.md`. A edição da disciplina é a 5ª (2011): páginas podem diferir. Hoffmann (1987) não localizado.
+- [x] 22/11/2026 **I. Referências.** Gujarati (PDF da 4ª edição) conferido e registrado em `fontes/PAGINAS_DE_REFERENCIA.md` e em `fontes/VERIFICACAO_CORRECOES.md`. Único livro de Gujarati usado: 4ª edição (2004). Hoffmann (1987) não localizado.
 - [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git) e de `Trabalhos Referencias/`. Mantidos (D-2026-11-22-08). Apagar exige pedido expresso.
 - [ ] **K. Artigo**: só depois de C, D e H e da aprovação do pesquisador.
 
@@ -89,5 +89,5 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 - [x] 22/11/2026 **L. Conferir Adrianópolis 2012 e a industrialização de 2015.** Conferido na API do SIDRA: iguais ao cache e ao publicado. Dado mantido com ressalva (D-2026-11-22-12). Causa econômica não documentada na fonte. Salto de 7% para 45% só nesse município; resíduo padronizado de −6,88. Conferir em `SIDRA 5938` (cache de `dados_brutos/pib_sidra.rds`) e corrigir se for erro de construção.
 - [x] 22/11/2026 **M. Memorial matricial do Modelo 4 e de Prais-Winsten.** Feito em `R/07` (C14 e C15).
 - [ ] **N. Confirmação do professor** (texto em `SOLICITACAO_AO_PROFESSOR.txt`): dummies de município; correção com ρ comum no painel; procedimento para normalidade rejeitada; limiares de influência; teste das carreiras com dez observações; Gini de 87 divisões; quebra de 2016; projeção com exp() sem correção.
-- [ ] **O. Edição do Gujarati (parcial).** A 5ª edição foi consultada pelo índice; capítulos pendentes de PDF completo (Cochrane-Orcutt, Prais-Winsten, Goldfeld-Quandt, Breusch-Pagan, tabela D.5A). O PDF é a 4ª edição (2004); a disciplina cita a 5ª (2011). Conferir as páginas na 5ª quando possível.
+- [x] 22/11/2026 **O. Edição do Gujarati.** Decidido usar só a 4ª edição (2004), PDF local com texto completo (D-2026-11-22-13). Outras edições não são usadas no trabalho.
 - [x] 22/11/2026 **P. Modelo de referência.** Decidido: principal Modelo 4 com Prais-Winsten; referência Modelo 2 com Prais-Winsten (D-2026-11-22-12). Com Prais-Winsten, o Modelo 2 perde significância em X3 e X4. Decidir se o texto apresenta o Modelo 2 apenas como referência ou se X6 passa a ser estimada de outra forma.
