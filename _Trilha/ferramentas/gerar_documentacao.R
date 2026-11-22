@@ -31,6 +31,9 @@ inf_ag <- res("inferencia_agregada_x5_x6.csv")
 gini_chk <- res("medida_gini_checagem.csv")
 comp <- res("comparacao_selic_producao.csv")
 comp_f <- res("comparacao_f_retirar_selic.csv")
+proj <- res("projecao_selic_m4.csv")
+efeito <- res("efeito_selic_projecao.csv")
+rob_x4 <- res("robustez_x4_definicao_gini.csv")
 
 nomes_termo <- c("(Intercept)" = "Constante", prop_superior = "X2 ensino superior (%)",
                  dom_industrial = "X3 dominância industrial (%)", gini_setorial = "X4 concentração setorial (Gini)",
@@ -70,6 +73,7 @@ gravar("02_especificacao_e_metodos.md", c(
   "- **Modelos 3 e 3b:** Modelo 2 com a dummy de Curitiba; o 3b acrescenta a interação X3 x X6.",
   "- **Modelo 4 (principal):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + dummies de município + u_it.", "",
   "A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acréscimo das dummies rejeita e o RESET passa a não rejeitar. A forma funcional não era o problema; a heterogeneidade entre municípios era. Ver 04_diagnosticos.md.", "",
+  "Fontes do uso de variáveis dummy: Hoffmann (capítulo 5, variáveis binárias), Gujarati (capítulo 9, variáveis explicativas qualitativas) e o trabalho de exemplo da disciplina (seção 2.3). Os slides das aulas lidos não tratam de dummies.", "",
   "## Métodos usados (todos ensinados na disciplina)", "",
   "| Método | Uso no projeto | Fonte oficial |", "|---|---|---|",
   "| MQO e álgebra matricial | estimação e memorial | notas de regressão múltipla |",
@@ -144,6 +148,20 @@ gravar("04_diagnosticos.md", c(
   md(data.frame(Variável = inf_ag$variavel, Base = inf_ag$base, gl = inf_ag$gl, Estimativa = f4(inf_ag$estimativa),
                 `p-valor` = fp(inf_ag$p_valor), Decisão = inf_ag$decisao_5pct, check.names = FALSE)), "",
   sprintf("Com a Selic, a inclinação não é significativa a 5%% na base de médias anuais (p-valor %s). Esse resultado não se sustenta com a inferência do Modelo 4.", fp(inf_ag$p_valor[1])), "",
+  "## Projeção pela previsão matricial (Modelo 4)", "",
+  "Previsão do ln do salário para 2021 em cada município, com intervalos da previsão média e individual (fórmulas de previsão matricial das notas de regressão múltipla). A variável de cenário é a Selic.", "",
+  md(data.frame(Cenário = unique(proj$cenario), `Selic (% a.a.)` = f2(tapply(proj$selic, proj$cenario, mean)[unique(proj$cenario)]),
+                `Salário médio previsto (R$, média dos 29 municípios)` = f2(tapply(proj$salario_previsto_reais, proj$cenario, mean)[unique(proj$cenario)]),
+                check.names = FALSE)), "",
+  md(data.frame(Modelo = efeito$modelo, `Efeito de +1 p.p. (ln)` = f4(efeito$efeito_ln_por_pp),
+                `Efeito (%)` = f2(efeito$efeito_percentual_por_pp), `IC 95% (ln)` = paste0("[", f4(efeito$ic95_inf_ln), "; ", f4(efeito$ic95_sup_ln), "]"),
+                gl = efeito$gl, `p-valor` = fp(efeito$p_valor), check.names = FALSE)), "",
+  "Leitura: pelo Modelo 4, cada ponto percentual a mais de Selic está associado a um salário cerca de 0,4% maior. A inferência do Modelo 4 é otimista (290 observações para 10 valores de Selic); a checagem agregada tem intervalo que inclui zero. A projeção mostra o efeito, mas o intervalo para a Selic deve ser lido com essa ressalva.", "",
+  "## Robustez da X4: definição do Gini", "",
+  md(data.frame(Modelo = rob_x4$modelo, `Definição da X4` = rob_x4$definicao_x4, coef = f4(rob_x4$coef_x4),
+                `p-valor` = fp(rob_x4$p_valor_x4), `R2 aj.` = f4(rob_x4$r2_ajustado), AIC = f2(rob_x4$aic),
+                `RESET p` = fp(rob_x4$reset_p), check.names = FALSE)), "",
+  "O Gini sobre as 87 divisões (com zeros) depende de quantos setores têm emprego (correlação -0,95). O Gini só sobre as divisões com vínculo tem correlação -0,41 com esse número. Com a segunda definição, o efeito dentro dos municípios (Modelo 4) não é significativo. O efeito entre municípios (Modelo 2) se mantém nas duas definições.", "",
   "## Medida X4 (Gini setorial)", "",
   sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes.", f4(gini_chk$valor[1])), "",
   "## Teste da Selic e da produção agrícola", "",
@@ -157,7 +175,7 @@ gravar("04_diagnosticos.md", c(
           f2(comp_f$estatistica_f[1]), fp(comp_f$p_valor[1]), f2(comp_f$estatistica_f[2]), fp(comp_f$p_valor[2]),
           f2(comp$aic[3]), f2(comp$aic[1])), "",
   "## Autocorrelação dentro de cada município", "",
-  "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para n = 10 e k' = 5, com dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
+  "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. Os valores de dL = 0,243 e dU = 2,822 para n = 10 e k' = 5 foram lidos por reconhecimento óptico de caracteres (OCR) do PDF da tabela da disciplina e ainda não foram conferidos em livro impresso. A tabela de Durbin-Watson do Hoffmann (2016) começa em n = 15, então não cobre n = 10; a conferência depende da tabela D.5A do Gujarati. Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
   md(tab_aut_res), "",
   "No Modelo 2, a autocorrelação positiva aparece em muitos municípios. No Modelo 4, a mediana do Durbin-Watson sobe para perto de 1,3 e o ρ auxiliar cai para 0,19: a maior parte da autocorrelação do Modelo 2 era heterogeneidade omitida entre municípios.", "",
   "<details><summary>Série por município</summary>", "", md(tab_aut), "", "</details>"))
@@ -172,6 +190,7 @@ gravar("05_limitacoes.md", c(
   "- A autocorrelação dentro dos municípios cai com as dummies, mas o Breusch-Godfrey ainda rejeita em alguns municípios; não há correção ensinada aplicável ao painel para o resto.",
   "- Heterocedasticidade: o Breusch-Pagan-Godfrey rejeita no Modelo 2 e no Modelo 4. A inferência usa erros de White.",
   "- Autocorrelação positiva dentro dos municípios: aceita como limitação do trabalho (decisão registrada). Os erros-padrão, mesmo os de White, tendem a estar subestimados nessa parte.",
+  "- A definição da X4 altera o efeito dentro dos municípios (ver 04_diagnosticos.md, robustez da X4).",
   "- O Modelo 4 usa variáveis dummy de município. Os slides de aulas lidos não trazem o capítulo 9 de Gujarati; o uso das dummies depende de confirmação com o professor.",
   "- A Selic tem 10 valores distintos; sua inferência é otimista, embora retirá-la piore o ajuste (ver 04_diagnosticos.md).",
   "- A divisão do teste de Chow no ano de 2016 é uma escolha, com duas partes de 145 observações.",
@@ -186,7 +205,8 @@ gravar("06_fontes.md", c(
   "| Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |",
   "| Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |",
   "| Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |",
-  "| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU |",
+  "| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU (a conferir) |",
+  "| Hoffmann, R. Análise de regressão: uma introdução à econometria (livro aberto da USP, 2016, DOI 10.11606/9788592105709). Não é a edição citada pelo professor (1987). | capítulo 5 (variáveis binárias); tabela VI (Durbin-Watson, a partir de n = 15) |",
   "| Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |",
   "| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |", "",
   "## Dados", "",

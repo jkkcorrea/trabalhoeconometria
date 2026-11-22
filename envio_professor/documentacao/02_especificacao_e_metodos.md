@@ -8,6 +8,8 @@ Três especificações, todas por MQO sobre o painel empilhado:
 
 A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acréscimo das dummies rejeita e o RESET passa a não rejeitar. A forma funcional não era o problema; a heterogeneidade entre municípios era. Ver 04_diagnosticos.md.
 
+Fontes do uso de variáveis dummy: Hoffmann (capítulo 5, variáveis binárias), Gujarati (capítulo 9, variáveis explicativas qualitativas) e o trabalho de exemplo da disciplina (seção 2.3). Os slides das aulas lidos não tratam de dummies.
+
 ## Métodos usados (todos ensinados na disciplina)
 
 | Método | Uso no projeto | Fonte oficial |

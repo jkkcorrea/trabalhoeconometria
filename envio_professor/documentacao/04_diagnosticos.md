@@ -55,6 +55,34 @@ A Selic tem 10 valores distintos (um por ano) e a distância tem 29 (um por muni
 
 Com a Selic, a inclinação não é significativa a 5% na base de médias anuais (p-valor 0,1886). Esse resultado não se sustenta com a inferência do Modelo 4.
 
+## Projeção pela previsão matricial (Modelo 4)
+
+Previsão do ln do salário para 2021 em cada município, com intervalos da previsão média e individual (fórmulas de previsão matricial das notas de regressão múltipla). A variável de cenário é a Selic.
+
+| Cenário | Selic (% a.a.) | Salário médio previsto (R$, média dos 29 municípios) |
+|---|---|---|
+| Selic de 2021 | -5,11 | 2582,82 |
+| Selic de 2021 + 1 p.p. | -4,11 | 2592,95 |
+| Selic de 2021 - 1 p.p. | -6,11 | 2572,72 |
+
+| Modelo | Efeito de +1 p.p. (ln) | Efeito (%) | IC 95% (ln) | gl | p-valor |
+|---|---|---|---|---|---|
+| M4 (dummies de município), erro de White | 0,0039 | 0,39 | [0,0023; 0,0055] | 257 | < 0,0001 |
+| Checagem agregada (médias anuais, n = 10) | 0,0038 | 0,38 | [-0,0023; 0,0099] |   8 | 0,1886 |
+
+Leitura: pelo Modelo 4, cada ponto percentual a mais de Selic está associado a um salário cerca de 0,4% maior. A inferência do Modelo 4 é otimista (290 observações para 10 valores de Selic); a checagem agregada tem intervalo que inclui zero. A projeção mostra o efeito, mas o intervalo para a Selic deve ser lido com essa ressalva.
+
+## Robustez da X4: definição do Gini
+
+| Modelo | Definição da X4 | coef | p-valor | R2 aj. | AIC | RESET p |
+|---|---|---|---|---|---|---|
+| Modelo 4 | 87 divisões (zeros incluídos) | 0,8653 | 0,0496 | 0,9558 | -969,14 | 0,7527 |
+| Modelo 2 | 87 divisões (zeros incluídos) | -0,6548 | 0,0001 | 0,6433 | -388,30 | < 0,0001 |
+| Modelo 4 | somente divisões com vínculo | 0,1776 | 0,4420 | 0,9549 | -963,11 | 0,5671 |
+| Modelo 2 | somente divisões com vínculo | -0,6378 | 0,0011 | 0,6356 | -382,07 | < 0,0001 |
+
+O Gini sobre as 87 divisões (com zeros) depende de quantos setores têm emprego (correlação -0,95). O Gini só sobre as divisões com vínculo tem correlação -0,41 com esse número. Com a segunda definição, o efeito dentro dos municípios (Modelo 4) não é significativo. O efeito entre municípios (Modelo 2) se mantém nas duas definições.
+
 ## Medida X4 (Gini setorial)
 
 A correlação entre o Gini e o número de divisões CNAE com emprego é -0,9497. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes.
@@ -76,7 +104,7 @@ Retirar a Selic piora o ajuste: F = 26,70 no Modelo 4 (p-valor < 0,0001) e F = 9
 
 ## Autocorrelação dentro de cada município
 
-Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para n = 10 e k' = 5, com dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.
+Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. Os valores de dL = 0,243 e dU = 2,822 para n = 10 e k' = 5 foram lidos por reconhecimento óptico de caracteres (OCR) do PDF da tabela da disciplina e ainda não foram conferidos em livro impresso. A tabela de Durbin-Watson do Hoffmann (2016) começa em n = 15, então não cobre n = 10; a conferência depende da tabela D.5A do Gujarati. Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.
 
 | Modelo | Municípios | DW mediano | ρ mediano | DW positivo pela tabela | Breusch-Godfrey rejeita a 5% |
 |---|---|---|---|---|---|

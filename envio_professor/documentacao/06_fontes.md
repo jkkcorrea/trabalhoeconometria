@@ -8,7 +8,8 @@
 | Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |
 | Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |
 | Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |
-| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU |
+| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU (a conferir) |
+| Hoffmann, R. Análise de regressão: uma introdução à econometria (livro aberto da USP, 2016, DOI 10.11606/9788592105709). Não é a edição citada pelo professor (1987). | capítulo 5 (variáveis binárias); tabela VI (Durbin-Watson, a partir de n = 15) |
 | Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |
 | Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |
 

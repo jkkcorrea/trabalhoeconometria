@@ -68,13 +68,13 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 
 Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelação aceita como limitação (D-2026-11-22-04), teste da Selic e da produção agrícola (`resultados_econometricos/comparacao_*.csv`), correção da entropia de Shannon (D-2026-11-22-05), leitura dos slides de `aulas`, produção agrícola coletada com cache (R/01b).
 
-- [ ] **C. Manter a Selic ou retirá-la.** Retirar piora o ajuste (F = 26,7 no Modelo 4). Trocar pela produção agrícola não melhora (AIC −943,7 contra −969,1 com a Selic; coeficiente da produção negativo e não significativo). Recomendação: manter a Selic e declarar a inferência como limitação. Decisão do pesquisador.
-- [ ] **D. Dummies de município no Modelo 4.** Os slides de `aulas` lidos (regressão matricial, especificação e diagnóstico, Chow, desigualdade) não trazem variáveis dummy; o capítulo 9 de Gujarati não está na pasta. Confirmar com o professor se dummies de município são método ensinado. Se não forem, o modelo principal volta a ser o Modelo 2.
+- [x] 22/11/2026 **C. Manter a Selic ou retirá-la.** Decidido: manter (D-2026-11-22-06). Projeção e efeito documentados. Retirar piora o ajuste (F = 26,7 no Modelo 4). Trocar pela produção agrícola não melhora (AIC −943,7 contra −969,1 com a Selic; coeficiente da produção negativo e não significativo). Recomendação: manter a Selic e declarar a inferência como limitação. Decisão do pesquisador.
+- [ ] **D. Dummies de município no Modelo 4.** Os slides de `aulas` não trazem dummies, mas o trabalho de exemplo (seção 2.3), o Hoffmann (capítulo 5) e o Gujarati (capítulo 9) trazem (D-2026-11-22-07, mantidas). Falta a confirmação do professor. Se ele não aceitar, o modelo principal volta a ser o Modelo 2.
 - [ ] **F. Conferir visualmente dL = 0,243 e dU = 2,822** no PDF `tabela_DW.pdf` (lidos por OCR).
-- [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2).
+- [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2). Robustez calculada (`robustez_x4_definicao_gini.csv`): com as divisões ativas, o efeito dentro dos municípios deixa de ser significativo (p = 0,44); entre municípios o sinal se mantém. Decisão do pesquisador sobre qual definição usar.
 - [ ] **H. Presunções a confirmar** (ver seção "Presunções" abaixo).
 - [ ] **I. Referências**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro (os slides citam ambos, com edição e páginas). Baixar os livros protegidos para `fontes/livros_artigos/`.
-- [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git) e de `Trabalhos Referencias/`. Apagar exige pedido expresso.
+- [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git) e de `Trabalhos Referencias/`. Mantidos (D-2026-11-22-08). Apagar exige pedido expresso.
 - [ ] **K. Artigo**: só depois de C, D e H e da aprovação do pesquisador.
 
 ## Presunções (o que confirmar)

@@ -26,6 +26,7 @@ esperado <- c("LEIAME.md",
                                         "especificacao_lm_tendencia.csv", "chow_quebra_periodo.csv",
                                         "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv", "especificacao_acrescimo_municipios.csv",
                                         "comparacao_selic_producao.csv", "comparacao_f_retirar_selic.csv",
+                                        "projecao_selic_m4.csv", "efeito_selic_projecao.csv", "robustez_x4_definicao_gini.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -47,7 +48,7 @@ registrar("A1b", "Sem saídas de métodos removidos nem arquivos antigos", lengt
 # Métodos fora do escopo ensinado: não podem aparecer nos scripts nem nos documentos.
 proibidos <- c("mundlak", "hausman", "plm::", "vcovCL", "clustered", "cluster", "bootstrap", "webb", "wild",
                "rademacher", "prais", "neweywest", "newey", "smearing", "duan",
-               "boxcox", "box-cox", "jarque", "efeitos fixos", "within", "pbgtest", "pwartest", "exp\\(", "vcovHAC")
+               "boxcox", "box-cox", "jarque", "efeitos fixos", "within", "pbgtest", "pwartest", "vcovHAC")  # exp() sem correção é a retransformação autorizada (CLAUDE.md, seção 6); smearing e Duan já barrados
 arquivos_texto <- list.files(DIR, pattern = "\\.(R|md|csv|txt)$", recursive = TRUE, full.names = TRUE)
 arquivos_texto <- arquivos_texto[!grepl("08_verificacao.md$|/resultados_econometricos/.*\\.csv$|/dados_processados/", arquivos_texto)]
 achados <- character()
@@ -198,6 +199,23 @@ F_acr <- ((sqr(X_r) - sqr(X_u)) / (ncol(X_u) - ncol(X_r))) / (sqr(X_u) / (n - nc
 acr <- le("resultados_econometricos/especificacao_acrescimo_municipios.csv")
 registrar("C8", "F de acréscimo das dummies de município recalculado (SQR restrita e irrestrita)",
           abs(F_acr - acr$estatistica_f[1]) < 1e-6, sprintf("calculado %.4f; no arquivo %.4f", F_acr, acr$estatistica_f[1]))
+
+# C9: projeção do Modelo 4 (Selic) fecha com o ajuste e com o coeficiente da Selic.
+proj9 <- le("resultados_econometricos/projecao_selic_m4.csv")
+ef <- le("resultados_econometricos/efeito_selic_projecao.csv")
+m4 <- lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + factor(id_municipio), data = painel)
+b_s <- coef(m4)["selic_real"]
+base9 <- proj9[proj9$cenario == "Selic de 2021", ]; mais9 <- proj9[proj9$cenario == "Selic de 2021 + 1 p.p.", ]
+menos9 <- proj9[proj9$cenario == "Selic de 2021 - 1 p.p.", ]
+ajuste21 <- setNames(predict(m4, newdata = painel[painel$ano == 2021, ]), painel$id_municipio[painel$ano == 2021])
+d_base <- max(abs(base9$ln_previsto - ajuste21[as.character(base9$id_municipio)]))
+d_mais <- max(abs((mais9$ln_previsto - base9$ln_previsto) - b_s))
+d_menos <- max(abs((base9$ln_previsto - menos9$ln_previsto) - b_s))
+d_exp <- max(abs(base9$salario_previsto_reais - exp(base9$ln_previsto)))
+registrar("C9", "Projeção da Selic recalculada (cenário base = ajuste de 2021; ±1 p.p. = coeficiente)",
+          nrow(base9) == 29 && nrow(mais9) == 29 && nrow(menos9) == 29 && d_base < 1e-8 && d_mais < 1e-8 &&
+            d_menos < 1e-8 && d_exp < 1e-6 && abs(ef$efeito_ln_por_pp[1] - b_s) < 1e-8,
+          sprintf("desvios: base %.1e; +1 p.p. %.1e; -1 p.p. %.1e; exp %.1e", d_base, d_mais, d_menos, d_exp))
 
 # ============================== E. Resumo final ==================================
 status_ok <- sum(resultado$situacao == "APROVADA"); total <- nrow(resultado)

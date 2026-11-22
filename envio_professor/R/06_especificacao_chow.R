@@ -219,6 +219,86 @@ f_selic <- tibble::tibble(
 readr::write_csv(f_selic, file.path(DIR_RESULTADOS, "comparacao_f_retirar_selic.csv"))
 print(comparacao[, c("especificacao", "r2_ajustado", "aic", "reset_p", "p_selic_white", "p_producao_white")], row.names = FALSE)
 
+# Projeção pela previsão matricial (Gujarati, cap. 7; notas de regressão múltipla, slides 82 a 93):
+# x0 é o vetor de valores das explicativas (inclui 1 e as dummies de município); a previsão média tem
+# variância sigma2 * x0' (X'X)^-1 x0 e a previsão individual tem sigma2 * (1 + x0' (X'X)^-1 x0).
+# Cenários da Selic para 2021: valor observado e +/- 1 ponto percentual, com M4 (dummies de município).
+m4 <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real +
+                  factor(id_municipio), data = painel)
+Xm <- stats::model.matrix(m4)
+XtXi <- solve(t(Xm) %*% Xm)
+sigma2 <- sum(stats::residuals(m4)^2) / m4$df.residual
+t_crit <- stats::qt(0.975, m4$df.residual)
+selic_2021 <- painel$selic_real[painel$ano == max(painel$ano)][1]
+cenarios <- tibble::tibble(cenario = c("Selic de 2021", "Selic de 2021 + 1 p.p.", "Selic de 2021 - 1 p.p."),
+                           selic = c(selic_2021, selic_2021 + 1, selic_2021 - 1))
+dados_2021 <- painel[painel$ano == max(painel$ano), ]
+projecao <- purrr::map_dfr(seq_len(nrow(cenarios)), function(i) {
+  purrr::map_dfr(seq_len(nrow(dados_2021)), function(j) {
+    x0 <- Xm[painel$ano == max(painel$ano) & painel$id_municipio == dados_2021$id_municipio[j], , drop = FALSE][1, ]
+    x0[["selic_real"]] <- cenarios$selic[i]
+    yhat <- sum(x0 * stats::coef(m4))
+    h <- as.numeric(t(x0) %*% XtXi %*% x0)
+    ep_media <- sqrt(sigma2 * h)
+    ep_ind <- sqrt(sigma2 * (1 + h))
+    tibble::tibble(cenario = cenarios$cenario[i], selic = cenarios$selic[i],
+                   id_municipio = dados_2021$id_municipio[j], nome_municipio = dados_2021$nome_municipio[j],
+                   ln_previsto = yhat, salario_previsto_reais = exp(yhat),
+                   ic_media_inf = yhat - t_crit * ep_media, ic_media_sup = yhat + t_crit * ep_media,
+                   ic_individual_inf = yhat - t_crit * ep_ind, ic_individual_sup = yhat + t_crit * ep_ind)
+  })
+})
+readr::write_csv(projecao, file.path(DIR_RESULTADOS, "projecao_selic_m4.csv"))
+
+# Efeito da Selic: variação do ln do salário por 1 ponto percentual, com erro de White (HC1) e
+# com a checagem agregada (regressão sobre médias anuais, n = 10, gl = 8).
+ct_m4 <- lmtest::coeftest(m4, vcov. = sandwich::vcovHC(m4, type = "HC1"))
+b_selic <- ct_m4["selic_real", 1]
+ep_selic <- ct_m4["selic_real", 2]
+efeito_selic <- tibble::tibble(
+  modelo = "M4 (dummies de município), erro de White",
+  efeito_ln_por_pp = b_selic,
+  efeito_percentual_por_pp = 100 * (exp(b_selic) - 1),
+  ic95_inf_ln = b_selic - t_crit * ep_selic,
+  ic95_sup_ln = b_selic + t_crit * ep_selic,
+  gl = m4$df.residual,
+  p_valor = ct_m4["selic_real", 4]
+)
+agregado <- summary(stats::lm(ln_salario_real ~ selic_real, data = media_ano))$coefficients["selic_real", ]
+efeito_selic <- dplyr::bind_rows(efeito_selic, tibble::tibble(
+  modelo = "Checagem agregada (médias anuais, n = 10)",
+  efeito_ln_por_pp = agregado[1], efeito_percentual_por_pp = 100 * (exp(agregado[1]) - 1),
+  ic95_inf_ln = agregado[1] - stats::qt(0.975, 8) * agregado[2],
+  ic95_sup_ln = agregado[1] + stats::qt(0.975, 8) * agregado[2],
+  gl = 8L, p_valor = agregado[4]))
+readr::write_csv(efeito_selic, file.path(DIR_RESULTADOS, "efeito_selic_projecao.csv"))
+
+# Robustez da X4: Gini calculado só sobre as divisões com vínculo (n = número de divisões com emprego).
+# Ao contrário do Gini sobre 87 divisões, esta versão não depende mecanicamente de quantos setores
+# existem (correlação com o número de divisões: -0,41, contra -0,95 no Gini de 87 divisões).
+if (file.exists(arq_rais)) {
+  gini_ativas <- sapply(split(cnae, paste(cnae$id_municipio, cnae$ano)), function(d) {
+    x <- sort(d$vinculos_ativos / sum(d$vinculos_ativos)); n_div <- length(x)
+    sum((2 / n_div) * seq_len(n_div) * x) - (n_div + 1) / n_div
+  })
+  painel$gini_ativas <- gini_ativas[paste(painel$id_municipio, painel$ano)]
+  linhas_x4 <- purrr::imap_dfr(c(gini_setorial = "87 divisões (zeros incluídos)",
+                                 gini_ativas = "somente divisões com vínculo"), function(rot, v) {
+    f_m4 <- stats::as.formula(paste("ln_salario_real ~ prop_superior + dom_industrial +", v,
+                                    "+ selic_real + factor(id_municipio)"))
+    f_m2 <- stats::as.formula(paste("ln_salario_real ~ prop_superior + dom_industrial +", v,
+                                    "+ selic_real + dist_curitiba_km"))
+    purrr::imap_dfr(list("Modelo 4" = f_m4, "Modelo 2" = f_m2), function(f, nome) {
+      m <- stats::lm(f, data = painel)
+      ct <- lmtest::coeftest(m, vcov. = sandwich::vcovHC(m, type = "HC1"))
+      tibble::tibble(modelo = nome, definicao_x4 = rot, coef_x4 = ct[v, 1], p_valor_x4 = ct[v, 4],
+                     r2_ajustado = summary(m)$adj.r.squared, aic = stats::AIC(m),
+                     reset_p = lmtest::resettest(m, power = 2:3, type = "fitted")$p.value)
+    })
+  })
+  readr::write_csv(linhas_x4, file.path(DIR_RESULTADOS, "robustez_x4_definicao_gini.csv"))
+}
+
 message("Etapa 6 concluída: RESET, LM, Chow, inferência agregada e checagem do Gini gravados.")
 print(tabela_reset[, c("modelo", "teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
 print(tabela_acrescimo[, c("teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
