@@ -39,7 +39,7 @@ PERGUNTAS (responda cada uma)
 
 5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios tem p = 0,05. Só com as divisões com vínculo, p = 0,44. Qual definição usar?
 
-6. Teste das carreiras. Com 10 anos por município, a aproximação normal não se aplica (exige mais de 10 sinais de cada tipo). Há outro procedimento que devemos usar, ou declaramos como não aplicável?
+6. Teste das carreiras (Gujarati, 4ª ed., pp. 493-494). Ele conta as sequências de sinais dos resíduos (+ ou −) em cada série. A aproximação normal exige N1 > 10 resíduos positivos e N2 > 10 negativos na mesma série. Cada município tem 10 anos, então a condição não se cumpre em nenhuma das 58 séries (29 municípios, 2 modelos). O teste não foi aplicado. Podemos declarar isso, ou há outro procedimento ensinado para séries curtas?
 
 7. Influência. Usamos alavancagem, resíduo padronizado e variação do coeficiente ao retirar a observação, com limiares nossos (2k/n; |r| > 2; 1 erro-padrão). Distância de Cook e DFBETAS não estão no programa. A análise descritiva basta?
 
