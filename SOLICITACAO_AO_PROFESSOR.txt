@@ -1,8 +1,9 @@
-SOLICITAÇÃO DE CONFIRMAÇÃO - TRABALHO DE ECONOMETRIA I (UFPR)
-Envio único. Escrito para o professor da disciplina.
+Boa tarde, professor. Tudo bem com o senhor?
+
+Estou escrevendo para tirar algumas dúvidas do trabalho final de Econometria I. Segue um resumo do trabalho e as perguntas.
 
 TEMA E DADOS
-Salário médio formal real (em logaritmo) de 29 municípios da RMC, 2012 a 2021: 290 observações em painel. Regressores: escolaridade (X2), industrialização (X3), Gini setorial do emprego (X4), Selic real (X5) e distância a Curitiba (X6).
+Salário médio formal real (em logaritmo) de 29 municípios da RMC, 2012 a 2021. Painel balanceado: 290 observações (29 x 10). Salário real entre R$ 1.793 e R$ 4.501 (mediana R$ 2.541), em reais de 2021. Regressores: escolaridade (X2, proporção de vínculos com superior completo), industrialização (X3, participação da indústria no VAB), Gini setorial do emprego (X4, 87 divisões CNAE), Selic real (X5) e distância a Curitiba (X6).
 
 HIPÓTESE TESTADA
 H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização, controlados os efeitos comuns a todos os municípios.
@@ -16,38 +17,42 @@ Por variável (sinal esperado, aprovado):
 Critério: rejeita-se H0 quando p < 0,05 no coeficiente correspondente, com erro de White.
 
 FORMA FUNCIONAL
-Usamos o logaritmo natural do salário porque ele é sempre positivo, tem distribuição assimétrica à direita e o log comprime essa cauda. Com ele, o coeficiente mede variação relativa (%) do salário por unidade da regressora (Gujarati, 4ª ed., pp. 207-208). Logaritmo não se aplica a valores zero ou negativos (p. 450); todos os salários são positivos.
+Usamos o logaritmo natural do salário porque ele é sempre positivo, tem distribuição assimétrica à direita e o log comprime essa cauda. O coeficiente então mede variação relativa (%) do salário por unidade da regressora (Gujarati, 4ª ed., pp. 207-208). Logaritmo não se aplica a valores zero ou negativos (p. 450); todos os salários são positivos.
 
 MODELOS
-- Modelo 4 (dummies de município), com correção de autocorrelação por Prais-Winsten (ρ = 0,368 comum a todos os municípios) e erro de White. Candidato a principal.
+- Modelo 4 (dummies de município), com correção de autocorrelação por Prais-Winsten (ρ = 0,368, comum a todos os municípios) e erro de White. Candidato a principal.
 - Modelo 4 sem correção, com erro de White. Comparação.
 - Modelo 2 (MQO empilhado), com Prais-Winsten. Referência.
 
 RESULTADOS (Modelo 4, Prais-Winsten, erro de White)
 - Escolaridade: +0,0067 (p = 0,003). Industrialização: −0,0004 (p = 0,668). Gini: +0,8409 (p = 0,098). Selic: +0,0030 (p = 0,0005).
 - Sem correção: Gini p = 0,050; escolaridade p < 0,001.
-- Durbin-Watson mediano (sem correção) = 1,33; após a correção, ρ dos resíduos = 0,017.
+- Durbin-Watson mediano por município: 1,33 (Modelo 4, sem correção) e 0,25 (Modelo 2, sem correção). Após a correção, ρ dos resíduos = 0,017 (Modelo 4).
 
-PERGUNTAS (responda cada uma)
-1. Dummies de município. Os slides não as trazem; aparecem no Gujarati (cap. 9, pp. 332-352) e no trabalho de exemplo. Podemos usá-las no modelo principal?
+PERGUNTAS
+1. Dummies de município. Os slides da aula não as trazem; aparecem no Gujarati (cap. 9, pp. 332-352) e no trabalho de exemplo. Podemos usá-las no modelo principal?
 
 2. Autocorrelação. Prais-Winsten com ρ comum, aplicado dentro de cada município, é aceito? Ou declaramos a autocorrelação como limitação?
 
-3. Modelo principal. Com a correção, o RESET de Ramsey depende da variante: type "fitted" F = 33,6 (p ≈ 1e-13); type "regressor" F = 3,0 (p ≈ 2e-9); type "princomp" F = 0,41 (p = 0,66). Sem correção, p = 0,75. Qual modelo devemos apresentar como principal, e como interpretar esse teste?
+3. Modelo principal. Com a correção, o RESET de Ramsey depende da variante do teste: type "fitted" F = 33,57 (gl 2; 255; p ≈ 1e-13); type "regressor" F = 3,00 (p ≈ 2e-9); type "princomp" F = 0,41 (p = 0,66). Sem correção, F = 0,28 (gl 2; 255; p = 0,75). Qual modelo devemos apresentar como principal, e como interpretar esse teste?
 
-4. Normalidade. Jarque-Bera rejeita nos dois modelos (Modelo 2: assimetria 1,74; curtose 8,52). Basta declarar como limitação?
+4. Normalidade. Jarque-Bera rejeita nos dois modelos: Modelo 2, estatística 514,4 (gl 2), assimetria 1,74 e curtose 8,52; Modelo 4, estatística 615,9, assimetria −0,94 e curtose 9,89. Basta declarar como limitação?
 
-5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios tem p = 0,05. Só com as divisões com vínculo, p = 0,44. Qual definição usar?
+5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios (Modelo 4) tem p = 0,050. Só com as divisões com vínculo, p = 0,442. Entre municípios (Modelo 2), p = 0,0001 nas duas definições. Qual definição usar?
 
 6. Teste das carreiras (Gujarati, 4ª ed., pp. 493-494). Ele conta as sequências de sinais dos resíduos (+ ou −) em cada série. A aproximação normal exige N1 > 10 resíduos positivos e N2 > 10 negativos na mesma série. Cada município tem 10 anos, então a condição não se cumpre em nenhuma das 58 séries (29 municípios, 2 modelos). O teste não foi aplicado. Podemos declarar isso, ou há outro procedimento ensinado para séries curtas?
 
-7. Influência. Usamos alavancagem, resíduo padronizado e variação do coeficiente ao retirar a observação, com limiares nossos (2k/n; |r| > 2; 1 erro-padrão). Distância de Cook e DFBETAS não estão no programa. A análise descritiva basta?
+7. Influência. Usamos alavancagem, resíduo padronizado e variação do coeficiente ao retirar a observação, com limiares nossos (alavancagem acima de 2k/n; |resíduo padronizado| > 2; variação maior que 1 erro-padrão). No Modelo 4, há 3 pontos de alavancagem alta, 13 outliers e 2 pontos influentes (Adrianópolis 2012 e Lapa 2016). Distância de Cook e DFBETAS não estão no programa. A análise descritiva basta?
 
 8. Projeção de 2021. Retransformamos o logaritmo por exp(), sem correção de viés. Está adequado?
 
-9. Chow. Dividimos o período em 2012-2016 e 2017-2021 (p = 0,10). O corte é escolha nossa. Aceita, ou indica outro corte?
+9. Chow. Dividimos o período em 2012-2016 e 2017-2021: F = 1,79 (gl 6; 278), p = 0,10. O corte é escolha nossa. Aceita, ou indica outro corte?
 
-10. Dados. (a) Adrianópolis: a indústria passa de 7% (2014) para 45% (2015), confirmado na API do SIDRA; resíduo padronizado de −6,9 no Modelo 4. Mantemos com ressalva? (b) Araucária: VAB industrial negativo em 2012 e 2013, mantido com marca. Mantemos ou excluímos?
+10. Dados.
+(a) Adrianópolis: VAB da indústria de R$ 6,2 milhões (2014) para R$ 67,8 milhões (2015); VAB total de R$ 87,4 milhões para R$ 149,0 milhões. A participação industrial passa de 7% para 45%. Confirmado na API do SIDRA (tabela 5938). O resíduo padronizado no Modelo 4 é −6,9. Mantemos com ressalva?
+(b) Araucária: VAB industrial negativo em 2012 (−R$ 560,8 mil) e 2013 (−R$ 246,4 mil), mantido e marcado no painel. Mantemos ou excluímos?
 
 REFERÊNCIA
 Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª edição (McGraw-Hill, 2004), páginas do PDF.
+
+Atenciosamente,
