@@ -4,6 +4,17 @@ Envio único. Escrito para o professor da disciplina.
 TEMA E DADOS
 Salário médio formal real (em logaritmo) de 29 municípios da RMC, 2012 a 2021: 290 observações em painel. Regressores: escolaridade (X2), industrialização (X3), Gini setorial do emprego (X4), Selic real (X5) e distância a Curitiba (X6).
 
+HIPÓTESE TESTADA
+H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização, controlados os efeitos comuns a todos os municípios.
+Ha: pelo menos uma dessas condições afeta o salário.
+Por variável (sinal esperado, aprovado):
+- H1, escolaridade (X2): positivo.
+- H2, industrialização (X3): positivo.
+- H3, diversificação setorial (X4, Gini invertido): negativo para o Gini.
+- H4, Selic real (X5): exploratória, sem sinal único.
+- H5, distância a Curitiba (X6): negativo.
+Critério: rejeita-se H0 quando p < 0,05 no coeficiente correspondente, com erro de White.
+
 FORMA FUNCIONAL
 Usamos o logaritmo natural do salário porque ele é sempre positivo, tem distribuição assimétrica à direita e o log comprime essa cauda. Com ele, o coeficiente mede variação relativa (%) do salário por unidade da regressora (Gujarati, 4ª ed., pp. 207-208). Logaritmo não se aplica a valores zero ou negativos (p. 450); todos os salários são positivos.
 
