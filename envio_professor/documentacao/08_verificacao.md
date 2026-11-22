@@ -39,7 +39,7 @@ A verificação A4 compara os scripts com a versão de trabalho, que não acompa
 | C7 | Goldfeld-Quandt (ordenado por vínculos) recomputado, p unilateral e bilateral | APROVADA | F 1.4317/1.4317; p unilateral 0.0306/0.0306; bilateral 0.0611/0.0611 |
 | C8 | P-valor da Selic agrupado por ano recomputado (t com 9 gl) | APROVADA | 0.006954 contra 0.006954 |
 | C9 | FIV do Modelo 2 pelas regressões auxiliares | APROVADA | maior diferença 2.66e-15 |
-| C10 | Bootstrap wild cluster: segunda implementação com outra semente concorda dentro de 0,012 (cerca de 3 desvios de Monte Carlo) (cerca de 3 desvios de Monte Carlo) | APROVADA | X4 0.0920/0.0895; X6 0.4962/0.5003 |
+| C10 | Bootstrap wild cluster: segunda implementação com outra semente concorda dentro de 0,02 (o erro de Monte Carlo combinado é de cerca de 0,004) | APROVADA | X4 0.0920/0.0895; X6 0.4962/0.5003 |
 | C11 | Memorial matricial: coeficientes iguais aos recomputados por QR | APROVADA | diferença 3.27e-13 |
 | C12 | Memorial: R², R² ajustado e F global iguais aos de lm() | APROVADA | R² 0.6456; F 103.4549 |
 | C13 | Efeitos fixos com quadráticos: coeficientes por variáveis binárias iguais ao arquivo | APROVADA | diferença 8.68e-14 |
@@ -55,7 +55,7 @@ A verificação A4 compara os scripts com a versão de trabalho, que não acompa
 | C23 | Teste de Chow recomputado: Modelo 2 contra indicadora de Curitiba e interações com X2 a X5 (F com 5 e 279 gl) | APROVADA | F 4.1553/4.1553 |
 | C26 | Teste da restrição de Fisher recomputado (agrupado por município, t com 28 gl, e por ano, t com 9 gl) | APROVADA | p 0.6175 e 0.8154 |
 | C24 | Decomposição da Selic real (Selic nominal e IPCA) por variáveis binárias recomputada | APROVADA | 0.003945 e -0.003357 |
-| C25 | Bootstrap com pesos de Webb por ano: segunda implementação (variáveis binárias, outra semente) concorda dentro de 0,02 | APROVADA | 0.0426 contra 0.0462 |
+| C25 | Bootstrap com pesos de Webb por ano: segunda implementação (variáveis binárias, outra semente) concorda dentro de 0,012 (cerca de 4 desvios de Monte Carlo) | APROVADA | 0.0426 contra 0.0462 |
 | D1 | Documentação cita o coeficiente de X2 de efeitos fixos com o valor do arquivo (quatro casas) | APROVADA | 0,0086 |
 | D2 | Dicionário de variáveis cobre todas as colunas do modelo no painel | APROVADA | 10 linhas |
 | E1 | Reexecução em cópia limpa (a partir de dados_brutos): scripts 02 a 08 terminam sem erro | APROVADA | 02_tratamento_painel ok; 03_aede_visualizacoes ok; 04_modelagem_diagnosticos ok; 05_robustez_mundlak ok; 06_calibracao_modelo ok; 07_memorial_modelo_2 ok; 08_fragilidades_modelo ok |

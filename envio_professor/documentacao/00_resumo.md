@@ -21,13 +21,14 @@ Todos os números abaixo vêm dos arquivos de `resultados_econometricos/` e fora
 ## Diagnósticos do Modelo 2
 
 - Multicolinearidade: maior FIV 2,6166 (limite 10).
-- Breusch-Pagan: 13,0536 (p-valor = 0,0229); Durbin-Watson empilhado: 0,4227; Jarque-Bera: 517,5486; RESET: 18,4638.
+- Breusch-Pagan: 13,0536 (p-valor = 0,0229); Jarque-Bera: 517,5486; RESET: 18,4638.
+- Autocorrelação: o Durbin-Watson do painel empilhado (0,4227) não é usado como evidência, porque as linhas vizinhas de municípios diferentes entram como defasagem (28 pares); fica só como referência técnica. A evidência está no rho dentro do município e nos testes de painel (`04_calibracao.md`, seções 4 e 5).
 - O Modelo 2 viola homocedasticidade, ausência de autocorrelação, normalidade e forma funcional; o erro-padrão clássico não é válido, e a inferência usa erros robustos e agrupados.
 
 ## O que a calibração mostrou
 
 - O efeito de município é significativo (F = 75,8928) e correlacionado com X2, X3 e X4 (Mundlak: p-valor < 0,0001; Hausman: p-valor < 0,0001).
-- Com efeitos fixos, X2 vale 0,0086 (MQO empilhado: 0,0159) e X3 deixa de ser significativo (-0,0005, p-valor = 0,4707).
+- Com efeitos fixos (within), X2 vale 0,0086 (MQO empilhado: 0,0159) e X3 deixa de ser significativo (coeficiente -0,0005; p-valor = 0,4707 nos efeitos fixos e p-valor = 0,4746 no Mundlak, que são dois modelos diferentes).
 - Selic real: p-valor de 0,0005 a 0,0547 conforme o procedimento de inferência; a Selic nominal e o IPCA entram com sinais opostos.
 - Forma funcional: com quadráticos, o RESET de regressores passa a 0,0811, mas o de valores ajustados piora para 0,0515 e, com efeitos de ano, o de regressores rejeita (0,0024); o quadrático de X2 sugere retornos decrescentes e o Box-Cox não rejeita o logaritmo de Y com efeitos fixos.
 - Os resultados são associações; ver `06_limitacoes.md`.

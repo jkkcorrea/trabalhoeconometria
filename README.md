@@ -39,8 +39,22 @@ Projeto concluído em 21/11/2026, com a pasta `envio_professor/` pronta para o p
 | `gerar_documentacao.R` | Gera `envio_professor/documentacao/` a partir dos CSV de resultado. |
 | `verificar_envio.R` | Verificação independente da pasta de envio (recomputa painel e resultados, reexecuta tudo em cópia limpa). |
 | `reconstruir_envio.sh` | Reconstrói a pasta de envio do zero: limpeza, pipeline, documentação e verificação. |
+| `gerar_catalogo.R` | Gera `CATALOGO_DO_PROJETO.md` a partir das pastas reais. |
+| `conferir_numeros.R` | Confere se os números de um rascunho (artigo, slides) aparecem nos resultados e na documentação. |
 
 Para refazer a entrega depois de qualquer mudança nos scripts: `bash _Trilha/ferramentas/reconstruir_envio.sh`.
+
+## Instruções para IA, skills e agentes
+
+| Arquivo | Função |
+|---|---|
+| `SUMARIO_DO_PROJETO.md`, `CATALOGO_DO_PROJETO.md` | Entrada rápida e catálogo gerado. |
+| `instrucoes_ia/LEIA_PRIMEIRO.md` | Regras para qualquer IA e qualquer colega, com o lembrete de `git push`. |
+| `instrucoes_ia/PROMPT_ARTIGO.md` | Roteiro para construir o artigo seção por seção (sem texto pronto). |
+| `instrucoes_ia/PROMPT_SLIDES.md` | Roteiro, paleta e regras de leitura para os slides. |
+| `instrucoes_ia/VERIFICACAO_CONTEUDO.md` | Conferência obrigatória do texto contra o código. |
+| `.claude/agents/construtor-artigo.md`, `designer-storytelling-slides.md`, `professor-econometria.md` | Agentes. |
+| `.claude/skills/` | `formatacao-abnt`, `estrutura-artigo-ufpr`, `economia-de-tokens`, `maximizacao-de-contexto`, `sumario-do-projeto`, `boas-praticas-programacao`, `escrita-cientifica`, `diagramacao-projeto`, `storytelling-graficos`, `professor-econometria`. |
 
 ## Ambiente
 

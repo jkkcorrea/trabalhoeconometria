@@ -90,3 +90,11 @@ Ao entregar um script, a resposta abre com um parágrafo técnico sobre as rotin
 - **Skill e agente:** `.claude/skills/storytelling-graficos/SKILL.md` orienta gráficos de leitura humana; `.claude/skills/professor-econometria/SKILL.md` e `.claude/agents/professor-econometria.md` fazem a correção como professor, com régua de 100 pontos. O agente só é reconhecido depois de recarregar a sessão; antes disso, usar um agente genérico instruído pelo arquivo.
 - **Texto acadêmico:** a documentação em `envio_professor/documentacao/` traz dados, métodos, números e limitações validados; o artigo continua sendo do pesquisador.
 - **Execução:** `Rscript R/00_executar_tudo.R` roda os scripts 02 a 08 em ordem, cada um em processo separado; `bash _Trilha/ferramentas/reconstruir_envio.sh` refaz a pasta de envio e a verifica. A documentação geral do projeto está em `README.md`.
+
+## 12. Instruções para colegas e uso de IA (21/11/2026)
+
+- `instrucoes_ia/LEIA_PRIMEIRO.md` reúne as regras para qualquer IA; `PROMPT_ARTIGO.md` e `PROMPT_SLIDES.md` são roteiros (sem texto pronto); `VERIFICACAO_CONTEUDO.md` é a conferência obrigatória do texto contra o código, apoiada em `_Trilha/ferramentas/conferir_numeros.R`.
+- Agentes `construtor-artigo` e `designer-storytelling-slides` e skills `formatacao-abnt`, `estrutura-artigo-ufpr`, `economia-de-tokens`, `maximizacao-de-contexto`, `sumario-do-projeto`, `boas-praticas-programacao`, `escrita-cientifica` e `diagramacao-projeto` ficam em `.claude/`. A redação do artigo continua sendo do pesquisador (seção 1): essas instruções organizam e conferem, não decidem teoria nem sinais esperados.
+- `SUMARIO_DO_PROJETO.md` (escrito à mão) e `CATALOGO_DO_PROJETO.md` (gerado por `_Trilha/ferramentas/gerar_catalogo.R`) são a porta de entrada; regenere o catálogo quando a estrutura mudar.
+- Toda tarefa de colega termina com lembrete de envio ao repositório por branch e pull request (`CONTRIBUIR.md`).
+

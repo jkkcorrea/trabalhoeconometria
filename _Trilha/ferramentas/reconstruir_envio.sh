@@ -19,3 +19,13 @@ rm -f Rplots.pdf
 cd "$RAIZ"
 Rscript --vanilla _Trilha/ferramentas/gerar_documentacao.R 2>&1 | tail -1
 Rscript --vanilla _Trilha/ferramentas/verificar_envio.R 2>&1 | grep -E "FALHOU|verificações aprovadas"
+# Zip de envio, gerado só depois de a verificação passar (set -e + pipefail interrompem antes se ela falhar).
+python3 - <<'PYZIP'
+import os, zipfile
+z = "envio_professor.zip"
+if os.path.exists(z): os.remove(z)
+with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as f:
+    for raiz, _, arqs in os.walk("envio_professor"):
+        for a in sorted(arqs): f.write(os.path.join(raiz, a))
+print("zip regenerado:", z, round(os.path.getsize(z) / 1024 / 1024, 2), "MB")
+PYZIP

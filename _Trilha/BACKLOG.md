@@ -52,3 +52,9 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 ## Ferramentaria
 
 - [x] 21/11/2026 **7. Git.** Baixado em 21/11/2026: git 2.43.0 instalado na máquina Linux; repositório local iniciado com o `.gitignore` do projeto (acrescido de `Trabalhos Referencias/`, `backup_antes_alteracoes/` e `envio_professor.zip`); remoto só por decisão do pesquisador. Texto anterior: Em 14/11/2026 o git não foi localizado no PATH nem nas pastas do Windows.
+
+## Abertos em 21/11/2026 (instruções para colegas)
+
+- [ ] **26. Conferir com o orientador** a edição da NBR 6022/14724/6023 e o template atual da UFPR (modelo lido é de 2016/2022; template de artigo de 2026/06 só listado); margens e fonte do artigo vêm da prática geral da ABNT `[a confirmar]`. Itens marcados `[a confirmar na norma]` em `.claude/skills/formatacao-abnt/SKILL.md`.
+- [ ] **27. Testar os agentes novos** (`construtor-artigo`, `designer-storytelling-slides`) após recarregar a sessão; criar `artigo/` e `apresentacao/` quando os colegas começarem.
+

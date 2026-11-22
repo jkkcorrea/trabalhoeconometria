@@ -160,7 +160,7 @@ boot_alt <- function(j, B = 12000, semente = 7) {
 }
 bt <- le("resultados_econometricos/calibracao_bootstrap_wild_cluster.csv"); bt <- bt[bt$estimador == "MQO empilhado (Modelo 2)", ]
 p_x4 <- boot_alt(4); p_x6 <- boot_alt(6)
-registrar("C10", "Bootstrap wild cluster: segunda implementação com outra semente concorda dentro de 0,012 (cerca de 3 desvios de Monte Carlo) (cerca de 3 desvios de Monte Carlo)",
+registrar("C10", "Bootstrap wild cluster: segunda implementação com outra semente concorda dentro de 0,02 (o erro de Monte Carlo combinado é de cerca de 0,004)",
           abs(p_x4 - bt$p_bootstrap[bt$termo == "shannon_diversificacao"]) < 0.02 && abs(p_x6 - bt$p_bootstrap[bt$termo == "dist_curitiba_km"]) < 0.02,
           sprintf("X4 %.4f/%.4f; X6 %.4f/%.4f", p_x4, bt$p_bootstrap[bt$termo == "shannon_diversificacao"], p_x6, bt$p_bootstrap[bt$termo == "dist_curitiba_km"]))
 # Memorial
@@ -235,7 +235,7 @@ Xd <- cbind(Q[, 1:3], painel$selic_nominal_ano, painel$ipca_ano); bd <- lm.fit(c
 registrar("C24", "Decomposição da Selic real (Selic nominal e IPCA) por variáveis binárias recomputada", max(abs(bd - dc$estimativa[4:5])) < 1e-9, sprintf("%.6f e %.6f", bd[1], bd[2]))
 set.seed(99); pesos <- c(-sqrt(1.5), -1, -sqrt(0.5), sqrt(0.5), 1, sqrt(1.5))
 tbw <- vapply(1:12000, function(i) tst(fit_r + sample(pesos, 10, TRUE)[gy] * ur), numeric(1)); pw_ <- mean(abs(tbw) >= abs(t_obs) - 1e-9); wbc <- fr("selic_bootstrap_webb.csv")
-registrar("C25", "Bootstrap com pesos de Webb por ano: segunda implementação (variáveis binárias, outra semente) concorda dentro de 0,02", abs(pw_ - wbc$p_bootstrap_webb[1]) < 0.012, sprintf("%.4f contra %.4f", pw_, wbc$p_bootstrap_webb[1]))
+registrar("C25", "Bootstrap com pesos de Webb por ano: segunda implementação (variáveis binárias, outra semente) concorda dentro de 0,012 (cerca de 4 desvios de Monte Carlo)", abs(pw_ - wbc$p_bootstrap_webb[1]) < 0.012, sprintf("%.4f contra %.4f", pw_, wbc$p_bootstrap_webb[1]))
 
 # ============================== D. Documentação ===================================
 doc3 <- readLines(file.path(DIR, "documentacao/04_calibracao.md"), encoding = "UTF-8")
