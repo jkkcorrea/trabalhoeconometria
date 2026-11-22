@@ -1,2 +1,0 @@
-modelo,termo,matriz,graus_liberdade,estimativa,erro_padrao,estatistica_t,p_valor
-Modelo 2,selic_real,"Agrupado por ano (vcovCL, HC1, 10 grupos)",9,0.006633395753252974,0.001906933308984501,3.4785672482617946,0.006954236729472078

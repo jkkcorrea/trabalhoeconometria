@@ -1,0 +1,12 @@
+modelo,variavel,fiv,tolerancia,decisao_fiv_10
+Modelo 2,prop_superior,1.1655029123091636,0.8579987140647642,sem problema (FIV <= 10)
+Modelo 2,dom_industrial,1.1436353703891426,0.874404574999925,sem problema (FIV <= 10)
+Modelo 2,gini_setorial,2.326523398183236,0.4298258941994274,sem problema (FIV <= 10)
+Modelo 2,selic_real,1.0060315380876255,0.9940046232555583,sem problema (FIV <= 10)
+Modelo 2,dist_curitiba_km,2.2132719581574416,0.4518197577637519,sem problema (FIV <= 10)
+Modelo 3,prop_superior,1.529735373967733,0.6537078353664934,sem problema (FIV <= 10)
+Modelo 3,dom_industrial,1.1464714132912543,0.8722415477671888,sem problema (FIV <= 10)
+Modelo 3,gini_setorial,2.328299704430508,0.429497971458359,sem problema (FIV <= 10)
+Modelo 3,selic_real,1.0067799960552517,0.9932656627249081,sem problema (FIV <= 10)
+Modelo 3,dist_curitiba_km,2.2769936951515395,0.4391755682632435,sem problema (FIV <= 10)
+Modelo 3,dummy_curitiba,1.5617168596595898,0.6403209351392747,sem problema (FIV <= 10)

@@ -12,7 +12,7 @@ if (!dir.exists("R") || !dir.exists("dados_brutos")) {
 
 scripts <- c(
   "02_tratamento_painel.R", "03_aede_visualizacoes.R", "04_modelagem_diagnosticos.R",
-  "05_robustez_mundlak.R", "06_calibracao_modelo.R", "07_memorial_modelo_2.R", "08_fragilidades_modelo.R"
+  "05_autocorrelacao_municipios.R", "06_especificacao_chow.R", "07_memorial_modelo_2.R"
 )
 if (identical(Sys.getenv("INCLUIR_EXTRACAO"), "sim")) scripts <- c("01_extracao_dados.R", scripts)
 

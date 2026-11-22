@@ -1,0 +1,2 @@
+modelo,teste,hipotese_nula,n1,n2,k,estatistica_f,gl,p_valor,decisao_5pct
+Modelo 2,Chow: quebra estrutural entre 2012-2016 e 2017-2021,coeficientes iguais nas duas partes,145,145,6,1.7863052872822303,6; 278,0.1018478414994964,não rejeita H0

@@ -68,5 +68,5 @@ O MQO empilhado (linha de base) é rejeitado por Mundlak, Hausman e pelo teste d
 
 1. Redigir o artigo (introdução, revisão, interpretação, conclusão).
 2. Definir e fundamentar os sinais esperados de X2 a X6 (nenhum arquivo traz hipótese prévia de sinal; a correção do professor apontou isso).
-3. Confirmar ou reverter a escolha do modelo de referência (D-2026-11-21-20): efeitos fixos para X2, X3 e X4, com o MQO empilhado como linha de base.
+3. Modelo principal: Mundlak; MQO empilhado como linha de base; efeitos fixos como robustez (D-2026-11-22-01).
 4. Decidir sobre a discussão dos limites dL e dU do Durbin-Watson, que não foram usados (n = 290).

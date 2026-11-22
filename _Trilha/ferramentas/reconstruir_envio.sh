@@ -7,12 +7,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 RAIZ="$(pwd)"; D="$RAIZ/envio_professor"; T="$(mktemp -d)"
 [ -f "$RAIZ/CLAUDE.md" ] || { echo "rode a partir da raiz do projeto"; exit 1; }
 Rscript --vanilla _Trilha/ferramentas/limpar_comentarios.R R "$T/limpo" "$T/relatorio.txt" | tail -1
-rm -rf "$D/R"/* "$D/resultados_econometricos"/* "$D/figuras_graficos"/* "$D/dados_processados"/*
+rm -rf "$D/R"/* "$D/resultados_econometricos"/* "$D/figuras_graficos"/* "$D/dados_processados"/* "$D/documentacao"/*
 mkdir -p "$D"/{R,dados_brutos,dados_processados,resultados_econometricos,figuras_graficos,documentacao}
 cp "$T"/limpo/0*.R "$D/R/"
 for f in pib_sidra macro_bacen malha_rmc distancias rais; do cp "dados_brutos/$f.rds" "$D/dados_brutos/"; done
 cd "$D"
-for n in 02_tratamento_painel 03_aede_visualizacoes 04_modelagem_diagnosticos 05_robustez_mundlak 06_calibracao_modelo 07_memorial_modelo_2 08_fragilidades_modelo; do
+for n in 02_tratamento_painel 03_aede_visualizacoes 04_modelagem_diagnosticos 05_autocorrelacao_municipios 06_especificacao_chow 07_memorial_modelo_2; do
   Rscript --vanilla "R/$n.R" > "$T/$n.log" 2>&1 && echo "ok   $n" || { echo "ERRO $n"; tail -5 "$T/$n.log"; exit 1; }
 done
 rm -f Rplots.pdf

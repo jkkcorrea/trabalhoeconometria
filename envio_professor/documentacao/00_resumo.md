@@ -1,38 +1,26 @@
-# Resumo dos resultados validados
+# Resumo dos resultados
 
-Todos os números abaixo vêm dos arquivos de `resultados_econometricos/` e foram recomputados de forma independente (`08_verificacao.md`).
+Todos os números abaixo saem de `resultados_econometricos/`. Escopo: apenas métodos ensinados na disciplina.
 
-## Desenho
+## Modelo principal (MQO empilhado, erro de White)
 
-- Painel de 29 municípios da Região Metropolitana de Curitiba, 2012 a 2021 (290 observações). Variável dependente: ln do salário médio real formal (R$ de 2021).
-- Linha de base da disciplina: MQO empilhado (Modelo 2), com diagnósticos do modelo clássico.
-- Estimativas de referência para X2, X3 e X4: efeitos fixos (equivalentes às do modelo de Mundlak, que preserva X5 e X6), porque o teste F de efeitos individuais, o Hausman e o Mundlak rejeitam o MQO empilhado.
-
-## Coeficientes principais (erro agrupado por município, t com 28 graus de liberdade)
-
-| Termo | MQO empilhado | p-valor  | Mundlak | p-valor |
+| Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|
-| X2 ensino superior (%) | 0,0159 | < 0,0001 | 0,0086 | < 0,0001 |
-| X3 dominância industrial (%) | 0,0054 | < 0,0001 | -0,0005 | 0,4746 |
-| X4 diversificação (Shannon) | 0,0762 | 0,1541 | -0,0737 | 0,1057 |
-| X5 Selic real (% a.a.) | 0,0066 | 0,0003 | 0,0040 | 0,0005 |
-| X6 distância a Curitiba (km) | -0,0016 | 0,3394 | -0,0016 | 0,3305 |
+| Constante | 8,1064 | 0,1533 | 52,87 | < 0,0001 |
+| X2 ensino superior (%) | 0,0150 | 0,0015 | 10,25 | < 0,0001 |
+| X3 dominância industrial (%) | 0,0055 | 0,0007 | 8,13 | < 0,0001 |
+| X4 concentração setorial (Gini) | -0,6548 | 0,1678 | -3,90 | 0,0001 |
+| X5 Selic real (% a.a.) | 0,0065 | 0,0018 | 3,66 | 0,0003 |
+| X6 distância a Curitiba (km) | -0,0016 | 0,0005 | -2,96 | 0,0033 |
 
-## Diagnósticos do Modelo 2
+F da ANOVA = 105,26 (p-valor < 0,0001); R2 = 0,6495.
 
-- Multicolinearidade: maior FIV 2,6166 (limite 10).
-- Breusch-Pagan: 13,0536 (p-valor = 0,0229); Jarque-Bera: 517,5486; RESET: 18,4638.
-- Autocorrelação: o Durbin-Watson do painel empilhado (0,4227) não é usado como evidência, porque as linhas vizinhas de municípios diferentes entram como defasagem (28 pares); fica só como referência técnica. A evidência está no rho dentro do município e nos testes de painel (`04_calibracao.md`, seções 4 e 5).
-- O Modelo 2 viola homocedasticidade, ausência de autocorrelação, normalidade e forma funcional; o erro-padrão clássico não é válido, e a inferência usa erros robustos e agrupados.
+## Diagnósticos
 
-## O que a calibração mostrou
+- Multicolinearidade: maior FIV = 2,3265 (limite 10).
+- Heterocedasticidade (Breusch-Pagan-Godfrey): p-valor 0,0363.
+- Forma funcional (RESET): p-valor < 0,0001; rejeita.
+- Quebra estrutural (Chow): p-valor 0,1018; não rejeita.
+- Autocorrelação positiva dentro dos municípios: 14 de 29 municípios pela tabela de Durbin-Watson.
 
-- O efeito de município é significativo (F = 75,8928) e correlacionado com X2, X3 e X4 (Mundlak: p-valor < 0,0001; Hausman: p-valor < 0,0001).
-- Com efeitos fixos (within), X2 vale 0,0086 (MQO empilhado: 0,0159) e X3 deixa de ser significativo (coeficiente -0,0005; p-valor = 0,4707 nos efeitos fixos e p-valor = 0,4746 no Mundlak, que são dois modelos diferentes).
-- Selic real: p-valor de 0,0005 a 0,0547 conforme o procedimento de inferência; a Selic nominal e o IPCA entram com sinais opostos.
-- Forma funcional: com quadráticos, o RESET de regressores passa a 0,0811, mas o de valores ajustados piora para 0,0515 e, com efeitos de ano, o de regressores rejeita (0,0024); o quadrático de X2 sugere retornos decrescentes e o Box-Cox não rejeita o logaritmo de Y com efeitos fixos.
-- Os resultados são associações; ver `06_limitacoes.md`.
-
-## Onde ler
-
-`01_dados_e_variaveis.md`, `02_especificacao_e_metodos.md`, `03_resultados_modelos_classicos.md`, `04_calibracao.md`, `05_fragilidades.md`, `06_limitacoes.md`, `07_criterios_da_disciplina.md` e `08_verificacao.md`.
+Detalhes: 03_resultados_modelos.md, 04_diagnosticos.md, 05_limitacoes.md.

@@ -278,7 +278,7 @@ tratar_dados_pib <- function(dados_sidra_raw) {
 
 
 # -----------------------------------------------------------------------------
-# 6. Tratamento da RAIS: salário (Y), escolaridade (X2) e Shannon (X4)
+# 6. Tratamento da RAIS: salário (Y), escolaridade (X2) e Gini setorial (X4)
 # -----------------------------------------------------------------------------
 tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
   if (!is.list(dados_rais_raw) ||
@@ -323,7 +323,8 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
 
   cnae_validos <- cnae |> dplyr::filter(divisao_cnae != "ignorada")
   vinculos_ignorados <- sum(cnae$vinculos_ativos[cnae$divisao_cnae == "ignorada"])
-  message("Vínculos com divisão 'ignorada' excluídos do Shannon: ", vinculos_ignorados)
+  message("Vínculos com divisão 'ignorada' excluídos do Gini setorial: ", vinculos_ignorados)
+  N_DIVISOES_CNAE <- 87L
   s_divisoes <- dplyr::n_distinct(cnae_validos$divisao_cnae)
   message("Divisões CNAE válidas observadas no painel (S): ", s_divisoes)
   if (s_divisoes != 87L) {
@@ -342,15 +343,26 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
          call. = FALSE)
   }
 
-  # Entropia de Shannon: divisões com zero vínculo contribuem com 0 (0 ln 0 = 0).
-  shannon <- cnae_validos |>
+  # Índice de Gini da participação setorial no emprego do município (concentração).
+  # Fórmula ensinada no Guia P2 (questão 3): G = (2 / (n^2 mu)) * soma(i * x_(i)) - 1/n - 1,
+  # com x = participação de cada divisão no total de vínculos, ordenada de forma crescente.
+  # Como sum(x) = 1, mu = 1/n e a fórmula vira G = (2/n) * soma(i * x_(i)) - (n + 1)/n.
+  # As 87 divisões entram com participação zero quando não têm vínculo. Usar n = 87 e tratar
+  # divisões como indivíduos é; o total de 87 divisões da CNAE 2.0 é.
+  if (s_divisoes > N_DIVISOES_CNAE) {
+    stop("rais: ", s_divisoes, " divisões válidas, acima de ", N_DIVISOES_CNAE, " (CNAE 2.0).", call. = FALSE)
+  }
+  gini_setorial <- cnae_validos |>
     dplyr::group_by(id_municipio, ano) |>
-    dplyr::mutate(p = vinculos_ativos / sum(vinculos_ativos)) |>
     dplyr::summarise(
-      shannon_diversificacao = -sum(dplyr::if_else(p > 0, p * log(p), 0)),
+      gini_setorial = {
+        x <- sort(vinculos_ativos / sum(vinculos_ativos))
+        x <- c(rep(0, N_DIVISOES_CNAE - length(x)), x)
+        n_div <- length(x)
+        sum((2 / n_div) * seq_len(n_div) * x) - (n_div + 1) / n_div
+      },
       .groups = "drop"
-    ) |>
-    dplyr::mutate(shannon_normalizado = shannon_diversificacao / log(s_divisoes))
+    )
 
   denominador_x2 <- mun$vinculos_ativos - mun$vinculos_escolaridade_na
   if (any(denominador_x2 <= 0)) {
@@ -367,7 +379,7 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
       prop_superior = 100 * vinculos_superior / (vinculos_ativos - vinculos_escolaridade_na),
       vinculos_ativos, vinculos_superior, vinculos_escolaridade_na
     ) |>
-    dplyr::left_join(shannon, by = c("id_municipio", "ano")) |>
+    dplyr::left_join(gini_setorial, by = c("id_municipio", "ano")) |>
     dplyr::arrange(id_municipio, ano)
 
   attr(df_rais, "s_divisoes") <- s_divisoes
@@ -375,7 +387,7 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
     df_rais, "RAIS tratada", linhas_esperadas = LINHAS_PAINEL,
     colunas_economicas = c("salario_medio_nominal", "prop_superior", "vinculos_ativos",
                            "vinculos_superior", "vinculos_escolaridade_na",
-                           "shannon_diversificacao", "shannon_normalizado")
+                           "gini_setorial")
   )
   attr(df_rais_validado, "s_divisoes") <- s_divisoes
   df_rais_validado
@@ -442,7 +454,7 @@ consolidar_painel_mestre <- function(df_macro, df_pib, df_rais, df_geo) {
     dplyr::select(
       id_municipio, nome_municipio, ano,
       salario_medio_nominal, salario_medio_real, ln_salario_real,
-      prop_superior, dom_industrial, shannon_diversificacao, shannon_normalizado,
+      prop_superior, dom_industrial, gini_setorial,
       selic_real, dist_curitiba_km, dummy_curitiba, x3_negativo,
       selic_nominal_ano, ipca_ano, indice_ipca_medio,
       vinculos_ativos, vinculos_superior, vinculos_escolaridade_na,
@@ -541,15 +553,14 @@ auditar_painel <- function(df_painel) {
             paste(marcados$id_municipio, marcados$ano, collapse = "; "), call. = FALSE)
   }
 
-  # 9.4 Shannon normalizado entre 0 e 1.
-  fora_unitario <- df_painel |>
-    dplyr::filter(shannon_normalizado < 0 | shannon_normalizado > 1)
-  if (nrow(fora_unitario) > 0) {
-    warning(nrow(fora_unitario), " observação(ões) com shannon_normalizado fora de 0 a 1.",
-            call. = FALSE)
+  # 9.4 Gini setorial entre 0 e 1.
+  fora_gini <- df_painel |>
+    dplyr::filter(gini_setorial < 0 | gini_setorial > 1)
+  if (nrow(fora_gini) > 0) {
+    warning(nrow(fora_gini), " observação(ões) com gini_setorial fora de 0 a 1.", call. = FALSE)
   } else {
-    message(sprintf("[OK] shannon_normalizado entre 0 e 1 (mínimo %.4f, máximo %.4f).",
-                    min(df_painel$shannon_normalizado), max(df_painel$shannon_normalizado)))
+    message(sprintf("[OK] gini_setorial entre 0 e 1 (mínimo %.4f, máximo %.4f).",
+                    min(df_painel$gini_setorial), max(df_painel$gini_setorial)))
   }
 
   # 9.5 Selic real constante entre municípios em cada ano.
@@ -592,9 +603,9 @@ auditar_painel <- function(df_painel) {
 # 10. Estatísticas descritivas e correlação
 # -----------------------------------------------------------------------------
 VARIAVEIS_MODELO <- c("salario_medio_real", "ln_salario_real", "prop_superior",
-                      "dom_industrial", "shannon_diversificacao", "shannon_normalizado",
+                      "dom_industrial", "gini_setorial",
                       "selic_real", "dist_curitiba_km")
-VARIAVEIS_EXPLICATIVAS <- c("prop_superior", "dom_industrial", "shannon_diversificacao",
+VARIAVEIS_EXPLICATIVAS <- c("prop_superior", "dom_industrial", "gini_setorial",
                             "selic_real", "dist_curitiba_km")
 
 gerar_descritivas <- function(df_painel) {

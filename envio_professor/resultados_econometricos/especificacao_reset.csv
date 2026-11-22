@@ -1,0 +1,2 @@
+modelo,teste,hipotese_nula,estatistica_f,gl,p_valor,decisao_5pct
+Modelo 2,RESET de Ramsey (potências 2 e 3 dos ajustados),forma funcional correta,14.485686321635688,2; 282,1.0269430768003566e-6,rejeita H0

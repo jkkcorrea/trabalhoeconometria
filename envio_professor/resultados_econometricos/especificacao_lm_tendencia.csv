@@ -1,0 +1,2 @@
+modelo,teste,hipotese_nula,estatistica,gl,p_valor,decisao_5pct
+Modelo 2,LM para acréscimo de tendência linear (ano),coeficiente de ano = 0,0.37683871646252204,1,0.5392999765699179,não rejeita H0

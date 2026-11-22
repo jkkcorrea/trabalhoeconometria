@@ -98,3 +98,11 @@ Ao entregar um script, a resposta abre com um parágrafo técnico sobre as rotin
 - `SUMARIO_DO_PROJETO.md` (escrito à mão) e `CATALOGO_DO_PROJETO.md` (gerado por `_Trilha/ferramentas/gerar_catalogo.R`) são a porta de entrada; regenere o catálogo quando a estrutura mudar.
 - Toda tarefa de colega termina com lembrete de envio ao repositório por branch e pull request (`CONTRIBUIR.md`).
 
+## 13. Escopo ensinado (22/11/2026, D-2026-11-22-02)
+
+- Só métodos das fontes oficiais da disciplina, listados em `fontes/OFICIAL_FONTES_DA_DISCIPLINA.md`. O roteiro do PowerPoint (`instrucoes_ia/roteiro_powerpoint.md`, slide 7) diz que método não ensinado resulta em nota zero.
+- X4 é o Gini da participação setorial no emprego (87 divisões CNAE, zeros incluídos), substituindo a entropia de Shannon. As menções à entropia e ao Mundlak nas seções 6 e 7 acima ficam superadas por esta seção.
+- Modelo principal: MQO empilhado (Modelo 2), com erro de White HC1. Efeitos fixos, Mundlak, Hausman, erros agrupados, bootstrap e a correção de autocorrelação para painel ficam fora.
+- Autocorrelação por município: Durbin-Watson, ρ por regressão auxiliar e Breusch-Godfrey, na série de cada um dos 29 municípios.
+- Etapas: 02 painel, 03 figuras, 04 modelos e diagnósticos, 05 autocorrelação por município, 06 especificação e Chow, 07 memorial. As etapas 05, 06 e 08 antigas foram removidas.
+

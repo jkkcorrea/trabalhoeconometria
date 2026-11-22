@@ -1,0 +1,9 @@
+indicador,valor
+municípios analisados,29
+Durbin-Watson mediano,0.2504
+rho auxiliar mediano,0.7337
+decisão pela tabela: autocorrelação positiva,14
+decisão pela tabela: negativa,0
+decisão pela tabela: zona de inconclusão,15
+Breusch-Godfrey rejeita H0 a 5%,3
+"dL e dU usados (n = 10, k' = 5)",dL = 0.243; dU = 2.822 [a confirmar no PDF]

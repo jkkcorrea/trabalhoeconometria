@@ -58,3 +58,24 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 - [ ] **26. Conferir com o orientador** a edição da NBR 6022/14724/6023 e o template atual da UFPR (modelo lido é de 2016/2022; template de artigo de 2026/06 só listado); margens e fonte do artigo vêm da prática geral da ABNT `[a confirmar]`. Itens marcados `[a confirmar na norma]` em `.claude/skills/formatacao-abnt/SKILL.md`.
 - [ ] **27. Testar os agentes novos** (`construtor-artigo`, `designer-storytelling-slides`) após recarregar a sessão; criar `artigo/` e `apresentacao/` quando os colegas começarem.
 
+## Concluídos em 22/11/2026 (coerência do modelo e fontes)
+
+- [x] 22/11/2026 **28. Coerência do modelo.** Mundlak confirmado como modelo principal (D-2026-11-22-01). Corrigido o denominador do F agrupado por município: era o gl residual (281 e 284) e passa a G - 1 = 28, como no t. Afetados: `teste_mundlak.csv` e `teste_f_global_robusto.csv`.
+- [x] 22/11/2026 **29. Conferência das APIs.** SIDRA tabela 5938 (variáveis 37, 543, 498, 513, 517, 6575 e 525 conferidas na API); SGS 4390 e 433 (valor de jan/2019 conferido); localidades IBGE 05501 (29 municípios conferidos); endereço da RAIS no FTP do MTE (`PR<ano>.7z` em 2012 e 2017; `RAIS_VINC_PUB_SUL.7z` em 2018 a 2021). Registro em `fontes/VERIFICACAO_APIS.md`.
+- [x] 22/11/2026 **30. Referências baixadas.** Shannon (1948), Cameron, Gelbach e Miller (2008, versão de working paper), Webb (2014, Queen's WP 1315) e Croissant e Millo (2008) em `fontes/livros_artigos/`. Os livros protegidos ficam para download do pesquisador.
+
+## Escopo ensinado (22/11/2026, D-2026-11-22-02)
+
+- [x] 22/11/2026 **31. Métodos fora das fontes oficiais removidos** (outputs e scripts 05, 06 e 08 antigos apagados; listagem no histórico da sessão).
+- [x] 22/11/2026 **32. X4 trocada por Gini setorial** (RAIS, 87 divisões, zeros incluídos). Painel, figuras, modelos e documentação atualizados.
+- [x] 22/11/2026 **33. Scripts 04 a 07 reescritos no escopo ensinado; verificação 16 de 16; zip regenerado.**
+- [ ] **34. Conferir visualmente os valores de dL e dU da tabela de Durbin-Watson** (n = 10, k' = 5: dL = 0,243 e dU = 2,822 vieram de OCR de `tabela_DW.pdf`).
+- [ ] **35. Confirmar com o professor o n = 87 do Gini** e a decisão de tratar divisões como indivíduos (fórmula do Guia P2).
+- [ ] **36. Decisão do pesquisador sobre a forma funcional**: o RESET rejeita a log-linear (p < 0,0001). Ajustar a especificação é decisão do pesquisador.
+- [ ] **37. Autocorrelação positiva dentro dos municípios** (14 de 29 pela tabela; ρ mediano 0,73) não tem correção ensinada aplicável ao painel. Fica como limitação, a confirmar.
+- [ ] **38. Presunções a confirmar**: ordenação do Goldfeld-Quandt pela distância e fração 0,2; divisão do Chow em 2016; dummies e interações (Gujarati cap. 9, não conferido no livro).
+- [ ] **39. Livros e artigos**: Hoffmann e Vieira (1987) e o Gujarati (já no Drive) precisam de página conferida; Cameron-Gelbach-Miller, Webb, Mundlak e Hausman saem do escopo e não são citados.
+- [ ] **40. Atualizar README e CLAUDE.md** com o novo escopo (CLAUDE.md tem seção 13 registrando a mudança).
+- [ ] **41. Revisão geral pelo agente professor** (`professor-econometria`) depois de recarregar a sessão.
+- [ ] **42. Artigo**: só começa após os itens 34 a 38 e a aprovação do pesquisador.
+

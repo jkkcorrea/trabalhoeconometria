@@ -5,7 +5,7 @@ description: Use ao formatar artigo, tabelas, figuras, citações e referências
 
 # Formatação ABNT para o artigo
 
-Origem das regras: (A) modelo de artigo de periódico do SiBi/UFPR (`normas_modelo_artigo_periodico.pdf`, março/2016, revisado 2022; lido na sessão de 21/11/2026) e (B) guias de bibliotecas universitárias sobre as NBR, que são fonte secundária. Itens de (B) levam `[a confirmar na norma]`. O texto das normas ABNT é pago; o SiBi/UFPR oferece acesso pelo Target (https://target.ufpr.br/register.php). O modelo (A) cita a NBR 6022/2003 e o manual da UFPR de 2015; a NBR 6022 tem edição de 2018, então confirme com o orientador qual versão vale. Se o artigo for para uma revista, valem as normas editoriais dela.
+Origem das regras: (A) template e modelo de artigo de periódico do SiBi/UFPR (`normas_modelo_artigo_periodico.pdf`, março/2016, revisado 2022; lido na sessão de 21/11/2026) e (B) guias de bibliotecas universitárias sobre as NBR, que são fonte secundária. Itens de (B) levam `[a confirmar na norma]`. O texto das normas ABNT é pago; o SiBi/UFPR oferece acesso pelo Target (https://target.ufpr.br/register.php). O modelo (A) cita a NBR 6022/2003 e o manual da UFPR de 2015; a NBR 6022 tem edição de 2018, então confirme com o orientador qual versão vale. Se o artigo for para uma revista, valem as normas editoriais dela.
 
 ## 1. Parâmetros do modelo UFPR (A)
 
@@ -32,7 +32,7 @@ Origem das regras: (A) modelo de artigo de periódico do SiBi/UFPR (`normas_mode
 | APÊNDICE | opcional, texto elaborado pelo autor (ex.: questionário); título "APÊNDICE 1" |
 | ANEXO | opcional, documento não elaborado pelo autor (mapa, lei); título "ANEXO 1" |
 
-Margens, tipo de fonte e tamanho do papel: o modelo não traz os valores no texto. Prática geral da ABNT NBR 14724 (B): A4; margens superior e esquerda 3 cm, inferior e direita 2 cm; fonte Times New Roman ou Arial `[a confirmar na norma e no template .doc da UFPR]`. O template oficial está em https://bibliotecas.ufpr.br/servicos/normalizacao/ (template de artigo de periódico, `.doc`): em caso de conflito, vale o template.
+Margens, fonte e papel: confirmados no template oficial da UFPR (`fontes/modelos_ufpr/template-artigo-de-periodico-ufpr_2026-06.doc`, lido em 22/11/2026): papel A4 (11906 x 16838 twips); margem superior 3 cm e esquerda 3 cm; inferior 2 cm e direita 2 cm; fonte Arial 12 pt no texto (estilo Normal); entrelinha 1,5 no corpo; recuo de primeira linha de 1,5 cm no estilo "Texto" (851 twips), justificado; resumo e referências em entrelinha simples; citação longa com recuo de 4 cm (2268 twips), 10 pt, entrelinha simples, justificada; legendas em 10 pt. Essas medidas coincidem com as margens e a fonte que a NBR 14724 prevê na prática; a conferência com o texto da norma (paga) fica com o orientador `[a confirmar na norma]`. Fonte de conhecimento sobre a ABNT aplicada a documentos LaTeX: abnTeX2 (https://ctan.org/pkg/abntex2), que documenta as regras de NBR 14724, 6022, 6023, 6028 e 10520.
 
 ## 2. Citações no texto (NBR 10520) (B)
 

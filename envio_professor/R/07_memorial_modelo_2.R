@@ -43,9 +43,9 @@ for (p in c("dplyr", "tibble", "readr", "stringr", "lmtest")) {
 DIR_RESULTADOS <- "./resultados_econometricos"
 ARQ_PAINEL     <- "./dados_processados/dados_painel_rmc.rds"
 ALFA           <- 0.05
-REGRESSORES    <- c("prop_superior", "dom_industrial", "shannon_diversificacao",
+REGRESSORES    <- c("prop_superior", "dom_industrial", "gini_setorial",
                     "selic_real", "dist_curitiba_km")
-NOMES_X <- c("X2 (ensino superior)", "X3 (dominância industrial)", "X4 (diversificação)",
+NOMES_X <- c("X2 (ensino superior)", "X3 (dominância industrial)", "X4 (concentração setorial, Gini)",
              "X5 (Selic real)", "X6 (distância a Curitiba)")
 
 fmt4 <- function(x) formatC(x, format = "f", digits = 4, decimal.mark = ",", big.mark = "")
@@ -100,7 +100,7 @@ ic_inf  <- as.numeric(beta) - t_crit * ep
 ic_sup  <- as.numeric(beta) + t_crit * ep
 
 # Conferência contra lm().
-m_lm <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + shannon_diversificacao +
+m_lm <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial +
                     selic_real + dist_curitiba_km, data = dados)
 sm <- summary(m_lm)
 conferencias <- c(
@@ -111,7 +111,10 @@ conferencias <- c(
   F_global     = abs(F_glob - unname(sm$fstatistic[1])),
   SQR          = abs(SQR - sum(stats::residuals(m_lm)^2))
 )
-if (any(conferencias > 1e-8)) {
+# Tolerância relativa: diferenças de arredondamento de ponto flutuante (ex.: F ~ 100 com diferença ~5e-8).
+escala <- c(max(1, abs(as.numeric(beta))), max(1, abs(ep)), max(1, abs(R2)), max(1, abs(R2aj)),
+            max(1, abs(F_glob)), max(1, abs(SQR)))
+if (any(conferencias / escala > 1e-8)) {
   stop("O cálculo matricial diverge de lm(): ", paste(names(conferencias), signif(conferencias, 3),
                                                        collapse = "; "), call. = FALSE)
 }
@@ -151,7 +154,7 @@ f_incremental <- function(rotulo, retirar) {
 }
 incremental <- dplyr::bind_rows(
   f_incremental("X2 (capital humano)", "prop_superior"),
-  f_incremental("X3 e X4 (estrutura produtiva)", c("dom_industrial", "shannon_diversificacao")),
+  f_incremental("X3 e X4 (estrutura produtiva)", c("dom_industrial", "gini_setorial")),
   f_incremental("X5 (macroeconomia)", "selic_real"),
   f_incremental("X6 (localização)", "dist_curitiba_km")
 ) |>

@@ -76,7 +76,7 @@ ANIM_DURACAO <- 15
 
 # Notas de fonte usadas nas legendas das figuras.
 FONTE_SALARIO <- "Salário: RAIS (Ministério do Trabalho), deflacionado pelo IPCA (série 433 do Banco Central), em R$ de 2021."
-FONTE_RAIS    <- "Escolaridade e diversificação setorial: RAIS (Ministério do Trabalho)."
+FONTE_RAIS    <- "Escolaridade e concentração setorial: RAIS (Ministério do Trabalho)."
 FONTE_PIB     <- "Dominância industrial: PIB dos Municípios (IBGE, SIDRA)."
 FONTE_SELIC   <- "Selic real: Banco Central (séries 4390 e 433)."
 FONTE_MALHA   <- "Malha municipal e distância a Curitiba: IBGE."
@@ -110,7 +110,7 @@ carregar_painel <- function() {
 
   colunas_necessarias <- c(
     "id_municipio", "nome_municipio", "ano", "salario_medio_real", "ln_salario_real",
-    "prop_superior", "dom_industrial", "shannon_diversificacao", "selic_real",
+    "prop_superior", "dom_industrial", "gini_setorial", "selic_real",
     "dist_curitiba_km", "x3_negativo", "vinculos_ativos"
   )
   colunas_faltantes <- setdiff(colunas_necessarias, names(dados))
@@ -119,7 +119,7 @@ carregar_painel <- function() {
   }
 
   colunas_numericas <- c("salario_medio_real", "ln_salario_real", "prop_superior",
-                         "dom_industrial", "shannon_diversificacao", "selic_real",
+                         "dom_industrial", "gini_setorial", "selic_real",
                          "dist_curitiba_km", "vinculos_ativos")
   dados <- dados |>
     tibble::as_tibble() |>
@@ -209,9 +209,9 @@ tema_base <- theme_bw(base_size = 11) +
 plotar_matriz_correlacao <- function(dados) {
   arquivo <- file.path(DIR_FIGURAS, "fig1_matriz_correlacao.png")
   variaveis <- c("ln_salario_real", "prop_superior", "dom_industrial",
-                 "shannon_diversificacao", "selic_real", "dist_curitiba_km")
+                 "gini_setorial", "selic_real", "dist_curitiba_km")
   rotulos <- c("Ln do salário\nreal", "Ensino superior\n(%)", "Dominância\nindustrial (%)",
-               "Diversificação\n(Shannon)", "Selic real\n(% a.a.)", "Distância a\nCuritiba (km)")
+               "Concentração\nsetorial (Gini)", "Selic real\n(% a.a.)", "Distância a\nCuritiba (km)")
 
   m <- stats::cor(as.data.frame(dados)[, variaveis], use = "pairwise.complete.obs")
   ordem <- seq_along(variaveis)
@@ -511,7 +511,7 @@ plotar_mapas_estaticos <- function(dados, mapa_sf) {
     "salario_medio_real",     "Salário médio real formal",                       "R$ de 2021",                  list(fmt_reais), "C",
     "prop_superior",          "Vínculos com ensino superior completo",           "% dos vínculos",              list(fmt_pct),   "D",
     "dom_industrial",         "Dominância industrial (VAB da indústria)",        "% do VAB total",              list(fmt_pct),   "E",
-    "shannon_diversificacao", "Diversificação setorial (entropia de Shannon)",   "Índice",                      list(fmt_num2),  "G"
+    "gini_setorial",          "Concentração setorial do emprego (Gini)",         "Índice (0 a 1)",                      list(fmt_num2),  "G"
   )
 
   mapas <- purrr::pmap(especificacao |> mutate(primeiro = row_number() == 1),

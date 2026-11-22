@@ -1,0 +1,5 @@
+modelo,teste,hipotese_nula,estatistica,gl,p_valor,decisao_5pct
+Modelo 2,"Breusch-Pagan-Godfrey (bptest, studentized)",erros homocedásticos,11.895277560894355,5,0.036251239737550504,rejeita H0
+Modelo 3,"Breusch-Pagan-Godfrey (bptest, studentized)",erros homocedásticos,11.191964661255314,6,0.08262165918509322,não rejeita H0
+Modelo 3b,"Breusch-Pagan-Godfrey (bptest, studentized)",erros homocedásticos,12.609062115332318,7,0.08222609088436603,não rejeita H0
+Modelo 2,"Goldfeld-Quandt (gqtest, unilateral; ordenado por dist_curitiba_km)",variância constante,1.055653021648075,110; 110,0.388453098828553,não rejeita H0
