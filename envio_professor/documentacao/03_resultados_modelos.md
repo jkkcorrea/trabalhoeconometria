@@ -1,19 +1,20 @@
 # Resultados dos modelos
 
-Coeficientes com erro clássico (MQO) e com erro de White (HC1). O t tem n - k = 284 graus de liberdade.
+Coeficientes com erro de White (HC1) e t com n - k graus de liberdade. Erro clássico em `coeficientes_modelos.csv`.
 
-## Modelo 2 (principal), erro clássico
+## Modelo 4 (principal), erro de White
 
 | Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|
-| Constante | 8,1064 | 0,1356 | 59,79 | < 0,0001 |
-| X2 ensino superior (%) | 0,0150 | 0,0013 | 11,24 | < 0,0001 |
-| X3 dominância industrial (%) | 0,0055 | 0,0005 | 11,84 | < 0,0001 |
-| X4 concentração setorial (Gini) | -0,6548 | 0,1640 | -3,99 | < 0,0001 |
-| X5 Selic real (% a.a.) | 0,0065 | 0,0021 | 3,15 | 0,0018 |
-| X6 distância a Curitiba (km) | -0,0016 | 0,0005 | -3,42 | 0,0007 |
+| Constante | 7,2013 | 0,3621 | 19,89 | < 0,0001 |
+| X2 ensino superior (%) | 0,0084 | 0,0019 | 4,42 | < 0,0001 |
+| X3 dominância industrial (%) | -0,0006 | 0,0007 | -0,83 | 0,4086 |
+| X4 concentração setorial (Gini) | 0,8653 | 0,4387 | 1,97 | 0,0496 |
+| X5 Selic real (% a.a.) | 0,0039 | 0,0008 | 4,80 | < 0,0001 |
 
-## Modelo 2, erro de White (HC1)
+O Modelo 4 inclui 28 variáveis dummy de município (uma categoria de referência). Os coeficientes das dummies estão em `resultados_econometricos/coeficientes_modelos.csv`. X6 é constante dentro de cada município e não é identificada neste modelo.
+
+## Modelo 2 (comparação), erro de White
 
 | Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|
@@ -24,7 +25,7 @@ Coeficientes com erro clássico (MQO) e com erro de White (HC1). O t tem n - k =
 | X5 Selic real (% a.a.) | 0,0065 | 0,0018 | 3,66 | 0,0003 |
 | X6 distância a Curitiba (km) | -0,0016 | 0,0005 | -2,96 | 0,0033 |
 
-## Modelo 3, erro de White (HC1)
+## Modelo 3, erro de White
 
 | Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|
@@ -36,7 +37,7 @@ Coeficientes com erro clássico (MQO) e com erro de White (HC1). O t tem n - k =
 | X6 distância a Curitiba (km) | -0,0013 | 0,0005 | -2,38 | 0,0182 |
 | Dummy de Curitiba | 0,2023 | 0,0390 | 5,19 | < 0,0001 |
 
-## Modelo 3b, erro de White (HC1)
+## Modelo 3b, erro de White
 
 | Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|
@@ -56,4 +57,11 @@ Coeficientes com erro clássico (MQO) e com erro de White (HC1). O t tem n - k =
 | Modelo 2 | 105,26 | 5; 284 | < 0,0001 | 0,6495 | 0,6433 |
 | Modelo 3 | 95,95 | 6; 283 | < 0,0001 | 0,6704 | 0,6634 |
 | Modelo 3b | 83,27 | 7; 282 | < 0,0001 | 0,6740 | 0,6659 |
+| Modelo 4 | 196,53 | 32; 257 | < 0,0001 | 0,9607 | 0,9558 |
 
+## Leitura dos coeficientes
+
+- X2 é positivo nos dois modelos e significativo a 5%: a associação não depende de comparar municípios diferentes.
+- X3 é positivo entre municípios (Modelo 2) e não significativo dentro deles (Modelo 4).
+- X4 tem sinal negativo no Modelo 2 e positivo no Modelo 4, consistente com a correlação de -0,95 com o número de setores ativos (ver 04_diagnosticos.md).
+- X5 é significativo no Modelo 4, mas a inferência usa 257 graus de liberdade com apenas 10 valores de Selic (ver 04_diagnosticos.md).

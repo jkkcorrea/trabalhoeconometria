@@ -56,7 +56,31 @@ tabela_reset <- tibble::tibble(
   gl = paste(unname(reset$parameter), collapse = "; "), p_valor = reset$p.value,
   decisao_5pct = ifelse(reset$p.value < 0.05, "rejeita H0", "não rejeita H0")
 )
+# Modelo 4 (dummies de município): RESET e teste F de acréscimo das dummies sobre o Modelo 2.
+modelo4 <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real +
+                       factor(id_municipio), data = painel)
+reset4 <- lmtest::resettest(modelo4, power = 2:3, type = "fitted")
+tabela_reset <- dplyr::bind_rows(tabela_reset, tibble::tibble(
+  modelo = "Modelo 4", teste = "RESET de Ramsey (potências 2 e 3 dos ajustados)",
+  hipotese_nula = "forma funcional correta", estatistica_f = unname(reset4$statistic),
+  gl = paste(unname(reset4$parameter), collapse = "; "), p_valor = reset4$p.value,
+  decisao_5pct = ifelse(reset4$p.value < 0.05, "rejeita H0", "não rejeita H0")
+))
 readr::write_csv(tabela_reset, file.path(DIR_RESULTADOS, "especificacao_reset.csv"))
+
+# Teste F de acréscimo (ensinado): modelo sem dummies contra o Modelo 4, com as 28 dummies de município.
+# Os dois modelos são aninhados (mesmas variáveis X2 a X5; X6 fica fora porque é constante no município).
+modelo4_restrito <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real,
+                              data = painel)
+acrescimo <- stats::anova(modelo4_restrito, modelo4)
+tabela_acrescimo <- tibble::tibble(
+  teste = "F de acréscimo das dummies de município (X2 a X5, sem e com as dummies)",
+  hipotese_nula = "dummies de município conjuntamente nulas",
+  gl_numerador = acrescimo$Df[2], gl_denominador = acrescimo$Res.Df[2],
+  estatistica_f = acrescimo$F[2], p_valor = acrescimo$`Pr(>F)`[2],
+  decisao_5pct = ifelse(acrescimo$`Pr(>F)`[2] < 0.05, "rejeita H0", "não rejeita H0")
+)
+readr::write_csv(tabela_acrescimo, file.path(DIR_RESULTADOS, "especificacao_acrescimo_municipios.csv"))
 
 # LM para acréscimo de tendência linear do ano: n * R2 da regressão dos resíduos.
 aux <- stats::lm(stats::residuals(modelo2) ~ prop_superior + dom_industrial + gini_setorial +
@@ -148,6 +172,7 @@ if (file.exists(arq_rais)) {
 }
 
 message("Etapa 6 concluída: RESET, LM, Chow, inferência agregada e checagem do Gini gravados.")
-print(tabela_reset[, c("teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
+print(tabela_reset[, c("modelo", "teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
+print(tabela_acrescimo[, c("teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
 print(tabela_lm[, c("teste", "estatistica", "p_valor", "decisao_5pct")], row.names = FALSE)
 print(tabela_chow[, c("teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)

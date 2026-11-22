@@ -4,7 +4,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 48 arquivos |
+| A1 | Arquivos essenciais presentes | APROVADA | 49 arquivos |
 | A1b | Sem saídas de métodos removidos nem arquivos antigos | APROVADA | nenhuma saída antiga |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 20 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
@@ -21,5 +21,6 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | D1 | Coeficiente de X2 (erro de White) escrito no resumo igual ao CSV | APROVADA | valor 0,0150 |
 | D2 | Os modelos e testes do resumo batem com os arquivos de resultado | APROVADA | três modelos presentes |
 | C7 | Inferência agregada da Selic (n = 10) recalculada | APROVADA | p-valor recalculado 0.1886; no arquivo 0.1886 |
+| C8 | F de acréscimo das dummies de município recalculado (SQR restrita e irrestrita) | APROVADA | calculado 76.1264; no arquivo 76.1264 |
 
-17 de 17 verificações aprovadas.
+18 de 18 verificações aprovadas.

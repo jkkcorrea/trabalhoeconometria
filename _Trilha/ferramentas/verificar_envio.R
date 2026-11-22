@@ -24,7 +24,7 @@ esperado <- c("LEIAME.md",
                                         "anova_f_modelos.csv", "autocorrelacao_por_municipio.csv",
                                         "autocorrelacao_resumo.csv", "especificacao_reset.csv",
                                         "especificacao_lm_tendencia.csv", "chow_quebra_periodo.csv",
-                                        "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv",
+                                        "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv", "especificacao_acrescimo_municipios.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -188,6 +188,15 @@ t_ag <- summary(lm(ln_salario_real ~ selic_real, data = medias))$coefficients["s
 ia <- le("resultados_econometricos/inferencia_agregada_x5_x6.csv")
 registrar("C7", "Inferência agregada da Selic (n = 10) recalculada", abs(t_ag[4] - ia$p_valor[1]) < 1e-8,
           sprintf("p-valor recalculado %.4f; no arquivo %.4f", t_ag[4], ia$p_valor[1]))
+
+# F de acréscimo das dummies de município recalculado por SQR restrita e irrestrita.
+dum <- factor(painel$id_municipio)
+X_r <- X[, -6]; X_u <- cbind(X_r, model.matrix(~ dum)[, -1])  # sem X6 (constante no município)
+sqr <- function(M) { bb <- solve(t(M) %*% M) %*% t(M) %*% y; sum((y - M %*% bb)^2) }
+F_acr <- ((sqr(X_r) - sqr(X_u)) / (ncol(X_u) - ncol(X_r))) / (sqr(X_u) / (n - ncol(X_u)))
+acr <- le("resultados_econometricos/especificacao_acrescimo_municipios.csv")
+registrar("C8", "F de acréscimo das dummies de município recalculado (SQR restrita e irrestrita)",
+          abs(F_acr - acr$estatistica_f[1]) < 1e-6, sprintf("calculado %.4f; no arquivo %.4f", F_acr, acr$estatistica_f[1]))
 
 # ============================== E. Resumo final ==================================
 status_ok <- sum(resultado$situacao == "APROVADA"); total <- nrow(resultado)

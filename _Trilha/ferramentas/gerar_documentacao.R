@@ -24,9 +24,9 @@ anova <- res("anova_f_modelos.csv")
 aut <- res("autocorrelacao_por_municipio.csv")
 aut_res <- res("autocorrelacao_resumo.csv")
 reset <- res("especificacao_reset.csv")
+acresc <- res("especificacao_acrescimo_municipios.csv")
 lm_t <- res("especificacao_lm_tendencia.csv")
 chow <- res("chow_quebra_periodo.csv")
-mem_fiv <- res("memorial_modelo_2_fiv.csv")
 inf_ag <- res("inferencia_agregada_x5_x6.csv")
 gini_chk <- res("medida_gini_checagem.csv")
 
@@ -35,10 +35,13 @@ nomes_termo <- c("(Intercept)" = "Constante", prop_superior = "X2 ensino superio
                  selic_real = "X5 Selic real (% a.a.)", dist_curitiba_km = "X6 distância a Curitiba (km)",
                  dummy_curitiba = "Dummy de Curitiba", `dom_industrial:dist_curitiba_km` = "X3 x X6 (interação)")
 coef_m <- function(modelo, matriz) {
-  d <- coef[coef$modelo == modelo & coef$matriz == matriz, ]
+  d <- coef[coef$modelo == modelo & coef$matriz == matriz & !grepl("^factor", coef$termo), ]
   data.frame(Termo = nomes_termo[d$termo], Estimativa = f4(d$estimativa), `Erro-padrão` = f4(d$erro_padrao),
              t = f2(d$estatistica_t), `p-valor` = fp(d$p_valor), check.names = FALSE)
 }
+m4_nota <- paste("O Modelo 4 inclui 28 variáveis dummy de município (uma categoria de referência). Os coeficientes",
+                 "das dummies estão em `resultados_econometricos/coeficientes_modelos.csv`. X6 é constante dentro",
+                 "de cada município e não é identificada neste modelo.")
 
 # ---- 01 dados e variáveis
 n_municipios <- length(unique(painel$id_municipio))
@@ -54,18 +57,22 @@ gravar("01_dados_e_variaveis.md", c(
   "| X5: Selic real (% a.a.) | Selic anual pela equação de Fisher com o IPCA | Banco Central (séries 4390 e 433) |",
   "| X6: distância a Curitiba (km) | distância entre centroides; Curitiba igual a zero | malha municipal do IBGE (geobr) |", "",
   "O Gini segue a fórmula do Guia P2 (questão 3): G = (2/n) soma(i x x_(i)) - (n+1)/n, com n = 87 divisões. Tratar divisões como indivíduos e o total de 87 divisões são escolhas a confirmar.", "",
+  sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. Ver 04_diagnosticos.md.", f4(gini_chk$valor[1])), "",
   "Estatísticas descritivas: `dados_processados/estatisticas_descritivas.csv`. Correlações: `dados_processados/matriz_correlacao_explicativas.csv`."))
 
 # ---- 02 especificação e métodos
 gravar("02_especificacao_e_metodos.md", c(
   "# Especificação e métodos", "",
-  "Modelo principal (Modelo 2), estimado por MQO sobre o painel empilhado:", "",
-  "ln(Y_it) = b1 + b2 X2_it + b3 X3_it + b4 X4_it + b5 X5_t + b6 X6_i + u_it", "",
-  "Modelo 3 acrescenta a dummy de Curitiba; Modelo 3b acrescenta a interação X3 x X6.", "",
+  "Três especificações, todas por MQO sobre o painel empilhado:", "",
+  "- **Modelo 2 (comparação, com X6):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + b6 X6 + u_it.",
+  "- **Modelos 3 e 3b:** Modelo 2 com a dummy de Curitiba; o 3b acrescenta a interação X3 x X6.",
+  "- **Modelo 4 (principal):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + dummies de município + u_it.", "",
+  "A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acréscimo das dummies rejeita e o RESET passa a não rejeitar. A forma funcional não era o problema; a heterogeneidade entre municípios era. Ver 04_diagnosticos.md.", "",
   "## Métodos usados (todos ensinados na disciplina)", "",
   "| Método | Uso no projeto | Fonte oficial |", "|---|---|---|",
   "| MQO e álgebra matricial | estimação e memorial | notas de regressão múltipla |",
-  "| t, F, ANOVA, R2 | inferência | notas de regressão múltipla |",
+  "| t, F, ANOVA, R2 | inferência e teste de acréscimo | notas de regressão múltipla |",
+  "| Variáveis dummy | controle de município (Modelo 4) e de Curitiba | Gujarati, cap. 9 (confirmar no livro) |",
   "| FIV e tolerância (limite 10) | multicolinearidade | notas de multicolinearidade; Guia P2 |",
   "| Breusch-Pagan-Godfrey | heterocedasticidade | notas de heterocedasticidade; provas 2023 a 2025 |",
   "| Goldfeld-Quandt | heterocedasticidade | notas de heterocedasticidade |",
@@ -76,68 +83,81 @@ gravar("02_especificacao_e_metodos.md", c(
   "| LM para variável omitida | acréscimo de tendência linear | notas de especificação e diagnóstico |",
   "| Teste de Chow | quebra estrutural por período | notas do teste de Chow |", "",
   "## Métodos removidos do projeto (não ensinados nas fontes oficiais)", "",
-  "Efeitos fixos e aleatórios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera, smearing de Duan e a entropia de Shannon.", "",
-  "Fontes oficiais e IDs no Drive: `documentacao/06_fontes.md`."))
+  "Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera, smearing de Duan e a entropia de Shannon.", "",
+  "Fontes oficiais e IDs no Drive: `06_fontes.md`."))
 
 # ---- 03 resultados
 gravar("03_resultados_modelos.md", c(
   "# Resultados dos modelos", "",
-  "Coeficientes com erro clássico (MQO) e com erro de White (HC1). O t tem n - k = 284 graus de liberdade.", "",
-  "## Modelo 2 (principal), erro clássico", "", md(coef_m("Modelo 2", "classico")), "",
-  "## Modelo 2, erro de White (HC1)", "", md(coef_m("Modelo 2", "white")), "",
-  "## Modelo 3, erro de White (HC1)", "", md(coef_m("Modelo 3", "white")), "",
-  "## Modelo 3b, erro de White (HC1)", "", md(coef_m("Modelo 3b", "white")), "",
+  "Coeficientes com erro de White (HC1) e t com n - k graus de liberdade. Erro clássico em `coeficientes_modelos.csv`.", "",
+  "## Modelo 4 (principal), erro de White", "", md(coef_m("Modelo 4", "white")), "", m4_nota, "",
+  "## Modelo 2 (comparação), erro de White", "", md(coef_m("Modelo 2", "white")), "",
+  "## Modelo 3, erro de White", "", md(coef_m("Modelo 3", "white")), "",
+  "## Modelo 3b, erro de White", "", md(coef_m("Modelo 3b", "white")), "",
   "## Significância conjunta (F da ANOVA)", "",
   md(data.frame(Modelo = anova$modelo, F = f2(anova$estatistica_f),
                 `gl` = paste(anova$gl_numerador, anova$gl_denominador, sep = "; "),
                 `p-valor` = fp(anova$p_valor), `R2` = f4(anova$r2), `R2 ajustado` = f4(anova$r2_ajustado),
-                check.names = FALSE)), ""))
+                check.names = FALSE)), "",
+  "## Leitura dos coeficientes", "",
+  "- X2 é positivo nos dois modelos e significativo a 5%: a associação não depende de comparar municípios diferentes.",
+  "- X3 é positivo entre municípios (Modelo 2) e não significativo dentro deles (Modelo 4).",
+  "- X4 tem sinal negativo no Modelo 2 e positivo no Modelo 4, consistente com a correlação de -0,95 com o número de setores ativos (ver 04_diagnosticos.md).",
+  "- X5 é significativo no Modelo 4, mas a inferência usa 257 graus de liberdade com apenas 10 valores de Selic (ver 04_diagnosticos.md)."))
 
 # ---- 04 diagnósticos
 tab_test <- data.frame(Modelo = testes$modelo, Teste = testes$teste, Estatística = f2(testes$estatistica),
                        gl = testes$gl, `p-valor` = fp(testes$p_valor), Decisão = testes$decisao_5pct, check.names = FALSE)
-tab_aut <- data.frame(Município = aut$nome_municipio, `Durbin-Watson` = f4(aut$durbin_watson),
+tab_aut <- data.frame(Modelo = aut$modelo, Município = aut$nome_municipio, `Durbin-Watson` = f4(aut$durbin_watson),
                       `Decisão pela tabela` = aut$decisao_dw_tabela, `ρ auxiliar` = f4(aut$rho_auxiliar),
                       `Breusch-Godfrey p` = fp(aut$breusch_godfrey_p), check.names = FALSE)
+tab_aut_res <- data.frame(Modelo = aut_res$modelo, Municípios = aut_res$municipios,
+                          `DW mediano` = f4(aut_res$durbin_watson_mediano), `ρ mediano` = f4(aut_res$rho_auxiliar_mediano),
+                          `DW positivo pela tabela` = aut_res$positiva_pela_tabela,
+                          `Breusch-Godfrey rejeita a 5%` = aut_res$breusch_godfrey_rejeita, check.names = FALSE)
 gravar("04_diagnosticos.md", c(
   "# Diagnósticos do modelo", "",
+  "## Heterogeneidade entre municípios", "",
+  md(data.frame(Teste = acresc$teste, `Estatística F` = f2(acresc$estatistica_f),
+                gl = paste(acresc$gl_numerador, acresc$gl_denominador, sep = "; "),
+                `p-valor` = fp(acresc$p_valor), Decisão = acresc$decisao_5pct, check.names = FALSE)), "",
+  sprintf("As dummies de município são conjuntamente significativas. O RESET do Modelo 2 rejeita (p-valor %s) e o RESET do Modelo 4 não rejeita (p-valor %s). A rejeição da forma funcional vem, portanto, da variável omitida entre municípios.",
+          fp(reset$p_valor[reset$modelo == "Modelo 2"]), fp(reset$p_valor[reset$modelo == "Modelo 4"])), "",
   "## Multicolinearidade (FIV e tolerância)", "",
   md(data.frame(Modelo = vif$modelo, Variável = vif$variavel, FIV = f4(vif$fiv), Tolerância = f4(vif$tolerancia),
                 Decisão = vif$decisao_fiv_10)), "",
-  "Limite da regra ensinada: FIV > 10 indica multicolinearidade elevada.", "",
-  "## Heterocedasticidade, forma funcional e quebra estrutural", "",
+  "FIV calculado no Modelo 2 e no Modelo 3, pela regra ensinada (FIV > 10 indica multicolinearidade elevada). O Modelo 4 não entra nessa tabela.", "",
+  "## Heterocedasticidade e testes de especificação", "",
   md(tab_test), "",
-  sprintf("RESET de Ramsey (potências 2 e 3 dos ajustados): estatística F = %s, p-valor %s. A forma log-linear é rejeitada e este é o principal achado de especificação.",
-          f2(reset$estatistica_f), fp(reset$p_valor)), "",
-  sprintf("LM para tendência linear do ano: estatística = %s, p-valor %s. Não há tendência omitida.",
+  "Como o Breusch-Pagan-Godfrey rejeita no Modelo 2 e no Modelo 4, a inferência usa erros de White (HC1).", "",
+  sprintf("RESET de Ramsey: Modelo 2, p-valor %s (rejeita); Modelo 4, p-valor %s (não rejeita).",
+          fp(reset$p_valor[reset$modelo == "Modelo 2"]), fp(reset$p_valor[reset$modelo == "Modelo 4"])), "",
+  sprintf("LM para tendência linear do ano (Modelo 2): estatística = %s, p-valor %s. Não há tendência omitida.",
           f4(lm_t$estatistica), fp(lm_t$p_valor)), "",
-  sprintf("Teste de Chow (2012 a 2016 contra 2017 a 2021): F = %s, p-valor %s. Não há quebra estrutural a 5%%.",
+  sprintf("Teste de Chow (2012 a 2016 contra 2017 a 2021, Modelo 2): F = %s, p-valor %s. Não há quebra estrutural a 5%%.",
           f4(chow$estatistica_f), fp(chow$p_valor)), "",
   "## Inferência com variáveis que variam pouco", "",
   "A Selic tem 10 valores distintos (um por ano) e a distância tem 29 (um por município). Com 290 observações, o t do modelo trata essas linhas como independentes e superestima a precisão. A checagem usa regressões simples sobre médias, com n - 2 graus de liberdade:", "",
   md(data.frame(Variável = inf_ag$variavel, Base = inf_ag$base, gl = inf_ag$gl, Estimativa = f4(inf_ag$estimativa),
                 `p-valor` = fp(inf_ag$p_valor), Decisão = inf_ag$decisao_5pct, check.names = FALSE)), "",
-  sprintf("Com a Selic, a inclinação não é significativa a 5%% na base de médias anuais (p-valor %s). O efeito de X5 no modelo principal não se sustenta fora da estrutura de 290 observações.", fp(inf_ag$p_valor[1])), "",
+  sprintf("Com a Selic, a inclinação não é significativa a 5%% na base de médias anuais (p-valor %s). Esse resultado não se sustenta com a inferência do Modelo 4.", fp(inf_ag$p_valor[1])), "",
   "## Medida X4 (Gini setorial)", "",
-  sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes. Sinal e interpretação da X4 dependem dessa leitura.", f4(gini_chk$valor[1])), "",
+  sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes.", f4(gini_chk$valor[1])), "",
   "## Autocorrelação dentro de cada município", "",
-  "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2. A tabela de Durbin-Watson para n = 10 e k' = 5 tem dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
-  md(tab_aut), "",
-  sprintf("Resumo: %s municípios com autocorrelação positiva pela tabela; %s na zona de inconclusão; %s com Breusch-Godfrey significativo a 5%%.",
-          aut_res$valor[aut_res$indicador == "decisão pela tabela: autocorrelação positiva"],
-          aut_res$valor[aut_res$indicador == "decisão pela tabela: zona de inconclusão"],
-          aut_res$valor[aut_res$indicador == "Breusch-Godfrey rejeita H0 a 5%"]), "",
-  "Essa autocorrelação positiva não é corrigida por nenhum método ensinado aplicável ao painel. Os erros-padrão, mesmo os de White, tendem a estar subestimados nesse caso. Isso é limitação do trabalho."))
+  "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para n = 10 e k' = 5, com dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
+  md(tab_aut_res), "",
+  "No Modelo 2, a autocorrelação positiva aparece em muitos municípios. No Modelo 4, a mediana do Durbin-Watson sobe para perto de 1,3 e o ρ auxiliar cai para 0,19: a maior parte da autocorrelação do Modelo 2 era heterogeneidade omitida entre municípios.", "",
+  "<details><summary>Série por município</summary>", "", md(tab_aut), "", "</details>"))
 
 # ---- 05 limitações
 gravar("05_limitacoes.md", c(
   "# Limitações", "",
   "- Desenho observacional: os coeficientes são associações, não efeitos causais.",
-  "- Variáveis de nível de tempo e de município (Selic e distância) têm poucos valores distintos. A significância do modelo principal para X5 não se sustenta na checagem agregada (04_diagnosticos).",
-  "- Autocorrelação positiva dentro dos municípios em 14 de 29 séries pela tabela de Durbin-Watson, sem correção ensinada aplicável ao painel. Os erros-padrão, mesmo os de White, tendem a estar subestimados.",
-  "- Forma funcional rejeitada pelo RESET (p-valor < 0,0001). A especificação log-linear com estas cinco variáveis não está completa.",
-  "- Heterocedasticidade rejeitada a 5% pelo Breusch-Pagan-Godfrey no Modelo 2 (p-valor 0,0363); a inferência usa erros de White.",
-  "- A medida X4 acompanha o número de divisões com emprego (correlação de -0,95). Sua leitura precisa ser definida antes da interpretação.",
+  "- Com as dummies de município, X6 (distância) não é identificada. Seu efeito só aparece no Modelo 2, onde está confundido com as diferenças não observadas entre municípios.",
+  "- Variáveis de nível de tempo (Selic) têm 10 valores distintos. A inferência do Modelo 4 para X5 trata 290 observações como independentes e superestima a precisão. É o ponto que mais limita a conclusão sobre juros.",
+  "- O efeito de X4 muda de sinal entre o Modelo 2 (entre municípios) e o Modelo 4 (dentro dos municípios). A medida acompanha o número de setores com emprego (correlação -0,95).",
+  "- A autocorrelação dentro dos municípios cai com as dummies, mas o Breusch-Godfrey ainda rejeita em alguns municípios; não há correção ensinada aplicável ao painel para o resto.",
+  "- Heterocedasticidade: o Breusch-Pagan-Godfrey rejeita no Modelo 2 e no Modelo 4. A inferência usa erros de White.",
   "- Sinais esperados e hipóteses ainda não foram definidos no projeto; sem eles não há teste de hipótese econômica.",
   "- A divisão do teste de Chow no ano de 2016 é uma escolha, com duas partes de 145 observações.",
   "- Vínculos com divisão CNAE 'ignorada' ficam fora do cálculo do Gini."))
@@ -147,7 +167,7 @@ gravar("06_fontes.md", c(
   "# Fontes e referências", "",
   "## Fontes oficiais da disciplina (podem ser citadas)", "",
   "| Fonte | Conteúdo usado |", "|---|---|",
-  "| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação |",
+  "| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação, variáveis dummy |",
   "| Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |",
   "| Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |",
   "| Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |",
@@ -163,15 +183,15 @@ gravar("06_fontes.md", c(
   "Os endereços e os códigos das APIs foram conferidos em 22/11/2026 (ver 08_verificacao.md).", "",
   "Referências de métodos removidos do projeto não são citadas no trabalho."))
 
-# ---- 07 critérios (regras de correção da P2 sobre o modelo)
+# ---- 07 critérios
 gravar("07_criterios_da_disciplina.md", c(
   "# Critérios da disciplina aplicados ao trabalho", "",
   "- Todos os cálculos no R, com caminhos relativos e rotina reproduzível: `R/00_executar_tudo.R`.",
-  "- Quatro casas decimais nos resultados do memorial (`resultados_econometricos/memorial_modelo_2.txt`).",
+  "- Quatro casas decimais nos resultados do memorial (`memorial_modelo_2.txt`, referente ao Modelo 2).",
   "- Hipóteses nula e alternativa explicitadas nos testes (`testes_diagnostico.csv`, `especificacao_*.csv`).",
   "- Apenas métodos ensinados (ver 02_especificacao_e_metodos.md)."))
 
-# ---- 08 ambiente
+# ---- ambiente e dicionário
 ambiente <- data.frame(pacote = c("dplyr", "readr", "tibble", "stringr", "purrr", "ggplot2", "car", "lmtest", "sandwich", "sf", "geobr", "sidrar", "rbcb", "gifski", "gganimate"),
                        versao = vapply(c("dplyr", "readr", "tibble", "stringr", "purrr", "ggplot2", "car", "lmtest", "sandwich", "sf", "geobr", "sidrar", "rbcb", "gifski", "gganimate"),
                                        function(p) if (requireNamespace(p, quietly = TRUE)) as.character(packageVersion(p)) else "ausente", character(1)))
@@ -179,26 +199,32 @@ write.csv(ambiente, file.path(DOC, "ambiente_r.csv"), row.names = FALSE)
 write.csv(data.frame(variavel = names(painel), tipo = vapply(painel, function(x) class(x)[1], character(1))),
           file.path(DOC, "dicionario_variaveis.csv"), row.names = FALSE)
 
-# ---- 00 resumo (fecha a documentação)
+# ---- 00 resumo
 gravar("00_resumo.md", c(
   "# Resumo dos resultados", "",
-  "Todos os números abaixo saem de `resultados_econometricos/`. Escopo: apenas métodos ensinados na disciplina.", "",
-  "## Modelo principal (MQO empilhado, erro de White)", "",
+  "Todos os números saem de `resultados_econometricos/`. Escopo: apenas métodos ensinados na disciplina.", "",
+  "## Modelo principal (Modelo 4: MQO com dummies de município e erro de White)", "",
+  md(coef_m("Modelo 4", "white")), "", m4_nota, "",
+  sprintf("F da ANOVA = %s (p-valor %s); R2 = %s.", f2(anova$estatistica_f[anova$modelo == "Modelo 4"]),
+          fp(anova$p_valor[anova$modelo == "Modelo 4"]), f4(anova$r2[anova$modelo == "Modelo 4"])), "",
+  "## Modelo de comparação (Modelo 2: MQO com X6, erro de White)", "",
   md(coef_m("Modelo 2", "white")), "",
-  sprintf("F da ANOVA = %s (p-valor %s); R2 = %s.", f2(anova$estatistica_f[1]), fp(anova$p_valor[1]), f4(anova$r2[1])), "",
   "## Diagnósticos", "",
-  sprintf("- Multicolinearidade: maior FIV = %s (limite 10).", f4(max(vif$fiv[vif$modelo == "Modelo 2"]))),
-  sprintf("- Heterocedasticidade (Breusch-Pagan-Godfrey): p-valor %s.", fp(testes$p_valor[testes$modelo == "Modelo 2" & grepl("Breusch", testes$teste)])),
-  sprintf("- Forma funcional (RESET): p-valor %s; rejeita.", fp(reset$p_valor)),
+  sprintf("- Heterogeneidade entre municípios: F de acréscimo das dummies = %s (p-valor %s).", f2(acresc$estatistica_f), fp(acresc$p_valor)),
+  sprintf("- Forma funcional: RESET p-valor %s no Modelo 2 e %s no Modelo 4.", fp(reset$p_valor[reset$modelo == "Modelo 2"]), fp(reset$p_valor[reset$modelo == "Modelo 4"])),
+  sprintf("- Multicolinearidade (Modelo 2): maior FIV = %s (limite 10).", f4(max(vif$fiv[vif$modelo == "Modelo 2"]))),
+  sprintf("- Heterocedasticidade (Breusch-Pagan-Godfrey): p-valor %s no Modelo 2 e %s no Modelo 4; inferência com White.",
+          fp(testes$p_valor[testes$modelo == "Modelo 2" & grepl("Breusch", testes$teste)]),
+          fp(testes$p_valor[testes$modelo == "Modelo 4" & grepl("Breusch", testes$teste)])),
   sprintf("- Quebra estrutural (Chow): p-valor %s; não rejeita.", fp(chow$p_valor)),
-  sprintf("- Autocorrelação positiva dentro dos municípios: %s de 29 municípios pela tabela de Durbin-Watson.",
-          aut_res$valor[aut_res$indicador == "decisão pela tabela: autocorrelação positiva"]), "",
-  "Detalhes: 03_resultados_modelos.md, 04_diagnosticos.md, 05_limitacoes.md."))
+  sprintf("- Autocorrelação: mediana do Durbin-Watson por município = %s no Modelo 2 e %s no Modelo 4.",
+          f4(aut_res$durbin_watson_mediano[aut_res$modelo == "Modelo 2"]), f4(aut_res$durbin_watson_mediano[aut_res$modelo == "Modelo 4"])), "",
+  "Limitações e pontos a rever: 05_limitacoes.md."))
 
 # ---- LEIAME
 gravar("../LEIAME.md", c(
   "# Salário médio real formal nos municípios da Região Metropolitana de Curitiba, 2012 a 2021", "",
-  "Trabalho de Econometria I (UFPR). Painel de 29 municípios em 10 anos (290 observações). Variável dependente: logaritmo do salário médio real formal. Explicativas: X2 ensino superior, X3 dominância industrial, X4 concentração setorial (Gini), X5 Selic real e X6 distância a Curitiba.", "",
+  "Trabalho de Econometria I (UFPR). Painel de 29 municípios em 10 anos (290 observações). Variável dependente: logaritmo do salário médio real formal. Explicativas: X2 ensino superior, X3 dominância industrial, X4 concentração setorial (Gini), X5 Selic real e X6 distância a Curitiba (no Modelo 2).", "",
   "## Como reproduzir", "",
   "1. Instalar o R e os pacotes de `documentacao/ambiente_r.csv`.",
   "2. Definir esta pasta como diretório de trabalho e rodar `Rscript R/00_executar_tudo.R`.", "",
@@ -206,9 +232,9 @@ gravar("../LEIAME.md", c(
   "| Script | Função |", "|---|---|",
   "| 02_tratamento_painel.R | constrói o painel e as variáveis |",
   "| 03_aede_visualizacoes.R | figuras e animações |",
-  "| 04_modelagem_diagnosticos.R | modelos, erro de White, VIF, Breusch-Pagan-Godfrey, Goldfeld-Quandt, ANOVA |",
-  "| 05_autocorrelacao_municipios.R | Durbin-Watson, ρ e Breusch-Godfrey por município |",
-  "| 06_especificacao_chow.R | RESET, LM de tendência e teste de Chow |",
-  "| 07_memorial_modelo_2.R | memorial matricial do Modelo 2 |", "",
+  "| 04_modelagem_diagnosticos.R | modelos 2, 3, 3b e 4; erro de White; VIF; Breusch-Pagan-Godfrey; Goldfeld-Quandt; ANOVA |",
+  "| 05_autocorrelacao_municipios.R | Durbin-Watson, ρ e Breusch-Godfrey por município (Modelos 2 e 4) |",
+  "| 06_especificacao_chow.R | RESET, teste F de acréscimo das dummies, LM de tendência, Chow, inferência agregada e checagem do Gini |",
+  "| 07_memorial_modelo_2.R | memorial matricial do Modelo 2 com quatro casas decimais |", "",
   "Onde ler: `documentacao/00_resumo.md`. Verificações: `documentacao/08_verificacao.md`."))
 message("Documentação gerada em ", DOC)

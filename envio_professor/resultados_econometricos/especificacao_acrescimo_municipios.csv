@@ -1,0 +1,2 @@
+teste,hipotese_nula,gl_numerador,gl_denominador,estatistica_f,p_valor,decisao_5pct
+"F de acréscimo das dummies de município (X2 a X5, sem e com as dummies)",dummies de município conjuntamente nulas,28,257,76.12636373009383,7.375166812864999e-108,rejeita H0

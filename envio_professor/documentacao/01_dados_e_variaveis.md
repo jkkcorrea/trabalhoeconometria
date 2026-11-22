@@ -13,4 +13,6 @@ Painel de 29 municípios da Região Metropolitana de Curitiba, de 2012 a 2021 (2
 
 O Gini segue a fórmula do Guia P2 (questão 3): G = (2/n) soma(i x x_(i)) - (n+1)/n, com n = 87 divisões. Tratar divisões como indivíduos e o total de 87 divisões são escolhas a confirmar.
 
+A correlação entre o Gini e o número de divisões CNAE com emprego é -0,9497. Ver 04_diagnosticos.md.
+
 Estatísticas descritivas: `dados_processados/estatisticas_descritivas.csv`. Correlações: `dados_processados/matriz_correlacao_explicativas.csv`.

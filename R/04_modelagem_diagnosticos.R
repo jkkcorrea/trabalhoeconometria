@@ -82,12 +82,16 @@ carregar_painel <- function() {
 FORMULA_M2 <- ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + dist_curitiba_km
 FORMULA_M3 <- update(FORMULA_M2, . ~ . + dummy_curitiba)
 FORMULA_M3B <- update(FORMULA_M3, . ~ . + dom_industrial:dist_curitiba_km)
+# Modelo 4: variáveis dummy de município (Gujarati, cap. 9). Absorve X6 (constante dentro do município)
+# e controla a heterogeneidade entre municípios, que o teste F de acréscimo rejeita fortemente (Etapa 6).
+FORMULA_M4 <- ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + factor(id_municipio)
 
 ajustar_modelos <- function(painel) {
   list(
     "Modelo 2" = lm(FORMULA_M2, data = painel),
     "Modelo 3" = lm(FORMULA_M3, data = painel),
-    "Modelo 3b" = lm(FORMULA_M3B, data = painel)
+    "Modelo 3b" = lm(FORMULA_M3B, data = painel),
+    "Modelo 4" = lm(FORMULA_M4, data = painel)
   )
 }
 
@@ -96,6 +100,7 @@ ajustar_modelos <- function(painel) {
 # -----------------------------------------------------------------------------
 tabela_coeficientes <- function(modelos) {
   purrr::imap_dfr(modelos, function(m, nome) {
+    # As 28 dummies de município são gravadas no CSV; a documentação mostra só as variáveis do modelo.
     gl <- df.residual(m)
     matrizes <- list(classico = stats::vcov(m), white = sandwich::vcovHC(m, type = "HC1"))
     purrr::imap_dfr(matrizes, function(V, tipo) {

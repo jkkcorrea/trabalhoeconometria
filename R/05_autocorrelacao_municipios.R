@@ -53,6 +53,10 @@ painel <- readRDS(ARQ_PAINEL)
 modelo2 <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial +
                        selic_real + dist_curitiba_km, data = painel)
 painel$residuo <- stats::residuals(modelo2)
+# Modelo 4 (dummies de município): resíduos da mesma análise, para comparação.
+modelo4 <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real +
+                       factor(id_municipio), data = painel)
+painel$residuo_m4 <- stats::residuals(modelo4)
 
 # Decisão pela tabela de Durbin-Watson (teste bilateral de autocorrelação de primeira ordem).
 # Com dU = 2,822 > 4 - dU = 1,178, não existe zona de não rejeição: a tabela não permite conclusão
@@ -66,9 +70,9 @@ decidir_dw <- function(d) {
   )
 }
 
-analisar_municipio <- function(df) {
+analisar_municipio <- function(df, coluna_residuo = "residuo") {
   df <- dplyr::arrange(df, ano)
-  e <- df$residuo
+  e <- df[[coluna_residuo]]
   n <- length(e)
   d <- sum(diff(e)^2) / sum(e^2)                          # Durbin-Watson (Gujarati, eq. 18)
   rho <- unname(stats::coef(stats::lm(e[-1] ~ 0 + e[-n])))  # AR(1) sem constante
@@ -88,25 +92,30 @@ analisar_municipio <- function(df) {
 
 autocorrelacao <- painel |>
   dplyr::group_split(id_municipio) |>
-  purrr::map_dfr(analisar_municipio)
+  purrr::map_dfr(analisar_municipio) |>
+  dplyr::mutate(modelo = "Modelo 2")
+autocorrelacao_m4 <- painel |>
+  dplyr::group_split(id_municipio) |>
+  purrr::map_dfr(analisar_municipio, coluna_residuo = "residuo_m4") |>
+  dplyr::mutate(modelo = "Modelo 4")
+autocorrelacao <- dplyr::bind_rows(autocorrelacao, autocorrelacao_m4)
+# A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para k' = 5 (Modelo 2). Para o Modelo 4,
+# k' = 32 (as dummies contam como regressores): a tabela não se aplica e a decisão fica indicada.
+autocorrelacao$decisao_dw_tabela[autocorrelacao$modelo == "Modelo 4"] <- "tabela não cobre k' = 32"
 
-if (nrow(autocorrelacao) != 29L) stop("A análise devia cobrir 29 municípios.", call. = FALSE)
+if (nrow(autocorrelacao) != 58L) stop("A análise devia cobrir 29 municípios em dois modelos.", call. = FALSE)
 
-resumo <- tibble::tibble(
-  indicador = c("municípios analisados", "Durbin-Watson mediano", "rho auxiliar mediano",
-                "decisão pela tabela: autocorrelação positiva", "decisão pela tabela: negativa",
-                "decisão pela tabela: zona de inconclusão", "Breusch-Godfrey rejeita H0 a 5%",
-                "dL e dU usados (n = 10, k' = 5)"),
-  valor = c(nrow(autocorrelacao),
-            signif(stats::median(autocorrelacao$durbin_watson), 4),
-            signif(stats::median(autocorrelacao$rho_auxiliar), 4),
-            sum(autocorrelacao$decisao_dw_tabela == "autocorrelação positiva"),
-            sum(autocorrelacao$decisao_dw_tabela == "autocorrelação negativa"),
-            sum(autocorrelacao$decisao_dw_tabela == "zona de inconclusão"),
-            sum(autocorrelacao$breusch_godfrey_decisao == "rejeita H0"),
-            paste0("dL = ", DW_DL, "; dU = ", DW_DU, " [a confirmar no PDF]"))
-)
-
+resumo <- autocorrelacao |>
+  dplyr::group_by(modelo) |>
+  dplyr::summarise(
+    municipios = dplyr::n(),
+    durbin_watson_mediano = signif(stats::median(durbin_watson), 4),
+    rho_auxiliar_mediano = signif(stats::median(rho_auxiliar), 4),
+    positiva_pela_tabela = sum(decisao_dw_tabela == "autocorrelação positiva"),
+    zona_inconclusao = sum(decisao_dw_tabela == "zona de inconclusão"),
+    breusch_godfrey_rejeita = sum(breusch_godfrey_decisao == "rejeita H0"),
+    .groups = "drop"
+  )
 readr::write_csv(autocorrelacao, file.path(DIR_RESULTADOS, "autocorrelacao_por_municipio.csv"))
 readr::write_csv(resumo, file.path(DIR_RESULTADOS, "autocorrelacao_resumo.csv"))
 

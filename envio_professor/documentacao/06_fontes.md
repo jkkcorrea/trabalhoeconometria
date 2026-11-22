@@ -4,7 +4,7 @@
 
 | Fonte | Conteúdo usado |
 |---|---|
-| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação |
+| Gujarati, D. N.; Porter, D. C. Econometria Básica. 5ª ed. AMGH, 2011 | base teórica: regressão, testes, heterocedasticidade, autocorrelação, especificação, variáveis dummy |
 | Hoffmann, R.; Vieira, S. Análise de Regressão: Introdução à Econometria. 2ª ed. Hucitec, 1987 | regressão linear múltipla (bibliografia básica) |
 | Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |
 | Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |

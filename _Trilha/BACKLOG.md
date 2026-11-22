@@ -68,7 +68,7 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 
 Concluídos pela sessão e fora desta lista: remoção dos métodos fora do escopo, troca de X4 por Gini, reescrita dos scripts 04 a 07, verificação (17 de 17), documentação regenerada, figuras (incluindo a nova diag4 e o diagnóstico de inferência agregada), README, CLAUDE.md seção 13, e avaliação como professor em `_Trilha/AVALIACAO_PROFESSOR_20261122.md`.
 
-- [ ] **A. Hipóteses e sinais esperados de X2 a X6** (pesquisador). Sem eles não há teste de hipótese econômica no trabalho.
+- [ ] **A. Hipóteses e sinais esperados de X2 a X6** (pesquisador; proposta em `_Trilha/HIPOTESES_PROPOSTAS.md`, Modelo 4 como principal). Sem eles não há teste de hipótese econômica no trabalho.
 - [ ] **B. Leitura do X4 (Gini)**: diversidade setorial, com sinal invertido, ou troca por medida de concentração (pesquisador). A correlação com o número de setores é −0,95.
 - [ ] **C. Estatuto da Selic (X5)**: manter como associação não significativa fora da amostra de 290 observações, ou retirar do modelo principal (pesquisador).
 - [ ] **D. Forma funcional**: o RESET rejeita a log-linear (p < 0,0001). Escolher a especificação (pesquisador).
@@ -79,3 +79,5 @@ Concluídos pela sessão e fora desta lista: remoção dos métodos fora do esco
 - [ ] **I. Referências bibliográficas**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro. Baixar os livros protegidos para `fontes/livros_artigos/` (direitos autorais: só o pesquisador decide o que vai ao professor).
 - [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git, com os métodos removidos) e de `Trabalhos Referencias/` (trabalhos de colegas, não são fontes oficiais). Apagar exige pedido expresso.
 - [ ] **K. Artigo**: só depois de A a E e da aprovação do pesquisador.
+
+- [x] 22/11/2026 **43. Modelo 4 (dummies de município) como principal**: RESET passa (p = 0,75), F de acréscimo = 76,13, autocorrelação cai (DW mediano 0,25 para 1,33). Aguarda aprovação do pesquisador (item A).
