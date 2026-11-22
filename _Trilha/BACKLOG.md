@@ -64,18 +64,18 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 - [x] 22/11/2026 **29. Conferência das APIs.** SIDRA tabela 5938 (variáveis 37, 543, 498, 513, 517, 6575 e 525 conferidas na API); SGS 4390 e 433 (valor de jan/2019 conferido); localidades IBGE 05501 (29 municípios conferidos); endereço da RAIS no FTP do MTE (`PR<ano>.7z` em 2012 e 2017; `RAIS_VINC_PUB_SUL.7z` em 2018 a 2021). Registro em `fontes/VERIFICACAO_APIS.md`.
 - [x] 22/11/2026 **30. Referências baixadas.** Shannon (1948), Cameron, Gelbach e Miller (2008, versão de working paper), Webb (2014, Queen's WP 1315) e Croissant e Millo (2008) em `fontes/livros_artigos/`. Os livros protegidos ficam para download do pesquisador.
 
-## Escopo ensinado (22/11/2026, D-2026-11-22-02)
+## Escopo ensinado: itens com ação humana (atualizado em 22/11/2026)
 
-- [x] 22/11/2026 **31. Métodos fora das fontes oficiais removidos** (outputs e scripts 05, 06 e 08 antigos apagados; listagem no histórico da sessão).
-- [x] 22/11/2026 **32. X4 trocada por Gini setorial** (RAIS, 87 divisões, zeros incluídos). Painel, figuras, modelos e documentação atualizados.
-- [x] 22/11/2026 **33. Scripts 04 a 07 reescritos no escopo ensinado; verificação 16 de 16; zip regenerado.**
-- [ ] **34. Conferir visualmente os valores de dL e dU da tabela de Durbin-Watson** (n = 10, k' = 5: dL = 0,243 e dU = 2,822 vieram de OCR de `tabela_DW.pdf`).
-- [ ] **35. Confirmar com o professor o n = 87 do Gini** e a decisão de tratar divisões como indivíduos (fórmula do Guia P2).
-- [ ] **36. Decisão do pesquisador sobre a forma funcional**: o RESET rejeita a log-linear (p < 0,0001). Ajustar a especificação é decisão do pesquisador.
-- [ ] **37. Autocorrelação positiva dentro dos municípios** (14 de 29 pela tabela; ρ mediano 0,73) não tem correção ensinada aplicável ao painel. Fica como limitação, a confirmar.
-- [ ] **38. Presunções a confirmar**: ordenação do Goldfeld-Quandt pela distância e fração 0,2; divisão do Chow em 2016; dummies e interações (Gujarati cap. 9, não conferido no livro).
-- [ ] **39. Livros e artigos**: Hoffmann e Vieira (1987) e o Gujarati (já no Drive) precisam de página conferida; Cameron-Gelbach-Miller, Webb, Mundlak e Hausman saem do escopo e não são citados.
-- [ ] **40. Atualizar README e CLAUDE.md** com o novo escopo (CLAUDE.md tem seção 13 registrando a mudança).
-- [ ] **41. Revisão geral pelo agente professor** (`professor-econometria`) depois de recarregar a sessão.
-- [ ] **42. Artigo**: só começa após os itens 34 a 38 e a aprovação do pesquisador.
+Concluídos pela sessão e fora desta lista: remoção dos métodos fora do escopo, troca de X4 por Gini, reescrita dos scripts 04 a 07, verificação (17 de 17), documentação regenerada, figuras (incluindo a nova diag4 e o diagnóstico de inferência agregada), README, CLAUDE.md seção 13, e avaliação como professor em `_Trilha/AVALIACAO_PROFESSOR_20261122.md`.
 
+- [ ] **A. Hipóteses e sinais esperados de X2 a X6** (pesquisador). Sem eles não há teste de hipótese econômica no trabalho.
+- [ ] **B. Leitura do X4 (Gini)**: diversidade setorial, com sinal invertido, ou troca por medida de concentração (pesquisador). A correlação com o número de setores é −0,95.
+- [ ] **C. Estatuto da Selic (X5)**: manter como associação não significativa fora da amostra de 290 observações, ou retirar do modelo principal (pesquisador).
+- [ ] **D. Forma funcional**: o RESET rejeita a log-linear (p < 0,0001). Escolher a especificação (pesquisador).
+- [ ] **E. Autocorrelação positiva** em 14 de 29 municípios, sem correção ensinada aplicável ao painel: aceitar como limitação ou escolher outro procedimento (pesquisador).
+- [ ] **F. Conferir visualmente dL = 0,243 e dU = 2,822** no PDF `tabela_DW.pdf` (valores lidos por OCR).
+- [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2).
+- [ ] **H. Presunções a confirmar**: ordenação do Goldfeld-Quandt pela distância e fração 0,2; divisão do Chow em 2016; dummies e interações (Gujarati cap. 9, não conferido no livro).
+- [ ] **I. Referências bibliográficas**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro. Baixar os livros protegidos para `fontes/livros_artigos/` (direitos autorais: só o pesquisador decide o que vai ao professor).
+- [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git, com os métodos removidos) e de `Trabalhos Referencias/` (trabalhos de colegas, não são fontes oficiais). Apagar exige pedido expresso.
+- [ ] **K. Artigo**: só depois de A a E e da aprovação do pesquisador.

@@ -27,6 +27,8 @@ reset <- res("especificacao_reset.csv")
 lm_t <- res("especificacao_lm_tendencia.csv")
 chow <- res("chow_quebra_periodo.csv")
 mem_fiv <- res("memorial_modelo_2_fiv.csv")
+inf_ag <- res("inferencia_agregada_x5_x6.csv")
+gini_chk <- res("medida_gini_checagem.csv")
 
 nomes_termo <- c("(Intercept)" = "Constante", prop_superior = "X2 ensino superior (%)",
                  dom_industrial = "X3 dominância industrial (%)", gini_setorial = "X4 concentração setorial (Gini)",
@@ -111,6 +113,13 @@ gravar("04_diagnosticos.md", c(
           f4(lm_t$estatistica), fp(lm_t$p_valor)), "",
   sprintf("Teste de Chow (2012 a 2016 contra 2017 a 2021): F = %s, p-valor %s. Não há quebra estrutural a 5%%.",
           f4(chow$estatistica_f), fp(chow$p_valor)), "",
+  "## Inferência com variáveis que variam pouco", "",
+  "A Selic tem 10 valores distintos (um por ano) e a distância tem 29 (um por município). Com 290 observações, o t do modelo trata essas linhas como independentes e superestima a precisão. A checagem usa regressões simples sobre médias, com n - 2 graus de liberdade:", "",
+  md(data.frame(Variável = inf_ag$variavel, Base = inf_ag$base, gl = inf_ag$gl, Estimativa = f4(inf_ag$estimativa),
+                `p-valor` = fp(inf_ag$p_valor), Decisão = inf_ag$decisao_5pct, check.names = FALSE)), "",
+  sprintf("Com a Selic, a inclinação não é significativa a 5%% na base de médias anuais (p-valor %s). O efeito de X5 no modelo principal não se sustenta fora da estrutura de 290 observações.", fp(inf_ag$p_valor[1])), "",
+  "## Medida X4 (Gini setorial)", "",
+  sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes. Sinal e interpretação da X4 dependem dessa leitura.", f4(gini_chk$valor[1])), "",
   "## Autocorrelação dentro de cada município", "",
   "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2. A tabela de Durbin-Watson para n = 10 e k' = 5 tem dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
   md(tab_aut), "",
@@ -124,12 +133,14 @@ gravar("04_diagnosticos.md", c(
 gravar("05_limitacoes.md", c(
   "# Limitações", "",
   "- Desenho observacional: os coeficientes são associações, não efeitos causais.",
-  "- Autocorrelação positiva dentro dos municípios, sem correção ensinada aplicável ao painel (ver 04_diagnosticos).",
-  "- Forma funcional rejeitada pelo RESET: a especificação log-linear com estas cinco variáveis não é completa.",
-  "- Heterocedasticidade rejeitada pelo Breusch-Pagan-Godfrey no Modelo 2; a inferência usa erros de White.",
-  "- O Gini setorial tem correlação de 0,73 com a distância a Curitiba. Os FIVs ficam abaixo de 10, mas a colinearidade entre X4 e X6 deve ser lida com cautela.",
-  "- A divisão do Chow no ano de 2016 é uma escolha, e o tamanho das duas partes é igual (145 observações cada).",
-  "- Dados da RAIS: vínculos com divisão CNAE 'ignorada' ficam fora do Gini."))
+  "- Variáveis de nível de tempo e de município (Selic e distância) têm poucos valores distintos. A significância do modelo principal para X5 não se sustenta na checagem agregada (04_diagnosticos).",
+  "- Autocorrelação positiva dentro dos municípios em 14 de 29 séries pela tabela de Durbin-Watson, sem correção ensinada aplicável ao painel. Os erros-padrão, mesmo os de White, tendem a estar subestimados.",
+  "- Forma funcional rejeitada pelo RESET (p-valor < 0,0001). A especificação log-linear com estas cinco variáveis não está completa.",
+  "- Heterocedasticidade rejeitada a 5% pelo Breusch-Pagan-Godfrey no Modelo 2 (p-valor 0,0363); a inferência usa erros de White.",
+  "- A medida X4 acompanha o número de divisões com emprego (correlação de -0,95). Sua leitura precisa ser definida antes da interpretação.",
+  "- Sinais esperados e hipóteses ainda não foram definidos no projeto; sem eles não há teste de hipótese econômica.",
+  "- A divisão do teste de Chow no ano de 2016 é uma escolha, com duas partes de 145 observações.",
+  "- Vínculos com divisão CNAE 'ignorada' ficam fora do cálculo do Gini."))
 
 # ---- 06 fontes
 gravar("06_fontes.md", c(

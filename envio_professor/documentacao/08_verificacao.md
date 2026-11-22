@@ -4,7 +4,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 46 arquivos |
+| A1 | Arquivos essenciais presentes | APROVADA | 48 arquivos |
 | A1b | Sem saídas de métodos removidos nem arquivos antigos | APROVADA | nenhuma saída antiga |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 20 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
@@ -20,5 +20,6 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C6 | Teste de Chow recalculado | APROVADA | calculado 1.7863; no arquivo 1.7863 |
 | D1 | Coeficiente de X2 (erro de White) escrito no resumo igual ao CSV | APROVADA | valor 0,0150 |
 | D2 | Os modelos e testes do resumo batem com os arquivos de resultado | APROVADA | três modelos presentes |
+| C7 | Inferência agregada da Selic (n = 10) recalculada | APROVADA | p-valor recalculado 0.1886; no arquivo 0.1886 |
 
-16 de 16 verificações aprovadas.
+17 de 17 verificações aprovadas.

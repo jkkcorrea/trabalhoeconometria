@@ -24,6 +24,7 @@ esperado <- c("LEIAME.md",
                                         "anova_f_modelos.csv", "autocorrelacao_por_municipio.csv",
                                         "autocorrelacao_resumo.csv", "especificacao_reset.csv",
                                         "especificacao_lm_tendencia.csv", "chow_quebra_periodo.csv",
+                                        "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -180,6 +181,13 @@ registrar("D1", "Coeficiente de X2 (erro de White) escrito no resumo igual ao CS
 pdesc <- le("resultados_econometricos/anova_f_modelos.csv")
 registrar("D2", "Os modelos e testes do resumo batem com os arquivos de resultado",
           all(c("Modelo 2", "Modelo 3", "Modelo 3b") %in% pdesc$modelo), "três modelos presentes")
+
+# Inferência agregada da Selic recalculada (regressão simples sobre médias anuais, n = 10).
+medias <- aggregate(cbind(ln_salario_real, selic_real) ~ ano, data = painel, FUN = mean)
+t_ag <- summary(lm(ln_salario_real ~ selic_real, data = medias))$coefficients["selic_real", ]
+ia <- le("resultados_econometricos/inferencia_agregada_x5_x6.csv")
+registrar("C7", "Inferência agregada da Selic (n = 10) recalculada", abs(t_ag[4] - ia$p_valor[1]) < 1e-8,
+          sprintf("p-valor recalculado %.4f; no arquivo %.4f", t_ag[4], ia$p_valor[1]))
 
 # ============================== E. Resumo final ==================================
 status_ok <- sum(resultado$situacao == "APROVADA"); total <- nrow(resultado)

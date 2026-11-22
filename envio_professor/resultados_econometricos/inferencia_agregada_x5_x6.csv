@@ -1,0 +1,3 @@
+variavel,base,n,gl,estimativa,erro_padrao,estatistica_t,p_valor,decisao_5pct
+X5 Selic real,médias anuais (n = 10),10,8,0.0038125278015521545,0.0026524590952617527,1.4373559269444351,0.1885543067066974,não rejeita H0
+X6 distância a Curitiba,médias por município (n = 29),29,27,-0.004724928537783689,0.0013875185698091134,-3.4053083256635017,0.0020819569638436093,rejeita H0

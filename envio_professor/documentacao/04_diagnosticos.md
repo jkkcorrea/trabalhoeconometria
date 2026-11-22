@@ -33,6 +33,21 @@ LM para tendência linear do ano: estatística = 0,3768, p-valor 0,5393. Não h�
 
 Teste de Chow (2012 a 2016 contra 2017 a 2021): F = 1,7863, p-valor 0,1018. Não há quebra estrutural a 5%.
 
+## Inferência com variáveis que variam pouco
+
+A Selic tem 10 valores distintos (um por ano) e a distância tem 29 (um por município). Com 290 observações, o t do modelo trata essas linhas como independentes e superestima a precisão. A checagem usa regressões simples sobre médias, com n - 2 graus de liberdade:
+
+| Variável | Base | gl | Estimativa | p-valor | Decisão |
+|---|---|---|---|---|---|
+| X5 Selic real | médias anuais (n = 10) |  8 | 0,0038 | 0,1886 | não rejeita H0 |
+| X6 distância a Curitiba | médias por município (n = 29) | 27 | -0,0047 | 0,0021 | rejeita H0 |
+
+Com a Selic, a inclinação não é significativa a 5% na base de médias anuais (p-valor 0,1886). O efeito de X5 no modelo principal não se sustenta fora da estrutura de 290 observações.
+
+## Medida X4 (Gini setorial)
+
+A correlação entre o Gini e o número de divisões CNAE com emprego é -0,9497. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes. Sinal e interpretação da X4 dependem dessa leitura.
+
 ## Autocorrelação dentro de cada município
 
 Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2. A tabela de Durbin-Watson para n = 10 e k' = 5 tem dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.
