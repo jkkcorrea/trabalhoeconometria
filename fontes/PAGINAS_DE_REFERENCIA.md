@@ -1,8 +1,30 @@
 # Páginas de referência usadas no projeto
 
-Fonte principal: Gujarati. O PDF usado é a **4ª edição** (McGraw-Hill, 2004), arquivo `Gujarati_Basic_Econometrics.pdf` na pasta do projeto. A disciplina cita a **5ª edição** (AMGH, 2011); as páginas abaixo são as do PDF e podem diferir na edição citada. Hoffmann entra só como apoio.
+## Edição de referência: Gujarati e Porter, Basic Econometrics, 5ª edição
 
-## Gujarati (fonte principal, páginas do PDF)
+A disciplina cita a 5ª edição (AMGH, 2011). A 5ª edição foi consultada pelo índice remissivo da edição em espanhol (Quinta edición, 2009/2010, arquivo "Econometria - Damodar N. Gujarati.pdf" no Drive). O texto obtido pelo conector cobre apenas as primeiras 95 páginas do PDF (front matter e índice), então os capítulos não puderam ser lidos. A paginação da tradução portuguesa pode diferir.
+
+| Assunto | Página(s) na 5ª edição (índice) |
+|---|---|
+| Normalidade (Jarque-Bera) | 130 |
+| Teste de Chow | 254 e 285; falla de predicción de Chow, 498 |
+| Teste LM e forma funcional (RESET, seção 8.10) | 259 |
+| Variáveis dicótomas e cualitativas (cap. 9) | a partir de 283 |
+| Mínimos quadrados ponderados | 409 |
+| Erros robustos de White | 411 |
+| Teste das carreiras | 431 |
+| Durbin-Watson | 434 |
+| Breusch-Godfrey | 438 |
+| Newey-West | seção 12.10 (página não extraída) |
+| Valores atípicos, apalancamento e influência | 496 |
+
+Não localizados no índice disponível (pendente de PDF completo): Cochrane-Orcutt, Prais-Winsten, Goldfeld-Quandt, Breusch-Pagan e a tabela de Durbin-Watson (Apêndice D).
+
+## Edição do PDF local: Gujarati, 4ª edição (páginas do PDF)
+
+Arquivo `Gujarati_Basic_Econometrics.pdf` (raiz do projeto), McGraw-Hill, 2004. Usado para as páginas abaixo, quando a 5ª edição não pôde ser verificada.
+
+## Gujarati (4ª edição, páginas do PDF)
 
 | Assunto usado no projeto | Capítulo | Páginas do PDF | Conferido |
 |---|---|---|---|

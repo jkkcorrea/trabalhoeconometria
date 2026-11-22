@@ -4,7 +4,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 60 arquivos |
+| A1 | Arquivos essenciais presentes | APROVADA | 66 arquivos |
 | A1b | Sem saídas de métodos removidos nem arquivos antigos | APROVADA | nenhuma saída antiga |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 21 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
@@ -27,5 +27,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C11 | Prais-Winsten do Modelo 2 recalculado (coeficiente de X2 e ponto fixo de ρ) | APROVADA | X2 calculado 0.003755, no arquivo 0.003755; ρ ponto fixo 0.943971, no arquivo 0.943971 |
 | C12 | Decisões de Durbin-Watson por município conferidas com dL = 0,243 e dU = 2,822 (Gujarati, Tabela D.5A) | APROVADA | 29 de 29 municípios com decisão igual à regra |
 | C13 | Alavancagens somam o número de parâmetros (traço da matriz chapéu) | APROVADA | Modelo 2: 6.0000 (k = 6); Modelo 4: 33.0000 (k = 33) |
+| C14 | Memorial do Modelo 4 (Frisch-Waugh-Lovell) bate com os coeficientes e erros-padrão do Modelo 4 | APROVADA | maior diferença 5.67e-14; gl = 257 (290 - 33) |
+| C15 | Memorial de Prais-Winsten (Modelo 2) bate com a Etapa 5 e ρ é ponto fixo da regressão auxiliar | APROVADA | maior diferença nos coeficientes 6.13e-10; ρ = 0.943971; ponto fixo = 0.943971 |
 
-23 de 23 verificações aprovadas.
+25 de 25 verificações aprovadas.

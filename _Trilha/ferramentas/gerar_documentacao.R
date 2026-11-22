@@ -105,7 +105,18 @@ gravar("02_especificacao_e_metodos.md", c(
 gravar("03_resultados_modelos.md", c(
   "# Resultados dos modelos", "",
   "Coeficientes com erro de White (HC1) e t com n - k graus de liberdade. Erro clássico em `coeficientes_modelos.csv`.", "",
-  "## Modelo 4 (principal), erro de White", "", md(coef_m("Modelo 4", "white")), "", m4_nota, "",
+  "## Modelo principal: Modelo 4 com correção de autocorrelação (Prais-Winsten), erro de White", "",
+  "Modelo principal do trabalho: dummies de município (Modelo 4) com correção de autocorrelação por Prais-Winsten, ρ comum a todos os municípios [presunção da modelagem], e erros-padrão de White (HC1). O memorial matricial está em `memorial_prais_winsten_m2.csv` (Modelo 2) e `memorial_modelo_4_fwl.csv` (Modelo 4, sem correção). Os coeficientes sem correção ficam abaixo como comparação.", "",
+  md({
+    cm <- corr[corr$modelo == "Modelo 4" & corr$metodo == "Prais-Winsten", ]
+    cm <- cm[cm$termo %in% c("prop_superior", "dom_industrial", "gini_setorial", "selic_real"), ]
+    data.frame(Variável = c(prop_superior = "X2 escolaridade", dom_industrial = "X3 industrialização", gini_setorial = "X4 Gini", selic_real = "X5 Selic real")[cm$termo],
+               Coeficiente = f4(cm$estimativa), `EP HC1` = f4(cm$erro_padrao_HC1), `p-valor HC1` = fp(cm$p_valor_HC1), check.names = FALSE)
+  }), "",
+  sprintf("ρ estimado = %s; após a transformação, o ρ dos resíduos cai para %s. Confirmado por memorial matricial (C15).",
+          f4(corr$rho[corr$modelo == "Modelo 4" & corr$metodo == "Prais-Winsten"][1]),
+          f4(corr$rho_auxiliar_residuos_corrigidos[corr$modelo == "Modelo 4" & corr$metodo == "Prais-Winsten"][1])), "",
+  "## Modelo 4 sem correção, erro de White (comparação)", "", md(coef_m("Modelo 4", "white")), "", m4_nota, "",
   "## Modelo 2 (comparação), erro de White", "", md(coef_m("Modelo 2", "white")), "",
   "## Modelo 3, erro de White", "", md(coef_m("Modelo 3", "white")), "",
   "## Modelo 3b, erro de White", "", md(coef_m("Modelo 3b", "white")), "",
@@ -275,7 +286,7 @@ gravar("06_fontes.md", c(
   "# Fontes e referências", "",
   "## Fontes oficiais da disciplina (podem ser citadas)", "",
   "| Fonte | Conteúdo usado |", "|---|---|",
-  "| Gujarati, D. N.; Porter, D. C. Econometria Básica. Edição citada pelo professor: 5ª ed., AMGH, 2011. O PDF usado neste trabalho é a 4ª edição (McGraw-Hill, 2004); as páginas citadas são as do PDF. | fonte principal dos métodos (ver tabela abaixo) |",
+  "| Gujarati, D. N.; Porter, D. C. Basic Econometrics, 5ª ed. (2009; edição em espanhol consultada no índice, 2010); a edição citada pelo professor é a 5ª (AMGH, 2011). O PDF usado neste trabalho é a 4ª edição (McGraw-Hill, 2004); as páginas citadas são as do PDF. | fonte principal dos métodos (ver tabela abaixo) |",
   "| Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |",
   "| Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |",
   "| Gujarati, Apêndice D, Tabela D.5A (PDF p. 995): n = 10, k = 5, 5%: dL = 0,243 e dU = 2,822 | Durbin-Watson por município (conferido no livro) |",

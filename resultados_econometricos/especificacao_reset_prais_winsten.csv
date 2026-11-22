@@ -1,0 +1,3 @@
+modelo,teste,hipotese_nula,hipotese_alternativa,estatistica_f,gl,p_valor,decisao_5pct
+"Modelo 4 (principal, Prais-Winsten)",RESET de Ramsey após Prais-Winsten (potências 2 e 3 dos ajustados transformados),H0: forma funcional correta (coeficientes de y^2 e y^3 iguais a zero na regressão transformada),Ha: forma funcional incorreta (ao menos um coeficiente diferente de zero),33.5678557850065,2; 255,1.145293294307951e-13,rejeita H0
+"Modelo 2 (referência, Prais-Winsten)",RESET de Ramsey após Prais-Winsten (potências 2 e 3 dos ajustados transformados),H0: forma funcional correta (coeficientes de y^2 e y^3 iguais a zero na regressão transformada),Ha: forma funcional incorreta (ao menos um coeficiente diferente de zero),7.45772097481504,2; 282,6.980742173064853e-4,rejeita H0

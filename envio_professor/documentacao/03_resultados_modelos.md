@@ -2,7 +2,20 @@
 
 Coeficientes com erro de White (HC1) e t com n - k graus de liberdade. Erro clássico em `coeficientes_modelos.csv`.
 
-## Modelo 4 (principal), erro de White
+## Modelo principal: Modelo 4 com correção de autocorrelação (Prais-Winsten), erro de White
+
+Modelo principal do trabalho: dummies de município (Modelo 4) com correção de autocorrelação por Prais-Winsten, ρ comum a todos os municípios [presunção da modelagem], e erros-padrão de White (HC1). O memorial matricial está em `memorial_prais_winsten_m2.csv` (Modelo 2) e `memorial_modelo_4_fwl.csv` (Modelo 4, sem correção). Os coeficientes sem correção ficam abaixo como comparação.
+
+| Variável | Coeficiente | EP HC1 | p-valor HC1 |
+|---|---|---|---|
+| X2 escolaridade | 0,0067 | 0,0022 | 0,0029 |
+| X3 industrialização | -0,0004 | 0,0009 | 0,6678 |
+| X4 Gini | 0,8409 | 0,5059 | 0,0977 |
+| X5 Selic real | 0,0030 | 0,0009 | 0,0005 |
+
+ρ estimado = 0,3677; após a transformação, o ρ dos resíduos cai para 0,0167. Confirmado por memorial matricial (C15).
+
+## Modelo 4 sem correção, erro de White (comparação)
 
 | Termo | Estimativa | Erro-padrão | t | p-valor |
 |---|---|---|---|---|

@@ -29,6 +29,8 @@ esperado <- c("LEIAME.md",
                                         "projecao_selic_m4.csv", "efeito_selic_projecao.csv", "robustez_x4_definicao_gini.csv",
                                         "normalidade_residuos.csv", "influencia_observacoes.csv", "influencia_sensibilidade.csv",
                                         "autocorrelacao_correcao.csv",
+                                        "memorial_modelo_4_fwl.csv", "memorial_modelo_4_fwl_vetores.csv", "memorial_modelo_4_fwl_matriz.csv",
+                                        "memorial_prais_winsten_m2.csv", "memorial_prais_winsten_m2_escalares.csv", "especificacao_reset_prais_winsten.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -270,6 +272,22 @@ soma2 <- sum(inf$alavancagem[inf$modelo == "Modelo 2"]); soma4 <- sum(inf$alavan
 registrar("C13", "Alavancagens somam o número de parâmetros (traço da matriz chapéu)",
           abs(soma2 - length(stats::coef(m2_ols))) < 1e-6 && abs(soma4 - length(stats::coef(m4))) < 1e-6,
           sprintf("Modelo 2: %.4f (k = %d); Modelo 4: %.4f (k = %d)", soma2, length(stats::coef(m2_ols)), soma4, length(stats::coef(m4))))
+
+# C14: memorial do Modelo 4 por Frisch-Waugh-Lovell (R/07) bate com os coeficientes classicos do Modelo 4 (lm).
+mem4 <- le("resultados_econometricos/memorial_modelo_4_fwl.csv")
+cc4 <- le("resultados_econometricos/coeficientes_modelos.csv")
+cc4 <- cc4[cc4$modelo == "Modelo 4" & cc4$matriz == "classico", ]
+d14 <- max(abs(mem4$estimativa_memorial - cc4$estimativa[match(mem4$termo, cc4$termo)]),
+           abs(mem4$erro_padrao_memorial - cc4$erro_padrao[match(mem4$termo, cc4$termo)]))
+registrar("C14", "Memorial do Modelo 4 (Frisch-Waugh-Lovell) bate com os coeficientes e erros-padrão do Modelo 4",
+          d14 < 1e-8, sprintf("maior diferença %.2e; gl = 257 (290 - 33)", d14))
+
+# C15: memorial de Prais-Winsten do Modelo 2 bate com a Etapa 5 e ρ é ponto fixo.
+mpw <- le("resultados_econometricos/memorial_prais_winsten_m2.csv")
+esc <- le("resultados_econometricos/memorial_prais_winsten_m2_escalares.csv")
+registrar("C15", "Memorial de Prais-Winsten (Modelo 2) bate com a Etapa 5 e ρ é ponto fixo da regressão auxiliar",
+          max(mpw$diferenca, na.rm = TRUE) < 1e-8 && abs(esc$rho - esc$rho_ponto_fixo) < 1e-8,
+          sprintf("maior diferença nos coeficientes %.2e; ρ = %.6f; ponto fixo = %.6f", max(mpw$diferenca, na.rm = TRUE), esc$rho, esc$rho_ponto_fixo))
 
 # ============================== E. Resumo final ==================================
 status_ok <- sum(resultado$situacao == "APROVADA"); total <- nrow(resultado)

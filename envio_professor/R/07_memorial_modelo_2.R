@@ -317,3 +317,111 @@ readr::write_csv(prev,        file.path(DIR_RESULTADOS, "memorial_modelo_2_previ
 
 message("Memorial gravado em ", DIR_RESULTADOS, ". Conferência contra lm(): maior diferença = ",
         format(max(conferencias), scientific = TRUE, digits = 3), ".")
+
+
+REG_FOCAIS <- c("prop_superior", "dom_industrial", "gini_setorial", "selic_real")
+rotulos_focais <- c("X2 (ensino superior)", "X3 (dominância industrial)", "X4 (Gini setorial)", "X5 (Selic real)")
+
+mun <- dados$id_municipio
+desvio <- function(v) v - ave(v, mun)
+Zd <- sapply(REG_FOCAIS, function(v) desvio(dados[[v]]))
+yd <- desvio(y)
+ZtZ4 <- crossprod(Zd)
+Zty4 <- crossprod(Zd, yd)
+b4 <- solve(ZtZ4, Zty4)
+k4 <- 1 + length(REG_FOCAIS) + (nlevels(factor(mun)) - 1)
+gl4 <- n - k4
+ssr4 <- sum(yd^2) - sum(b4 * Zty4)
+s2_4 <- ssr4 / gl4
+ep4 <- sqrt(diag(s2_4 * solve(ZtZ4)))
+t4 <- as.vector(b4) / ep4
+p4 <- 2 * stats::pt(-abs(t4), df = gl4)
+modelo4_lm <- stats::lm(ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real +
+                          factor(id_municipio), data = dados)
+b4_lm <- stats::coef(modelo4_lm)[REG_FOCAIS]
+ep4_lm <- sqrt(diag(stats::vcov(modelo4_lm)))[REG_FOCAIS]
+memorial_m4 <- tibble::tibble(
+  termo = REG_FOCAIS, rotulo = rotulos_focais,
+  estimativa_memorial = as.vector(b4), erro_padrao_memorial = ep4, t = t4, p_valor = p4,
+  estimativa_lm = as.vector(b4_lm), erro_padrao_lm = as.vector(ep4_lm),
+  diferenca_maxima = max(abs(as.vector(b4) - as.vector(b4_lm)), abs(ep4 - as.vector(ep4_lm)))
+)
+if (memorial_m4$diferenca_maxima[1] > 1e-8) stop("Memorial do Modelo 4 não bate com lm().", call. = FALSE)
+matriz_m4 <- tibble::as_tibble(cbind(termo_linha = REG_FOCAIS, as.data.frame(ZtZ4)), .name_repair = "minimal")
+names(matriz_m4) <- c("termo_linha", REG_FOCAIS)
+readr::write_csv(memorial_m4, file.path(DIR_RESULTADOS, "memorial_modelo_4_fwl.csv"))
+readr::write_csv(tibble::tibble(termo = REG_FOCAIS, Z_transposto_y = as.vector(Zty4),
+                                gl = gl4, SQR = ssr4, s2 = s2_4), file.path(DIR_RESULTADOS, "memorial_modelo_4_fwl_vetores.csv"))
+readr::write_csv(matriz_m4, file.path(DIR_RESULTADOS, "memorial_modelo_4_fwl_matriz.csv"))
+
+corr <- readr::read_csv(file.path(DIR_RESULTADOS, "autocorrelacao_correcao.csv"), show_col_types = FALSE)
+pw2 <- corr[corr$modelo == "Modelo 2" & corr$metodo == "Prais-Winsten", ]
+rho_pw <- pw2$rho[1]
+primeira <- !duplicated(mun)
+ant <- which(!primeira) - 1L
+Xs <- X; ys <- y
+Xs[!primeira, ] <- X[!primeira, , drop = FALSE] - rho_pw * X[ant, , drop = FALSE]
+ys[!primeira] <- y[!primeira] - rho_pw * y[ant]
+Xs[primeira, ] <- sqrt(1 - rho_pw^2) * X[primeira, , drop = FALSE]
+ys[primeira] <- sqrt(1 - rho_pw^2) * y[primeira]
+XtX_pw <- crossprod(Xs)
+Xty_pw <- crossprod(Xs, ys)
+b_pw <- solve(XtX_pw, Xty_pw)
+ssr_pw <- sum((ys - Xs %*% b_pw)^2)
+s2_pw <- ssr_pw / gl
+ep_pw <- sqrt(diag(s2_pw * solve(XtX_pw)))
+t_pw <- as.vector(b_pw) / ep_pw
+p_pw <- 2 * stats::pt(-abs(t_pw), df = gl)
+# ρ de ponto fixo: regressão auxiliar dos resíduos originais, dentro de cada município
+e_orig <- as.vector(y - X %*% b_pw)
+rho_fixo <- sum(e_orig[!primeira] * e_orig[ant]) / sum(e_orig[ant]^2)
+coef_arq <- pw2$estimativa
+memorial_pw <- tibble::tibble(
+  termo = colnames(X), estimativa_memorial = as.vector(b_pw), erro_padrao_memorial = ep_pw,
+  t = t_pw, p_valor = p_pw,
+  estimativa_arquivo = coef_arq[match(make.names(colnames(X), unique = TRUE), make.names(pw2$termo, unique = TRUE))]
+)
+memorial_pw$diferenca <- abs(memorial_pw$estimativa_memorial - memorial_pw$estimativa_arquivo)
+if (max(memorial_pw$diferenca, na.rm = TRUE) > 1e-8) stop("Memorial Prais-Winsten não bate com a Etapa 5.", call. = FALSE)
+if (abs(rho_fixo - rho_pw) > 1e-8) stop("ρ não é ponto fixo da regressão auxiliar.", call. = FALSE)
+readr::write_csv(memorial_pw, file.path(DIR_RESULTADOS, "memorial_prais_winsten_m2.csv"))
+readr::write_csv(tibble::tibble(rho = rho_pw, rho_ponto_fixo = rho_fixo, gl = gl, SQR_transformada = ssr_pw, s2 = s2_pw),
+                 file.path(DIR_RESULTADOS, "memorial_prais_winsten_m2_escalares.csv"))
+message("Memorial do Modelo 4 (FWL) e de Prais-Winsten gravados; diferenças máximas em relação a lm() e à Etapa 5 abaixo de 1e-8.")
+
+# ---- C) RESET de Ramsey depois da transformação de Prais-Winsten (modelo principal, Modelo 4, e referência, Modelo 2).
+# Regressão transformada com ŷ* (ajustados da regressão transformada) elevado a 2 e 3; F com 2 e gl restantes.
+reset_pw <- function(Xt, yt, rotulo, gl_resid) {
+  fit0 <- stats::lm.fit(Xt, yt)
+  yhat <- as.vector(Xt %*% fit0$coefficients)
+  Xa <- cbind(Xt, yhat^2, yhat^3)
+  fit1 <- stats::lm.fit(Xa, yt)
+  sqr0 <- sum(fit0$residuals^2); sqr1 <- sum(fit1$residuals^2)
+  gl_num <- 2; gl_den <- gl_resid - 2
+  F_r <- ((sqr0 - sqr1) / gl_num) / (sqr1 / gl_den)
+  tibble::tibble(modelo = rotulo, teste = "RESET de Ramsey após Prais-Winsten (potências 2 e 3 dos ajustados transformados)",
+                 hipotese_nula = "H0: forma funcional correta (coeficientes de y^2 e y^3 iguais a zero na regressão transformada)",
+                 hipotese_alternativa = "Ha: forma funcional incorreta (ao menos um coeficiente diferente de zero)",
+                 estatistica_f = F_r, gl = paste(gl_num, gl_den, sep = "; "),
+                 p_valor = stats::pf(F_r, gl_num, gl_den, lower.tail = FALSE),
+                 decisao_5pct = ifelse(stats::pf(F_r, gl_num, gl_den, lower.tail = FALSE) < 0.05, "rejeita H0", "não rejeita H0"))
+}
+# Transformação de Prais-Winsten de uma matriz de modelo com ρ comum (mesma regra do memorial B).
+transformar_pw <- function(M, v, rho) {
+  Mt <- M; vt <- v
+  Mt[!primeira, ] <- M[!primeira, , drop = FALSE] - rho * M[ant, , drop = FALSE]
+  vt[!primeira] <- v[!primeira] - rho * v[ant]
+  Mt[primeira, ] <- sqrt(1 - rho^2) * M[primeira, , drop = FALSE]
+  vt[primeira] <- sqrt(1 - rho^2) * v[primeira]
+  list(X = Mt, y = vt)
+}
+# Modelo 2 (já em X, com intercepto) e Modelo 4 (matriz com dummies de município).
+X4full <- stats::model.matrix(modelo4_lm)
+rho_m4 <- corr$rho[corr$modelo == "Modelo 4" & corr$metodo == "Prais-Winsten"][1]
+t4 <- transformar_pw(X4full, dados$ln_salario_real, rho_m4)
+reset_m4 <- reset_pw(t4$X, t4$y, "Modelo 4 (principal, Prais-Winsten)", n - ncol(X4full))
+t2 <- transformar_pw(X, y, rho_pw)
+reset_m2 <- reset_pw(t2$X, t2$y, "Modelo 2 (referência, Prais-Winsten)", gl)
+readr::write_csv(dplyr::bind_rows(reset_m4, reset_m2), file.path(DIR_RESULTADOS, "especificacao_reset_prais_winsten.csv"))
+message("RESET após Prais-Winsten gravado: Modelo 4 p = ", format(reset_m4$p_valor, digits = 4),
+        "; Modelo 2 p = ", format(reset_m2$p_valor, digits = 4), ".")
