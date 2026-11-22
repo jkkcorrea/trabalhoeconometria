@@ -12,6 +12,8 @@
 "dist_curitiba_km","numeric"
 "dummy_curitiba","integer"
 "x3_negativo","logical"
+"valor_producao_mil","numeric"
+"ln_producao_agricola","numeric"
 "selic_nominal_ano","numeric"
 "ipca_ano","numeric"
 "indice_ipca_medio","numeric"

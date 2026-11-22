@@ -171,6 +171,54 @@ if (file.exists(arq_rais)) {
   message("Checagem do Gini: correlação com divisões ativas = ", checagem$valor[1])
 }
 
+# Teste da Selic e da produção agrícola (fonte: PAM, IBGE/SIDRA, tabela 5457, variável 215).
+# Compara o modelo com Selic, sem Selic e com a produção no lugar da Selic, nos dois desenhos:
+# com dummies de município (Modelo 4) e sem elas, com X6 (Modelo 2). Métrica de desempenho: AIC,
+# BIC e R2 ajustado; diagnósticos: RESET e Breusch-Pagan-Godfrey. O t usa erro de White (HC1).
+especificacoes_comparacao <- list(
+  "M4 com Selic" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + factor(id_municipio),
+  "M4 sem Selic" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + factor(id_municipio),
+  "M4 sem Selic + ln produção agrícola" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + ln_producao_agricola + factor(id_municipio),
+  "M2 com Selic" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + dist_curitiba_km,
+  "M2 sem Selic" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + dist_curitiba_km,
+  "M2 sem Selic + ln produção agrícola" = ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + dist_curitiba_km + ln_producao_agricola
+)
+comparacao <- purrr::imap_dfr(especificacoes_comparacao, function(f, nome) {
+  m <- stats::lm(f, data = painel)
+  ct <- lmtest::coeftest(m, vcov. = sandwich::vcovHC(m, type = "HC1"))
+  termo_x5 <- if ("selic_real" %in% rownames(ct)) "selic_real" else NA
+  termo_pr <- if ("ln_producao_agricola" %in% rownames(ct)) "ln_producao_agricola" else NA
+  tibble::tibble(
+    especificacao = nome,
+    parametros = length(stats::coef(m)),
+    r2_ajustado = summary(m)$adj.r.squared,
+    aic = stats::AIC(m),
+    bic = stats::BIC(m),
+    reset_p = lmtest::resettest(m, power = 2:3, type = "fitted")$p.value,
+    bp_p = lmtest::bptest(m)$p.value,
+    p_selic_white = if (is.na(termo_x5)) NA_real_ else ct[termo_x5, 4],
+    coef_producao_white = if (is.na(termo_pr)) NA_real_ else ct[termo_pr, 1],
+    p_producao_white = if (is.na(termo_pr)) NA_real_ else ct[termo_pr, 4]
+  )
+})
+readr::write_csv(comparacao, file.path(DIR_RESULTADOS, "comparacao_selic_producao.csv"))
+# F de retirar a Selic, nos dois desenhos (modelo sem Selic contra modelo com Selic).
+f_selic <- tibble::tibble(
+  desenho = c("M4 (dummies de município)", "M2 (com X6)"),
+  estatistica_f = c(
+    stats::anova(stats::lm(especificacoes_comparacao[[2]], data = painel),
+                 stats::lm(especificacoes_comparacao[[1]], data = painel))$F[2],
+    stats::anova(stats::lm(especificacoes_comparacao[[5]], data = painel),
+                 stats::lm(especificacoes_comparacao[[4]], data = painel))$F[2]),
+  p_valor = c(
+    stats::anova(stats::lm(especificacoes_comparacao[[2]], data = painel),
+                 stats::lm(especificacoes_comparacao[[1]], data = painel))$`Pr(>F)`[2],
+    stats::anova(stats::lm(especificacoes_comparacao[[5]], data = painel),
+                 stats::lm(especificacoes_comparacao[[4]], data = painel))$`Pr(>F)`[2])
+)
+readr::write_csv(f_selic, file.path(DIR_RESULTADOS, "comparacao_f_retirar_selic.csv"))
+print(comparacao[, c("especificacao", "r2_ajustado", "aic", "reset_p", "p_selic_white", "p_producao_white")], row.names = FALSE)
+
 message("Etapa 6 concluída: RESET, LM, Chow, inferência agregada e checagem do Gini gravados.")
 print(tabela_reset[, c("modelo", "teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)
 print(tabela_acrescimo[, c("teste", "estatistica_f", "p_valor", "decisao_5pct")], row.names = FALSE)

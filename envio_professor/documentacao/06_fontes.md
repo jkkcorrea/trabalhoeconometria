@@ -10,6 +10,7 @@
 | Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |
 | Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU |
 | Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |
+| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |
 
 ## Dados
 
@@ -20,6 +21,7 @@
 | Vínculos, escolaridade, salário e divisão CNAE | RAIS, microdados públicos do Ministério do Trabalho | dados_brutos/rais.rds |
 | Malha municipal | IBGE, pacote geobr | dados_brutos/malha_rmc.rds |
 | Distâncias a Curitiba | cálculo a partir dos centroides | dados_brutos/distancias.rds |
+| Valor da produção agrícola municipal (PAM) | IBGE, SIDRA, tabela 5457, variável 215 | dados_brutos/pam_valor_producao.rds |
 
 Os endereços e os códigos das APIs foram conferidos em 22/11/2026 (ver 08_verificacao.md).
 

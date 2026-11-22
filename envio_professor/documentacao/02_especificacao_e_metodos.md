@@ -27,6 +27,8 @@ A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acr�
 
 ## Métodos removidos do projeto (não ensinados nas fontes oficiais)
 
-Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera, smearing de Duan e a entropia de Shannon.
+Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera e smearing de Duan.
+
+A entropia de Shannon foi removida por engano: ela é ensinada (Hoffmann, cap. 17, slides de medidas de desigualdade, em `aulas`). A X4 continua sendo o Gini; a entropia fica disponível como medida alternativa.
 
 Fontes oficiais e IDs no Drive: `06_fontes.md`.

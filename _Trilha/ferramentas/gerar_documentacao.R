@@ -29,6 +29,8 @@ lm_t <- res("especificacao_lm_tendencia.csv")
 chow <- res("chow_quebra_periodo.csv")
 inf_ag <- res("inferencia_agregada_x5_x6.csv")
 gini_chk <- res("medida_gini_checagem.csv")
+comp <- res("comparacao_selic_producao.csv")
+comp_f <- res("comparacao_f_retirar_selic.csv")
 
 nomes_termo <- c("(Intercept)" = "Constante", prop_superior = "X2 ensino superior (%)",
                  dom_industrial = "X3 dominância industrial (%)", gini_setorial = "X4 concentração setorial (Gini)",
@@ -83,7 +85,8 @@ gravar("02_especificacao_e_metodos.md", c(
   "| LM para variável omitida | acréscimo de tendência linear | notas de especificação e diagnóstico |",
   "| Teste de Chow | quebra estrutural por período | notas do teste de Chow |", "",
   "## Métodos removidos do projeto (não ensinados nas fontes oficiais)", "",
-  "Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera, smearing de Duan e a entropia de Shannon.", "",
+  "Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap, Newey-West e Prais-Winsten aplicados ao painel empilhado, Box-Cox, Jarque-Bera e smearing de Duan.", "",
+  "A entropia de Shannon foi removida por engano: ela é ensinada (Hoffmann, cap. 17, slides de medidas de desigualdade, em `aulas`). A X4 continua sendo o Gini; a entropia fica disponível como medida alternativa.", "",
   "Fontes oficiais e IDs no Drive: `06_fontes.md`."))
 
 # ---- 03 resultados
@@ -143,6 +146,16 @@ gravar("04_diagnosticos.md", c(
   sprintf("Com a Selic, a inclinação não é significativa a 5%% na base de médias anuais (p-valor %s). Esse resultado não se sustenta com a inferência do Modelo 4.", fp(inf_ag$p_valor[1])), "",
   "## Medida X4 (Gini setorial)", "",
   sprintf("A correlação entre o Gini e o número de divisões CNAE com emprego é %s. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes.", f4(gini_chk$valor[1])), "",
+  "## Teste da Selic e da produção agrícola", "",
+  "A produção agrícola vem da PAM (IBGE/SIDRA, tabela 5457, variável 215, valor da produção em mil reais), deflacionada pelo IPCA. Testou-se se retirar a Selic melhora o modelo e se a produção a substitui. Critérios: AIC e BIC (menores são melhores), R2 ajustado e diagnósticos. O t usa erro de White.", "",
+  md(data.frame(Especificação = comp$especificacao, `R2 aj.` = f4(comp$r2_ajustado), AIC = f2(comp$aic), BIC = f2(comp$bic),
+                `RESET p` = fp(comp$reset_p), `BP p` = fp(comp$bp_p),
+                `p Selic (White)` = ifelse(is.na(comp$p_selic_white), "-", fp(comp$p_selic_white)),
+                `Coef. produção` = ifelse(is.na(comp$coef_producao_white), "-", f4(comp$coef_producao_white)),
+                `p produção` = ifelse(is.na(comp$p_producao_white), "-", fp(comp$p_producao_white)), check.names = FALSE)), "",
+  sprintf("Retirar a Selic piora o ajuste: F = %s no Modelo 4 (p-valor %s) e F = %s no Modelo 2 (p-valor %s). A produção agrícola substitui a Selic sem ganho relevante (AIC %s contra %s no Modelo 4) e com coeficiente negativo e não significativo; não é adotada no modelo principal.",
+          f2(comp_f$estatistica_f[1]), fp(comp_f$p_valor[1]), f2(comp_f$estatistica_f[2]), fp(comp_f$p_valor[2]),
+          f2(comp$aic[3]), f2(comp$aic[1])), "",
   "## Autocorrelação dentro de cada município", "",
   "Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para n = 10 e k' = 5, com dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.", "",
   md(tab_aut_res), "",
@@ -158,7 +171,9 @@ gravar("05_limitacoes.md", c(
   "- O efeito de X4 muda de sinal entre o Modelo 2 (entre municípios) e o Modelo 4 (dentro dos municípios). A medida acompanha o número de setores com emprego (correlação -0,95).",
   "- A autocorrelação dentro dos municípios cai com as dummies, mas o Breusch-Godfrey ainda rejeita em alguns municípios; não há correção ensinada aplicável ao painel para o resto.",
   "- Heterocedasticidade: o Breusch-Pagan-Godfrey rejeita no Modelo 2 e no Modelo 4. A inferência usa erros de White.",
-  "- Sinais esperados e hipóteses ainda não foram definidos no projeto; sem eles não há teste de hipótese econômica.",
+  "- Autocorrelação positiva dentro dos municípios: aceita como limitação do trabalho (decisão registrada). Os erros-padrão, mesmo os de White, tendem a estar subestimados nessa parte.",
+  "- O Modelo 4 usa variáveis dummy de município. Os slides de aulas lidos não trazem o capítulo 9 de Gujarati; o uso das dummies depende de confirmação com o professor.",
+  "- A Selic tem 10 valores distintos; sua inferência é otimista, embora retirá-la piore o ajuste (ver 04_diagnosticos.md).",
   "- A divisão do teste de Chow no ano de 2016 é uma escolha, com duas partes de 145 observações.",
   "- Vínculos com divisão CNAE 'ignorada' ficam fora do cálculo do Gini."))
 
@@ -172,14 +187,16 @@ gravar("06_fontes.md", c(
   "| Notas de aula de regressão linear múltipla (Hasegawa) | matriz X'X, ANOVA, t e F, R2 parcial |",
   "| Notas de multicolinearidade, heterocedasticidade, autocorrelação, especificação e teste de Chow (SE614) | métodos de diagnóstico |",
   "| Tabela de Durbin-Watson (Apêndice D) | valores de dL e dU |",
-  "| Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |", "",
+  "| Guia da P2 (professor) | regras de decisão de FIV, BPG, DW e Gini |",
+  "| Slides da pasta `aulas` do Drive: regressão matricial, especificação e diagnóstico (cap. 13), teste de Chow, multicolinearidade, heterocedasticidade, autocorrelação, medidas de desigualdade (Hoffmann, cap. 17) | confirmação dos métodos ensinados |", "",
   "## Dados", "",
   "| Dado | Origem | Arquivo |", "|---|---|---|",
   "| PIB e VAB municipais | IBGE, SIDRA, tabela 5938 | dados_brutos/pib_sidra.rds |",
   "| Selic (4390) e IPCA (433) | Banco Central, SGS | dados_brutos/macro_bacen.rds |",
   "| Vínculos, escolaridade, salário e divisão CNAE | RAIS, microdados públicos do Ministério do Trabalho | dados_brutos/rais.rds |",
   "| Malha municipal | IBGE, pacote geobr | dados_brutos/malha_rmc.rds |",
-  "| Distâncias a Curitiba | cálculo a partir dos centroides | dados_brutos/distancias.rds |", "",
+  "| Distâncias a Curitiba | cálculo a partir dos centroides | dados_brutos/distancias.rds |",
+  "| Valor da produção agrícola municipal (PAM) | IBGE, SIDRA, tabela 5457, variável 215 | dados_brutos/pam_valor_producao.rds |", "",
   "Os endereços e os códigos das APIs foram conferidos em 22/11/2026 (ver 08_verificacao.md).", "",
   "Referências de métodos removidos do projeto não são citadas no trabalho."))
 

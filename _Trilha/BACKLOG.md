@@ -64,20 +64,23 @@ Pendências abertas do projeto. Item resolvido é marcado com `- [x]`, a data e 
 - [x] 22/11/2026 **29. Conferência das APIs.** SIDRA tabela 5938 (variáveis 37, 543, 498, 513, 517, 6575 e 525 conferidas na API); SGS 4390 e 433 (valor de jan/2019 conferido); localidades IBGE 05501 (29 municípios conferidos); endereço da RAIS no FTP do MTE (`PR<ano>.7z` em 2012 e 2017; `RAIS_VINC_PUB_SUL.7z` em 2018 a 2021). Registro em `fontes/VERIFICACAO_APIS.md`.
 - [x] 22/11/2026 **30. Referências baixadas.** Shannon (1948), Cameron, Gelbach e Miller (2008, versão de working paper), Webb (2014, Queen's WP 1315) e Croissant e Millo (2008) em `fontes/livros_artigos/`. Os livros protegidos ficam para download do pesquisador.
 
-## Escopo ensinado: itens com ação humana (atualizado em 22/11/2026)
+## Pendências com ação humana (atualizado em 22/11/2026)
 
-Concluídos pela sessão e fora desta lista: remoção dos métodos fora do escopo, troca de X4 por Gini, reescrita dos scripts 04 a 07, verificação (17 de 17), documentação regenerada, figuras (incluindo a nova diag4 e o diagnóstico de inferência agregada), README, CLAUDE.md seção 13, e avaliação como professor em `_Trilha/AVALIACAO_PROFESSOR_20261122.md`.
+Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelação aceita como limitação (D-2026-11-22-04), teste da Selic e da produção agrícola (`resultados_econometricos/comparacao_*.csv`), correção da entropia de Shannon (D-2026-11-22-05), leitura dos slides de `aulas`, produção agrícola coletada com cache (R/01b).
 
-- [ ] **A. Hipóteses e sinais esperados de X2 a X6** (pesquisador; proposta em `_Trilha/HIPOTESES_PROPOSTAS.md`, Modelo 4 como principal). Sem eles não há teste de hipótese econômica no trabalho.
-- [ ] **B. Leitura do X4 (Gini)**: diversidade setorial, com sinal invertido, ou troca por medida de concentração (pesquisador). A correlação com o número de setores é −0,95.
-- [ ] **C. Estatuto da Selic (X5)**: manter como associação não significativa fora da amostra de 290 observações, ou retirar do modelo principal (pesquisador).
-- [ ] **D. Forma funcional**: o RESET rejeita a log-linear (p < 0,0001). Escolher a especificação (pesquisador).
-- [ ] **E. Autocorrelação positiva** em 14 de 29 municípios, sem correção ensinada aplicável ao painel: aceitar como limitação ou escolher outro procedimento (pesquisador).
-- [ ] **F. Conferir visualmente dL = 0,243 e dU = 2,822** no PDF `tabela_DW.pdf` (valores lidos por OCR).
+- [ ] **C. Manter a Selic ou retirá-la.** Retirar piora o ajuste (F = 26,7 no Modelo 4). Trocar pela produção agrícola não melhora (AIC −943,7 contra −969,1 com a Selic; coeficiente da produção negativo e não significativo). Recomendação: manter a Selic e declarar a inferência como limitação. Decisão do pesquisador.
+- [ ] **D. Dummies de município no Modelo 4.** Os slides de `aulas` lidos (regressão matricial, especificação e diagnóstico, Chow, desigualdade) não trazem variáveis dummy; o capítulo 9 de Gujarati não está na pasta. Confirmar com o professor se dummies de município são método ensinado. Se não forem, o modelo principal volta a ser o Modelo 2.
+- [ ] **F. Conferir visualmente dL = 0,243 e dU = 2,822** no PDF `tabela_DW.pdf` (lidos por OCR).
 - [ ] **G. Confirmar com o professor o n = 87 do Gini** e o tratamento das divisões como indivíduos (fórmula do Guia P2).
-- [ ] **H. Presunções a confirmar**: ordenação do Goldfeld-Quandt pela distância e fração 0,2; divisão do Chow em 2016; dummies e interações (Gujarati cap. 9, não conferido no livro).
-- [ ] **I. Referências bibliográficas**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro. Baixar os livros protegidos para `fontes/livros_artigos/` (direitos autorais: só o pesquisador decide o que vai ao professor).
-- [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git, com os métodos removidos) e de `Trabalhos Referencias/` (trabalhos de colegas, não são fontes oficiais). Apagar exige pedido expresso.
-- [ ] **K. Artigo**: só depois de A a E e da aprovação do pesquisador.
+- [ ] **H. Presunções a confirmar** (ver seção "Presunções" abaixo).
+- [ ] **I. Referências**: conferir a página do Hoffmann e Vieira (1987) e do Gujarati no livro (os slides citam ambos, com edição e páginas). Baixar os livros protegidos para `fontes/livros_artigos/`.
+- [ ] **J. Destino da pasta `backup_antes_alteracoes/`** (2,7 MB, fora do git) e de `Trabalhos Referencias/`. Apagar exige pedido expresso.
+- [ ] **K. Artigo**: só depois de C, D e H e da aprovação do pesquisador.
 
-- [x] 22/11/2026 **43. Modelo 4 (dummies de município) como principal**: RESET passa (p = 0,75), F de acréscimo = 76,13, autocorrelação cai (DW mediano 0,25 para 1,33). Aguarda aprovação do pesquisador (item A).
+## Presunções (o que confirmar)
+
+1. Ordenação do Goldfeld-Quandt pela distância e fração 0,2 central omitida.
+2. Divisão do teste de Chow em 2012–2016 e 2017–2021 (o ano de corte é uma escolha).
+3. Tratamento das 87 divisões CNAE como indivíduos no Gini.
+4. Uso de dummies de município (item D).
+

@@ -13,11 +13,11 @@ pr <- function(p) file.path(DIR, p)
 
 # ============================== A. Inventário, higiene e escopo ===================
 esperado <- c("LEIAME.md",
-  paste0("R/", c("00_executar_tudo", "01_extracao_dados", "02_tratamento_painel", "03_aede_visualizacoes",
+  paste0("R/", c("00_executar_tudo", "01_extracao_dados", "01b_extracao_pam", "02_tratamento_painel", "03_aede_visualizacoes",
                  "04_modelagem_diagnosticos", "05_autocorrelacao_municipios", "06_especificacao_chow",
                  "07_memorial_modelo_2"), ".R"),
   "figuras_graficos/animacao1_mapa_renda_rmc.gif", "figuras_graficos/animacao2_ranking_salario_municipios.gif",
-  paste0("dados_brutos/", c("pib_sidra", "macro_bacen", "malha_rmc", "distancias", "rais"), ".rds"),
+  paste0("dados_brutos/", c("pib_sidra", "macro_bacen", "malha_rmc", "distancias", "rais", "pam_valor_producao"), ".rds"),
   paste0("dados_processados/", c("dados_painel_rmc.csv", "dados_painel_rmc.rds",
                                  "estatisticas_descritivas.csv", "matriz_correlacao_explicativas.csv")),
   paste0("resultados_econometricos/", c("coeficientes_modelos.csv", "testes_diagnostico.csv", "vif_tolerancia.csv",
@@ -25,6 +25,7 @@ esperado <- c("LEIAME.md",
                                         "autocorrelacao_resumo.csv", "especificacao_reset.csv",
                                         "especificacao_lm_tendencia.csv", "chow_quebra_periodo.csv",
                                         "inferencia_agregada_x5_x6.csv", "medida_gini_checagem.csv", "especificacao_acrescimo_municipios.csv",
+                                        "comparacao_selic_producao.csv", "comparacao_f_retirar_selic.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
@@ -45,7 +46,7 @@ registrar("A1b", "Sem saídas de métodos removidos nem arquivos antigos", lengt
 
 # Métodos fora do escopo ensinado: não podem aparecer nos scripts nem nos documentos.
 proibidos <- c("mundlak", "hausman", "plm::", "vcovCL", "clustered", "cluster", "bootstrap", "webb", "wild",
-               "rademacher", "shannon", "entrop", "prais", "neweywest", "newey", "smearing", "duan",
+               "rademacher", "prais", "neweywest", "newey", "smearing", "duan",
                "boxcox", "box-cox", "jarque", "efeitos fixos", "within", "pbgtest", "pwartest", "exp\\(", "vcovHAC")
 arquivos_texto <- list.files(DIR, pattern = "\\.(R|md|csv|txt)$", recursive = TRUE, full.names = TRUE)
 arquivos_texto <- arquivos_texto[!grepl("08_verificacao.md$|/resultados_econometricos/.*\\.csv$|/dados_processados/", arquivos_texto)]
@@ -82,7 +83,7 @@ registrar("A3", "Sem identificadores internos de trabalho nem caminhos pessoais"
 
 # Código dos scripts igual ao do projeto, a menos dos comentários.
 dif <- character()
-for (f in c("00_executar_tudo", "01_extracao_dados", "02_tratamento_painel", "03_aede_visualizacoes",
+for (f in c("00_executar_tudo", "01_extracao_dados", "01b_extracao_pam", "02_tratamento_painel", "03_aede_visualizacoes",
             "04_modelagem_diagnosticos", "05_autocorrelacao_municipios", "06_especificacao_chow",
             "07_memorial_modelo_2")) {
   a <- parse(file.path("R", paste0(f, ".R")), keep.source = FALSE, encoding = "UTF-8")

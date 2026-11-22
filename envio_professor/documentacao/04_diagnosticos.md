@@ -59,6 +59,21 @@ Com a Selic, a inclinação não é significativa a 5% na base de médias anuais
 
 A correlação entre o Gini e o número de divisões CNAE com emprego é -0,9497. O Gini, nesta construção, mede sobretudo quantos setores têm emprego, e não a desigualdade entre setores grandes.
 
+## Teste da Selic e da produção agrícola
+
+A produção agrícola vem da PAM (IBGE/SIDRA, tabela 5457, variável 215, valor da produção em mil reais), deflacionada pelo IPCA. Testou-se se retirar a Selic melhora o modelo e se a produção a substitui. Critérios: AIC e BIC (menores são melhores), R2 ajustado e diagnósticos. O t usa erro de White.
+
+| Especificação | R2 aj. | AIC | BIC | RESET p | BP p | p Selic (White) | Coef. produção | p produção |
+|---|---|---|---|---|---|---|---|---|
+| M4 com Selic | 0,9558 | -969,14 | -844,36 | 0,7527 | 0,0002 | < 0,0001 | - | - |
+| M4 sem Selic | 0,9515 | -942,47 | -821,36 | 0,1407 | 0,0001 | - | - | - |
+| M4 sem Selic + ln produção agrícola | 0,9518 | -943,67 | -818,89 | 0,5655 | < 0,0001 | - | -0,0185 | 0,0886 |
+| M2 com Selic | 0,6433 | -388,30 | -362,61 | < 0,0001 | 0,0363 | 0,0003 | - | - |
+| M2 sem Selic | 0,6321 | -380,32 | -358,30 | < 0,0001 | 0,0443 | - | - | - |
+| M2 sem Selic + ln produção agrícola | 0,6383 | -384,22 | -358,53 | < 0,0001 | 0,0818 | - | -0,0112 | 0,0499 |
+
+Retirar a Selic piora o ajuste: F = 26,70 no Modelo 4 (p-valor < 0,0001) e F = 9,94 no Modelo 2 (p-valor 0,0018). A produção agrícola substitui a Selic sem ganho relevante (AIC -943,67 contra -969,14 no Modelo 4) e com coeficiente negativo e não significativo; não é adotada no modelo principal.
+
 ## Autocorrelação dentro de cada município
 
 Aplicado à série de dez anos de cada município, com os resíduos do Modelo 2 e do Modelo 4. A tabela de Durbin-Watson usada vai até k' = 20 e foi lida para n = 10 e k' = 5, com dL = 0,243 e dU = 2,822 (valores lidos do PDF por OCR, [a confirmar]). Para o Modelo 4 (k' = 32) a tabela não se aplica. Com dU maior que 4 - dU não há zona de não rejeição: a tabela só permite conclusão para d < dL.
