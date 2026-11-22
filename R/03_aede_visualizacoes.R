@@ -74,7 +74,7 @@ if (dir.exists(biblioteca_usuario)) {
 pacotes_necessarios <- c(
   "dplyr", "tidyr", "purrr", "readr", "tibble", "stringr", "sf", "ggplot2",
   "gganimate", "gifski", "transformr", "ggridges", "ggrepel", "patchwork",
-  "viridis", "ggspatial", "scales"
+  "viridis", "ggspatial", "scales", "png"
 )
 pacotes_ausentes <- pacotes_necessarios[
   !vapply(pacotes_necessarios, requireNamespace, logical(1), quietly = TRUE)
@@ -605,31 +605,64 @@ renderizar_gif_mapa <- function(dados, mapa_sf) {
     camada_numeros(pontos, tamanho_circulo = 5.4, tamanho_texto = 3.1) +
     scale_fill_viridis_c(name = "Salário médio real\n(R$ de 2021)", option = "C",
                          limits = limites, labels = fmt_reais,
-                         breaks = scales::breaks_pretty(n = 5),
+                         breaks = scales::breaks_pretty(n = 3),
                          guide = guide_colourbar(position = "bottom", title.position = "top", title.hjust = 0.5,
                                                  barwidth = unit(8, "cm"), barheight = unit(0.4, "cm"))) +
     labs(
       title    = "Rendimento médio real na RMC, {round(frame_time)}",
-      subtitle = "Escala de cor fixa para todos os anos. Números: ver legenda_municipios_rmc.png",
+      subtitle = "Escala de cor fixa para todos os anos. Contorno preto: Curitiba. Legenda dos números abaixo do mapa.",
       caption  = paste(FONTE_SALARIO, FONTE_MALHA, sep = "\n")
     ) +
     theme_void(base_size = 13) +
     theme(
       plot.title      = element_text(face = "bold", size = 15),
       plot.subtitle   = element_text(size = 10),
-      plot.caption    = element_text(hjust = 0, size = 8, colour = "grey30"),
+      plot.caption    = element_text(hjust = 0, size = 8, colour = "grey30", margin = margin(t = 12)),
+      legend.text     = element_text(size = 9),
+      legend.margin   = margin(b = 6),
       plot.background = element_rect(fill = "white", colour = NA),
       plot.margin     = margin(10, 10, 10, 10)
     ) +
     gganimate::transition_time(ano) +
     gganimate::ease_aes("linear")
 
-  animacao <- gganimate::animate(
-    grafico, renderer = gganimate::gifski_renderer(),
+  # Os quadros do mapa são gravados em PNG e recebem, abaixo, a legenda estática de
+  # número e município; o GIF é montado com o gifski a partir dos quadros compostos.
+  dir_quadros <- tempfile("quadros_mapa_")
+  dir.create(dir_quadros)
+  on.exit(unlink(dir_quadros, recursive = TRUE), add = TRUE)
+  gganimate::animate(
+    grafico, renderer = gganimate::file_renderer(dir = dir_quadros, prefix = "q", overwrite = TRUE),
     width = ANIM_LARGURA, height = ANIM_ALTURA, fps = ANIM_FPS, duration = ANIM_DURACAO
   )
-  gganimate::anim_save(arquivo, animation = animacao)
+  quadros <- sort(list.files(dir_quadros, pattern = "\\.png$", full.names = TRUE))
+  if (length(quadros) != ANIM_FPS * ANIM_DURACAO) {
+    stop("Número de quadros inesperado: ", length(quadros), call. = FALSE)
+  }
+
+  altura_legenda <- 250
+  arq_legenda <- file.path(dir_quadros, "legenda_fixa.png")
+  ggsave(arq_legenda, painel_legenda(numeracao, colunas = 4), width = ANIM_LARGURA / 100,
+         height = altura_legenda / 100, units = "in", dpi = 100, bg = "white")
+  img_legenda <- png::readPNG(arq_legenda)[, , 1:3, drop = FALSE]
+  if (dim(img_legenda)[2] != ANIM_LARGURA) stop("Largura da legenda diferente da dos quadros.", call. = FALSE)
+
+  quadros_compostos <- file.path(dir_quadros, sprintf("c_%04d.png", seq_along(quadros)))
+  for (i in seq_along(quadros)) {
+    img <- png::readPNG(quadros[i])[, , 1:3, drop = FALSE]
+    png::writePNG(abind_vertical(img, img_legenda), quadros_compostos[i])
+  }
+  gifski::gifski(quadros_compostos, gif_file = arquivo, width = ANIM_LARGURA,
+                 height = ANIM_ALTURA + altura_legenda, delay = 1 / ANIM_FPS, progress = FALSE)
   arquivo
+}
+
+# Empilha duas imagens (arrays altura x largura x 3) na vertical.
+abind_vertical <- function(topo, base) {
+  out <- array(0, dim = c(dim(topo)[1] + dim(base)[1], dim(topo)[2], 3))
+  out[seq_len(dim(topo)[1]), , ] <- topo
+  out[dim(topo)[1] + seq_len(dim(base)[1]), , ] <- base
+  out
 }
 
 

@@ -2,7 +2,7 @@
 
 Verificações independentes da pasta de envio, feitas em base R sem reutilizar o código dos scripts entregues. Cada linha traz o que foi conferido e a diferença medida.
 
-Data: 21/11/2026. Versão do R: 4.6.2.
+Data: 22/11/2026. Versão do R: 4.6.2.
 
 - A: inventário, higiene dos arquivos e identidade do código (só os comentários mudaram).
 - B: recomputação do painel a partir dos dados brutos.
@@ -47,7 +47,7 @@ A verificação A4 compara os scripts com a versão de trabalho, que não acompa
 | C15 | Bootstrap wild cluster por ano exato (1.024 combinações) recomputado com variáveis binárias de município (independente do script) | APROVADA | 0.054688 contra 0.054688 |
 | C16 | Exogeneidade estrita: coeficientes dos valores futuros iguais aos recomputados (within) | APROVADA | diferença 6.94e-18 |
 | C17 | Teste conjunto de exogeneidade estrita recomputado (Wald, F com 3 e 28 gl) | APROVADA | F 2.6191/2.6191 |
-| C18 | Animações .gif presentes e válidas (cabeçalho GIF) | APROVADA | 906 KB; 3055 KB |
+| C18 | Animações .gif presentes e válidas (cabeçalho GIF) | APROVADA | 1088 KB; 3055 KB |
 | C19 | Intervalos de confiança de robustez_mundlak_coeficientes.csv usam o erro agrupado e t de 28 gl (estimativa +/- t x erro) | APROVADA | diferença 0.00e+00 |
 | C20 | Box-Cox com efeitos fixos: lambda estimado igual ao de MASS::boxcox | APROVADA | -0.13 contra -0.13 |
 | C21 | Simulação com efeitos fixos: variação percentual de +10 pontos em X3 e +5 pontos em X2 recomputada | APROVADA | -0.4833 e 4.3984 |
