@@ -1,32 +1,42 @@
 SOLICITAÇÃO DE CONFIRMAÇÃO - TRABALHO DE ECONOMETRIA I (UFPR)
+Envio único. Escrito para o professor da disciplina.
 
-Escrito para: o professor da disciplina.
+TEMA E DADOS
+Salário médio formal real (em logaritmo) de 29 municípios da RMC, 2012 a 2021: 290 observações em painel. Regressores: escolaridade (X2), industrialização (X3), Gini setorial do emprego (X4), Selic real (X5) e distância a Curitiba (X6).
 
-TEMA
-Salário médio formal real (ln) em 29 municípios da RMC, 2012 a 2021: 290 observações em painel empilhado. Regressores: escolaridade (X2), industrialização (X3), Gini setorial do emprego (X4), Selic real (X5) e distância a Curitiba (X6).
+FORMA FUNCIONAL
+Usamos o logaritmo natural do salário porque ele é sempre positivo, tem distribuição assimétrica à direita e o log comprime essa cauda. Com ele, o coeficiente mede variação relativa (%) do salário por unidade da regressora (Gujarati, 4ª ed., pp. 207-208). Logaritmo não se aplica a valores zero ou negativos (p. 450); todos os salários são positivos.
 
-MODELO
-- Principal: Modelo 4 (dummies de município), com correção de autocorrelação por Prais-Winsten (ρ comum) e erro de White.
-- Referência: Modelo 2 (MQO empilhado), também com Prais-Winsten.
+MODELOS
+- Modelo 4 (dummies de município), com correção de autocorrelação por Prais-Winsten (ρ = 0,368 comum a todos os municípios) e erro de White. Candidato a principal.
+- Modelo 4 sem correção, com erro de White. Comparação.
+- Modelo 2 (MQO empilhado), com Prais-Winsten. Referência.
 
-RESULTADOS PRINCIPAIS (Modelo 4, Prais-Winsten, erro de White)
+RESULTADOS (Modelo 4, Prais-Winsten, erro de White)
 - Escolaridade: +0,0067 (p = 0,003). Industrialização: −0,0004 (p = 0,668). Gini: +0,8409 (p = 0,098). Selic: +0,0030 (p = 0,0005).
-- Sem correção: Gini p = 0,050, escolaridade p < 0,001.
-- Autocorrelação: Durbin-Watson mediano de 1,33 sem correção; ρ dos resíduos corrigidos = 0,017.
+- Sem correção: Gini p = 0,050; escolaridade p < 0,001.
+- Durbin-Watson mediano (sem correção) = 1,33; após a correção, ρ dos resíduos = 0,017.
 
-PERGUNTAS
-1. Dummies de município. Os slides da aula não as trazem; aparecem no Gujarati (cap. 9) e no trabalho de exemplo. Podemos usá-las no modelo principal?
+PERGUNTAS (responda cada uma)
+1. Dummies de município. Os slides não as trazem; aparecem no Gujarati (cap. 9, pp. 332-352) e no trabalho de exemplo. Podemos usá-las no modelo principal?
 
-2. Correção de autocorrelação. Prais-Winsten com ρ comum aplicado dentro de cada município (painel de 10 anos por município) é aceito? Ou declaramos a autocorrelação como limitação?
+2. Autocorrelação. Prais-Winsten com ρ comum, aplicado dentro de cada município, é aceito? Ou declaramos a autocorrelação como limitação?
 
-3. Forma funcional após a correção. Pelo RESET de Ramsey, o Modelo 4 corrigido rejeita a forma funcional (F = 33,6; p ≈ 1e-13), enquanto sem correção não rejeita (p = 0,75). Termos quadráticos não mudam o resultado. Como devemos tratar esse ponto, e qual modelo apresentar como principal?
+3. Modelo principal. Com a correção, o RESET de Ramsey depende da variante: type "fitted" F = 33,6 (p ≈ 1e-13); type "regressor" F = 3,0 (p ≈ 2e-9); type "princomp" F = 0,41 (p = 0,66). Sem correção, p = 0,75. Qual modelo devemos apresentar como principal, e como interpretar esse teste?
 
-4. Normalidade. Jarque-Bera rejeita nos dois modelos (Modelo 2: assimetria 1,74, curtose 8,52). Basta declarar como limitação?
+4. Normalidade. Jarque-Bera rejeita nos dois modelos (Modelo 2: assimetria 1,74; curtose 8,52). Basta declarar como limitação?
 
-5. Gini (X4). Com as 87 divisões CNAE (com zeros), o efeito dentro dos municípios tem p = 0,05; só com as divisões que têm vínculo, p = 0,44. Qual definição usar?
+5. Gini (X4). Com as 87 divisões CNAE (zeros incluídos), o efeito dentro dos municípios tem p = 0,05. Só com as divisões com vínculo, p = 0,44. Qual definição usar?
 
-DADOS DE APOIO
-- Teste das carreiras: não aplicável (com 10 anos, N1 e N2 < 10 por município).
-- Influência (Modelo 4): Adrianópolis 2012 e Lapa 2016. Sem elas, o coeficiente do Gini passa de 0,87 para 1,15. Adrianópolis tem salto da indústria de 7% (2014) para 45% (2015), confirmado na API do SIDRA (tabela 5938).
-- Quebra estrutural (Chow, corte em 2016): p = 0,10.
-- Referências: Gujarati, 5ª edição (índice consultado; páginas dos capítulos a confirmar na edição portuguesa).
+6. Teste das carreiras. Com 10 anos por município, a aproximação normal não se aplica (exige mais de 10 sinais de cada tipo). Há outro procedimento que devemos usar, ou declaramos como não aplicável?
+
+7. Influência. Usamos alavancagem, resíduo padronizado e variação do coeficiente ao retirar a observação, com limiares nossos (2k/n; |r| > 2; 1 erro-padrão). Distância de Cook e DFBETAS não estão no programa. A análise descritiva basta?
+
+8. Projeção de 2021. Retransformamos o logaritmo por exp(), sem correção de viés. Está adequado?
+
+9. Chow. Dividimos o período em 2012-2016 e 2017-2021 (p = 0,10). O corte é escolha nossa. Aceita, ou indica outro corte?
+
+10. Dados. (a) Adrianópolis: a indústria passa de 7% (2014) para 45% (2015), confirmado na API do SIDRA; resíduo padronizado de −6,9 no Modelo 4. Mantemos com ressalva? (b) Araucária: VAB industrial negativo em 2012 e 2013, mantido com marca. Mantemos ou excluímos?
+
+REFERÊNCIA
+Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª edição (2004), páginas do PDF. A disciplina cita a 5ª edição; a paginação pode diferir.
