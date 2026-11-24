@@ -1,6 +1,6 @@
 # Roteiro da apresentação (rascunho v1, 23/11/2026)
 
-Duração estimada: 12 a 15 minutos, 20 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides, com a fonte em `apresentacao/deck_fonte/project/`.
+Duração estimada: 12 a 15 minutos, 22 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo claro, azul semelhante ao institucional da UFPR, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
 
 ## Slide 1: título
 Salário médio real formal e estrutura produtiva na RMC, 2012 a 2021. Nome, disciplina (Econometria I, UFPR), data.
@@ -32,17 +32,23 @@ Tabela com cinco blocos (escolaridade, estrutura industrial, diversificação se
 - Salário médio: R$ 2.651 (média). Escolaridade: 15,3%. Industrialização: 25,7%. Selic real: 2,3% a.a. Distância média: 46 km.
 - Figura: `fig2_ridgeplot_salario_anos.png` (distribuição do salário por ano).
 
-## Slide 8: o que o gráfico no tempo mostra
+## Slide 8: renda no mapa, ano a ano (animação)
+Animação de 15 segundos (figura `animacao1_mapa_renda_rmc.gif`): salário médio real por município, 2012 a 2021, com a mesma escala de cor em todos os anos e Curitiba com contorno preto. Em PowerPoint ou PDF o GIF perde o movimento; usar o mapa estático `mapa1_painel_espacial_rmc.png`.
+
+## Slide 9: ranking dos salários por município (animação)
+Animação de 15 segundos (figura `animacao2_ranking_salario_municipios.gif`): municípios ordenados do maior ao menor salário em cada ano. Na transição entre anos alguns rótulos se sobrepõem por instantes; se necessário, congelar um ano em PNG.
+
+## Slide 10: o que o gráfico no tempo mostra
 - Médias dos 29 municípios: salário pico em 2017; Selic pico em 2016 e 2017, depois queda; escolaridade desacelera após 2017.
 - Justifica o corte de Chow em 2017.
 - Figura: `diag6_variaveis_no_tempo.png`.
 
-## Slide 9: modelo
+## Slide 11: modelo
 - ln(salário real) = β0 + β1 X2 + β2 X3 + β3 X4 + β4 X5 + β5 X6 + u.
 - MQO com erros de White (HC1), gl = 284.
 - Sem variáveis binárias de município e sem métodos de painel (escopo da disciplina).
 
-## Slide 10: resultados principais
+## Slide 12: resultados principais
 | Variável | Coeficiente | p-valor |
 |---|---|---|
 | Escolaridade | +0,0150 | < 0,0001 |
@@ -53,7 +59,7 @@ Tabela com cinco blocos (escolaridade, estrutura industrial, diversificação se
 
 R² ajustado = 0,643.
 
-## Slide 11: leitura dos coeficientes
+## Slide 13: leitura dos coeficientes
 - Escolaridade: +1 p.p. de vínculos com superior está associado a salário 1,5% maior.
 - Gini: diversificação maior (Gini menor) está associada a salário maior.
 - Selic: +1 p.p. está associado a salário 0,66% maior (IC 95%: 0,30% a 1,01%).
@@ -61,7 +67,7 @@ R² ajustado = 0,643.
 - Associações, não efeitos causais.
 - [revisar: leitura econômica com o pesquisador.]
 
-## Slide 12: hipóteses e resultado
+## Slide 14: hipóteses e resultado
 | Hipótese | Resultado |
 |---|---|
 | H1 escolaridade + | confirmada |
@@ -70,48 +76,48 @@ R² ajustado = 0,643.
 | H4 Selic (exploratória) | associação positiva; ressalva de 10 valores anuais |
 | H5 distância − | confirmada |
 
-## Slide 13: diagnósticos
+## Slide 15: diagnósticos
 - FIV máximo 2,33: sem multicolinearidade.
 - Breusch-Pagan rejeita homocedasticidade (p = 0,036): inferência com erros de White.
 - Shapiro-Wilk rejeita normalidade (W = 0,862): figura Q-Q, limitação declarada.
 - RESET rejeita forma linear (p < 0,0001): limitação declarada.
 - Figura: `diag5_normalidade_qq.png`.
 
-## Slide 14: autocorrelação e quebra estrutural
+## Slide 16: autocorrelação e quebra estrutural
 - Durbin-Watson por município: mediana 0,25; autocorrelação positiva em 14 de 29 municípios. Limitação declarada.
 - Chow em 2017: F = 1,60, p = 0,146 (sem quebra). Em 2016: p = 0,102.
 
-## Slide 15: robustez e previsão
+## Slide 17: robustez e previsão
 - Gini só com divisões com vínculo: −0,638 (p = 0,001), mesmo sinal.
 - Previsão de 2021: média de R$ 2.622 com a Selic observada; R$ 2.639 com +1 p.p.; R$ 2.605 com −1 p.p. Correção de viés exp(s²/2) = 1,0075.
 
-## Slide 16: caso de Adrianópolis
+## Slide 18: caso de Adrianópolis
 - Participação industrial: 7% (2014) para 45% (2015), com dado oficial do IBGE.
 - Fábrica de cimento inaugurada no município em dezembro de 2015: hipótese plausível, não confirmada (emprego industrial só cresce em 2017).
 - Figura sugerida: `fig3_dispersao_capital_humano_industria.png` (destaque de Adrianópolis, se a figura marcar o município).
 - [revisar: decidir se o caso entra na apresentação ou só no texto.]
 
-## Slide 17: contribuição do trabalho (candidatas)
+## Slide 19: contribuição do trabalho (candidatas)
 - Gini discreto da aula sobre as 87 divisões da CNAE como medida de diversificação setorial do emprego municipal.
 - Painel balanceado dos 29 municípios da RMC, 2012 a 2021, que combina RAIS, SIDRA, Banco Central e IBGE.
 - Evidência descritiva: escolaridade, industrialização, diversificação e proximidade de Curitiba se associam a salário maior.
 - Registro dos limites do modelo e do caso de Adrianópolis.
 - [revisar: contribuição a confirmar pelo pesquisador, depois da revisão da literatura.]
 
-## Slide 18: limitações
+## Slide 20: limitações
 - Associações, não causalidade.
 - Forma funcional (RESET) e normalidade rejeitadas.
 - Autocorrelação positiva dentro dos municípios.
 - Gini depende do número de divisões com vínculo.
 - Recorte limitado a 2012 a 2021 pela disponibilidade do VAB setorial.
 
-## Slide 19: conclusão
+## Slide 21: conclusão
 Escolaridade, industrialização e diversificação setorial associam-se a salários maiores; distância a Curitiba, a salários menores. A Selic real tem associação positiva pequena. [revisar: fechamento a cargo do pesquisador.]
 
-## Slide 20: referências
+## Slide 22: referências
 Gujarati (2003); Hoffmann (2006, cap. 17); Hasegawa (slides de aula, 2016a, 2016b, 2017, 2020, 2022 e 2024, UFPR); IBGE/SIDRA; Banco Central (SGS); RAIS/MTE; fontes do caso de Adrianópolis (conferir links).
 
 ## Pendências desta apresentação
 - Gerar o arquivo PowerPoint a partir deste roteiro, após revisão do texto.
-- Escolher a figura do slide 6 e do slide 16.
-- Confirmar as referências dos slides 18 e 20.
+- Escolher a figura do slide 6 e do slide 18.
+- Confirmar as referências dos slides 20 e 22.

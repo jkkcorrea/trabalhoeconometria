@@ -11,13 +11,13 @@ Fontes atuais:
 
 | Código | Assunto | Onde está no artigo (v2) | Onde está nos slides | O que mudar conforme a resposta |
 |---|---|---|---|---|
-| A1 | Procedimento quando a normalidade é rejeitada (Shapiro-Wilk, W = 0,8618) | §4.2, bullet "Normalidade"; §5.3, parágrafo após a FIGURA 4 | slide 13 (`diagnosticos.html`), nota do orador | Se o professor aceitar a limitação: manter. Se pedir outro procedimento: reescrever o parágrafo de §5.3 e a tabela de inferência; atualizar a nota do slide 13. |
-| A2 | Forma funcional rejeitada pelo RESET (F = 14,49) | §4.2, bullet "Forma funcional"; §5.3 (tabela 4); §6 (Discussão) | slide 13 (nota); slide 18 (`limitacoes.html`) | Se o professor orientar outra especificação, rodar o modelo alternativo em `R/` e substituir os coeficientes na TABELA 3, a previsão da TABELA 5 e o texto da seção 4 e 5. |
-| A3 | Autocorrelação positiva dentro dos municípios (DW mediana 0,25; 14 de 29 municípios) | §5.3 (tabela 4); APÊNDICE A (nota final); §6 | slide 14 (`autocorrelacao.html`), nota; slide 18 | Se o professor pedir correção: a inferência da TABELA 3 muda; refazer resultados e o slide 14. Se aceitar a limitação: manter. |
-| A4 | Escolha do corte do Chow (2017, pelo gráfico) e comparação em 2016 | §4.2, bullet "Estabilidade"; legenda da FIGURA 1; tabela 4 | slide 8 (`tempo.html`), slide 14 (nota) | Se o professor pedir outro corte: escolher a partir da FIGURA 1, atualizar `ANO_CORTE` em `R/06_especificacao_chow.R` e os números da tabela 4 e do slide 14. |
-| A5 | Projeção de 2021 dentro da amostra e correção aproximada exp(s²/2) = 1,0075 | §4.3; §5.5 (tabela 5) | slide 15 (`robustez.html`), nota | Se o professor rejeitar a correção: mostrar a previsão sem correção (já calculada em `projecao_selic_m2.csv`) e atualizar a TABELA 5 e o slide 15. |
+| A1 | Procedimento quando a normalidade é rejeitada (Shapiro-Wilk, W = 0,8618) | §4.2, bullet "Normalidade"; §5.3, parágrafo após a FIGURA 4 | slide 15 (`diagnosticos.html`), nota do orador | Se o professor aceitar a limitação: manter. Se pedir outro procedimento: reescrever o parágrafo de §5.3 e a tabela de inferência; atualizar a nota do slide 15. |
+| A2 | Forma funcional rejeitada pelo RESET (F = 14,49) | §4.2, bullet "Forma funcional"; §5.3 (tabela 4); §6 (Discussão) | slide 15 (nota); slide 20 (`limitacoes.html`) | Se o professor orientar outra especificação, rodar o modelo alternativo em `R/` e substituir os coeficientes na TABELA 3, a previsão da TABELA 5 e o texto da seção 4 e 5. |
+| A3 | Autocorrelação positiva dentro dos municípios (DW mediana 0,25; 14 de 29 municípios) | §5.3 (tabela 4); APÊNDICE A (nota final); §6 | slide 16 (`autocorrelacao.html`), nota; slide 20 | Se o professor pedir correção: a inferência da TABELA 3 muda; refazer resultados e o slide 16. Se aceitar a limitação: manter. |
+| A4 | Escolha do corte do Chow (2017, pelo gráfico) e comparação em 2016 | §4.2, bullet "Estabilidade"; legenda da FIGURA 1; tabela 4 | slide 10 (`tempo.html`), slide 16 (nota) | Se o professor pedir outro corte: escolher a partir da FIGURA 1, atualizar `ANO_CORTE` em `R/06_especificacao_chow.R` e os números da tabela 4 e do slide 16. |
+| A5 | Projeção de 2021 dentro da amostra e correção aproximada exp(s²/2) = 1,0075 | §4.3; §5.5 (tabela 5) | slide 17 (`robustez.html`), nota | Se o professor rejeitar a correção: mostrar a previsão sem correção (já calculada em `projecao_selic_m2.csv`) e atualizar a TABELA 5 e o slide 17. |
 | A6 | n = 87 no Gini e tratamento das divisões como indivíduos (fórmula de Hoffmann, aula) | §3.4 (Gini); TABELA 1 (linha X4) | slide 6 (`variaveis.html`), nota | Se o professor pedir outra definição: alterar §3.4, a TABELA 1, a seção 5.2 (H3) e os resultados; o Gini sem divisões vazias já está em `robustez_x4_definicao_gini.csv`. |
-| A7 | Modelo sem variáveis binárias de município (orientação de Econometria I) | §4.1 (último parágrafo) | slide 9 (`modelo.html`), nota | Confirmação por escrito. Se o professor aceitar binárias: abrir decisão nova (D-AAAA-MM-DD-NN) e refazer o modelo; hoje o modelo principal não as usa. |
+| A7 | Modelo sem variáveis binárias de município (orientação de Econometria I) | §4.1 (último parágrafo) | slide 11 (`modelo.html`), nota | Confirmação por escrito. Se o professor aceitar binárias: abrir decisão nova (D-AAAA-MM-DD-NN) e refazer o modelo; hoje o modelo principal não as usa. |
 
 ## Itens que não dependem do professor (mantidos no backlog de `_Trilha/BACKLOG.md`)
 
@@ -50,7 +50,7 @@ Avaliação completa em `_Trilha/AVALIACAO_COMENTARIO_PROFESSOR_20261123.md`. O 
 | B4 | Contribuição | Seções 6.7 e 7 | Candidatas redigidas; pesquisador decide |
 | B5 | Pontos a explicar | Dummies: 4.1; normalidade, RESET, autocorrelação e Chow: 4.2 e 5.3; Gini: 3.4; projeção: 4.3; Adrianópolis e Araucária: 3.3 | Redigido; justificativas a validar |
 
-Slides: acrescentados em 23/11/2026 os slides 3 (revisão da literatura) e 17 (contribuição), ambos com marcações de revisão; a numeração acima já considera os 20 slides.
+Slides: acrescentados em 23/11/2026 os slides 3 (revisão da literatura) e 19 (contribuição), ambos com marcações de revisão; a numeração acima já considera os 22 slides.
 
 ## Referências (fontes/REFERENCIAS.md)
 
