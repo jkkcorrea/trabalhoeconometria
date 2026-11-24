@@ -1,4 +1,4 @@
-# Roteiro da apresentação (rascunho v1, 23/11/2026)
+# Roteiro da apresentação (rascunho v2, 23/11/2026)
 
 Duração estimada: 12 a 15 minutos, 22 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo branco, tons de cinza, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
 
@@ -18,7 +18,7 @@ Tabela com cinco blocos (escolaridade, estrutura industrial, diversificação se
 - Variável dependente: ln do salário médio real (R$ de 2021).
 
 ## Slide 5: hipóteses
-- H0 geral: o salário não depende da escolaridade, da estrutura de emprego e da localização.
+- H0 geral: o salário não depende da escolaridade, da industrialização, da diversificação setorial, da Selic nem da distância a Curitiba.
 - H1 escolaridade +; H2 industrialização +; H3 diversificação (Gini −); H4 Selic exploratória; H5 distância −.
 - Decisão a 5%, com erros de White.
 
@@ -70,11 +70,11 @@ R² ajustado = 0,643.
 ## Slide 14: hipóteses e resultado
 | Hipótese | Resultado |
 |---|---|
-| H1 escolaridade + | confirmada |
-| H2 industrialização + | confirmada |
-| H3 diversificação (Gini −) | confirmada no modelo principal; não resiste ao controle de porte |
-| H4 Selic (exploratória) | associação positiva; ressalva de 10 valores anuais |
-| H5 distância − | confirmada |
+| H1 escolaridade + | rejeita H0; sinal esperado |
+| H2 industrialização + | rejeita H0; sinal esperado |
+| H3 diversificação (Gini −) | rejeita H0 no modelo principal; não resiste ao controle de porte |
+| H4 Selic (exploratória) | rejeita-se H0 (p = 0,0003), sinal positivo; ressalva de 10 valores anuais |
+| H5 distância − | rejeita H0 no modelo principal; perde significância com o controle de porte |
 
 ## Slide 15: diagnósticos
 - FIV máximo 2,33: sem multicolinearidade.
@@ -84,6 +84,7 @@ R² ajustado = 0,643.
 - Figura: `diag5_normalidade_qq.png`.
 
 ## Slide 16: autocorrelação e quebra estrutural
+- Breusch-Godfrey (n − p observações): rejeita em 5 de 29 municípios (3 com o primeiro defasado preenchido por zero); no Durbin-Watson, 14 em autocorrelação positiva e 15 inconclusivos, porque dU > 2 e a zona de não rejeição é vazia.
 - Durbin-Watson por município: mediana 0,25; autocorrelação positiva em 14 de 29 municípios. Com os resíduos centrados por município, mediana 1,16 e só 1 município abaixo de dL. Limitação declarada.
 - Chow em 2017: F = 1,60, p = 0,146 (sem quebra). Em 2016: p = 0,102.
 
@@ -93,15 +94,15 @@ R² ajustado = 0,643.
 - Previsão de 2021: média de R$ 2.622 com a Selic observada; R$ 2.639 com +1 p.p.; R$ 2.605 com −1 p.p. Correção de viés exp(s²/2) = 1,0075.
 
 ## Slide 18: caso de Adrianópolis
-- Participação industrial: 7% (2014) para 45% (2015), com dado oficial do IBGE.
-- Fábrica de cimento inaugurada no município em dezembro de 2015: hipótese plausível, não confirmada (emprego industrial só cresce em 2017).
+- Participação industrial: 7,1% (2014) para 45,5% (2015), com dado oficial do IBGE.
+- Fábrica de cimento inaugurada no município em dezembro de 2015: hipótese plausível, não confirmada (o emprego formal da indústria extrativa sobe de 66 vínculos (2012) para 260 (2015) e cai para 64 (2017), quando a divisão 23 (minerais não metálicos) salta de 14 para 186: compatível com a hipótese, sem confirmá-la).
 - Figura sugerida: `fig3_dispersao_capital_humano_industria.png` (destaque de Adrianópolis, se a figura marcar o município).
 - [revisar: decidir se o caso entra na apresentação ou só no texto.]
 
 ## Slide 19: contribuição do trabalho (candidatas)
 - Gini discreto da aula sobre as 87 divisões da CNAE como medida de diversificação setorial do emprego municipal.
 - Painel balanceado dos 29 municípios da RMC, 2012 a 2021, que combina RAIS, SIDRA, Banco Central e IBGE.
-- Evidência descritiva: escolaridade, industrialização, diversificação e proximidade de Curitiba se associam a salário maior.
+- Evidência descritiva: escolaridade, industrialização e proximidade de Curitiba se associam a salário maior; a diversificação, só sem o controle de porte.
 - Registro dos limites do modelo e do caso de Adrianópolis.
 - [revisar: contribuição a confirmar pelo pesquisador, depois da revisão da literatura.]
 
@@ -114,12 +115,12 @@ R² ajustado = 0,643.
 - Recorte limitado a 2012 a 2021 pela disponibilidade do VAB setorial.
 
 ## Slide 21: conclusão
-Escolaridade, industrialização e diversificação setorial associam-se a salários maiores; distância a Curitiba, a salários menores. A Selic real tem associação positiva pequena. [revisar: fechamento a cargo do pesquisador.]
+Escolaridade e industrialização associam-se a salários maiores, e a distância a Curitiba, a salários menores. A diversificação setorial (Gini) se associa a salários maiores no modelo principal, mas não quando se controla o porte do município; a distância também perde significância com esse controle. A Selic real tem associação positiva pequena. [revisar: fechamento a cargo do pesquisador.]
 
 ## Slide 22: referências
-Gujarati (2003); Hoffmann (2006, cap. 17); Hasegawa (slides de aula, 2016a, 2016b, 2017, 2020, 2022 e 2024, UFPR); IBGE/SIDRA; Banco Central (SGS); RAIS/MTE; fontes do caso de Adrianópolis (conferir links).
+Gujarati (2003); Gujarati e Porter (2011, citado nas aulas; não consultado); Hoffmann (2006, cap. 17); Hasegawa (slides de aula, 2016a, 2016b, 2017, 2020, 2022 e 2024, UFPR); IBGE/SIDRA; Banco Central (SGS); RAIS/MTE; fontes do caso de Adrianópolis (conferir links).
 
 ## Pendências desta apresentação
 - Gerar o arquivo PowerPoint a partir deste roteiro, após revisão do texto.
-- Escolher a figura do slide 6 e do slide 18.
-- Confirmar as referências dos slides 20 e 22.
+- Conferir se a figura do slide 18 marca Adrianópolis (hoje só o rótulo de 2021).
+- Confirmar as referências do slide 22.

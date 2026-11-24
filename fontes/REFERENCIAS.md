@@ -19,7 +19,7 @@ Todas são slides de aula, citados no artigo como HASEGAWA com o ano. Os PDFs es
 |---|---|---|---|---|
 | HASEGAWA, 2016a | *Multicolinearidade*, 10 nov. 2016 | Gujarati e Porter (2011, cap. 10) | `multicolinear.pdf` (`1cg_s5SrrDe5xA_IyB42Ph6_7QMIEntG6`) | FIV. O texto extraído não traz o limite 10 (está em imagem): **[a confirmar]**. |
 | HASEGAWA, 2016b | *Heterocedasticidade*, 17 nov. 2016 | Gujarati e Porter (2011, cap. 11) | `heterocedast.pdf` (`1cK-6ZxNTH-leP2QjteoLzO9kGbXRRptY`) | Breusch-Pagan-Godfrey e Goldfeld-Quandt (lista de métodos formais, p. 47-48 da aula). |
-| HASEGAWA, 2017 | *Autocorrelação*, 9 out. 2017 | Gujarati e Porter (2011, cap. 11) | `autocorrel.pdf` (`1WYCarnorspho-VZzBH7UncPzT4azDAgo`) | Durbin-Watson, Breusch-Godfrey; consequências para t e F (p. 55-65 da aula); medidas corretivas (p. 97-100). |
+| HASEGAWA, 2017 | *Autocorrelação*, 9 out. 2017 | Gujarati e Porter (2011, cap. 12; o título do slide diz cap. 11, mas as figuras são do cap. 12) | `autocorrel.pdf` (`1WYCarnorspho-VZzBH7UncPzT4azDAgo`) | Durbin-Watson, Breusch-Godfrey (Gujarati, PDF p. 501: regressão com n − p observações e estatística (n − p) R²); consequências para t e F (p. 55-65 da aula); medidas corretivas (p. 97-100). |
 | HASEGAWA, 2020 | *Medidas de desigualdade*: Hoffmann (2006, cap. 17), 6 nov. 2020 | Hoffmann (2006, cap. 17) | `se305_medidasdesigualdade_.pdf` (raiz; 61 slides) | Gini discreto (slides 21 e 22). O slide escreve "Hoffman". |
 | HASEGAWA, 2022 | *Modelagem: especificação e diagnóstico*, 8 maio 2022 | Gujarati e Porter (2011, cap. 13) | `especificao_diagnostico.pdf` (`14esRhmU2A667g_-gevQ2AcjC2eg2N38v`) | RESET, exame de resíduos, Durbin-Watson como sinal de erro de especificação (valores de dL e dU para n = 10, k = 1 a 3). |
 | HASEGAWA, 2024 | *Teste de Chow*, 30 out. 2024 | Gujarati e Porter (2011, cap. 8); Hoffmann e Vieira (1987) | `teste_Chow.pdf` (`1_k-SeJGSX-efcfF508KyysrSBSrIoVE2`) | Mecânica do teste e graus de liberdade (k e n1 + n2 − 2k; aqui, 6 e 278). |
@@ -44,7 +44,7 @@ Datas de acesso dos dados (necessárias para a NBR 6023): **[a confirmar]**; a e
 
 ## 4. Caso de Adrianópolis: fábrica de cimento (Secil Supremo)
 
-Usado em: `fontes/ADRIANOPOLIS_PESQUISA.md`, artigo (§3.3 e §6) e slide 15. A hipótese de que a fábrica explique o salto da participação industrial em 2015 é **plausível e não confirmada**.
+Usado em: `fontes/ADRIANOPOLIS_PESQUISA.md`, artigo (§3.3 e §6) e slide 18. A hipótese de que a fábrica explique o salto da participação industrial em 2015 é **plausível e não confirmada**.
 
 | Fonte | Link | O que traz | Estado |
 |---|---|---|---|

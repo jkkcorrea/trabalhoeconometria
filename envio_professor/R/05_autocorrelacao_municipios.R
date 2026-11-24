@@ -8,7 +8,7 @@
 #
 # Testes paramétricos (Gujarati, 4ª ed., cap. 12; slides autocorrel; Guia P2):
 #   - Durbin-Watson, com as cinco zonas de decisão do Guia P2;
-#   - Breusch-Godfrey de ordem 1 (lmtest::bgtest), qui-quadrado com 1 gl;
+#   - Breusch-Godfrey de ordem 1 (lmtest::bgtest, fill = NA: n - p observações, como no Gujarati), qui-quadrado com 1 gl;
 #   - ρ por regressão auxiliar AR(1) sem constante (descritivo).
 #
 # Tabela de Durbin-Watson: n = 10 e k' = 5, 5%: dL = 0,243 e dU = 2,822 (Gujarati, 4ª ed.,
@@ -69,7 +69,10 @@ analisar_municipio <- function(df) {
   n <- length(e)
   d <- sum(diff(e)^2) / sum(e^2)
   rho <- unname(stats::coef(stats::lm(e[-1] ~ 0 + e[-n])))
-  bg <- lmtest::bgtest(stats::lm(e ~ 1), order = 1)
+  # Breusch-Godfrey como em Gujarati (cap. 12): a regressão auxiliar usa n - p observações e a
+  # estatística é (n - p) R^2; por isso o primeiro resíduo defasado é descartado (fill = NA).
+  bg <- lmtest::bgtest(stats::lm(e ~ 1), order = 1, fill = NA)
+  bg0 <- lmtest::bgtest(stats::lm(e ~ 1), order = 1)   # variante: primeiro defasado igual a zero (padrão do lmtest)
   tibble::tibble(
     id_municipio = df$id_municipio[1],
     nome_municipio = df$nome_municipio[1],
@@ -80,7 +83,8 @@ analisar_municipio <- function(df) {
     breusch_godfrey_estatistica = unname(bg$statistic),
     breusch_godfrey_gl = unname(bg$parameter),
     breusch_godfrey_p = bg$p.value,
-    breusch_godfrey_decisao = ifelse(bg$p.value < 0.05, "rejeita H0", "não rejeita H0")
+    breusch_godfrey_decisao = ifelse(bg$p.value < 0.05, "rejeita H0", "não rejeita H0"),
+    breusch_godfrey_p_preenchimento_zero = bg0$p.value
   )
 }
 
@@ -153,9 +157,9 @@ resumo_heterogeneidade <- tibble::tibble(
   abaixo_dl = sum(por_municipio$durbin_watson < DW_DL),
   abaixo_dl_centrado = sum(por_municipio$durbin_watson_centrado < DW_DL),
   municipios_mesmo_sinal = sum(por_municipio$todos_mesmo_sinal),
-  # Breusch-Godfrey sem preencher com zero o primeiro resíduo defasado (lmtest usa fill = 0 por padrão)
-  bg_rejeita_sem_preenchimento = sum(vapply(split(painel$residuo, painel$id_municipio), function(e) {
-    lmtest::bgtest(stats::lm(e ~ 1), order = 1, fill = NA)$p.value < 0.05
+  # Breusch-Godfrey com o primeiro resíduo defasado igual a zero (padrão do lmtest), para comparação
+  bg_rejeita_preenchimento_zero = sum(vapply(split(painel$residuo, painel$id_municipio), function(e) {
+    lmtest::bgtest(stats::lm(e ~ 1), order = 1)$p.value < 0.05
   }, logical(1))),
   parcela_soma_quadrados_entre_municipios = soma_entre / sum(painel$residuo^2)
 )

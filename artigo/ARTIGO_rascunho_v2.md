@@ -6,7 +6,7 @@
 
 ## Resumo
 
-Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5% no modelo principal (a distância deixa de ser significativa quando se controla o porte do município). A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001), mas esse resultado deixa de valer quando se controla o porte do município. A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade; incluir o porte do município reduz a rejeição da forma funcional, mas não a elimina, e a autocorrelação positiva dentro dos municípios é em grande parte diferença persistente entre eles. Os resultados são associações, não efeitos causais.
+Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usam-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5% no modelo principal (a distância deixa de ser significativa quando se controla o porte do município). A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001), mas esse resultado deixa de valer quando se controla o porte do município. A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade; incluir o porte do município reduz a rejeição da forma funcional, mas não a elimina, e a autocorrelação positiva dentro dos municípios é em grande parte diferença persistente entre eles. Os resultados são associações, não efeitos causais.
 
 **Palavras-chave:** Salário real. Região Metropolitana de Curitiba. Estrutura produtiva. Gini setorial. Mínimos quadrados ordinários.
 
@@ -22,7 +22,7 @@ Os salários formais variam de forma acentuada entre municípios de uma mesma re
 
 [revisar: motivação da pergunta e relevância para a RMC, com referências a serem inseridas.]
 
-O objetivo é estimar a associação entre o salário médio real formal dos municípios da RMC e cinco características do município: escolaridade, estrutura industrial, diversificação setorial do emprego, Selic real e distância a Curitiba, no período de 2012 a 2021. O trabalho testa a hipótese nula de que o salário não depende dessas características, contra a hipótese de que ao menos uma delas afeta o salário. Para cada variável, os sinais esperados são: positivo para escolaridade e industrialização; negativo para o Gini setorial, isto é, positivo para a diversificação; exploratório para a Selic; e negativo para a distância a Curitiba.
+O objetivo é estimar a associação entre o salário médio real formal dos municípios da RMC e cinco características do município: escolaridade, estrutura industrial, diversificação setorial do emprego, Selic real e distância a Curitiba, no período de 2012 a 2021. O trabalho testa a hipótese nula de que o salário não depende dessas características, contra a hipótese de que ao menos uma delas está associada ao salário. Para cada variável, os sinais esperados são: positivo para escolaridade e industrialização; negativo para o Gini setorial, isto é, positivo para a diversificação; exploratório para a Selic; e negativo para a distância a Curitiba.
 
 O trabalho usa dados oficiais de quatro fontes e um modelo de mínimos quadrados ordinários, com inferência robusta à heterocedasticidade. Os resultados são descritivos e associativos. A seção 3 descreve os dados e as variáveis, a seção 4 apresenta o modelo e os métodos, a seção 5 traz os resultados, a seção 6 os discute e a seção 7 conclui.
 
@@ -60,7 +60,7 @@ Os materiais-base do método são as aulas da disciplina (HASEGAWA, 2016a; 2016b
 
 ### 3.1 Unidades e período
 
-A unidade de observação são os 29 municípios da RMC (código IBGE 05501), de 2012 a 2021. O painel é balanceado, com 290 observações. O recorte é limitado pela disponibilidade do valor adicionado setorial municipal, que não é publicado para 2022 e 2023 (SIDRA, tabela 5938). Os 29 municípios são listados no Apêndice B.
+A unidade de observação são os 29 municípios da RMC (código IBGE 05501), de 2012 a 2021. O painel é balanceado, com 290 observações. O período termina em 2021, último ano com valor adicionado setorial municipal publicado: a SIDRA (tabela 5938) traz esse valor de 2002 a 2021 e o indica como não disponível para 2022 e 2023. O início em 2012 é escolha do pesquisador. Os 29 municípios são listados no Apêndice B.
 
 ### 3.2 Fontes e construção das variáveis
 
@@ -73,13 +73,13 @@ A TABELA 1 resume as variáveis, suas fontes e sua construção.
 | Y: salário médio real | remuneração média dos vínculos formais, em reais de 2021 (logaritmo natural) | RAIS (Ministério do Trabalho), deflacionada pelo IPCA (série 433, Banco Central) |
 | X2: escolaridade | % dos vínculos ativos com ensino superior completo | RAIS |
 | X3: industrialização | VAB da indústria / VAB total, em % | IBGE, SIDRA, tabela 5938 |
-| X4: diversificação (Gini) | Gini da distribuição dos vínculos entre as 87 divisões da CNAE, com zeros | RAIS |
+| X4: Gini setorial (concentração do emprego; menor valor, mais diversificado) | Gini da distribuição dos vínculos entre as 87 divisões da CNAE, com zeros | RAIS |
 | X5: Selic real | Selic acumulada no ano, deflacionada pelo IPCA anual, em % a.a. | Banco Central (séries 4390 e 433) |
 | X6: distância | distância entre os centroides do município e de Curitiba, em km | IBGE (malha municipal) |
 
 FONTE: O autor (2026), a partir das fontes indicadas.
 
-A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita (FIGURA 2), e, com o logaritmo, o coeficiente de cada regressora indica variação relativa do salário [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
+A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita (FIGURA 2), e, com o logaritmo, o coeficiente de cada regressora indica, de forma aproximada, a variação relativa do salário (100·b %; o valor exato é (exp(b) − 1) × 100 %) [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
 
 ### 3.3 Estatísticas descritivas
 
@@ -113,7 +113,7 @@ FONTE: O autor (2026). A linha tracejada marca a divisão do período usada no t
 
 FONTE: O autor (2026), a partir da RAIS (Ministério do Trabalho), deflacionada pelo IPCA (série 433, Banco Central), em R$ de 2021. A cor acompanha o valor do salário no eixo horizontal.
 
-Em todos os anos, a maior parte dos municípios fica entre cerca de R$ 2.000 e R$ 3.000, com uma cauda à direita que chega perto de R$ 4.500 (FIGURA 2), o que mostra a assimetria à direita do salário.
+Em todos os anos, a maior parte dos municípios fica entre cerca de R$ 2.000 e R$ 3.000, com uma cauda à direita (o maior valor, R$ 4.501, é de Curitiba em 2017; FIGURA 2), o que mostra a assimetria à direita do salário.
 
 **FIGURA 3 - Correlação de Pearson entre as variáveis do modelo, RMC, 2012 a 2021**
 
@@ -121,7 +121,7 @@ Em todos os anos, a maior parte dos municípios fica entre cerca de R$ 2.000 e R
 
 FONTE: O autor (2026). Como cada município aparece dez vezes, as 290 observações não são independentes.
 
-Dois valores merecem nota. Em Araucária, o VAB da indústria é negativo em 2012 (−R$ 560,8 milhões) e 2013 (−R$ 246,4 milhões), como publicado pelo IBGE; o valor é mantido e marcado. Em Adrianópolis, a participação industrial passa de 7,1% (2014) para 45,5% (2015). O salto foi confirmado na fonte e, segundo a pesquisa feita para o trabalho, pode estar relacionado à fábrica de cimento inaugurada no município em dezembro de 2015. Essa relação não está confirmada: o emprego formal industrial só cresce em 2017 (ver `fontes/ADRIANOPOLIS_PESQUISA.md`). A FIGURA 4 mostra Adrianópolis entre os municípios da RMC.
+Dois valores merecem nota. Em Araucária, o VAB da indústria é negativo em 2012 (−R$ 560,8 milhões) e 2013 (−R$ 246,4 milhões), como publicado pelo IBGE; o valor é mantido e marcado. Em Adrianópolis, a participação industrial passa de 7,1% (2014) para 45,5% (2015). O salto foi confirmado na fonte e, segundo a pesquisa feita para o trabalho, pode estar relacionado à fábrica de cimento inaugurada no município em dezembro de 2015. Essa relação não está confirmada, mas o emprego formal é compatível com ela: os vínculos da indústria extrativa (divisões 05 a 09 da CNAE) sobem de 66 em 2012 para 260 em 2015 e caem para 64 em 2017, quando os da divisão 23 (minerais não metálicos) saltam de 14 para 186; os da indústria de transformação (divisões 10 a 33) só crescem em 2017 (ver `fontes/ADRIANOPOLIS_PESQUISA.md`). A FIGURA 4 mostra Adrianópolis entre os municípios da RMC.
 
 **FIGURA 4 - Capital humano e dominância industrial, RMC, 2012 a 2021 (painel A: escolaridade; painel B: VAB da indústria)**
 
@@ -166,9 +166,9 @@ O modelo não inclui variáveis binárias de município nem métodos de dados em
 Em cada teste, H0 e Ha são explicitadas e a decisão é tomada a 5%:
 
 - **Multicolinearidade:** fator de inflação da variância (FIV), com limite de 10 (GUJARATI, 2003, cap. 10, p. 390 do PDF; HASEGAWA, 2016a). Objetivo: verificar se as regressoras são tão correlacionadas que inflacionam os erros-padrão.
-- **Heterocedasticidade:** Breusch-Pagan-Godfrey (HASEGAWA, 2016b; GUJARATI, 2003, cap. 11), com H0 de variância constante e Ha de variância que depende das regressoras, o teste geral de White (regressão auxiliar com os regressores, seus quadrados e produtos cruzados) e Goldfeld-Quandt, com a amostra ordenada pela distância e, como verificação, por cada regressor, e fração central de 0,2 omitida [presunção da modelagem] (HASEGAWA, 2016b).
+- **Heterocedasticidade:** Breusch-Pagan-Godfrey (HASEGAWA, 2016b; GUJARATI, 2003, cap. 11), na versão estudentizada (n·R²; a versão ESS/2 do livro dá 44,74, p < 0,0001, com a mesma decisão), com H0 de variância constante e Ha de variância que depende das regressoras, o teste geral de White (regressão auxiliar com os regressores, seus quadrados e produtos cruzados) e Goldfeld-Quandt, com a amostra ordenada pela distância e, como verificação, por cada regressor, e fração central de 0,2 omitida [presunção da modelagem] (HASEGAWA, 2016b).
 - **Normalidade dos resíduos:** Shapiro-Wilk, com H0 de normalidade e Ha de não normalidade, complementado pelo gráfico quantil-quantil (Q-Q). [aguardando orientação do professor: procedimento a adotar quando a normalidade é rejeitada.]
-- **Forma funcional:** RESET de Ramsey (HASEGAWA, 2022; GUJARATI, 2003, cap. 13), com potências 2 e 3 dos valores ajustados, com H0 de forma linear correta. Como o RESET rejeita, o modelo é reestimado com os quadrados de X2 e X3 (centrados na média) e com o logaritmo dos vínculos ativos como controle de porte, e o RESET é repetido (TABELA 7); os resíduos são examinados contra cada regressor (FIGURA 6). [aguardando orientação do professor: tratamento da forma funcional rejeitada.]
+- **Forma funcional:** RESET de Ramsey (HASEGAWA, 2022; GUJARATI, 2003, cap. 13), com potências 2 e 3 dos valores ajustados, com H0 de forma linear correta. Como o RESET rejeita, o modelo é reestimado com os quadrados de X2 e X3 (centrados na média) e com o logaritmo dos vínculos ativos como controle de porte, e o RESET é repetido (TABELA 6); os resíduos são examinados contra cada regressor (FIGURA 6). [aguardando orientação do professor: tratamento da forma funcional rejeitada.]
 - **Estabilidade:** teste de Chow para quebra estrutural (HASEGAWA, 2024), com o corte em 2017 escolhido a partir do gráfico das médias anuais (FIGURA 1), e em 2016 para comparação; teste LM para tendência linear. [aguardando orientação do professor: escolha do corte e comparação em 2016.]
 - **Autocorrelação:** Durbin-Watson (HASEGAWA, 2017), com dL = 0,243 e dU = 2,822 da tabela D.5A de Gujarati (2003) (n = 10, k = 5, 5%), e Breusch-Godfrey de ordem 1 (HASEGAWA, 2017), aplicados à série de cada município (APÊNDICE A). Como verificação, o Durbin-Watson também é calculado com os resíduos centrados na média de cada município, para separar a dependência de um ano para o seguinte da diferença persistente entre municípios.
 
@@ -180,8 +180,8 @@ As estatísticas e as regras de decisão de cada teste são as seguintes (n = 29
 - **Shapiro-Wilk:** estatística W calculada sobre os resíduos; rejeita a normalidade se o p-valor for menor que 5%. O gráfico Q-Q compara os quantis dos resíduos com os da normal.
 - **RESET:** F do acréscimo das potências 2 e 3 dos valores ajustados ao modelo, com 2 e 282 graus de liberdade. Rejeita H0 (forma linear correta) se o p-valor for menor que 5%.
 - **Chow:** F = [(SQR_R − SQR₁ − SQR₂) / k] / [(SQR₁ + SQR₂) / (n − 2k)], com SQR_R do modelo para todo o período e SQR₁ e SQR₂ dos modelos de 2012 a 2017 e de 2018 a 2021 (corte em 2017; o corte de 2016 compara 2012 a 2016 com 2017 a 2021); graus de liberdade 6 e 278. H0: os coeficientes são iguais nos dois períodos.
-- **Durbin-Watson:** d = Σ_{t=2}^{10} (û_t − û_{t−1})² / Σ_{t=1}^{10} û_t², calculado com os resíduos de cada município. Decisão: d < dL, autocorrelação positiva; dL ≤ d ≤ dU, inconclusivo; d > dU, não se rejeita a ausência de autocorrelação positiva.
-- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo de cada município sobre uma constante e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade. É uma versão reduzida do teste, sem os regressores, porque a série de cada município tem dez anos; o primeiro resíduo defasado é preenchido com zero (padrão do `lmtest`), e, se for descartado, rejeitam 5 municípios em vez de 3, o que mostra a sensibilidade do teste com dez observações.
+- **Durbin-Watson:** d = Σ_{t=2}^{10} (û_t − û_{t−1})² / Σ_{t=1}^{10} û_t², calculado com os resíduos de cada município. Zonas de decisão: d < dL, autocorrelação positiva; d > 4 − dL, autocorrelação negativa; dU < d < 4 − dU, não se rejeita a ausência de autocorrelação; nas demais, o teste é inconclusivo. Como dU = 2,822 é maior que 2, a zona de não rejeição é vazia para n = 10 e k' = 5. A tabela supõe uma regressão com 10 observações e 5 regressores; aqui os resíduos vêm do modelo de 290 observações, e dL e dU são aproximações.
+- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo de cada município sobre uma constante e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade. É uma versão reduzida do teste, sem os regressores, porque a série de cada município tem dez anos. Como em GUJARATI (2003, p. 501 do PDF), a regressão auxiliar usa n − p observações (o primeiro resíduo defasado é descartado) e a estatística é (n − p)·R²; com o primeiro defasado preenchido com zero (padrão do `lmtest`), rejeitam 3 municípios em vez de 5, o que mostra a sensibilidade do teste com dez observações.
 - **White:** LM = n·R² da regressão auxiliar de û² sobre os regressores, seus quadrados e produtos cruzados (20 termos), com distribuição qui-quadrado de 20 graus de liberdade.
 - **F geral com erro de White:** F = b'V⁻¹b / q, com b as q = 5 inclinações e V o bloco correspondente da matriz HC1.
 
@@ -211,11 +211,13 @@ O F geral com a matriz de White (HC1) é 92,83 (gl 5 e 284; p < 0,0001), próxim
 
 ### 5.2 Hipóteses
 
-- **H1 (escolaridade, positiva):** confirmada. Coeficiente de +0,0150, p < 0,0001.
-- **H2 (industrialização, positiva):** confirmada. Coeficiente de +0,0055, p < 0,0001.
-- **H3 (diversificação, Gini negativo):** confirmada no modelo principal. Coeficiente de −0,6548, p = 0,0001. Com as divisões com vínculo, −0,638, p = 0,0011. Ressalva: com o logaritmo dos vínculos ativos como controle de porte, o coeficiente deixa de ser significativo e muda de sinal (seção 5.4).
-- **H4 (Selic, exploratória):** associação positiva significativa, de +0,0065 (cerca de 0,66% por ponto percentual). Ressalva: a Selic tem 10 valores distintos (um por ano), o que limita a precisão do coeficiente.
-- **H5 (distância, negativa):** confirmada no modelo principal. Coeficiente de −0,0016 por km, p = 0,0033. Ressalva: com o controle de porte, o coeficiente cai para −0,0007 (p = 0,1748) e deixa de ser significativo (seção 5.4).
+A decisão de cada hipótese usa o teste t com erro de White, a 5%. Ressalva geral: as observações de um mesmo município não são independentes (72,9% da soma de quadrados dos resíduos está entre municípios), e o erro de White não trata essa dependência; os p-valores, sobretudo os de X5 (10 valores distintos) e X6 (29 valores), tendem a ser otimistas.
+
+- **H1 (escolaridade, positiva):** rejeita-se H0 (p < 0,0001), com o sinal esperado. Coeficiente de +0,0150.
+- **H2 (industrialização, positiva):** rejeita-se H0 (p < 0,0001), com o sinal esperado. Coeficiente de +0,0055.
+- **H3 (diversificação, Gini negativo):** rejeita-se H0 no modelo principal (p = 0,0001), com o sinal esperado. Coeficiente de −0,6548; com as divisões com vínculo, −0,638 (p = 0,0011). Ressalva: com o logaritmo dos vínculos ativos como controle de porte, o coeficiente deixa de ser significativo e muda de sinal (seção 5.4).
+- **H4 (Selic, exploratória):** rejeita-se H0 (p = 0,0003), com coeficiente positivo de +0,0065 (cerca de 0,66% por ponto percentual). Ressalva: a Selic tem 10 valores distintos (um por ano), o que limita a precisão do coeficiente.
+- **H5 (distância, negativa):** rejeita-se H0 no modelo principal (p = 0,0033), com o sinal esperado. Coeficiente de −0,0016 por km. Ressalva: com o controle de porte, o coeficiente cai para −0,0007 (p = 0,1748) e deixa de ser significativo (seção 5.4).
 
 [revisar: interpretação econômica de cada sinal, inclusive a leitura da H4 e a relação entre H3 e a diversificação.]
 
@@ -238,7 +240,7 @@ A TABELA 4 resume os diagnósticos do modelo principal.
 | Chow (corte em 2016) | F = 1,79, p = 0,102 | não rejeita quebra |
 | Durbin-Watson por município | mediana 0,25 | positiva em 14 de 29 municípios; 15 inconclusivos |
 | Durbin-Watson com resíduos centrados por município | mediana 1,16 | 1 município abaixo de dL |
-| Breusch-Godfrey por município | rejeita em 3 de 29 | APÊNDICE A |
+| Breusch-Godfrey por município | rejeita em 5 de 29 | APÊNDICE A |
 
 FONTE: O autor (2026). Detalhes por município no APÊNDICE A.
 
@@ -252,10 +254,10 @@ FONTE: O autor (2026).
 
 **Leitura dos diagnósticos.** Cada resultado muda a leitura dos coeficientes de uma forma específica:
 
-- **Heterocedasticidade (rejeitada):** os estimadores de mínimos quadrados continuam não tendenciosos, mas perdem eficiência e os testes t e F usuais podem deixar de valer (HASEGAWA, 2016b; 2017). Por isso a inferência usa erros-padrão de White. O Breusch-Pagan e o White rejeitam a homocedasticidade; o Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável, e ordenado pela industrialização (X3) ele rejeita (p = 0,0268), o que indica que a variância dos resíduos está ligada à industrialização.
-- **Forma funcional (RESET rejeita):** a relação linear em logaritmo pode omitir termos ou variáveis (HASEGAWA, 2022). Os coeficientes são lidos como aproximações lineares. O porte do município explica parte da não linearidade: ao incluir o logaritmo dos vínculos ativos, o F do RESET cai de 14,49 para 3,98 e o R² ajustado sobe de 0,6433 para 0,6744, mas o RESET ainda rejeita (TABELA 7).
-- **Autocorrelação positiva (14 de 29 municípios; 15 inconclusivos):** os estimadores seguem não tendenciosos e consistentes, mas deixam de ser eficientes, a variância residual tende a ser subestimada e os testes t e F perdem validade (HASEGAWA, 2017). Com apenas dez anos por município, o teste de Durbin-Watson tem poder limitado, o que explica o grande número de resultados inconclusivos. Parte da autocorrelação aparente vem de o modelo empilhado não captar diferenças persistentes entre municípios: em 16 dos 29 municípios os dez resíduos têm o mesmo sinal, o que ajuda a explicar por que o Durbin-Watson aponta 14 municípios e o Breusch-Godfrey apenas 3. Com os resíduos centrados na média de cada município, o Durbin-Watson mediano passa de 0,25 para 1,16 e só 1 município fica abaixo de dL; 72,9% da soma de quadrados dos resíduos está entre municípios. Os valores dL e dU da tabela D.5A são aproximados neste caso, porque X6 não varia no tempo dentro do município.
-- **Estabilidade (Chow não rejeita em 2016 nem em 2017):** não há evidência de que os coeficientes mudem entre os dois subperíodos, o que sustenta o uso de um único modelo para todo o período.
+- **Heterocedasticidade (rejeitada):** os estimadores de mínimos quadrados continuam não tendenciosos, mas perdem eficiência e os testes t e F usuais podem deixar de valer (HASEGAWA, 2016b; 2017). Por isso a inferência usa erros-padrão de White. O Breusch-Pagan e o White rejeitam a homocedasticidade; o Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável, e ordenado pela industrialização (X3) ele rejeita (p = 0,0268), indício de que a variância dos resíduos está ligada à industrialização; como são cinco ordenações e uma só rejeição, o resultado não resiste a um ajuste por testes múltiplos (0,05/5 = 0,01 por teste).
+- **Forma funcional (RESET rejeita):** a relação linear em logaritmo pode omitir termos ou variáveis (HASEGAWA, 2022). Os coeficientes são lidos como aproximações lineares. O porte do município explica parte da não linearidade: ao incluir o logaritmo dos vínculos ativos, o F do RESET cai de 14,49 para 3,98 e o R² ajustado sobe de 0,6433 para 0,6744, mas o RESET ainda rejeita (TABELA 6).
+- **Autocorrelação positiva (14 de 29 municípios; 15 inconclusivos):** os estimadores seguem não tendenciosos e consistentes, mas deixam de ser eficientes, a variância residual tende a ser subestimada e os testes t e F perdem validade (HASEGAWA, 2017). Como dU = 2,822 é maior que 2, a tabela D.5A não tem zona de não rejeição para n = 10 e k' = 5, e cada município fica em autocorrelação positiva ou inconclusivo; por isso há 15 inconclusivos. Parte da autocorrelação aparente vem de o modelo empilhado não captar diferenças persistentes entre municípios: em 16 dos 29 municípios os dez resíduos têm o mesmo sinal, o que ajuda a explicar por que o Durbin-Watson aponta 14 municípios e o Breusch-Godfrey 5. Com os resíduos centrados na média de cada município, o Durbin-Watson mediano passa de 0,25 para 1,16 e só 1 município fica abaixo de dL; 72,9% da soma de quadrados dos resíduos está entre municípios. Os valores dL e dU da tabela D.5A são aproximados neste caso: a tabela supõe uma regressão com 10 observações e 5 regressores, e os resíduos vêm do modelo de 290 observações, com X6 constante e X5 comum a todos os municípios.
+- **Estabilidade (Chow não rejeita em 2016 nem em 2017):** o teste, sob as hipóteses de variâncias iguais e erros independentes que este trabalho põe em dúvida, não indica mudança nos coeficientes entre os dois subperíodos; a leitura é cautelosa.
 
 A cauda positiva dos resíduos vem de poucas observações: os cinco maiores resíduos são de Adrianópolis (2013 a 2015) e de Araucária (2012 e 2013), municípios com participação industrial atípica, e o maior em módulo é de 4,79 erros-padrão (Adrianópolis, 2014). A FIGURA 6 mostra os resíduos contra cada regressor.
 
@@ -265,13 +267,13 @@ A cauda positiva dos resíduos vem de poucas observações: os cinco maiores res
 
 FONTE: O autor (2026). A linha escura é uma suavização.
 
-A rejeição da normalidade, mostrada na FIGURA 5, é tratada como limitação: com 290 observações, a inferência por erros de White não depende da normalidade [revisar: a relação entre o tamanho da amostra e a validade dos testes, com referência]. A rejeição do RESET e a autocorrelação positiva são limitações do modelo. [aguardando orientação do professor: tratamento da normalidade e da forma funcional rejeitadas, que pode alterar esta subseção.]
+A rejeição da normalidade, mostrada na FIGURA 5, é tratada como limitação: a aproximação de amostras grandes dispensa a normalidade dos erros, mas exige observações independentes, o que só vale em parte aqui [revisar: a relação entre o tamanho da amostra e a validade dos testes, com referência]. A rejeição do RESET e a autocorrelação positiva são limitações do modelo. [aguardando orientação do professor: tratamento da normalidade e da forma funcional rejeitadas, que pode alterar esta subseção.]
 
 ### 5.4 Robustez
 
-Foram feitas três verificações, resumidas na TABELA 6. Primeira, o Gini calculado só com as divisões que têm vínculo mantém o sinal (−0,638; p = 0,0011). Segunda, sem as duas observações de Araucária com VAB da indústria negativo (N = 288), o coeficiente do Gini passa de −0,6548 para −0,4992 e segue significativo (p = 0,0001), e os demais coeficientes mantêm sinal e significância. Terceira, o Gini setorial tem correlação de −0,88 com o logaritmo dos vínculos ativos do município, isto é, acompanha o porte; ao incluir esse logaritmo como controle, o coeficiente do Gini passa a +0,2579 (p = 0,1293) e o da distância deixa de ser significativo (p = 0,1748), enquanto escolaridade, industrialização e Selic mantêm sinal e significância.
+Foram feitas três verificações. Primeira, o Gini calculado só com as divisões que têm vínculo mantém o sinal (−0,638; p = 0,0011). As outras duas estão na TABELA 5. Segunda, sem as duas observações de Araucária com VAB da indústria negativo (N = 288), o coeficiente do Gini passa de −0,6548 para −0,4992 e segue significativo (p = 0,0001), e os demais coeficientes mantêm sinal e significância. Terceira, o Gini setorial tem correlação de −0,88 com o logaritmo dos vínculos ativos do município, isto é, acompanha o porte; ao incluir esse logaritmo como controle, o coeficiente do Gini passa a +0,2579 (p = 0,1293) e o da distância deixa de ser significativo (p = 0,1748), enquanto escolaridade, industrialização e Selic mantêm sinal e significância.
 
-**TABELA 6 - Robustez do Gini e da distância: controle de porte e exclusão de observações**
+**TABELA 5 - Robustez do Gini e da distância: controle de porte e exclusão de observações**
 
 | Especificação | Gini setorial: coeficiente (p-valor) | Distância: coeficiente (p-valor) | N | R² ajustado |
 |---|---|---|---|---|
@@ -283,9 +285,9 @@ FONTE: O autor (2026). Erros-padrão de White (HC1).
 
 Assim, H3 se sustenta no modelo principal, mas não resiste ao controle do porte: a medida pode estar captando o tamanho do município e não apenas a diversificação. [aguardando orientação do professor: decidir se o porte entra no modelo principal.]
 
-A TABELA 7 repete os diagnósticos com termos adicionais, em resposta à rejeição do RESET.
+A TABELA 6 repete os diagnósticos com termos adicionais, em resposta à rejeição do RESET.
 
-**TABELA 7 - Reespecificação da forma funcional e do porte: ajuste e diagnósticos**
+**TABELA 6 - Reespecificação da forma funcional e do porte: ajuste e diagnósticos**
 
 | Especificação | R² ajustado | AIC | RESET: F (p-valor) | Shapiro-Wilk: W | Gini: coeficiente (p-valor) |
 |---|---|---|---|---|---|
@@ -294,15 +296,15 @@ A TABELA 7 repete os diagnósticos com termos adicionais, em resposta à rejeiç
 | Mais ln dos vínculos ativos (porte) | 0,6744 | −413,76 | 3,98 (0,0197) | 0,8567 | +0,2579 (0,1293) |
 | Quadrados de X2 e X3 e porte | 0,7041 | −439,54 | 3,59 (0,0288) | 0,8868 | +0,2019 (0,3246) |
 
-FONTE: O autor (2026). O RESET rejeita a forma linear em todas as versões; a inclusão do porte é a que mais reduz a estatística, e o Shapiro-Wilk rejeita a normalidade em todas.
+FONTE: O autor (2026). O RESET rejeita a forma linear em todas as versões; a inclusão do porte reduz a estatística de 14,49 para 3,98, e os quadrados mais o porte, para 3,59; o Shapiro-Wilk rejeita a normalidade em todas.
 
 O modelo principal permanece como o definido pelas hipóteses do trabalho; as versões ampliadas servem de sensibilidade. O porte melhora o ajuste e reduz a estatística do RESET, mas muda o resultado de H3.
 
 ### 5.5 Previsão de 2021
 
-A TABELA 5 apresenta a previsão de 2021 para três cenários da Selic.
+A TABELA 7 apresenta a previsão de 2021 para três cenários da Selic.
 
-**TABELA 5 - Previsão da média do salário real em 2021, com correção de viés**
+**TABELA 7 - Previsão da média do salário real em 2021, com correção de viés**
 
 | Cenário | Selic (% a.a.) | Média prevista com correção (R$) |
 |---|---|---|
@@ -340,9 +342,9 @@ Mais dez quilômetros de distância associam-se a salário cerca de 1,6% menor (
 
 ### 6.6 Limitações e pontos de atenção
 
-Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário mantém o sinal nas duas definições da variável, mas depende da forma como ela é construída e não resiste ao controle do porte do município. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas (a significância da distância, porém, não resiste ao controle de porte), mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, que não é sustentada pelo emprego formal daquele ano. Além disso, os resultados são associações, não efeitos causais.
+Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário mantém o sinal nas duas definições da variável, mas depende da forma como ela é construída e não resiste ao controle do porte do município. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas (a significância da distância, porém, não resiste ao controle de porte), mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, compatível com o aumento do emprego na indústria extrativa de 2012 a 2015, mas não confirmada. Além disso, os resultados são associações, não efeitos causais.
 
-**Endogeneidade e variável omitida.** Há três razões para não ler os coeficientes como efeitos. Primeira, simultaneidade: salário e escolaridade se determinam juntos, porque municípios que pagam mais tendem a atrair trabalhadores mais escolarizados, e o VAB da indústria inclui a massa salarial do setor, o que liga X3 ao salário pela própria definição. Segunda, variável omitida: o porte do município tem correlação de −0,88 com o Gini e se associa ao salário, e sua inclusão muda o resultado de H3 (TABELA 6); outros fatores locais, como a composição por ocupação, não estão no modelo. Terceira, medição: a Selic real tem um só valor por ano e a distância é medida entre centroides. Sem instrumentos nem diferenças entre municípios no modelo, que ficam fora do escopo da disciplina, os resultados são associações. [revisar: interpretação a cargo do pesquisador.]
+**Endogeneidade e variável omitida.** Há três razões para não ler os coeficientes como efeitos. Primeira, simultaneidade: salário e escolaridade se determinam juntos, porque municípios que pagam mais tendem a atrair trabalhadores mais escolarizados, e o VAB da indústria inclui a massa salarial do setor, o que liga X3 ao salário pela própria definição. Segunda, variável omitida: o porte do município tem correlação de −0,88 com o Gini e se associa ao salário, e sua inclusão muda o resultado de H3 (TABELA 5); outros fatores locais, como a composição por ocupação, não estão no modelo. Terceira, medição: a Selic real tem um só valor por ano e a distância é medida entre centroides. Sem instrumentos nem diferenças entre municípios no modelo, que ficam fora do escopo da disciplina, os resultados são associações. [revisar: interpretação a cargo do pesquisador.]
 
 ### 6.7 Contribuição do trabalho
 
@@ -367,19 +369,19 @@ BRASIL DE FATO. Moradores de Adrianópolis (PR) denunciam Supremo Secil Cimentos
 
 GUJARATI, Damodar N. *Basic econometrics*. 4. ed. Boston: McGraw-Hill/Irwin, 2003. [PDF local consultado; a 4ª edição tem Gujarati como único autor; páginas citadas são do PDF.]
 
-HASEGAWA, Marcos Minoru. 2016a. *Multicolinearidade*. Slides de aula, Curso de Ciências Econômicas, Universidade Federal do Paraná, 10 nov. 2016. Baseado em Gujarati e Porter (2011, cap. 10).
-
-HASEGAWA, Marcos Minoru. 2016b. *Heterocedasticidade*. Slides de aula, Curso de Ciências Econômicas, Universidade Federal do Paraná, 17 nov. 2016. Baseado em Gujarati e Porter (2011, cap. 11).
-
-HASEGAWA, Marcos Minoru. 2017. *Autocorrelação*. Slides de aula, Curso de Ciências Econômicas, Universidade Federal do Paraná, 9 out. 2017. Baseado em Gujarati e Porter (2011, cap. 11).
-
-HASEGAWA, Marcos Minoru. 2020. *Medidas de desigualdade*: Hoffmann (2006, cap. 17). Slides de aula, disciplina Estatística Econômica e Introdução à Econometria, Curso de Ciências Econômicas, Universidade Federal do Paraná, 6 nov. 2020. 61 slides.
-
-HASEGAWA, Marcos Minoru. 2022. *Modelagem: especificação e diagnóstico*. Slides de aula, Curso de Ciências Econômicas, Universidade Federal do Paraná, 8 maio 2022. Baseado em Gujarati e Porter (2011, cap. 13).
-
-HASEGAWA, Marcos Minoru. 2024. *Teste de Chow*. Slides de aula, Curso de Ciências Econômicas, Universidade Federal do Paraná, 30 out. 2024. Baseado em Gujarati e Porter (2011, cap. 8).
-
 GUJARATI, Damodar N.; PORTER, Dawn C. *Econometria básica*. 5. ed. Porto Alegre: AMGH, 2011. [citado nas aulas; a edição usada nas aulas não foi consultada neste trabalho; revisar a referência.]
+
+HASEGAWA, Marcos Minoru. *Multicolinearidade*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 10 nov. 2016a. Baseado em Gujarati e Porter (2011, cap. 10).
+
+HASEGAWA, Marcos Minoru. *Heterocedasticidade*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 17 nov. 2016b. Baseado em Gujarati e Porter (2011, cap. 11).
+
+HASEGAWA, Marcos Minoru. *Autocorrelação*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 9 out. 2017. Baseado em Gujarati e Porter (2011, cap. 12; o título do slide indica cap. 11, mas as figuras são do cap. 12).
+
+HASEGAWA, Marcos Minoru. *Medidas de desigualdade*: Hoffmann (2006, cap. 17). Slides de aula, disciplina Estatística Econômica e Introdução à Econometria. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 6 nov. 2020. 61 slides.
+
+HASEGAWA, Marcos Minoru. *Modelagem: especificação e diagnóstico*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 8 maio 2022. Baseado em Gujarati e Porter (2011, cap. 13).
+
+HASEGAWA, Marcos Minoru. *Teste de Chow*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 30 out. 2024. Baseado em Gujarati e Porter (2011, cap. 8).
 
 HOFFMANN, Rodolfo. *Estatística para economistas*. 4. ed. rev. e ampl. São Paulo: Pioneira Thomson Learning, 2006. Cap. 17, Medidas de desigualdade. [editora a confirmar: catálogos indicam Cengage Learning para a mesma edição, ISBN 9788522104949.]
 
@@ -395,41 +397,41 @@ MINISTÉRIO DO TRABALHO. *Relação Anual de Informações Sociais (RAIS)*: micr
 
 ## APÊNDICE A - Autocorrelação por município (Durbin-Watson e Breusch-Godfrey)
 
-Objetivo: verificar a autocorrelação dos resíduos dentro de cada município, na série de 10 anos. Durbin-Watson com H0 de ausência de autocorrelação positiva, com dL = 0,243 e dU = 2,822 (n = 10, k = 5, 5%); Breusch-Godfrey de ordem 1, com H0 de ausência de autocorrelação de ordem 1, a 5%.
+Objetivo: verificar a autocorrelação dos resíduos dentro de cada município, na série de 10 anos. Durbin-Watson com H0 de ausência de autocorrelação positiva, com dL = 0,243 e dU = 2,822 (n = 10, k = 5, 5%); Breusch-Godfrey de ordem 1, com H0 de ausência de autocorrelação de ordem 1, a 5%, com n − p observações e estatística (n − p)·R², como no Gujarati. Como dU > 2, a zona de não rejeição do Durbin-Watson é vazia: cada município fica em autocorrelação positiva ou em inconclusivo.
 
 **QUADRO A.1 - Durbin-Watson e Breusch-Godfrey por município**
 
 | Município | DW | Decisão (DW) | Breusch-Godfrey p | Decisão (BG) |
 |---|---|---|---|---|
-| Adrianópolis | 0,08 | positiva | 0,022 | rejeita H0 |
-| Agudos do Sul | 0,37 | inconclusiva | 0,864 | não rejeita H0 |
-| Almirante Tamandaré | 0,08 | positiva | 0,664 | não rejeita H0 |
-| Araucária | 0,11 | positiva | 0,024 | rejeita H0 |
-| Balsa Nova | 0,78 | inconclusiva | 0,338 | não rejeita H0 |
-| Bocaiúva do Sul | 0,69 | inconclusiva | 0,417 | não rejeita H0 |
-| Campina Grande do Sul | 0,09 | positiva | 0,606 | não rejeita H0 |
-| Campo do Tenente | 0,55 | inconclusiva | 0,051 | não rejeita H0 |
-| Campo Largo | 0,07 | positiva | 0,423 | não rejeita H0 |
-| Campo Magro | 0,53 | inconclusiva | 0,115 | não rejeita H0 |
-| Cerro Azul | 0,21 | positiva | 0,051 | não rejeita H0 |
-| Colombo | 0,27 | inconclusiva | 0,265 | não rejeita H0 |
-| Contenda | 1,53 | inconclusiva | 0,859 | não rejeita H0 |
-| Curitiba | 0,08 | positiva | 0,173 | não rejeita H0 |
-| Fazenda Rio Grande | 0,25 | inconclusiva | 0,521 | não rejeita H0 |
-| Itaperuçu | 0,66 | inconclusiva | 0,381 | não rejeita H0 |
-| Lapa | 0,84 | inconclusiva | 0,720 | não rejeita H0 |
-| Mandirituba | 0,14 | positiva | 0,136 | não rejeita H0 |
-| Piên | 0,70 | inconclusiva | 0,049 | rejeita H0 |
-| Pinhais | 0,74 | inconclusiva | 0,167 | não rejeita H0 |
-| Piraquara | 0,09 | positiva | 0,114 | não rejeita H0 |
-| Quatro Barras | 0,20 | positiva | 0,680 | não rejeita H0 |
-| Quitandinha | 0,13 | positiva | 0,502 | não rejeita H0 |
-| Rio Branco do Sul | 0,09 | positiva | 0,941 | não rejeita H0 |
-| Rio Negro | 0,08 | positiva | 0,375 | não rejeita H0 |
-| São José dos Pinhais | 0,05 | positiva | 0,162 | não rejeita H0 |
-| Tijucas do Sul | 1,28 | inconclusiva | 0,432 | não rejeita H0 |
-| Tunas do Paraná | 0,76 | inconclusiva | 0,054 | não rejeita H0 |
-| Doutor Ulysses | 0,68 | inconclusiva | 0,833 | não rejeita H0 |
+| Adrianópolis | 0,08 | positiva | 0,030 | rejeita H0 |
+| Agudos do Sul | 0,37 | inconclusiva | 0,357 | não rejeita H0 |
+| Almirante Tamandaré | 0,08 | positiva | 0,322 | não rejeita H0 |
+| Araucária | 0,11 | positiva | 0,006 | rejeita H0 |
+| Balsa Nova | 0,78 | inconclusiva | 0,285 | não rejeita H0 |
+| Bocaiúva do Sul | 0,69 | inconclusiva | 0,436 | não rejeita H0 |
+| Campina Grande do Sul | 0,09 | positiva | 0,529 | não rejeita H0 |
+| Campo do Tenente | 0,55 | inconclusiva | 0,054 | não rejeita H0 |
+| Campo Largo | 0,07 | positiva | 0,428 | não rejeita H0 |
+| Campo Magro | 0,53 | inconclusiva | 0,134 | não rejeita H0 |
+| Cerro Azul | 0,21 | positiva | 0,025 | rejeita H0 |
+| Colombo | 0,27 | inconclusiva | 0,103 | não rejeita H0 |
+| Contenda | 1,53 | inconclusiva | 0,813 | não rejeita H0 |
+| Curitiba | 0,08 | positiva | 0,197 | não rejeita H0 |
+| Fazenda Rio Grande | 0,25 | inconclusiva | 0,135 | não rejeita H0 |
+| Itaperuçu | 0,66 | inconclusiva | 0,294 | não rejeita H0 |
+| Lapa | 0,84 | inconclusiva | 0,731 | não rejeita H0 |
+| Mandirituba | 0,14 | positiva | 0,034 | rejeita H0 |
+| Piên | 0,70 | inconclusiva | 0,053 | não rejeita H0 |
+| Pinhais | 0,74 | inconclusiva | 0,187 | não rejeita H0 |
+| Piraquara | 0,09 | positiva | 0,046 | rejeita H0 |
+| Quatro Barras | 0,20 | positiva | 0,576 | não rejeita H0 |
+| Quitandinha | 0,13 | positiva | 0,314 | não rejeita H0 |
+| Rio Branco do Sul | 0,09 | positiva | 0,377 | não rejeita H0 |
+| Rio Negro | 0,08 | positiva | 0,233 | não rejeita H0 |
+| São José dos Pinhais | 0,05 | positiva | 0,184 | não rejeita H0 |
+| Tijucas do Sul | 1,28 | inconclusiva | 0,461 | não rejeita H0 |
+| Tunas do Paraná | 0,76 | inconclusiva | 0,065 | não rejeita H0 |
+| Doutor Ulysses | 0,68 | inconclusiva | 0,555 | não rejeita H0 |
 
 FONTE: O autor (2026), a partir de `resultados_econometricos/autocorrelacao_por_municipio.csv`.
 
@@ -443,7 +445,7 @@ FONTE: O autor (2026), a partir da API de localidades do IBGE (composição ofic
 
 ## APÊNDICE C - Memorial do modelo principal
 
-Resumo do memorial matricial (arquivo completo em `resultados_econometricos/memorial_modelo_2.txt`). O estimador é b = (X'X)⁻¹X'y; a variância residual é s² = SQR/(n − k) = 4,2408/284 = 0,0149; R² = 0,6495 e R² ajustado = 0,6433.
+Resumo do memorial matricial (arquivo completo em `resultados_econometricos/memorial_modelo_2.txt`). No memorial, os coeficientes seguem a numeração do Gujarati, com b1 igual ao intercepto: b1 = β0, b2 = β1 (X2), e assim por diante. O estimador é b = (X'X)⁻¹X'y; a variância residual é s² = SQR/(n − k) = 4,2408/284 = 0,0149; R² = 0,6495 e R² ajustado = 0,6433.
 
 **QUADRO C.1 - Análise de variância do modelo principal**
 
@@ -487,4 +489,4 @@ A matriz de White é V = [n/(n − k)] (X'X)⁻¹ (Σ û_i² x_i x_i') (X'X)⁻�
 | X5 Selic real | 0,00207 | 0,00179 | 0,8620 |
 | X6 distância | 0,00046 | 0,00053 | 1,1526 |
 
-FONTE: O autor (2026), a partir de `resultados_econometricos/memorial_modelo_2_*.csv`. Erros clássicos.
+FONTE: O autor (2026), a partir de `resultados_econometricos/memorial_modelo_2_*.csv` e `f_incremental_robusto.csv` (quadros C.1 a C.3) e de `coeficientes_modelos.csv` (quadro C.4). Erros clássicos, salvo indicação; o quadro C.4 traz cinco casas decimais para mostrar a diferença entre as matrizes.

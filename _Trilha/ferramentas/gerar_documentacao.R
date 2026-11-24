@@ -151,10 +151,9 @@ gravar("00_resumo.md", c(
   sprintf("- Quebra estrutural (Chow, corte em 2017, indicado pelo gráfico): F = %s, p-valor %s (não rejeita).",
           f2(chow$estatistica_f[grepl("indicado", chow$teste)]), fp(chow$p_valor[grepl("indicado", chow$teste)])), "",
   "## Projeção de 2021 (previsão dentro da amostra)", "", md(tab_proj), "",
-  "## Pendências", "",
-  "- Gini (X4): fórmula da aula sobre medidas de desigualdade e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.",
-  "- Confirmação de métodos pelo professor: tratamento da forma funcional (RESET) e da normalidade.",
-  "- Recorte temporal: 2012 a 2021, mantido. Eventuais mudanças de recorte exigiriam reexecutar o pipeline e atualizar a documentação.", ""
+  "## Escolhas de construção", "",
+  "- Gini (X4): fórmula da aula sobre medidas de desigualdade (Hasegawa, 2020) e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.",
+  "- Recorte temporal: 2012 a 2021. O VAB setorial municipal está publicado até 2021 e aparece como não disponível para 2022 e 2023; mudar o recorte exige reexecutar o pipeline e atualizar a documentação.", ""
 ))
 
 # ---- 01 dados e variáveis
@@ -172,7 +171,7 @@ gravar("01_dados_e_variaveis.md", c(
   "| Deflator | IBGE, IPCA (série 433 do Banco Central) | Salários em reais de 2021 |", "",
   "## Variáveis e estatísticas descritivas", "", md(desc), "",
   "Observação: VAB industrial negativo em Araucária (2012 e 2013), mantido como publicado pelo IBGE e marcado no painel. Adrianópolis tem salto da participação industrial entre 2014 e 2015, confirmado na fonte.", "",
-  "Os salários estão em reais de 2021. O logaritmo natural é usado porque os salários são positivos e a distribuição é assimétrica à direita; o coeficiente de uma variável explicativa então indica variação relativa (%) do salário."
+  "Os salários estão em reais de 2021. O logaritmo natural é usado porque os salários são positivos e a distribuição é assimétrica à direita; o coeficiente de uma variável explicativa então indica, de forma aproximada, a variação relativa do salário (100·b %); o valor exato é (exp(b) − 1) × 100 %."
 ))
 
 # ---- 02 especificação e métodos
@@ -182,12 +181,12 @@ gravar("02_especificacao_e_metodos.md", c(
   "ln(salário real)_it = β0 + β1 X2_it + β2 X3_it + β3 X4_it + β4 X5_t + β5 X6_i + u_it", "",
   "Estimação por mínimos quadrados ordinários (MQO) com as 290 observações empilhadas. Inferência com erros-padrão de White (HC1), com t de n − k graus de liberdade (284).", "",
   "## Hipóteses", "",
-  "H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização.",
-  "Ha: pelo menos uma dessas condições afeta o salário.", "",
+  "H0 geral: o salário médio real formal de um município não está associado à sua escolaridade, à sua industrialização, à sua diversificação setorial, à Selic real nem à sua distância a Curitiba.",
+  "Ha: pelo menos uma dessas características está associada ao salário.", "",
   "| Hipótese | Variável | Sinal esperado |", "|---|---|---|",
   "| H1 | escolaridade (X2) | positivo |",
   "| H2 | industrialização (X3) | positivo |",
-  "| H3 | diversificação setorial (X4, Gini invertido) | negativo para o Gini |",
+  "| H3 | diversificação setorial (X4, Gini setorial) | negativo para o Gini |",
   "| H4 | Selic real (X5) | exploratória, sem sinal único |",
   "| H5 | distância a Curitiba (X6) | negativo |", "",
   "Critério: rejeita-se H0 no coeficiente quando p < 0,05.", "",
@@ -196,7 +195,7 @@ gravar("02_especificacao_e_metodos.md", c(
   "| MQO e álgebra matricial | estimação e memorial | caps. 6 e 7 |",
   "| Erros-padrão de White (HC1) | inferência | cap. 11, p. 442 em diante |",
   "| Multicolinearidade (FIV e tolerância) | diagnóstico | cap. 10 |",
-  "| Breusch-Pagan-Godfrey | heterocedasticidade | cap. 11, pp. 439 e 440 |",
+  "| Breusch-Pagan-Godfrey (versão estudentizada, n R²) | heterocedasticidade | cap. 11, pp. 439 e 440; a versão ESS/2 do livro dá 44,74, com a mesma decisão |",
   "| Goldfeld-Quandt | heterocedasticidade | cap. 11, pp. 436 a 440 |",
   "| Teste geral de White | heterocedasticidade | cap. 11 e aula de heterocedasticidade |",
   "| Shapiro-Wilk e gráfico Q-Q | normalidade dos resíduos | orientação do professor |",
@@ -204,8 +203,8 @@ gravar("02_especificacao_e_metodos.md", c(
   "| Teste LM para tendência linear | variável omitida (ano) | cap. 13 |",
   "| Teste de Chow | quebra estrutural | cap. 8, pp. 303 a 309 |",
   "| Durbin-Watson (tabela D.5A) | autocorrelação, série de cada município | cap. 12, pp. 495 a 499; Apêndice D, p. 995 |",
-  "| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, pp. 499 e 500 |",
-  "| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | presunção da modelagem |", "",
+  "| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, p. 501 do PDF |",
+  "| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | orientação do professor (explicar o ano da projeção e a correção do viés) |", "",
   "## Projeção", "",
   "A projeção é uma previsão dentro da amostra para 2021, último ano com todas as variáveis publicadas. Não há previsão para 2026. A previsão é x0'b; o intervalo da média usa x0'(X'X)^-1 x0 σ², e o intervalo individual, σ²(1 + x0'(X'X)^-1 x0).", "",
   sprintf("Viés da retransformação: a média em reais é exp(previsão + s²/2) sob erros normais. Aplicamos o fator exp(s²/2) = %s. Como a normalidade é rejeitada, a correção é aproximada.", f4(fator_vies)), ""
@@ -238,7 +237,7 @@ gravar("04_diagnosticos.md", c(
   "## Multicolinearidade", "", md(tab_vif), "",
   "Regra ensinada: FIV maior que 10 indica multicolinearidade elevada. Nenhum regressor passa do limite.", "",
   "## Autocorrelação por município", "",
-  "Os testes são aplicados à série de dez anos de cada município, com os resíduos do modelo principal. Durbin-Watson com dL = 0,243 e dU = 2,822 (Tabela D.5A, n = 10, k = 5, 5%). Zonas de decisão: d < dL rejeita a ausência de autocorrelação positiva; dL ≤ d ≤ 4 − dL é inconclusivo; d > 4 − dL rejeita a ausência de autocorrelação negativa.", "",
+  "Os testes são aplicados à série de dez anos de cada município, com os resíduos do modelo principal. Durbin-Watson com dL = 0,243 e dU = 2,822 (Tabela D.5A, n = 10, k = 5, 5%). Zonas de decisão: d < dL, autocorrelação positiva; d > 4 − dL, autocorrelação negativa; dU < d < 4 − dU, não se rejeita a ausência de autocorrelação; nas demais zonas, o teste é inconclusivo. Como dU = 2,822 é maior que 2, a zona de não rejeição é vazia: cada município fica em autocorrelação positiva ou em inconclusivo, e os resultados inconclusivos decorrem da tabela, e não de falta de dados. A tabela supõe uma regressão com 10 observações e 5 regressores; aqui os resíduos vêm do modelo de 290 observações, e dL e dU são apenas aproximações. O Breusch-Godfrey segue o Gujarati (cap. 12): regressão auxiliar com n − p observações e estatística (n − p) R².", "",
   md(tab_aut_res), "",
   "A autocorrelação é declarada como limitação. Não há correção de painel no modelo principal.", "",
   "## Quebra estrutural (Chow)", "", md(tab_chow), "",
@@ -248,12 +247,12 @@ gravar("04_diagnosticos.md", c(
   "## Forma funcional (RESET)", "",
   sprintf("F = %s (gl %s), p-valor %s: rejeita a forma funcional linear. Declarado como limitação do modelo.", f2(reset$estatistica_f[1]), reset$gl[1], fp(reset$p_valor[1])), "",
   "## Normalidade dos resíduos", "",
-  sprintf("Shapiro-Wilk W = %s, p-valor %s: rejeita a normalidade. O gráfico Q-Q (figuras_graficos/diag5_normalidade_qq.png) mostra desvio nas duas caudas. Com 290 observações, a inferência é aproximadamente válida; a limitação é declarada.",
+  sprintf("Shapiro-Wilk W = %s, p-valor %s: rejeita a normalidade. O gráfico Q-Q (figuras_graficos/diag5_normalidade_qq.png) mostra desvio nas duas caudas. A aproximação de amostras grandes também exige observações independentes, o que não vale aqui: a maior parte da soma de quadrados dos resíduos está entre municípios. A limitação é declarada.",
           f4(norm$estatistica[1]), fp(norm$p_valor[1])), "",
   "## Heterocedasticidade", "", md(tab_test), "",
   "A inferência usa erros-padrão de White (HC1), que não dependem da forma da variância.", "",
   "## Heterocedasticidade: teste de White e Goldfeld-Quandt por outras variáveis", "", md(tab_hc), "",
-  "O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório.", "",
+  "O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório. O p-valor do Goldfeld-Quandt ordenado pela distância é unilateral (0,3885) na tabela de hipóteses e bilateral (0,7769) na tabela acima. Com cinco ordenações e uma só rejeição (p = 0,0268), a rejeição não sobrevive a um ajuste por testes múltiplos (0,05 dividido por 5 é 0,01); ela indica um indício, e não uma conclusão.", "",
   "## F geral com erro de White", "", md(tab_frob), "",
   "## F incremental por bloco, com erro de White", "", md(tab_finc), "",
   "O F geral com a matriz de White (HC1) usa F = b'V^-1 b / q para as q = 5 inclinações. A conclusão é a mesma do F clássico.", "",
@@ -275,9 +274,9 @@ gravar("05_limitacoes.md", c(
   "# Limitações", "",
   "- Desenho observacional: os coeficientes indicam associações, não efeitos causais.",
   "- A forma funcional linear é rejeitada pelo RESET; os coeficientes devem ser lidos com essa ressalva.",
-  "- A normalidade dos resíduos é rejeitada pelo Shapiro-Wilk. A inferência usa a aproximação de amostras grandes.",
+  "- A normalidade dos resíduos é rejeitada pelo Shapiro-Wilk. A aproximação de amostras grandes exige observações independentes, o que não vale aqui (a maior parte da variação dos resíduos está entre municípios), e a inferência com erro de White não trata essa dependência.",
   "- O porte do município é uma variável omitida relevante: o Gini setorial tem correlação de -0,88 com o logaritmo dos vínculos ativos e, com esse controle, perde a significância e muda de sinal (robustez_porte_e_negativos.csv). Salário e escolaridade podem se determinar juntos, e o VAB da indústria contém a massa salarial; os resultados são associações.",
-  "- O Breusch-Godfrey é aplicado à série de resíduos de cada município (constante e resíduo defasado), versão reduzida, porque a série tem dez anos. Sem preencher com zero o primeiro resíduo defasado, o número de municípios que rejeitam sobe de 3 para 5 (valor em autocorrelacao_heterogeneidade_resumo.csv), o que mostra que o resultado é sensível a esse tratamento com apenas dez observações.",
+  "- O Breusch-Godfrey é aplicado à série de resíduos de cada município (constante e resíduo defasado), versão reduzida, porque a série tem dez anos; segue o Gujarati (n − p observações) e rejeita em 5 municípios. Com o primeiro resíduo defasado preenchido com zero (padrão do lmtest), rejeita em 3: o resultado é sensível a esse tratamento com apenas dez observações.",
   "- Autocorrelação dentro dos municípios: o Durbin-Watson e o Breusch-Godfrey indicam autocorrelação em parte dos municípios. Não há correção no modelo principal; a limitação é declarada.",
   "- O Gini (X4) usa as 87 divisões da CNAE como unidades, com zeros incluídos. A aula e Hoffmann aplicam a medida a indivíduos; a adaptação é nossa. O índice depende do número de divisões com vínculo (correlação de −0,95).",
   "- A Selic (X5) tem 10 valores distintos, um por ano. Seu coeficiente trata 290 observações como independentes e tende a superestimar a precisão.",
@@ -308,7 +307,7 @@ gravar("06_fontes.md", c(
 gravar("07_criterios_da_disciplina.md", c(
   "# Critérios de correção", "",
   "Trabalho de Econometria I (UFPR). O modelo usa apenas métodos da disciplina: MQO, erros-padrão de White, testes t e F, multicolinearidade (FIV), heterocedasticidade (Breusch-Pagan-Godfrey, White e Goldfeld-Quandt), normalidade (Shapiro-Wilk), forma funcional (RESET e LM), quebra estrutural (Chow), autocorrelação por série (Durbin-Watson e Breusch-Godfrey) e previsão matricial.", "",
-  "Hipóteses formais (H0 e Ha) e critério de decisão a 5% em todos os testes. Resultados com quatro casas decimais. Memorial de cálculo em `memorial_modelo_2_*.csv`."))
+  "Hipóteses formais (H0 e Ha) e critério de decisão a 5% em todos os testes. Coeficientes e erros-padrão com quatro casas decimais; estatísticas de teste com duas casas nos resumos e com todas as casas nos arquivos CSV. Memorial de cálculo em `memorial_modelo_2_*.csv`."))
 
 # ---- Ambiente e dicionário
 amb <- data.frame(item = c("R", "pacotes principais", "sistema"),

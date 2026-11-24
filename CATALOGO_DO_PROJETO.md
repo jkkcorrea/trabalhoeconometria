@@ -65,8 +65,8 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
 | `02_tratamento_painel.R` | 31 KB | Script R: Etapa 2: tratamento dos dados brutos e construção do painel mestre |
 | `03_aede_visualizacoes.R` | 38 KB | Script R: Etapa 3: análise exploratória espacial e visualizações |
-| `04_modelagem_diagnosticos.R` | 17 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
-| `05_autocorrelacao_municipios.R` | 9 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
+| `04_modelagem_diagnosticos.R` | 18 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
+| `05_autocorrelacao_municipios.R` | 10 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
 | `06_especificacao_chow.R` | 17 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
@@ -114,10 +114,10 @@ Cada skill é uma pasta com `SKILL.md`.
 | `conferir_derivados.sh` | 1 KB | Script de shell |
 | `conferir_numeros.R` | 4 KB | Script R: Uso (na raiz do projeto): Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md |
 | `gerar_catalogo.R` | 6 KB | Script R: Gera CATALOGO_DO_PROJETO.md a partir do conteúdo real das pastas. |
-| `gerar_documentacao.R` | 30 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
+| `gerar_documentacao.R` | 31 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
 | `limpar_comentarios.R` | 8 KB | Script R |
 | `reconstruir_envio.sh` | 2 KB | Script de shell |
-| `verificar_envio.R` | 22 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
+| `verificar_envio.R` | 23 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
 
 ## Trilha de decisões e handoffs (`_Trilha/`)
 
@@ -159,8 +159,8 @@ Gerada; não editar à mão.
 |---|---|---|
 | `anova_f_modelo.csv` | 178 B | CSV, 1 linhas x 7 colunas: modelo, estatistica_f, gl_numerador, gl_denominador, p_valor, r2, r2_ajustado |
 | `autocorrelacao_heterogeneidade_municipios.csv` | 4 KB | CSV, 29 linhas x 8 colunas: id_municipio, nome_municipio, residuo_medio, todos_mesmo_sinal, durbin_watson, durbin_watson_centrado, decisao_dw, decisao_dw_centrado |
-| `autocorrelacao_heterogeneidade_resumo.csv` | 242 B | CSV, 1 linhas x 7 colunas: durbin_watson_mediano, durbin_watson_centrado_mediano, abaixo_dl, abaixo_dl_centrado, municipios_mesmo_sinal, bg_rejeita_sem_preenchimento, parcela_soma_quadrados_entre_municipios |
-| `autocorrelacao_por_municipio.csv` | 10 KB | CSV, 29 linhas x 13 colunas: id_municipio, nome_municipio, n, durbin_watson, decisao_dw_tabela, rho_auxiliar, breusch_godfrey_estatistica, breusch_godfrey_gl, … |
+| `autocorrelacao_heterogeneidade_resumo.csv` | 243 B | CSV, 1 linhas x 7 colunas: durbin_watson_mediano, durbin_watson_centrado_mediano, abaixo_dl, abaixo_dl_centrado, municipios_mesmo_sinal, bg_rejeita_preenchimento_zero, parcela_soma_quadrados_entre_municipios |
+| `autocorrelacao_por_municipio.csv` | 11 KB | CSV, 29 linhas x 14 colunas: id_municipio, nome_municipio, n, durbin_watson, decisao_dw_tabela, rho_auxiliar, breusch_godfrey_estatistica, breusch_godfrey_gl, … |
 | `autocorrelacao_resumo.csv` | 162 B | CSV, 1 linhas x 8 colunas: municipios, durbin_watson_mediano, rho_auxiliar_mediano, dw_positiva, dw_inconclusiva, dw_nao_rejeita, dw_negativa, breusch_godfrey_rejeita |
 | `chow_quebra_periodo.csv` | 721 B | CSV, 2 linhas x 12 colunas: modelo, corte, teste, hipotese_nula, hipotese_alternativa, n1, n2, k, … |
 | `coeficientes_modelos.csv` | 2 KB | CSV, 12 linhas x 10 colunas: modelo, matriz, termo, estimativa, erro_padrao, estatistica_t, p_valor, ic_inf_95, … |
@@ -202,7 +202,7 @@ Gerada; não editar à mão.
 | `diag7_residuos_vs_regressores.png` | 345 KB | Figura PNG |
 | `fig1_matriz_correlacao.png` | 271 KB | Figura PNG |
 | `fig2_ridgeplot_salario_anos.png` | 437 KB | Figura PNG |
-| `fig3_dispersao_capital_humano_industria.png` | 615 KB | Figura PNG |
+| `fig3_dispersao_capital_humano_industria.png` | 614 KB | Figura PNG |
 | `legenda_municipios_rmc.png` | 177 KB | Figura PNG |
 | `mapa1_painel_espacial_rmc.png` | 1.2 MB | Figura PNG |
 
@@ -212,12 +212,12 @@ Gerada; não editar à mão.
 |---|---|---|
 | `00_resumo.md` | 3 KB | Markdown: Resumo |
 | `01_dados_e_variaveis.md` | 2 KB | Markdown: Dados e variáveis |
-| `02_especificacao_e_metodos.md` | 2 KB | Markdown: Especificação e métodos |
+| `02_especificacao_e_metodos.md` | 3 KB | Markdown: Especificação e métodos |
 | `03_resultados_modelos.md` | 3 KB | Markdown: Resultados do modelo principal |
-| `04_diagnosticos.md` | 9 KB | Markdown: Diagnósticos do modelo principal |
+| `04_diagnosticos.md` | 10 KB | Markdown: Diagnósticos do modelo principal |
 | `05_limitacoes.md` | 2 KB | Markdown: Limitações |
 | `06_fontes.md` | 1 KB | Markdown: Fontes e referências |
-| `07_criterios_da_disciplina.md` | 582 B | Markdown: Critérios de correção |
+| `07_criterios_da_disciplina.md` | 689 B | Markdown: Critérios de correção |
 | `08_verificacao.md` | 4 KB | Markdown: Verificação do envio |
 | `ambiente_r.csv` | 226 B | CSV, 3 linhas x 2 colunas: item, valor |
 | `dicionario_variaveis.csv` | 1 KB | CSV, 21 linhas x 2 colunas: variavel, descricao |

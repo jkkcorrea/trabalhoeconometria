@@ -28,11 +28,11 @@ Regra ensinada: FIV maior que 10 indica multicolinearidade elevada. Nenhum regre
 
 ## Autocorrelação por município
 
-Os testes são aplicados à série de dez anos de cada município, com os resíduos do modelo principal. Durbin-Watson com dL = 0,243 e dU = 2,822 (Tabela D.5A, n = 10, k = 5, 5%). Zonas de decisão: d < dL rejeita a ausência de autocorrelação positiva; dL ≤ d ≤ 4 − dL é inconclusivo; d > 4 − dL rejeita a ausência de autocorrelação negativa.
+Os testes são aplicados à série de dez anos de cada município, com os resíduos do modelo principal. Durbin-Watson com dL = 0,243 e dU = 2,822 (Tabela D.5A, n = 10, k = 5, 5%). Zonas de decisão: d < dL, autocorrelação positiva; d > 4 − dL, autocorrelação negativa; dU < d < 4 − dU, não se rejeita a ausência de autocorrelação; nas demais zonas, o teste é inconclusivo. Como dU = 2,822 é maior que 2, a zona de não rejeição é vazia: cada município fica em autocorrelação positiva ou em inconclusivo, e os resultados inconclusivos decorrem da tabela, e não de falta de dados. A tabela supõe uma regressão com 10 observações e 5 regressores; aqui os resíduos vêm do modelo de 290 observações, e dL e dU são apenas aproximações. O Breusch-Godfrey segue o Gujarati (cap. 12): regressão auxiliar com n − p observações e estatística (n − p) R².
 
 | Modelo | Municípios | DW mediano | ρ auxiliar mediano | DW rejeita ausência de autocorrelação positiva | DW inconclusivo | Breusch-Godfrey rejeita (5%) |
 |---|---|---|---|---|---|---|
-| Modelo 2 (principal) | 29 | 0,2504 | 0,7337 | 14 | 15 | 3 |
+| Modelo 2 (principal) | 29 | 0,2504 | 0,7337 | 14 | 15 | 5 |
 
 A autocorrelação é declarada como limitação. Não há correção de painel no modelo principal.
 
@@ -53,7 +53,7 @@ F = 14,49 (gl 2; 282), p-valor < 0,0001: rejeita a forma funcional linear. Decla
 
 ## Normalidade dos resíduos
 
-Shapiro-Wilk W = 0,8618, p-valor < 0,0001: rejeita a normalidade. O gráfico Q-Q (figuras_graficos/diag5_normalidade_qq.png) mostra desvio nas duas caudas. Com 290 observações, a inferência é aproximadamente válida; a limitação é declarada.
+Shapiro-Wilk W = 0,8618, p-valor < 0,0001: rejeita a normalidade. O gráfico Q-Q (figuras_graficos/diag5_normalidade_qq.png) mostra desvio nas duas caudas. A aproximação de amostras grandes também exige observações independentes, o que não vale aqui: a maior parte da soma de quadrados dos resíduos está entre municípios. A limitação é declarada.
 
 ## Heterocedasticidade
 
@@ -75,7 +75,7 @@ A inferência usa erros-padrão de White (HC1), que não dependem da forma da va
 | Goldfeld-Quandt (fração central 0,2 omitida), ordenado por selic_real | 1,13 | 110; 110 | 0,5353 | não rejeita H0 |
 | Goldfeld-Quandt (fração central 0,2 omitida), ordenado por dist_curitiba_km | 1,06 | 110; 110 | 0,7769 | não rejeita H0 |
 
-O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório.
+O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório. O p-valor do Goldfeld-Quandt ordenado pela distância é unilateral (0,3885) na tabela de hipóteses e bilateral (0,7769) na tabela acima. Com cinco ordenações e uma só rejeição (p = 0,0268), a rejeição não sobrevive a um ajuste por testes múltiplos (0,05 dividido por 5 é 0,01); ela indica um indício, e não uma conclusão.
 
 ## F geral com erro de White
 

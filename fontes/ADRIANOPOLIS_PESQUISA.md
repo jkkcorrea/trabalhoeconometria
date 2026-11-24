@@ -10,7 +10,7 @@ Data da pesquisa: 23/11/2026.
 - Na mediana do RMC, a participação industrial fica em torno de 22% em 2015. O salto é restrito a Adrianópolis.
 - Vínculos formais (RAIS, cache do projeto), Adrianópolis:
 
-| Ano | Vínculos totais | Indústria (CNAE 10 a 33) | Minerais não metálicos (CNAE 23) | Construção (CNAE 41) |
+| Ano | Vínculos totais | Transformação (CNAE 10 a 33) | Minerais não metálicos (CNAE 23) | Construção (CNAE 41) |
 |---|---|---|---|---|
 | 2012 | 788 | 30 | 18 | 4 |
 | 2013 | 918 | 33 | 22 | 13 |
@@ -19,6 +19,18 @@ Data da pesquisa: 23/11/2026.
 | 2016 | 883 | 14 | 14 | 1 |
 | 2017 | 1.010 | 186 | 186 | 16 |
 | 2018 | 1.042 | 202 | 194 | 23 |
+
+Vínculos ativos por grupo de divisões da CNAE, Adrianópolis (RAIS, cache do projeto, conferido em 24/11/2026):
+
+| Ano | Extrativa (05 a 09) | Transformação (10 a 33) | Utilidades (35 a 39) | Construção (41 a 43) |
+|---|---|---|---|---|
+| 2012 | 66 | 30 | 7 | 4 |
+| 2013 | 140 | 33 | 6 | 13 |
+| 2014 | 201 | 28 | 6 | 2 |
+| 2015 | 260 | 15 | 5 | 7 |
+| 2016 | 256 | 14 | 5 | 1 |
+| 2017 | 64 | 186 | 6 | 20 |
+| 2018 | 50 | 202 | 76 | 24 |
 
 ## O que as fontes dizem
 
@@ -33,7 +45,7 @@ Data da pesquisa: 23/11/2026.
 
 A fábrica começou a operar no fim de 2015, então a hipótese de que ela explique o VAB industrial de 2015 é plausível, mas não confirmada:
 
-1. O emprego formal da indústria em Adrianópolis não cresce em 2015 (15 vínculos industriais), e só aparece em 2017 (186). Um VAB industrial dez vezes maior em 2015 sem emprego correspondente é inconsistente com uma operação já em produção.
+1. Correção de 24/11/2026: a leitura anterior usava só a indústria de transformação (divisões 10 a 33), que não cresce até 2017. A indústria do IBGE inclui também a extrativa (divisões 05 a 09), e nela o emprego formal de Adrianópolis sobe de 66 (2012) para 260 (2015) e cai para 64 (2017), quando a divisão 23 (minerais não metálicos) salta de 14 para 186. Isso é compatível com a hipótese da cimenteira (extração de calcário antes da fábrica, depois a fábrica), mas não a confirma.
 2. Um possível componente é a construção da fábrica em 2014 e 2015. O VAB da construção entra no VAB da indústria na classificação do IBGE. Não há como separar essa parcela com os dados do projeto.
 3. A causa precisa de conferência na metodologia do IBGE para o VAB municipal de 2015 (a fonte mais direta).
 

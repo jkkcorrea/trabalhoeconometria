@@ -28,4 +28,4 @@ Unidades: os 29 municípios da Região Metropolitana de Curitiba (código IBGE 0
 
 Observação: VAB industrial negativo em Araucária (2012 e 2013), mantido como publicado pelo IBGE e marcado no painel. Adrianópolis tem salto da participação industrial entre 2014 e 2015, confirmado na fonte.
 
-Os salários estão em reais de 2021. O logaritmo natural é usado porque os salários são positivos e a distribuição é assimétrica à direita; o coeficiente de uma variável explicativa então indica variação relativa (%) do salário.
+Os salários estão em reais de 2021. O logaritmo natural é usado porque os salários são positivos e a distribuição é assimétrica à direita; o coeficiente de uma variável explicativa então indica, de forma aproximada, a variação relativa do salário (100·b %); o valor exato é (exp(b) − 1) × 100 %.

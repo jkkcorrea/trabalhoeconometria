@@ -10,12 +10,12 @@
 #   - teste de Chow com o corte indicado pelo gráfico (2017) e com o corte anterior (2016), para comparação;
 #   - robustez da X4: Gini com 87 divisões e Gini só com as divisões com vínculo;
 #   - projeção para 2021 com a Selic observada e ±1 p.p. (previsão matricial), com a correção
-#     do viés da retransformação exp(ln) pelo fator exp(s²/2) [presunção da modelagem].
+#     do viés da retransformação exp(ln) pelo fator exp(s²/2) (orientação do professor de explicar a correção).
 #
 # Lê:    ./dados_processados/dados_painel_rmc.rds; ./dados_brutos/rais.rds (checagem do Gini)
 # Grava: ./resultados_econometricos/especificacao_reset.csv, especificacao_lm_tendencia.csv,
 #        chow_quebra_periodo.csv, medida_gini_checagem.csv, robustez_x4_definicao_gini.csv, robustez_porte_e_negativos.csv, reespecificacao_forma_funcional.csv,
-#        projecao_selic_m2.csv, efeito_selic_m2.csv
+#        projecao_selic_m2.csv, previsao_media_2021.csv, efeito_selic_m2.csv
 #        ./figuras_graficos/diag6_variaveis_no_tempo.png
 # =============================================================================
 

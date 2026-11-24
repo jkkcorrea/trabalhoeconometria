@@ -76,7 +76,7 @@ ANIM_DURACAO <- 15
 
 # Notas de fonte usadas nas legendas das figuras.
 FONTE_SALARIO <- "Salário: RAIS (Ministério do Trabalho), deflacionado pelo IPCA (série 433 do Banco Central), em R$ de 2021."
-FONTE_RAIS    <- "Escolaridade e concentração setorial: RAIS (Ministério do Trabalho)."
+FONTE_RAIS    <- "Escolaridade e Gini setorial: RAIS (Ministério do Trabalho)."
 FONTE_PIB     <- "Dominância industrial: PIB dos Municípios (IBGE, SIDRA)."
 FONTE_SELIC   <- "Selic real: Banco Central (séries 4390 e 433)."
 FONTE_MALHA   <- "Malha municipal e distância a Curitiba: IBGE."

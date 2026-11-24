@@ -48,7 +48,7 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 
 ## Como reproduzir
 1. `Rscript R/00_executar_tudo.R` (a partir da raiz) roda os scripts 02 a 07.
-2. Entrega completa: `bash _Trilha/ferramentas/reconstruir_envio.sh` (limpa, roda, gera documentação, verifica e gera o zip). A verificação atual passa em 26 de 26.
+2. Entrega completa: `bash _Trilha/ferramentas/reconstruir_envio.sh` (limpa, roda, gera documentação, verifica e gera o zip). A verificação atual passa em 29 de 29.
 
 ## Pendências (ver `_Trilha/BACKLOG.md`)
 - Recorte temporal: mantido em 2012 a 2021; mudanças registradas no arquivo de registro.

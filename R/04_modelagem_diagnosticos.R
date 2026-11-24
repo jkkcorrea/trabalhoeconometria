@@ -6,7 +6,9 @@
 #
 # Diagnósticos (Gujarati, 4ª ed.; slides da aula):
 #   - multicolinearidade: FIV e tolerância, regra FIV > 10 (Gujarati, cap. 10);
-#   - heterocedasticidade: Breusch-Pagan-Godfrey (bptest, studentized) e Goldfeld-Quandt (cap. 11);
+#   - heterocedasticidade: Breusch-Pagan-Godfrey na versão estudentizada de Koenker, n R^2 (bptest, studentized);
+#     a versão do Gujarati, ESS/2, dá 44,7388 (p < 0,0001) e a mesma decisão; teste de White e Goldfeld-Quandt (cap. 11);
+#     o Goldfeld-Quandt ordena as observações pela variável indicada e, havendo empate, mantém a ordem do painel;
 #   - normalidade dos resíduos: Shapiro-Wilk e gráfico Q-Q (orientação do professor);
 #   - inferência: erros-padrão clássicos e de White (HC1), com t de n - k graus de liberdade.
 #
@@ -16,9 +18,11 @@
 #        ./resultados_econometricos/vif_tolerancia.csv
 #        ./resultados_econometricos/anova_f_modelo.csv
 #        ./resultados_econometricos/normalidade_residuos.csv
+#        ./resultados_econometricos/testes_heterocedasticidade_complementares.csv, f_geral_robusto.csv,
+#        ./resultados_econometricos/f_incremental_robusto.csv, maiores_residuos.csv
 #        ./figuras_graficos/diag1_residuos_vs_ajustados.png
 #        ./figuras_graficos/diag2_residuos_por_municipio.png
-#        ./figuras_graficos/diag5_normalidade_qq.png
+#        ./figuras_graficos/diag5_normalidade_qq.png, diag7_residuos_vs_regressores.png
 # =============================================================================
 
 if (!dir.exists("R") || !dir.exists("dados_processados")) {

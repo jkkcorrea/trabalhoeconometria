@@ -47,7 +47,7 @@ esperado <- c("LEIAME.md", paste0("R/", SCRIPTS, ".R"),
 presentes <- sub(paste0("^", DIR, "/"), "", list.files(DIR, recursive = TRUE, full.names = TRUE))
 faltam <- setdiff(esperado, presentes)
 registrar("A1", "Arquivos essenciais presentes", length(faltam) == 0,
-          if (length(faltam)) paste(faltam, collapse = ", ") else sprintf("%d arquivos", length(esperado)))
+          if (length(faltam)) paste(faltam, collapse = ", ") else sprintf("%d arquivos esperados presentes; %d arquivos na pasta", length(esperado), length(presentes)))
 
 sobra <- presentes[grepl("^(resultados_econometricos|figuras_graficos|dados_brutos)/", presentes) & !(presentes %in% esperado)]
 registrar("A1b", "Sem arquivos de versões anteriores nos resultados, figuras e dados brutos", length(sobra) == 0,
@@ -81,6 +81,7 @@ registrar("A2", "Nenhum método fora do escopo ensinado nos scripts e documentos
           if (length(achados)) paste(head(unique(achados), 8), collapse = "; ") else sprintf("%d arquivos varridos", length(arquivos_texto)))
 
 proib_id <- c("prompt", "antigravity", "handoff", "backlog", "claude", "anthropic", "pesquisador",
+              "presunção da modelagem", "a confirmar\\]", "\\[revisar", "\\[a inserir",
               "_Trilha", "kleis", "joao", "/home/", "OneDrive", "D-20[0-9]{2}-[0-9]{2}")
 achados2 <- character()
 for (f in arquivos_texto) {
@@ -125,7 +126,7 @@ gini_ref <- sapply(split(cn, paste(cn$id_municipio, cn$ano)), function(d) {
 })
 chave <- paste(painel$id_municipio, painel$ano)
 dif_gini <- max(abs(painel$gini_setorial - gini_ref[chave]))
-registrar("B2", "Gini setorial recomputado a partir da RAIS (fórmula do Guia P2, 87 divisões)", dif_gini < 1e-9,
+registrar("B2", "Gini setorial recomputado a partir da RAIS (fórmula da aula de desigualdade, Hasegawa 2020, 87 divisões)", dif_gini < 1e-9,
           sprintf("maior diferença %.2e", dif_gini))
 
 # ============================== C. Resultados do modelo principal recomputados ====
@@ -228,6 +229,18 @@ tc <- stats::qt(0.975, gl)
 registrar("C11", "Intervalo de confiança da Selic (erro de White, gl = n - k) recalculado",
           abs(ef$ic95_inf_ln[1] - (b_s - tc * ep_s)) < 1e-8 && abs(ef$ic95_sup_ln[1] - (b_s + tc * ep_s)) < 1e-8,
           sprintf("IC [%.6f; %.6f]", b_s - tc * ep_s, b_s + tc * ep_s))
+
+# Breusch-Godfrey de ordem 1 como em Gujarati: (n - 1) vezes o R2 não centrado da regressão do resíduo
+# centrado no defasado, com o primeiro defasado descartado
+bg_ref <- sapply(split(e, painel$id_municipio), function(u) {
+  r <- u - mean(u); nn <- length(r); fit <- stats::lm.fit(cbind(1, r[-nn]), r[-1])
+  (nn - 1) * (1 - sum(fit$residuals^2) / sum(r[-1]^2))
+})
+bg_csv <- aut$breusch_godfrey_estatistica[match(names(bg_ref), aut$id_municipio)]
+registrar("C19", "Breusch-Godfrey por município recalculado (n - p observações, primeiro defasado descartado)",
+          max(abs(bg_ref - bg_csv)) < 1e-8 &&
+            sum(stats::pchisq(bg_ref, 1, lower.tail = FALSE) < 0.05) == sum(aut$breusch_godfrey_decisao == "rejeita H0"),
+          sprintf("maior diferença %.2e; rejeitam %d de 29", max(abs(bg_ref - bg_csv)), sum(aut$breusch_godfrey_decisao == "rejeita H0")))
 
 # Memorial matricial (R/07): b, s2 e erro-padrão recalculados
 mem <- le("resultados_econometricos/memorial_modelo_2_coeficientes.csv")

@@ -8,14 +8,14 @@ Estimação por mínimos quadrados ordinários (MQO) com as 290 observações em
 
 ## Hipóteses
 
-H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização.
-Ha: pelo menos uma dessas condições afeta o salário.
+H0 geral: o salário médio real formal de um município não está associado à sua escolaridade, à sua industrialização, à sua diversificação setorial, à Selic real nem à sua distância a Curitiba.
+Ha: pelo menos uma dessas características está associada ao salário.
 
 | Hipótese | Variável | Sinal esperado |
 |---|---|---|
 | H1 | escolaridade (X2) | positivo |
 | H2 | industrialização (X3) | positivo |
-| H3 | diversificação setorial (X4, Gini invertido) | negativo para o Gini |
+| H3 | diversificação setorial (X4, Gini setorial) | negativo para o Gini |
 | H4 | Selic real (X5) | exploratória, sem sinal único |
 | H5 | distância a Curitiba (X6) | negativo |
 
@@ -28,7 +28,7 @@ Critério: rejeita-se H0 no coeficiente quando p < 0,05.
 | MQO e álgebra matricial | estimação e memorial | caps. 6 e 7 |
 | Erros-padrão de White (HC1) | inferência | cap. 11, p. 442 em diante |
 | Multicolinearidade (FIV e tolerância) | diagnóstico | cap. 10 |
-| Breusch-Pagan-Godfrey | heterocedasticidade | cap. 11, pp. 439 e 440 |
+| Breusch-Pagan-Godfrey (versão estudentizada, n R²) | heterocedasticidade | cap. 11, pp. 439 e 440; a versão ESS/2 do livro dá 44,74, com a mesma decisão |
 | Goldfeld-Quandt | heterocedasticidade | cap. 11, pp. 436 a 440 |
 | Teste geral de White | heterocedasticidade | cap. 11 e aula de heterocedasticidade |
 | Shapiro-Wilk e gráfico Q-Q | normalidade dos resíduos | orientação do professor |
@@ -36,8 +36,8 @@ Critério: rejeita-se H0 no coeficiente quando p < 0,05.
 | Teste LM para tendência linear | variável omitida (ano) | cap. 13 |
 | Teste de Chow | quebra estrutural | cap. 8, pp. 303 a 309 |
 | Durbin-Watson (tabela D.5A) | autocorrelação, série de cada município | cap. 12, pp. 495 a 499; Apêndice D, p. 995 |
-| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, pp. 499 e 500 |
-| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | presunção da modelagem |
+| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, p. 501 do PDF |
+| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | orientação do professor (explicar o ano da projeção e a correção do viés) |
 
 ## Projeção
 

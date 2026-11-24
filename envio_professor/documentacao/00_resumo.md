@@ -34,9 +34,8 @@ R² ajustado = 0,6433; F geral = 105,26 (gl 5 e 284), p-valor < 0,0001.
 | Selic de 2021 + 1 p.p. | -4,11 | 2619,55 | 2639,18 |
 | Selic de 2021 - 1 p.p. | -6,11 | 2585,50 | 2604,87 |
 
-## Pendências
+## Escolhas de construção
 
-- Gini (X4): fórmula da aula sobre medidas de desigualdade e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.
-- Confirmação de métodos pelo professor: tratamento da forma funcional (RESET) e da normalidade.
-- Recorte temporal: 2012 a 2021, mantido. Eventuais mudanças de recorte exigiriam reexecutar o pipeline e atualizar a documentação.
+- Gini (X4): fórmula da aula sobre medidas de desigualdade (Hasegawa, 2020) e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.
+- Recorte temporal: 2012 a 2021. O VAB setorial municipal está publicado até 2021 e aparece como não disponível para 2022 e 2023; mudar o recorte exige reexecutar o pipeline e atualizar a documentação.
 

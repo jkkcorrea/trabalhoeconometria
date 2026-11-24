@@ -1,6 +1,6 @@
 # Revisão pelos colegas: artigo, slides e roteiro
 
-Written for: colegas que vão revisar o trabalho de Econometria I (salário médio real formal e estrutura produtiva na RMC), com ou sem experiência em R.
+Escrito para: colegas que vão revisar o trabalho de Econometria I (salário médio real formal e estrutura produtiva na RMC), com ou sem experiência em R.
 
 Versão de 23/11/2026. **Tudo aqui é rascunho para apreciação.** O pesquisador responsável decide o que entra na versão final.
 
@@ -60,7 +60,7 @@ Ao terminar sua revisão, lembre de enviar o trabalho ao repositório por branch
 ## 6. O que ainda está em aberto
 
 - Revisão da literatura (seção 2) e a comparação dos resultados com ela (seção 6): do pesquisador.
-- Itens A1 a A7, que aguardam o professor.
+- Itens A1 a A8, que aguardam o professor.
 - Referências a conferir: editora de Hoffmann (2006), título e data do documento da AEN-PR sobre a fábrica de Adrianópolis, datas de acesso, edição do Gujarati.
 - Nome do apresentador e data na capa.
 - Slides de literatura e contribuição sem conteúdo definitivo.

@@ -8,7 +8,7 @@ Só métodos ensinados em Econometria I. Dummies de município, painel (efeitos 
 
 ## Estado
 
-Pasta `envio_professor/` regenerada e verificada (26 de 26). Modelo principal: MQO empilhado com erros de White. Pendências em `_Trilha/BACKLOG.md`.
+Pasta `envio_professor/` regenerada e verificada (29 de 29). Modelo principal: MQO empilhado com erros de White. Pendências em `_Trilha/BACKLOG.md`.
 
 ## Estrutura
 
@@ -32,7 +32,7 @@ Pasta `envio_professor/` regenerada e verificada (26 de 26). Modelo principal: M
 | `01b_extracao_pam.R` | Produção agrícola (PAM). Não é mais usada no painel; fica no projeto como registro e não vai à pasta de envio. |
 | `02_tratamento_painel.R` | Painel e variáveis, com o Gini setorial como X4. |
 | `03_aede_visualizacoes.R` | Figuras, mapas numerados e animações (exige `gifski`, que exige Rust). |
-| `04_modelagem_diagnosticos.R` | Modelo principal (MQO empilhado); erro clássico e de White; VIF; Breusch-Pagan-Godfrey; Goldfeld-Quandt; Shapiro-Wilk e Q-Q. |
+| `04_modelagem_diagnosticos.R` | Modelo principal (MQO empilhado); erro clássico e de White; FIV; Breusch-Pagan-Godfrey; Goldfeld-Quandt; Shapiro-Wilk e Q-Q. |
 | `05_autocorrelacao_municipios.R` | Durbin-Watson e Breusch-Godfrey por município (testes paramétricos). |
 | `06_especificacao_chow.R` | Gráfico das variáveis no tempo; RESET; LM de tendência; Chow (corte de 2017 pelo gráfico, e 2016 para comparação); robustez do Gini; projeção de 2021 com correção de viés exp(s²/2); efeito da Selic. |
 | `07_memorial_modelo_2.R` | Memorial matricial do modelo principal com quatro casas decimais. |
@@ -56,7 +56,7 @@ Linux, R 4.6.2, pacotes em `envio_professor/documentacao/ambiente_r.csv`. Rust (
 
 ## Resultado em uma frase
 
-No modelo principal (MQO empilhado, erro de White), escolaridade (+0,0150), industrialização (+0,0055), Gini (−0,6548) e Selic (+0,0065) são significativos a 5%; a distância (−0,0016) também. RESET rejeita a forma linear, Shapiro-Wilk rejeita a normalidade, e Durbin-Watson indica autocorrelação positiva em 14 de 29 municípios. Detalhes em `envio_professor/documentacao/00_resumo.md`.
+No modelo principal (MQO empilhado, erro de White), escolaridade (+0,0150), industrialização (+0,0055), Gini (−0,6548) e Selic (+0,0065) rejeitam H0 a 5% com os sinais esperados; a distância (−0,0016) também. Ressalvas: o Gini e a distância perdem a significância quando se controla o porte do município (ln dos vínculos ativos), e as observações de um município não são independentes (73% da soma de quadrados dos resíduos está entre municípios). RESET rejeita a forma linear, Shapiro-Wilk rejeita a normalidade, e Durbin-Watson indica autocorrelação positiva em 14 de 29 municípios. Detalhes em `envio_professor/documentacao/00_resumo.md`.
 
 ## O que cabe ao pesquisador
 

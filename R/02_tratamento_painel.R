@@ -356,7 +356,7 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
     warning("S = ", s_divisoes, " difere de 87 (total oficial da CNAE 2.0, IBGE). ",
             "Verifique se alguma divisão válida não aparece no painel.", call. = FALSE)
   }
-  if (s_divisoes < 2) stop("rais$cnae_divisao: menos de duas divisões válidas; ln(S) inválido.")
+  if (s_divisoes < 2) stop("rais$cnae_divisao: menos de duas divisões válidas; o Gini não se aplica.")
 
   pares_sem_valido <- dplyr::anti_join(
     dplyr::distinct(cnae[, c("id_municipio", "ano")]),
@@ -373,7 +373,8 @@ tratar_dados_mercado_trabalho <- function(dados_rais_raw) {
   # com x = participação de cada divisão no total de vínculos, ordenada de forma crescente.
   # Como sum(x) = 1, mu = 1/n e a fórmula vira G = (2/n) * soma(i * x_(i)) - (n + 1)/n.
   # As 87 divisões entram com participação zero quando não têm vínculo. Usar n = 87 e tratar
-  # divisões como indivíduos é [presunção da modelagem]; o total de 87 divisões da CNAE 2.0 é [a confirmar].
+  # as divisões como indivíduos segue a aula de medidas de desigualdade (Hasegawa, 2020) e
+  # Hoffmann (2006, cap. 17); o total de 87 divisões da CNAE 2.0 foi conferido no IBGE.
   if (s_divisoes > N_DIVISOES_CNAE) {
     stop("rais: ", s_divisoes, " divisões válidas, acima de ", N_DIVISOES_CNAE, " (CNAE 2.0).", call. = FALSE)
   }

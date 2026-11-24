@@ -169,4 +169,5 @@ Detalhe por critério, ganhos e ordem em `_Trilha/PLANO_PARA_NOTA_100.md`. Base:
 - [x] 24/11/2026 **N10. Apêndice C do artigo** com ANOVA, determinação parcial, FIV e F incremental.
 - [x] 24/11/2026 **N11. PAM fora do painel e do envio** (`R/02`; `R/01b` fica só no projeto).
 - [x] 24/11/2026 **N12. Verificador com 26 checagens** (novas C13 a C16: White, F robusto, DW centrado, reespecificação com porte); envio reconstruído e aprovado em 26 de 26.
-- [ ] **N15. Nova correção com o agente `professor-econometria`** depois deste bloco; registrar a nota aqui.
+- [x] 24/11/2026 **N15. Nova correção com o agente `professor-econometria`**: 85/100 (auditoria completa, números recalculados todos conferem). Corrigidos: referências de arquivo nos slides, ROTEIRO (H0 geral, H4, BG, Gujarati e Porter), página do BG (p. 501 do PDF), contagem de checagens (29).
+- [ ] **N16. Abertos após a nota 85:** (a) previsão da Tabela 7 (média em reais) e IC do ponto médio (ln) são objetos diferentes: unificar ou explicar; (b) citação de Gujarati e Porter (2011) sem consulta (apud ou retirar); (c) Bonferroni e GQ bilateral fora do formato do livro: avaliar retirar; (d) limpar marcadores internos ([revisar], caminhos _Trilha, nome e data do slide 1, editora) na versão final; (e) ordem das figuras 1 e 2; (f) A8 (porte no modelo principal); literatura e discussão (pesquisador).

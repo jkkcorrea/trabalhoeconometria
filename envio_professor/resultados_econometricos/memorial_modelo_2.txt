@@ -137,7 +137,7 @@ X6 (distância a Curitiba)                 0,0316                    0,2147
    X5 (Selic real)              b =     0,0065  ep =   0,0021  t =     3,1535  p =    0,0018  IC95 = [0,0025; 0,0106]  rejeita H0
    X6 (distância a Curitiba)    b =    -0,0016  ep =   0,0005  t =    -3,4168  p =    0,0007  IC95 = [-0,0025; -0,0007]  rejeita H0
 
-10. Multicolinearidade: tolerância e fator de inflação da variância (regra de Gujarati e Porter: FIV > 10)
+10. Multicolinearidade: tolerância e fator de inflação da variância (regra do Gujarati: FIV > 10)
    X2 (ensino superior)         R2_j = 0,1420  TOL = 0,8580  FIV = 1,1655  sem multicolinearidade severa
    X3 (dominância industrial)   R2_j = 0,1256  TOL = 0,8744  FIV = 1,1436  sem multicolinearidade severa
    X4 (concentração setorial, Gini) R2_j = 0,5702  TOL = 0,4298  FIV = 2,3265  sem multicolinearidade severa

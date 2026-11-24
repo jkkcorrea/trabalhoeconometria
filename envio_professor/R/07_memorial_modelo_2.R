@@ -193,8 +193,8 @@ crit_bp <- stats::qchisq(1 - ALFA, gl_bp)
 p_bp <- stats::pchisq(LM_bp, gl_bp, lower.tail = FALSE)
 # Memorial em texto (quatro casas decimais)
 # -----------------------------------------------------------------------------
-# Matrizes em notação científica com quatro algarismos significativos: a escala das
-# variáveis faria quase todos os elementos aparecerem como 0,0000 com quatro casas.
+# Matrizes multiplicadas por 1e6 e impressas com quatro casas decimais: a escala das
+# variáveis faria quase todos os elementos aparecerem como 0,0000 sem esse ajuste.
 matriz_texto <- function(M, escala = 1e6) {
   capture.output(print(noquote(matrix(formatC(M * escala, format = "f", digits = 4, decimal.mark = ","),
                                       nrow = nrow(M), dimnames = dimnames(M))), right = TRUE))
@@ -255,7 +255,7 @@ linhas <- c(
                         fmt4(ic_inf), fmt4(ic_sup),
                         ifelse(abs(t_val) > t_crit, "rejeita H0", "não rejeita H0"))),
   "",
-  "10. Multicolinearidade: tolerância e fator de inflação da variância (regra de Gujarati e Porter: FIV > 10)",
+  "10. Multicolinearidade: tolerância e fator de inflação da variância (regra do Gujarati: FIV > 10)",
   paste0("   ", sprintf("%s R2_j = %s  TOL = %s  FIV = %s  %s", pad(fiv$variavel, 28), fmt4(fiv$R2_auxiliar),
                         fmt4(fiv$tolerancia), fmt4(fiv$fiv), fiv$decisao)),
   "",
