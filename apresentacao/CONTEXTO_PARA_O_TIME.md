@@ -51,26 +51,28 @@ Modelo: MQO com erros robustos de White. R² ajustado 0,643.
 
 ## 6. Slide a slide
 
-Os slides estão no artefato de Slides (link no registro de pendências). A fonte está em `apresentacao/deck_fonte/project/`. Tempo estimado: 12 a 15 minutos.
+Os slides estão no artefato de Slides (link no registro de pendências). A fonte está em `apresentacao/deck_fonte/project/`. Tempo estimado: 12 a 15 minutos (20 slides).
 
 1. **Título.** Apresentar o trabalho. Trocar `[Nome do pesquisador]` e `[data da apresentação]` antes de usar.
 2. **Pergunta.** Ler a pergunta em voz alta. Dizer que o trabalho descreve associações.
-3. **Dados.** Mostrar o mapa dos 29 municípios. Falar das quatro fontes e do painel de 290 observações.
-4. **Hipóteses.** Explicar a hipótese nula (o salário não depende das características) e os sinais esperados. **[revisar: sinais definidos pelo pesquisador]**
-5. **Variáveis e Gini.** Explicar a fórmula do Gini de forma simples. Mostrar a matriz de correlação (figura `fig1`). Dizer que o Gini é correlacionado com o número de setores (−0,95). **[aguardando orientação do professor — item A6]**
-6. **Descrição dos dados.** Médias: salário R$ 2.651; escolaridade 15,3%; indústria 25,7%; Selic 2,3% a.a.; distância 46 km. Mostrar a distribuição do salário por ano (figura `fig2`).
-7. **O que o gráfico no tempo mostra.** Salário com pico em 2017; Selic alta em 2016 e 2017 e depois queda; escolaridade desacelera depois de 2017. A linha tracejada marca a quebra testada. **[aguardando orientação do professor — item A4]**
-8. **Modelo.** Mostrar a equação. Explicar que não há binárias de município e não há métodos de painel, por escopo da disciplina. **[aguardando orientação do professor — item A7]**
-9. **Resultados principais.** Ler a tabela. Lembrar que os erros são de White.
-10. **Leitura dos coeficientes.** Ler as frases prontas, com "associado a" em todas. **[revisar: leitura econômica pelo pesquisador]**
-11. **Hipóteses e resultado.** H1, H2, H3, H5 confirmadas nos sinais esperados. H4 (Selic) é exploratória, com ressalva.
-12. **Diagnósticos.** Mostrar o gráfico Q-Q (figura `diag5`). Explicar por que a normalidade rejeitada é limitação. **[aguardando orientação do professor — itens A1 e A2]**
-13. **Autocorrelação e quebra.** Durbin-Watson mediano 0,25; autocorrelação positiva em 14 de 29 municípios. Chow em 2017 e 2016 não rejeita a quebra. **[aguardando orientação do professor — itens A3 e A4]**
-14. **Robustez e previsão.** Gini só com divisões com vínculo: −0,638 (mesmo sinal). Previsão de 2021 dentro da amostra: R$ 2.622, com +1 ponto de Selic R$ 2.639 e com −1 ponto R$ 2.605. **[aguardando orientação do professor — item A5]**
-15. **Caso de Adrianópolis.** Participação da indústria saltou de 7,1% (2014) para 45,5% (2015). A hipótese de uma fábrica de cimento (inaugurada em dezembro de 2015) é plausível e **não confirmada**. O emprego industrial formal só cresce em 2017. Mostrar a figura `fig3`. **[revisar: decidir se o caso fica nos slides ou só no texto]**
-16. **Limitações.** Associações, não causas; forma funcional e normalidade rejeitadas; autocorrelação; dependência do Gini; recorte de 2012 a 2021.
-17. **Conclusão.** Repetir o que o modelo mostra, com as ressalvas. **[revisar: fechamento a cargo do pesquisador]**
-18. **Referências.** Algumas ainda precisam de confirmação. **[revisar: ver `artigo/ARTIGO_rascunho_v2.md`]**
+3. **Revisão da literatura (em construção).** Tabela com os cinco blocos da revisão e a pergunta de cada um. Dizer que a seção está em construção e que nenhuma obra foi inserida ainda. **[revisar: obras do pesquisador]**
+4. **Dados.** Mostrar o mapa dos 29 municípios. Falar das quatro fontes e do painel de 290 observações.
+5. **Hipóteses.** Explicar a hipótese nula (o salário não depende das características) e os sinais esperados. **[revisar: sinais definidos pelo pesquisador]**
+6. **Variáveis e Gini.** Explicar a fórmula do Gini de forma simples. Mostrar a matriz de correlação (figura `fig1`). Dizer que o Gini é correlacionado com o número de setores (−0,95). **[aguardando orientação do professor — item A6]**
+7. **Descrição dos dados.** Médias: salário R$ 2.651; escolaridade 15,3%; indústria 25,7%; Selic 2,3% a.a.; distância 46 km. Mostrar a distribuição do salário por ano (figura `fig2`).
+8. **O que o gráfico no tempo mostra.** Salário com pico em 2017; Selic alta em 2016 e 2017 e depois queda; escolaridade desacelera depois de 2017. A linha tracejada marca a quebra testada. **[aguardando orientação do professor — item A4]**
+9. **Modelo.** Mostrar a equação. Explicar que não há binárias de município e não há métodos de painel, por escopo da disciplina. **[aguardando orientação do professor — item A7]**
+10. **Resultados principais.** Ler a tabela. Lembrar que os erros são de White.
+11. **Leitura dos coeficientes.** Ler as frases prontas, com "associado a" em todas. **[revisar: leitura econômica pelo pesquisador]**
+12. **Hipóteses e resultado.** H1, H2, H3, H5 confirmadas nos sinais esperados. H4 (Selic) é exploratória, com ressalva.
+13. **Diagnósticos.** Mostrar o gráfico Q-Q (figura `diag5`). Explicar por que a normalidade rejeitada é limitação. **[aguardando orientação do professor — itens A1 e A2]**
+14. **Autocorrelação e quebra.** Durbin-Watson mediano 0,25; autocorrelação positiva em 14 de 29 municípios. Chow em 2017 e 2016 não rejeita a quebra. **[aguardando orientação do professor — itens A3 e A4]**
+15. **Robustez e previsão.** Gini só com divisões com vínculo: −0,638 (mesmo sinal). Previsão de 2021 dentro da amostra: R$ 2.622, com +1 ponto de Selic R$ 2.639 e com −1 ponto R$ 2.605. **[aguardando orientação do professor — item A5]**
+16. **Caso de Adrianópolis.** Participação da indústria saltou de 7,1% (2014) para 45,5% (2015). A hipótese de uma fábrica de cimento (inaugurada em dezembro de 2015) é plausível e **não confirmada**. O emprego industrial formal só cresce em 2017. Mostrar a figura `fig3`. **[revisar: decidir se o caso fica nos slides ou só no texto]**
+17. **Contribuição (candidatas).** Quatro candidatas: o Gini discreto das divisões da CNAE, o painel da RMC, a evidência descritiva e o registro dos limites. Tratar como descritiva, nunca causal. **[revisar: pesquisador confirma]**
+18. **Limitações.** Associações, não causas; forma funcional e normalidade rejeitadas; autocorrelação; dependência do Gini; recorte de 2012 a 2021.
+19. **Conclusão.** Repetir o que o modelo mostra, com as ressalvas. **[revisar: fechamento a cargo do pesquisador]**
+20. **Referências.** Algumas ainda precisam de confirmação. **[revisar: ver `artigo/ARTIGO_rascunho_v2.md`]**
 
 ## 7. Seções do artigo
 

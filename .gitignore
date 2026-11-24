@@ -19,3 +19,7 @@ Trabalhos Referencias/
 backup_antes_alteracoes/
 envio_professor.zip
 Rplots.pdf
+
+# PDFs de terceiros (livros e slides da disciplina) na raiz e livro aberto: não entram no repositório
+/*.pdf
+fontes/livros_artigos/hoffmann_2016_usp_livro_aberto.pdf

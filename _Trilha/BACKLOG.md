@@ -110,7 +110,7 @@ Concluídos: Adrianópolis registrado com pesquisa na internet e conferência na
 
 Pendentes:
 - [ ] **R1. Revisão do artigo pelo pesquisador**: interpretação teórica, conclusões, referências marcadas [a inserir] e resumo em inglês.
-- [ ] **R2. Gerar o PowerPoint** a partir de `apresentacao/ROTEIRO_SLIDES.md`, depois de revisar o texto. Escolher as figuras dos slides 5 e 15.
+- [ ] **R2. Gerar o PowerPoint** a partir de `apresentacao/ROTEIRO_SLIDES.md`, depois de revisar o texto. Escolher as figuras dos slides 6 e 16 (numeração de 20 slides).
 - [ ] **R3. Referências do artigo**: conferir a editora de Hoffmann (2006) e incluir a literatura sobre salário, estrutura produtiva e Selic (nenhuma foi conferida).
 - [ ] **R4. Links das fontes do caso Adrianópolis**: confirmar o link exato da notícia da Agência Estadual de Notícias do Paraná (inauguração em 17/12/2015) e a data de início de produção da Secil.
 - [ ] **R5. Causa do salto de Adrianópolis (2015)**: consultar a nota metodológica do IBGE para o VAB municipal de 2015 e verificar o VAB de construção. Não bloqueante.
@@ -126,6 +126,6 @@ Abertos:
 - [ ] **B3. Discussão dialogando com a literatura (seção 6)**: depende de B1.
 - [ ] **B4. Contribuição (seções 6.7 e 7)**: o pesquisador confirma as candidatas.
 - [ ] **B5. Pontos da resposta ao professor** explicados no texto: metodologia redigida; faltam as justificativas que cabem ao pesquisador (itens A1 a A7).
-- [ ] **B6. Slides**: acrescentar slides de literatura e de contribuição depois de B1 e B4.
+- [x] 23/11/2026 **B6. Slides**: slides de literatura (3) e de contribuição (17) acrescentados com marcações; preencher depois de B1 e B4.
 - [ ] **B7. Conferências menores**: limite FIV = 10 no slide de multicolinearidade (texto em imagem); editora de Hoffmann (2006); título e data do `.doc` da AEN; datas de acesso dos dados; edição de Gujarati (aulas citam a 5ª).
 - [ ] **R6 (atualizado)**: o comentário do professor indica que a resposta foi enviada; o pesquisador confirma.

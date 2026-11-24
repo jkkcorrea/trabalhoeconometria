@@ -2,6 +2,8 @@
 
 **Rascunho v2 (23/11/2026, ajustado ao comentário do professor).** Marcações: [revisar] = interpretação ou texto para o pesquisador confirmar; [a inserir] = referência ou seção ainda não produzida; [aguardando orientação do professor: …] = trecho que depende da resposta do professor (lista e instruções de alteração em `_Trilha/REGISTRO_PENDENCIAS_PROFESSOR.md`). Números vêm de `envio_professor/documentacao/` e `resultados_econometricos/`.
 
+**Versão para apreciação dos colegas.** Orientações de leitura e de retorno em `REVISAO_PELOS_COLEGAS.md`. Os números vêm do código e não devem ser alterados sem conferência; as marcações indicam o que falta e quem decide.
+
 ## Resumo
 
 Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5%. A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001). A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade, e a autocorrelação positiva dentro dos municípios é declarada como limitação. Os resultados são associações, não efeitos causais.

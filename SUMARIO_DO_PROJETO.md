@@ -33,6 +33,7 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 | Pendências | `_Trilha/BACKLOG.md` |
 | Registro de mudanças do recorte | `_Trilha/REGISTRO_RECORTE_TEMPORAL.md` |
 | Fontes, referências e páginas | `fontes/` (`PAGINAS_DE_REFERENCIA.md`, `VERIFICACAO_CORRECOES.md`, `VERIFICACAO_EDICOES.md`, `OFICIAL_FONTES_DA_DISCIPLINA.md`) |
+| Guia para os colegas que vão revisar | `REVISAO_PELOS_COLEGAS.md` |
 | Referências e links (lista central) | `fontes/REFERENCIAS.md` |
 | Artigo (rascunho v2, ajustado ao comentário do professor) | `artigo/ARTIGO_rascunho_v2.md` (v1 fica como registro); versão publicada no Claude Docs |
 | Apresentação (roteiro, fonte dos slides e contexto para o time) | `apresentacao/ROTEIRO_SLIDES.md`, `apresentacao/deck_fonte/project/`, `apresentacao/CONTEXTO_PARA_O_TIME.md` |

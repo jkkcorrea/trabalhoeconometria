@@ -9,8 +9,8 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 12 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 21.
-- Decisões registradas em `_Trilha/DECISOES.md`: 61 (vigentes na última coluna: 52).
-- Pendências em `_Trilha/BACKLOG.md`: 28 abertas e 36 baixadas.
+- Decisões registradas em `_Trilha/DECISOES.md`: 62 (vigentes na última coluna: 53).
+- Pendências em `_Trilha/BACKLOG.md`: 27 abertas e 37 baixadas.
 
 ## Onde começar
 
@@ -31,6 +31,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `R` | 4 KB |  |
 | `README.md` | 5 KB | Markdown: Salário médio real formal na Região Metropolitana de Curitiba, 2012 a 2021 |
 | `RESPOSTA_AO_PROFESSOR.txt` | 7 KB | Texto simples |
+| `REVISAO_PELOS_COLEGAS.md` | 5 KB | Markdown: Revisão pelos colegas: artigo, slides e roteiro |
 | `SUMARIO_DO_PROJETO.md` | 5 KB | Markdown: Sumário do projeto |
 | `Trabalhos Referencias` | 4 KB |  |
 | `_Trilha` | 4 KB |  |
