@@ -198,11 +198,11 @@ testes_heterocedasticidade_complementares <- function(modelo, painel) {
     hipotese_alternativa = "Ha: a variância depende dos regressores, de seus quadrados ou de seus produtos cruzados",
     estatistica = unname(white$statistic), gl = as.character(unname(white$parameter)), p_valor = white$p.value)
   gq <- purrr::map_dfr(VARIAVEIS_X, function(v) {
-    g <- lmtest::gqtest(modelo, order.by = painel[[v]], fraction = 0.2, alternative = "two.sided")
+    g <- lmtest::gqtest(modelo, order.by = painel[[v]], fraction = 0.2, alternative = "greater")
     tibble::tibble(
       teste = "Goldfeld-Quandt (fração central 0,2 omitida)", ordenado_por = v,
       hipotese_nula = "H0: sigma_1^2 = sigma_2^2 (variância igual nos dois segmentos)",
-      hipotese_alternativa = "Ha: as variâncias dos dois segmentos diferem (bilateral)",
+      hipotese_alternativa = "Ha: a variância cresce com a variável de ordenação (unilateral, como no livro)",
       estatistica = unname(g$statistic), gl = paste(unname(g$parameter), collapse = "; "), p_valor = g$p.value)
   })
   dplyr::bind_rows(linha_white, gq) |>

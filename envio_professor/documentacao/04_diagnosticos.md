@@ -69,13 +69,13 @@ A inferência usa erros-padrão de White (HC1), que não dependem da forma da va
 | Teste | Estatística | gl | p-valor | Decisão |
 |---|---|---|---|---|
 | White (regressão auxiliar com quadrados e produtos cruzados) | 94,15 | 20 | < 0,0001 | rejeita H0 |
-| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por prop_superior | 0,90 | 110; 110 | 0,5664 | não rejeita H0 |
-| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por dom_industrial | 1,53 | 110; 110 | 0,0268 | rejeita H0 |
-| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por gini_setorial | 0,96 | 110; 110 | 0,8404 | não rejeita H0 |
-| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por selic_real | 1,13 | 110; 110 | 0,5353 | não rejeita H0 |
-| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por dist_curitiba_km | 1,06 | 110; 110 | 0,7769 | não rejeita H0 |
+| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por prop_superior | 0,90 | 110; 110 | 0,7168 | não rejeita H0 |
+| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por dom_industrial | 1,53 | 110; 110 | 0,0134 | rejeita H0 |
+| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por gini_setorial | 0,96 | 110; 110 | 0,5798 | não rejeita H0 |
+| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por selic_real | 1,13 | 110; 110 | 0,2676 | não rejeita H0 |
+| Goldfeld-Quandt (fração central 0,2 omitida), ordenado por dist_curitiba_km | 1,06 | 110; 110 | 0,3885 | não rejeita H0 |
 
-O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório. O p-valor do Goldfeld-Quandt ordenado pela distância é unilateral (0,3885) na tabela de hipóteses e bilateral (0,7769) na tabela acima. Com cinco ordenações e uma só rejeição (p = 0,0268), a rejeição não sobrevive a um ajuste por testes múltiplos (0,05 dividido por 5 é 0,01); ela indica um indício, e não uma conclusão.
+O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório. Todos os Goldfeld-Quandt são unilaterais, como no livro (Ha: a variância cresce com a variável de ordenação); ordenado por X3, p = 0,0134. Das cinco ordenações, só essa rejeita; trata-se de indício ligado à industrialização, e não de conclusão.
 
 ## F geral com erro de White
 

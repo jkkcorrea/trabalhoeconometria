@@ -30,7 +30,7 @@ O trabalho usa dados oficiais de quatro fontes e um modelo de mínimos quadrados
 
 ## 2 REFERENCIAL TEÓRICO
 
-[a inserir pelo pesquisador: o professor pediu contextualização do problema por revisão da literatura (comentário de 23/11/2026). Cada subseção abaixo precisa de obras lidas e conferidas, registradas em `fontes/REFERENCIAS.md`; nenhuma referência de periódico foi inserida ainda. A pergunta de cada subseção orienta o conteúdo.]
+[PENDENTE, do pesquisador: o professor pediu contextualização do problema por revisão da literatura (comentário de 23/11/2026). Cada subseção abaixo precisa de obras lidas e conferidas, registradas em `fontes/REFERENCIAS.md`; nenhuma referência de periódico foi inserida ainda. A pergunta de cada subseção orienta o conteúdo.]
 
 ### 2.1 Escolaridade e salário (H1)
 
@@ -54,7 +54,7 @@ O trabalho usa dados oficiais de quatro fontes e um modelo de mínimos quadrados
 
 ### 2.6 Materiais-base do método
 
-Os materiais-base do método são as aulas da disciplina (HASEGAWA, 2016a; 2016b; 2017; 2020; 2022; 2024), que seguem Gujarati e Porter (2011), para regressão linear, testes e diagnósticos, e Hoffmann (2006), para a medida de desigualdade de Gini. As páginas e a tabela de Durbin-Watson usadas neste trabalho vêm da 4ª edição de Gujarati (2003), disponível localmente; a diferença de edição em relação às aulas (5ª edição, 2011) deve ser revisada [revisar].
+Os materiais-base do método são as aulas da disciplina (HASEGAWA, 2016a; 2016b; 2017; 2020; 2022; 2024), que seguem Gujarati e Porter (2011 apud HASEGAWA, 2016a), para regressão linear, testes e diagnósticos, e Hoffmann (2006), para a medida de desigualdade de Gini. As páginas e a tabela de Durbin-Watson usadas neste trabalho vêm da 4ª edição de Gujarati (2003), disponível localmente; a diferença de edição em relação às aulas (5ª edição, 2011) deve ser revisada [revisar].
 
 ## 3 METODOLOGIA
 
@@ -79,7 +79,7 @@ A TABELA 1 resume as variáveis, suas fontes e sua construção.
 
 FONTE: O autor (2026), a partir das fontes indicadas.
 
-A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita (FIGURA 2), e, com o logaritmo, o coeficiente de cada regressora indica, de forma aproximada, a variação relativa do salário (100·b %; o valor exato é (exp(b) − 1) × 100 %) [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
+A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita (distribuição descrita na seção de dados), e, com o logaritmo, o coeficiente de cada regressora indica, de forma aproximada, a variação relativa do salário (100·b %; o valor exato é (exp(b) − 1) × 100 %) [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
 
 ### 3.3 Estatísticas descritivas
 
@@ -176,7 +176,7 @@ As estatísticas e as regras de decisão de cada teste são as seguintes (n = 29
 
 - **FIV:** FIV_j = 1 / (1 − R²_j), em que R²_j vem da regressão da variável j sobre as demais. Decisão: FIV acima de 10 indica multicolinearidade.
 - **Breusch-Pagan-Godfrey:** LM = n·R² da regressão auxiliar do quadrado dos resíduos sobre as regressoras (versão estudentizada), com distribuição qui-quadrado de 5 graus de liberdade. Rejeita H0 se o p-valor for menor que 5%.
-- **Goldfeld-Quandt:** F = SQR₂ / SQR₁ entre as duas pontas da amostra ordenada por uma variável, omitida a fração central de 0,2; para a distância, Ha é que a variância cresce com ela; para as demais ordenações, o teste é bilateral.
+- **Goldfeld-Quandt:** F = SQR₂ / SQR₁ entre as duas pontas da amostra ordenada por uma variável, omitida a fração central de 0,2; para a distância, Ha é que a variância cresce com ela; o mesmo teste unilateral, com Ha de variância crescente, é aplicado às demais ordenações (X2 a X5).
 - **Shapiro-Wilk:** estatística W calculada sobre os resíduos; rejeita a normalidade se o p-valor for menor que 5%. O gráfico Q-Q compara os quantis dos resíduos com os da normal.
 - **RESET:** F do acréscimo das potências 2 e 3 dos valores ajustados ao modelo, com 2 e 282 graus de liberdade. Rejeita H0 (forma linear correta) se o p-valor for menor que 5%.
 - **Chow:** F = [(SQR_R − SQR₁ − SQR₂) / k] / [(SQR₁ + SQR₂) / (n − 2k)], com SQR_R do modelo para todo o período e SQR₁ e SQR₂ dos modelos de 2012 a 2017 e de 2018 a 2021 (corte em 2017; o corte de 2016 compara 2012 a 2016 com 2017 a 2021); graus de liberdade 6 e 278. H0: os coeficientes são iguais nos dois períodos.
@@ -233,7 +233,7 @@ A TABELA 4 resume os diagnósticos do modelo principal.
 | Breusch-Pagan-Godfrey | p = 0,0363 | rejeita homocedasticidade |
 | White (20 termos) | 94,15 (gl 20), p < 0,0001 | rejeita homocedasticidade |
 | Goldfeld-Quandt (ordenado pela distância, unilateral) | p = 0,3885 | não rejeita |
-| Goldfeld-Quandt (ordenado por X3) | F = 1,53 (gl 110 e 110), p = 0,0268 | rejeita |
+| Goldfeld-Quandt (ordenado por X3) | F = 1,53 (gl 110 e 110), p = 0,0134 | rejeita |
 | Shapiro-Wilk (resíduos) | W = 0,8618, p < 0,0001 | rejeita normalidade |
 | RESET | F = 14,49 (gl 2 e 282), p < 0,0001 | rejeita forma linear |
 | Chow (corte em 2017) | F = 1,60 (gl 6 e 278), p = 0,146 | não rejeita quebra |
@@ -254,7 +254,7 @@ FONTE: O autor (2026).
 
 **Leitura dos diagnósticos.** Cada resultado muda a leitura dos coeficientes de uma forma específica:
 
-- **Heterocedasticidade (rejeitada):** os estimadores de mínimos quadrados continuam não tendenciosos, mas perdem eficiência e os testes t e F usuais podem deixar de valer (HASEGAWA, 2016b; 2017). Por isso a inferência usa erros-padrão de White. O Breusch-Pagan e o White rejeitam a homocedasticidade; o Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável, e ordenado pela industrialização (X3) ele rejeita (p = 0,0268), indício de que a variância dos resíduos está ligada à industrialização; como são cinco ordenações e uma só rejeição, o resultado não resiste a um ajuste por testes múltiplos (0,05/5 = 0,01 por teste).
+- **Heterocedasticidade (rejeitada):** os estimadores de mínimos quadrados continuam não tendenciosos, mas perdem eficiência e os testes t e F usuais podem deixar de valer (HASEGAWA, 2016b; 2017). Por isso a inferência usa erros-padrão de White. O Breusch-Pagan e o White rejeitam a homocedasticidade; o Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável, e ordenado pela industrialização (X3) ele rejeita (p = 0,0134), indício de que a variância dos resíduos está ligada à industrialização; das cinco ordenações, só essa rejeita.
 - **Forma funcional (RESET rejeita):** a relação linear em logaritmo pode omitir termos ou variáveis (HASEGAWA, 2022). Os coeficientes são lidos como aproximações lineares. O porte do município explica parte da não linearidade: ao incluir o logaritmo dos vínculos ativos, o F do RESET cai de 14,49 para 3,98 e o R² ajustado sobe de 0,6433 para 0,6744, mas o RESET ainda rejeita (TABELA 6).
 - **Autocorrelação positiva (14 de 29 municípios; 15 inconclusivos):** os estimadores seguem não tendenciosos e consistentes, mas deixam de ser eficientes, a variância residual tende a ser subestimada e os testes t e F perdem validade (HASEGAWA, 2017). Como dU = 2,822 é maior que 2, a tabela D.5A não tem zona de não rejeição para n = 10 e k' = 5, e cada município fica em autocorrelação positiva ou inconclusivo; por isso há 15 inconclusivos. Parte da autocorrelação aparente vem de o modelo empilhado não captar diferenças persistentes entre municípios: em 16 dos 29 municípios os dez resíduos têm o mesmo sinal, o que ajuda a explicar por que o Durbin-Watson aponta 14 municípios e o Breusch-Godfrey 5. Com os resíduos centrados na média de cada município, o Durbin-Watson mediano passa de 0,25 para 1,16 e só 1 município fica abaixo de dL; 72,9% da soma de quadrados dos resíduos está entre municípios. Os valores dL e dU da tabela D.5A são aproximados neste caso: a tabela supõe uma regressão com 10 observações e 5 regressores, e os resíduos vêm do modelo de 290 observações, com X6 constante e X5 comum a todos os municípios.
 - **Estabilidade (Chow não rejeita em 2016 nem em 2017):** o teste, sob as hipóteses de variâncias iguais e erros independentes que este trabalho põe em dúvida, não indica mudança nos coeficientes entre os dois subperíodos; a leitura é cautelosa.
@@ -318,7 +318,7 @@ No ponto médio dos regressores de 2021 e no cenário base, o intervalo de 95% d
 
 ## 6 DISCUSSÃO
 
-[revisar: o professor pediu que a discussão dialogue com a literatura vigente e deixe clara a contribuição do trabalho (comentário de 23/11/2026). Cada subseção abaixo traz o resultado deste trabalho, com a magnitude, e deixa a comparação com a literatura para o pesquisador. Os percentuais abaixo vêm de exp(coeficiente × variação) − 1.]
+[PENDENTE, do pesquisador: o professor pediu que a discussão dialogue com a literatura vigente e deixe clara a contribuição do trabalho (comentário de 23/11/2026). Cada subseção abaixo traz o resultado deste trabalho, com a magnitude, e deixa a comparação com a literatura para o pesquisador. Os percentuais abaixo vêm de exp(coeficiente × variação) − 1.]
 
 ### 6.1 Escolaridade (H1)
 
@@ -348,7 +348,7 @@ Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini s
 
 ### 6.7 Contribuição do trabalho
 
-[revisar: a contribuição precisa ser confirmada pelo pesquisador e depende da revisão da literatura. Candidatas, só o que o trabalho de fato faz:]
+[PENDENTE, do pesquisador: a contribuição precisa ser confirmada pelo pesquisador e depende da revisão da literatura. Candidatas, só o que o trabalho de fato faz:]
 
 1. Uso do Gini discreto da aula (HOFFMANN, 2006; HASEGAWA, 2020) sobre as 87 divisões da CNAE como medida de diversificação setorial do emprego municipal, com a verificação de que o índice é dominado pelo número de divisões com vínculo.
 2. Painel balanceado dos 29 municípios da RMC, de 2012 a 2021, que combina RAIS, SIDRA, Banco Central e IBGE, com validações automáticas.
@@ -356,6 +356,8 @@ Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini s
 4. Registro dos limites do modelo (forma funcional, normalidade e autocorrelação) e do caso de Adrianópolis.
 
 ## 7 CONCLUSÃO
+
+[PENDENTE, do pesquisador: as considerações finais devem retomar a contribuição confirmada na seção 6.7 e a literatura da seção 2.]
 
 Os resultados indicam associações positivas entre salário real e escolaridade e industrialização, associação negativa entre salário e concentração setorial do emprego, que deixa de ser significativa quando se controla o porte do município, e associação negativa entre salário e distância a Curitiba, que também deixa de ser significativa com esse controle, no período de 2012 a 2021 e nos 29 municípios da RMC. A Selic real tem associação positiva e pequena. Os resultados não são causais, e os diagnósticos apontam limitações de forma funcional, normalidade e autocorrelação que devem ser consideradas na leitura dos coeficientes. A contribuição do trabalho, na seção 6.7, é descritiva: [revisar: uma frase com a contribuição, a cargo do pesquisador, e os próximos passos possíveis]. [revisar: conclusão e implicações, a cargo do pesquisador.]
 
@@ -368,8 +370,6 @@ BANCO CENTRAL DO BRASIL. *Sistema Gerenciador de Séries Temporais (SGS)*: séri
 BRASIL DE FATO. Moradores de Adrianópolis (PR) denunciam Supremo Secil Cimentos por poluição e estragos em casas. Brasil de Fato, 5 out. 2023. Disponível em: https://www.brasildefato.com.br/2023/10/05/moradores-de-adrianopolis-pr-denunciam-supremo-secil-cimentos-por-poluicao-e-estragos-em-casas. Acesso em: [data de acesso a confirmar].
 
 GUJARATI, Damodar N. *Basic econometrics*. 4. ed. Boston: McGraw-Hill/Irwin, 2003. [PDF local consultado; a 4ª edição tem Gujarati como único autor; páginas citadas são do PDF.]
-
-GUJARATI, Damodar N.; PORTER, Dawn C. *Econometria básica*. 5. ed. Porto Alegre: AMGH, 2011. [citado nas aulas; a edição usada nas aulas não foi consultada neste trabalho; revisar a referência.]
 
 HASEGAWA, Marcos Minoru. *Multicolinearidade*. Slides de aula. Curitiba: Universidade Federal do Paraná, Curso de Ciências Econômicas, 10 nov. 2016a. Baseado em Gujarati e Porter (2011, cap. 10).
 
