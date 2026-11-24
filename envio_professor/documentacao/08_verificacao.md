@@ -26,6 +26,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C19 | Breusch-Godfrey por município recalculado (n - p observações, primeiro defasado descartado) | APROVADA | maior diferença 7.20e-12; rejeitam 5 de 29 |
 | C12 | Memorial matricial do modelo principal bate com a álgebra independente | APROVADA | maior diferença nos coeficientes 1.66e-12 |
 | C13 | Teste de White recalculado (n R2 da regressão auxiliar com quadrados e produtos cruzados) | APROVADA | calculado 94.1532 (gl 20); no arquivo 94.1532 (gl 20) |
+| C20 | Goldfeld-Quandt unilateral ordenado por X3 recalculado (fração central 0,2 omitida) | APROVADA | calculado F = 1.5295, p = 0.0134; no arquivo F = 1.5295, p = 0.0134 |
 | C14 | F geral com erro de White (HC1) recalculado | APROVADA | calculado 92.8340; no arquivo 92.8340 |
 | C15 | Durbin-Watson com resíduos centrados por município e municípios de mesmo sinal recalculados | APROVADA | mesmo sinal 16; abaixo de dL com resíduos centrados 1 |
 | C16 | Reespecificação com o porte do município: RESET e coeficiente do Gini recalculados | APROVADA | RESET calculado 3.9843, no arquivo 3.9843; Gini 0.2579 |
@@ -34,4 +35,4 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | D1 | Coeficiente de X2 (erro de White) escrito na documentação igual ao CSV | APROVADA | valor esperado 0,0150 |
 | D2 | Estatística de Shapiro-Wilk escrita na documentação igual ao CSV | APROVADA | valor esperado 0,8618 |
 
-29 de 29 verificações aprovadas.
+30 de 30 verificações aprovadas.

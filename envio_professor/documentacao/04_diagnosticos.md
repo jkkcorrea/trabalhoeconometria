@@ -126,6 +126,8 @@ A cauda positiva dos resíduos vem de Adrianópolis (2012 a 2016) e de Araucári
 | Selic de 2021 + 1 p.p. | -4,11 | [7,8273; 7,8867] | [7,8343; 7,8797] |
 | Selic de 2021 - 1 p.p. | -6,11 | [7,8070; 7,8809] | [7,8155; 7,8724] |
 
+Os intervalos acima são de ln(salário) para um município com os regressores nas médias de 2021. Não se aplicam às médias em reais das 29 previsões municipais (tabela de previsão por cenário), que não têm intervalo: são dois objetos distintos, e a retransformação por exp() do intervalo não leva a correção de viés.
+
 ## Reespecificação da forma funcional
 
 | Especificação | R2 ajustado | AIC | RESET F | RESET p-valor | Shapiro-Wilk W | Gini: coeficiente (p) |

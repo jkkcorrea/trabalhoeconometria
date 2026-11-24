@@ -265,6 +265,7 @@ gravar("04_diagnosticos.md", c(
   md(tab_mres), "",
   "A cauda positiva dos resíduos vem de Adrianópolis (2012 a 2016) e de Araucária (2012 a 2014), municípios com participação industrial atípica; isso ajuda a explicar a assimetria e a curtose que o Shapiro-Wilk rejeita.", "",
   "## Intervalo da média da previsão de 2021 (ponto médio dos regressores)", "", md(tab_pmed), "",
+  "Os intervalos acima são de ln(salário) para um município com os regressores nas médias de 2021. Não se aplicam às médias em reais das 29 previsões municipais (tabela de previsão por cenário), que não têm intervalo: são dois objetos distintos, e a retransformação por exp() do intervalo não leva a correção de viés.", "",
   "## Reespecificação da forma funcional", "", md(tab_reesp), "",
   "Os quadrados de X2 e X3 usam as variáveis centradas na média. A inclusão do logaritmo dos vínculos ativos (porte do município) reduz bastante a estatística do RESET, o que indica que parte da não linearidade vem de uma variável omitida. O RESET ainda rejeita em todas as versões. O modelo principal permanece como o definido nas orientações; as versões ampliadas são sensibilidade.", ""
 ))

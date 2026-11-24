@@ -260,6 +260,16 @@ registrar("C13", "Teste de White recalculado (n R2 da regressão auxiliar com qu
           abs(n * r2_w - reg_w$estatistica) < 1e-6 && (aux_w$rank - 1) == as.numeric(reg_w$gl),
           sprintf("calculado %.4f (gl %d); no arquivo %.4f (gl %s)", n * r2_w, aux_w$rank - 1, reg_w$estatistica, reg_w$gl))
 
+# Goldfeld-Quandt unilateral (Ha: a variância cresce com a variável de ordenação), ordenado por X3
+ord3 <- order(painel$dom_industrial); omit <- floor(n * 0.2); m1 <- (n - omit) %/% 2
+i1 <- ord3[seq_len(m1)]; i2 <- ord3[(n - m1 + 1):n]
+rss <- function(i) sum(stats::lm.fit(X[i, ], y[i])$residuals^2)
+gl_gq <- m1 - k; F_gq <- (rss(i2) / gl_gq) / (rss(i1) / gl_gq); p_gq <- stats::pf(F_gq, gl_gq, gl_gq, lower.tail = FALSE)
+gq3 <- hw[grepl("Goldfeld", hw$teste) & hw$ordenado_por == "dom_industrial", ]
+registrar("C20", "Goldfeld-Quandt unilateral ordenado por X3 recalculado (fração central 0,2 omitida)",
+          abs(F_gq - gq3$estatistica) < 1e-6 && abs(p_gq - gq3$p_valor) < 1e-8,
+          sprintf("calculado F = %.4f, p = %.4f; no arquivo F = %.4f, p = %.4f", F_gq, p_gq, gq3$estatistica, gq3$p_valor))
+
 # F geral com a matriz de White (HC1): F = b'V^-1 b / q, com as q inclinações
 meio <- t(X) %*% (X * e^2)
 V_hc1 <- (n / (n - k)) * XtX_inv %*% meio %*% XtX_inv

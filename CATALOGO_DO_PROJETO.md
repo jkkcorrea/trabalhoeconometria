@@ -9,8 +9,8 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 13 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 30.
-- Decisões registradas em `_Trilha/DECISOES.md`: 62 (vigentes na última coluna: 53).
-- Pendências em `_Trilha/BACKLOG.md`: 44 abertas e 48 baixadas.
+- Decisões registradas em `_Trilha/DECISOES.md`: 64 (vigentes na última coluna: 54).
+- Pendências em `_Trilha/BACKLOG.md`: 44 abertas e 49 baixadas.
 
 ## Onde começar
 
@@ -114,10 +114,10 @@ Cada skill é uma pasta com `SKILL.md`.
 | `conferir_derivados.sh` | 1 KB | Script de shell |
 | `conferir_numeros.R` | 4 KB | Script R: Uso (na raiz do projeto): Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md |
 | `gerar_catalogo.R` | 6 KB | Script R: Gera CATALOGO_DO_PROJETO.md a partir do conteúdo real das pastas. |
-| `gerar_documentacao.R` | 31 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
+| `gerar_documentacao.R` | 32 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
 | `limpar_comentarios.R` | 8 KB | Script R |
 | `reconstruir_envio.sh` | 2 KB | Script de shell |
-| `verificar_envio.R` | 23 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
+| `verificar_envio.R` | 24 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
 
 ## Trilha de decisões e handoffs (`_Trilha/`)
 

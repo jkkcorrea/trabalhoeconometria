@@ -30,7 +30,7 @@ Subordinados (nunca são fonte): `artigo/ARTIGO_rascunho_v2.md` e sua cópia no 
 
 ## Como se confere
 
-1. `Rscript _Trilha/ferramentas/verificar_envio.R`: recalcula em R base, sem usar os scripts entregues, os resultados do nível 1 e confere a documentação (29 checagens).
+1. `Rscript _Trilha/ferramentas/verificar_envio.R`: recalcula em R base, sem usar os scripts entregues, os resultados do nível 1 e confere a documentação (30 checagens).
 2. `bash _Trilha/ferramentas/conferir_derivados.sh`: extrai os números do artigo, dos slides e dos roteiros e procura cada um nas saídas do nível 1; o que não aparece precisa de explicação.
 3. Leitura do agente `professor-econometria` (somente leitura) contra esta hierarquia.
 4. Sincronia: o artigo no Claude Docs e o deck publicado devem ser iguais a `artigo/ARTIGO_rascunho_v2.md` e a `apresentacao/deck_fonte/`; o arquivo do repositório é a referência.
