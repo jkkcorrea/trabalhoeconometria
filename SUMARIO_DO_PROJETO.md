@@ -14,6 +14,7 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 - X2: +0,0150 (p < 0,0001). X3: +0,0055 (p < 0,0001). X4: −0,6548 (p = 0,0001). X5: +0,0065 (p = 0,0003). X6: −0,0016 (p = 0,0033).
 - R² ajustado 0,6433; F geral 105,26 (gl 5 e 284).
 - Diagnósticos: FIV máximo 2,33; Breusch-Pagan rejeita a homocedasticidade (p = 0,0363); RESET rejeita a forma linear (p < 0,0001); Shapiro-Wilk rejeita a normalidade (p < 0,0001); Durbin-Watson rejeita a ausência de autocorrelação positiva em 14 de 29 municípios; Chow não mostra quebra (corte em 2017, p = 0,146).
+- Diagnósticos complementares: White (p < 0,0001), F geral com White (92,83), Durbin-Watson com resíduos centrados por município (mediana 1,16; 1 município abaixo de dL), RESET repetido com quadrados e com o porte (F cai de 14,49 para 3,98).
 - Robustez (R/06): o Gini tem correlação de −0,88 com o logaritmo dos vínculos ativos; com esse controle de porte, o coeficiente do Gini deixa de ser significativo e muda de sinal (decisão pendente, item A8). Sem as duas observações com VAB industrial negativo, o Gini segue em −0,4992.
 - Projeção de 2021 (previsão dentro da amostra), com correção de viés exp(s²/2) = 1,0075.
 
@@ -47,7 +48,7 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 
 ## Como reproduzir
 1. `Rscript R/00_executar_tudo.R` (a partir da raiz) roda os scripts 02 a 07.
-2. Entrega completa: `bash _Trilha/ferramentas/reconstruir_envio.sh` (limpa, roda, gera documentação, verifica e gera o zip). A verificação atual passa em 22 de 22.
+2. Entrega completa: `bash _Trilha/ferramentas/reconstruir_envio.sh` (limpa, roda, gera documentação, verifica e gera o zip). A verificação atual passa em 26 de 26.
 
 ## Pendências (ver `_Trilha/BACKLOG.md`)
 - Recorte temporal: mantido em 2012 a 2021; mudanças registradas no arquivo de registro.

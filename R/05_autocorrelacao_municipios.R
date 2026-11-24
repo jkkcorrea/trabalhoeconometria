@@ -133,5 +133,41 @@ g <- ggplot2::ggplot(pares, ggplot2::aes(residuo_defasado, residuo)) +
   ggplot2::theme_bw(base_size = 11)
 ggplot2::ggsave(file.path(DIR_FIGURAS, "diag3_residuos_defasados.png"), g, width = 7, height = 5, dpi = 200, bg = "white")
 
+# -----------------------------------------------------------------------------
+# 3. Heterogeneidade entre municípios (o modelo empilhado não tem termo de município)
+# -----------------------------------------------------------------------------
+# Se os resíduos de um município ficam todos de um mesmo lado, parte do que o Durbin-Watson
+# lê como autocorrelação é diferença persistente entre municípios, e não dependência de um
+# ano para o seguinte. Para separar, calcula-se o mesmo d com os resíduos centrados na média
+# do município. As zonas de decisão usam dL e dU da tabela D.5A, que são aproximadas aqui,
+# porque o modelo é empilhado e X6 não varia no tempo dentro do município.
+por_municipio <- painel |>
+  dplyr::group_split(id_municipio) |>
+  purrr::map_dfr(function(df) {
+    df <- dplyr::arrange(df, ano)
+    e <- df$residuo
+    ec <- e - mean(e)
+    tibble::tibble(
+      id_municipio = df$id_municipio[1], nome_municipio = df$nome_municipio[1],
+      residuo_medio = mean(e), todos_mesmo_sinal = all(e > 0) || all(e < 0),
+      durbin_watson = sum(diff(e)^2) / sum(e^2),
+      durbin_watson_centrado = sum(diff(ec)^2) / sum(ec^2)
+    )
+  }) |>
+  dplyr::mutate(decisao_dw = decidir_dw(durbin_watson), decisao_dw_centrado = decidir_dw(durbin_watson_centrado))
+
+soma_entre <- sum(10 * por_municipio$residuo_medio^2)
+resumo_heterogeneidade <- tibble::tibble(
+  durbin_watson_mediano = stats::median(por_municipio$durbin_watson),
+  durbin_watson_centrado_mediano = stats::median(por_municipio$durbin_watson_centrado),
+  abaixo_dl = sum(por_municipio$durbin_watson < DW_DL),
+  abaixo_dl_centrado = sum(por_municipio$durbin_watson_centrado < DW_DL),
+  municipios_mesmo_sinal = sum(por_municipio$todos_mesmo_sinal),
+  parcela_soma_quadrados_entre_municipios = soma_entre / sum(painel$residuo^2)
+)
+readr::write_csv(por_municipio, file.path(DIR_RESULTADOS, "autocorrelacao_heterogeneidade_municipios.csv"))
+readr::write_csv(resumo_heterogeneidade, file.path(DIR_RESULTADOS, "autocorrelacao_heterogeneidade_resumo.csv"))
+
 message("Etapa 5 concluída: Durbin-Watson e Breusch-Godfrey por município gravados.")
 print(resumo, row.names = FALSE)
+print(resumo_heterogeneidade, row.names = FALSE)

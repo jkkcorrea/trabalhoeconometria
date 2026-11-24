@@ -11,8 +11,6 @@
 "selic_real","X5: Selic real anual (% a.a.)"
 "dist_curitiba_km","X6: distância a Curitiba (km)"
 "x3_negativo","marca de VAB industrial negativo"
-"valor_producao_mil","valor da produção agrícola (PAM, mil reais)"
-"ln_producao_agricola","logaritmo da produção agrícola real"
 "selic_nominal_ano","Selic anual"
 "ipca_ano","IPCA anual"
 "indice_ipca_medio","índice de preços médio do ano"

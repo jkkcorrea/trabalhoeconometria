@@ -157,3 +157,16 @@ Detalhe por critério, ganhos e ordem em `_Trilha/PLANO_PARA_NOTA_100.md`. Base:
 - [ ] **N13. Discussão com a literatura, contribuição e considerações finais.** Pesquisador.
 - [ ] **N14. Slides finais, formatação no template UFPR/ABNT e limpeza das marcações.**
 - [ ] **N15. Nova correção com o agente `professor-econometria`** depois de cada bloco; registrar a nova nota aqui.
+
+## Execução do plano para a nota 100: pacote técnico (24/11/2026)
+
+- [x] 24/11/2026 **N4. Reespecificação para o RESET** (`R/06`, `reespecificacao_forma_funcional.csv`, TABELA 7). Resultado: o RESET ainda rejeita em todas as versões; o porte do município reduz o F de 14,49 para 3,98; o Gini perde a significância e muda de sinal. A decisão de qual versão é a principal continua aberta (A8).
+- [x] 24/11/2026 **N5. Teste de White e Goldfeld-Quandt por outras variáveis** (`R/04`, `testes_heterocedasticidade_complementares.csv`). White rejeita (p < 0,0001); Goldfeld-Quandt rejeita ordenado por X3 (p = 0,0268) e não rejeita pelas demais; a divergência com o Breusch-Pagan foi explicada.
+- [x] 24/11/2026 **N6. F geral com erro de White e intervalos da previsão com a matriz HC1** (`f_geral_robusto.csv`, colunas `*_white` em `projecao_selic_m2.csv`). O H4 do artigo já traz a ressalva da Selic.
+- [x] 24/11/2026 **N7. Durbin-Watson com resíduos centrados por município** (`R/05`). Confirmado: mediana 0,25 para 1,16; de 14 para 1 município abaixo de dL; 16 de 29 com resíduos de mesmo sinal; 72,9% da soma de quadrados entre municípios.
+- [x] 24/11/2026 **N8. Exame de resíduos** (`diag7_residuos_vs_regressores.png`, `maiores_residuos.csv`). As maiores caudas são de Adrianópolis (2013 a 2015) e Araucária (2012 e 2013).
+- [x] 24/11/2026 **N9. Parágrafo de endogeneidade** na seção 6.6 do artigo (revisar pelo pesquisador).
+- [x] 24/11/2026 **N10. Apêndice C do artigo** com ANOVA, determinação parcial, FIV e F incremental.
+- [x] 24/11/2026 **N11. PAM fora do painel e do envio** (`R/02`; `R/01b` fica só no projeto).
+- [x] 24/11/2026 **N12. Verificador com 26 checagens** (novas C13 a C16: White, F robusto, DW centrado, reespecificação com porte); envio reconstruído e aprovado em 26 de 26.
+- [ ] **N15. Nova correção com o agente `professor-econometria`** depois deste bloco; registrar a nota aqui.

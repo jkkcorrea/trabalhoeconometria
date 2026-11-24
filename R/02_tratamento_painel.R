@@ -470,32 +470,17 @@ consolidar_painel_mestre <- function(df_macro, df_pib, df_rais, df_geo) {
          LINHAS_PAINEL, ". Alguma junção perdeu ou duplicou observações.")
   }
 
-  # Produção agrícola municipal (PAM, tabela 5457, variável 215), gravada pela Etapa 1b.
-  # Valor em mil reais, deflacionado pelo mesmo fator do salário (IPCA, reais de 2021).
-  arq_pam <- file.path("dados_brutos", "pam_valor_producao.rds")
-  if (!file.exists(arq_pam)) stop("Etapa 2: falta ", arq_pam, ". Rode a Etapa 1b.", call. = FALSE)
-  pam <- readRDS(arq_pam) |>
-    dplyr::mutate(id_municipio = as.character(id_municipio), ano = as.integer(ano))
-
-  painel <- painel |>
-    dplyr::left_join(pam, by = c("id_municipio", "ano"))
-  if (anyNA(painel$valor_producao_mil)) stop("Etapa 2: produção agrícola sem valor para algum município e ano.", call. = FALSE)
-
   painel |>
     dplyr::mutate(
       # Salário em reais do último ano da amostra (2021).
       salario_medio_real = salario_medio_nominal * fator_deflacao,
-      ln_salario_real    = log(salario_medio_real),
-      # Produção agrícola em reais de 2021 e em logaritmo (valores de 77 mil a 865 milhões de reais).
-      producao_agricola_real = valor_producao_mil * 1000 * fator_deflacao,
-      ln_producao_agricola   = log(producao_agricola_real)
+      ln_salario_real    = log(salario_medio_real)
     ) |>
     dplyr::select(
       id_municipio, nome_municipio, ano,
       salario_medio_nominal, salario_medio_real, ln_salario_real,
       prop_superior, dom_industrial, gini_setorial,
       selic_real, dist_curitiba_km, x3_negativo,
-      valor_producao_mil, ln_producao_agricola,
       selic_nominal_ano, ipca_ano, indice_ipca_medio,
       vinculos_ativos, vinculos_superior, vinculos_escolaridade_na,
       pib, vab_total_soma, vab_industria

@@ -36,7 +36,7 @@ if (!nzchar(biblioteca_usuario)) {
 }
 if (dir.exists(biblioteca_usuario)) .libPaths(c(biblioteca_usuario, .libPaths()))
 
-PACOTES <- c("dplyr", "readr", "tibble", "purrr", "ggplot2", "car", "lmtest", "sandwich")
+PACOTES <- c("dplyr", "tidyr", "readr", "tibble", "purrr", "ggplot2", "car", "lmtest", "sandwich")
 ausentes <- PACOTES[!vapply(PACOTES, requireNamespace, logical(1), quietly = TRUE)]
 if (length(ausentes) > 0) stop("Pacotes ausentes: ", paste(ausentes, collapse = ", "), call. = FALSE)
 invisible(lapply(PACOTES, function(p) suppressPackageStartupMessages(library(p, character.only = TRUE))))
@@ -184,6 +184,84 @@ gerar_figuras <- function(modelo, painel) {
 }
 
 # -----------------------------------------------------------------------------
+# 5b. Diagnósticos complementares: teste de White, Goldfeld-Quandt por outras variáveis,
+#     F geral com erro de White e exame dos resíduos (aulas de heterocedasticidade e de
+#     especificação e diagnóstico)
+# -----------------------------------------------------------------------------
+VARIAVEIS_X <- c("prop_superior", "dom_industrial", "gini_setorial", "selic_real", "dist_curitiba_km")
+ROTULOS_X <- c(prop_superior = "X2 escolaridade (%)", dom_industrial = "X3 industrialização (%)",
+               gini_setorial = "X4 Gini setorial", selic_real = "X5 Selic real (% a.a.)",
+               dist_curitiba_km = "X6 distância a Curitiba (km)")
+
+testes_heterocedasticidade_complementares <- function(modelo, painel) {
+  # Teste geral de White: regressão auxiliar do quadrado do resíduo sobre os regressores,
+  # seus quadrados e produtos cruzados; estatística n R^2 ~ qui-quadrado.
+  aux <- stats::as.formula(paste("~ (", paste(VARIAVEIS_X, collapse = " + "), ")^2 +",
+                                 paste0("I(", VARIAVEIS_X, "^2)", collapse = " + ")))
+  z <- stats::model.matrix(aux, data = painel)[, -1, drop = FALSE]
+  r2_aux <- summary(stats::lm(stats::residuals(modelo)^2 ~ z))$r.squared
+  gl_white <- qr(cbind(1, z))$rank - 1
+  white <- list(statistic = nrow(painel) * r2_aux, parameter = gl_white)
+  white$p.value <- stats::pchisq(white$statistic, df = gl_white, lower.tail = FALSE)
+  linha_white <- tibble::tibble(
+    teste = "White (regressão auxiliar com quadrados e produtos cruzados)", ordenado_por = NA_character_,
+    hipotese_nula = "H0: Var(u_t) = sigma^2 para todo t (homocedasticidade)",
+    hipotese_alternativa = "Ha: a variância depende dos regressores, de seus quadrados ou de seus produtos cruzados",
+    estatistica = unname(white$statistic), gl = as.character(unname(white$parameter)), p_valor = white$p.value)
+  gq <- purrr::map_dfr(VARIAVEIS_X, function(v) {
+    g <- lmtest::gqtest(modelo, order.by = painel[[v]], fraction = 0.2, alternative = "two.sided")
+    tibble::tibble(
+      teste = "Goldfeld-Quandt (fração central 0,2 omitida)", ordenado_por = v,
+      hipotese_nula = "H0: sigma_1^2 = sigma_2^2 (variância igual nos dois segmentos)",
+      hipotese_alternativa = "Ha: as variâncias dos dois segmentos diferem (bilateral)",
+      estatistica = unname(g$statistic), gl = paste(unname(g$parameter), collapse = "; "), p_valor = g$p.value)
+  })
+  dplyr::bind_rows(linha_white, gq) |>
+    dplyr::mutate(modelo = "Modelo 2 (principal)", decisao_5pct = decisao(p_valor), .before = 1)
+}
+
+f_geral_robusto <- function(modelo) {
+  # F para H0: todos os coeficientes de inclinação são nulos, com a matriz de White (HC1):
+  # F = b' V^-1 b / q, em que b são as q inclinações e V o bloco correspondente da matriz HC1.
+  cl <- anova_f(modelo)
+  b <- stats::coef(modelo)[-1]
+  v <- sandwich::vcovHC(modelo, type = "HC1")[-1, -1, drop = FALSE]
+  f_rob <- as.numeric(t(b) %*% solve(v, b)) / length(b)
+  gl_res <- modelo$df.residual   # antes do tibble: a coluna "modelo" ofuscaria o objeto
+  tibble::tibble(
+    modelo = "Modelo 2 (principal)", matriz = c("clássica", "White (HC1)"),
+    estatistica_f = c(cl$estatistica_f, f_rob), gl_numerador = c(cl$gl_numerador, length(b)),
+    gl_denominador = c(cl$gl_denominador, gl_res),
+    p_valor = c(cl$p_valor, stats::pf(f_rob, length(b), gl_res, lower.tail = FALSE))
+  ) |> dplyr::mutate(decisao_5pct = decisao(p_valor))
+}
+
+exame_residuos <- function(modelo, painel) {
+  # Resíduos contra cada regressor (exame visual da forma funcional) e os maiores resíduos.
+  s <- sqrt(sum(stats::residuals(modelo)^2) / modelo$df.residual)
+  base <- painel |>
+    dplyr::select(nome_municipio, ano, dplyr::all_of(VARIAVEIS_X)) |>
+    dplyr::mutate(residuo = stats::residuals(modelo))
+  longo <- tidyr::pivot_longer(base, dplyr::all_of(VARIAVEIS_X), names_to = "variavel", values_to = "valor") |>
+    dplyr::mutate(variavel = factor(ROTULOS_X[variavel], levels = ROTULOS_X))
+  g <- ggplot2::ggplot(longo, ggplot2::aes(valor, residuo)) +
+    ggplot2::geom_hline(yintercept = 0, colour = "grey50") +
+    ggplot2::geom_point(colour = "#5F7F62", alpha = 0.6, size = 1.2) +
+    ggplot2::geom_smooth(method = "loess", formula = y ~ x, se = FALSE, colour = "grey15", linewidth = 0.7) +
+    ggplot2::facet_wrap(~variavel, scales = "free_x", ncol = 3) +
+    ggplot2::labs(title = "Resíduos contra cada regressor (modelo principal)",
+                  subtitle = "A linha escura é uma suavização; um padrão curvo sugere forma funcional incorreta",
+                  x = NULL, y = "Resíduo") +
+    ggplot2::theme_bw(base_size = 10)
+  ggplot2::ggsave(file.path(DIR_FIGURAS, "diag7_residuos_vs_regressores.png"), g, width = 9, height = 6, dpi = 200, bg = "white")
+  base |>
+    dplyr::mutate(residuo_sobre_s = residuo / s, abs_residuo = abs(residuo)) |>
+    dplyr::arrange(dplyr::desc(abs_residuo)) |>
+    dplyr::slice_head(n = 10) |>
+    dplyr::select(nome_municipio, ano, residuo, residuo_sobre_s)
+}
+
+# -----------------------------------------------------------------------------
 # 6. Execução
 # -----------------------------------------------------------------------------
 executar_etapa_4 <- function() {
@@ -198,8 +276,12 @@ executar_etapa_4 <- function() {
   readr::write_csv(anova_f(modelo), file.path(DIR_RESULTADOS, "anova_f_modelo.csv"))
   gerar_figuras(modelo, painel)
   figura_qq(modelo)
+  readr::write_csv(testes_heterocedasticidade_complementares(modelo, painel),
+                   file.path(DIR_RESULTADOS, "testes_heterocedasticidade_complementares.csv"))
+  readr::write_csv(f_geral_robusto(modelo), file.path(DIR_RESULTADOS, "f_geral_robusto.csv"))
+  readr::write_csv(exame_residuos(modelo, painel), file.path(DIR_RESULTADOS, "maiores_residuos.csv"))
 
-  message("Etapa 4 concluída: coeficientes, heterocedasticidade, normalidade (Shapiro-Wilk), FIV, ANOVA e figuras gravados.")
+  message("Etapa 4 concluída: coeficientes, heterocedasticidade (inclusive White), normalidade (Shapiro-Wilk), FIV, ANOVA, F robusto e figuras gravados.")
   invisible(list(modelo = modelo))
 }
 

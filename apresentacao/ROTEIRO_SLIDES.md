@@ -78,13 +78,13 @@ R² ajustado = 0,643.
 
 ## Slide 15: diagnósticos
 - FIV máximo 2,33: sem multicolinearidade.
-- Breusch-Pagan rejeita homocedasticidade (p = 0,036): inferência com erros de White.
+- Breusch-Pagan (p = 0,036) e White (p < 0,0001) rejeitam a homocedasticidade: inferência com erros de White.
 - Shapiro-Wilk rejeita normalidade (W = 0,8618): figura Q-Q, limitação declarada.
-- RESET rejeita forma linear (p < 0,0001): limitação declarada.
+- RESET rejeita forma linear (p < 0,0001); com o porte do município o F cai de 14,5 para 4,0, sem eliminar a rejeição.
 - Figura: `diag5_normalidade_qq.png`.
 
 ## Slide 16: autocorrelação e quebra estrutural
-- Durbin-Watson por município: mediana 0,25; autocorrelação positiva em 14 de 29 municípios. Limitação declarada.
+- Durbin-Watson por município: mediana 0,25; autocorrelação positiva em 14 de 29 municípios. Com os resíduos centrados por município, mediana 1,16 e só 1 município abaixo de dL. Limitação declarada.
 - Chow em 2017: F = 1,60, p = 0,146 (sem quebra). Em 2016: p = 0,102.
 
 ## Slide 17: robustez e previsão

@@ -12,12 +12,12 @@ le <- function(p) read.csv(file.path(DIR, p), check.names = FALSE, stringsAsFact
 pr <- function(p) file.path(DIR, p)
 
 # ============================== A. Inventário, higiene e escopo ==================
-SCRIPTS <- c("00_executar_tudo", "01_extracao_dados", "01b_extracao_pam", "02_tratamento_painel",
+SCRIPTS <- c("00_executar_tudo", "01_extracao_dados", "02_tratamento_painel",
              "03_aede_visualizacoes", "04_modelagem_diagnosticos", "05_autocorrelacao_municipios",
              "06_especificacao_chow", "07_memorial_modelo_2")
 esperado <- c("LEIAME.md", paste0("R/", SCRIPTS, ".R"),
   "figuras_graficos/animacao1_mapa_renda_rmc.gif", "figuras_graficos/animacao2_ranking_salario_municipios.gif",
-  paste0("dados_brutos/", c("pib_sidra", "macro_bacen", "malha_rmc", "distancias", "rais", "pam_valor_producao"), ".rds"),
+  paste0("dados_brutos/", c("pib_sidra", "macro_bacen", "malha_rmc", "distancias", "rais"), ".rds"),
   paste0("dados_processados/", c("dados_painel_rmc.csv", "dados_painel_rmc.rds",
                                  "estatisticas_descritivas.csv", "matriz_correlacao_explicativas.csv")),
   paste0("resultados_econometricos/", c("coeficientes_modelos.csv", "testes_diagnostico.csv", "vif_tolerancia.csv",
@@ -25,13 +25,16 @@ esperado <- c("LEIAME.md", paste0("R/", SCRIPTS, ".R"),
                                         "autocorrelacao_por_municipio.csv", "autocorrelacao_resumo.csv",
                                         "especificacao_reset.csv", "especificacao_lm_tendencia.csv", "chow_quebra_periodo.csv",
                                         "medida_gini_checagem.csv", "robustez_x4_definicao_gini.csv", "robustez_porte_e_negativos.csv",
+                                        "reespecificacao_forma_funcional.csv", "testes_heterocedasticidade_complementares.csv",
+                                        "f_geral_robusto.csv", "maiores_residuos.csv",
+                                        "autocorrelacao_heterogeneidade_municipios.csv", "autocorrelacao_heterogeneidade_resumo.csv",
                                         "projecao_selic_m2.csv", "efeito_selic_m2.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
                                         "memorial_modelo_2_f_incremental.csv", "memorial_modelo_2_fiv.csv",
                                         "memorial_modelo_2_previsao.csv")),
   paste0("figuras_graficos/", c("diag1_residuos_vs_ajustados.png", "diag2_residuos_por_municipio.png",
-                                "diag3_residuos_defasados.png", "diag5_normalidade_qq.png", "diag6_variaveis_no_tempo.png",
+                                "diag3_residuos_defasados.png", "diag5_normalidade_qq.png", "diag6_variaveis_no_tempo.png", "diag7_residuos_vs_regressores.png",
                                 "fig1_matriz_correlacao.png", "fig2_ridgeplot_salario_anos.png",
                                 "fig3_dispersao_capital_humano_industria.png", "legenda_municipios_rmc.png",
                                 "mapa1_painel_espacial_rmc.png")),
@@ -230,6 +233,48 @@ mem <- le("resultados_econometricos/memorial_modelo_2_coeficientes.csv")
 registrar("C12", "Memorial matricial do modelo principal bate com a álgebra independente",
           max(abs(as.numeric(mem[[2]]) - b)) < 1e-6,
           sprintf("maior diferença nos coeficientes %.2e", max(abs(as.numeric(mem[[2]]) - b))))
+
+# Teste de White: n R2 da regressão de e^2 sobre regressores, quadrados e produtos cruzados
+Xv <- X[, -1]
+cruz <- do.call(cbind, lapply(1:4, function(i) sapply((i + 1):5, function(j) Xv[, i] * Xv[, j])))
+Zw <- cbind(1, Xv, Xv^2, cruz)
+aux_w <- stats::lm.fit(Zw, e^2)
+r2_w <- 1 - sum(aux_w$residuals^2) / sum((e^2 - mean(e^2))^2)
+hw <- le("resultados_econometricos/testes_heterocedasticidade_complementares.csv")
+reg_w <- hw[grepl("^White", hw$teste), ]
+registrar("C13", "Teste de White recalculado (n R2 da regressão auxiliar com quadrados e produtos cruzados)",
+          abs(n * r2_w - reg_w$estatistica) < 1e-6 && (aux_w$rank - 1) == as.numeric(reg_w$gl),
+          sprintf("calculado %.4f (gl %d); no arquivo %.4f (gl %s)", n * r2_w, aux_w$rank - 1, reg_w$estatistica, reg_w$gl))
+
+# F geral com a matriz de White (HC1): F = b'V^-1 b / q, com as q inclinações
+meio <- t(X) %*% (X * e^2)
+V_hc1 <- (n / (n - k)) * XtX_inv %*% meio %*% XtX_inv
+F_rob <- as.numeric(t(b[-1]) %*% solve(V_hc1[-1, -1], b[-1])) / (k - 1)
+fr <- le("resultados_econometricos/f_geral_robusto.csv")
+registrar("C14", "F geral com erro de White (HC1) recalculado", abs(F_rob - fr$estatistica_f[fr$matriz == "White (HC1)"]) < 1e-6,
+          sprintf("calculado %.4f; no arquivo %.4f", F_rob, fr$estatistica_f[fr$matriz == "White (HC1)"]))
+
+# Durbin-Watson com os resíduos centrados na média do município e contagem de municípios de mesmo sinal
+dwc_ref <- sapply(split(e, painel$id_municipio), function(u) { uc <- u - mean(u); sum(diff(uc)^2) / sum(uc^2) })
+het <- le("resultados_econometricos/autocorrelacao_heterogeneidade_municipios.csv")
+hres <- le("resultados_econometricos/autocorrelacao_heterogeneidade_resumo.csv")
+mesmo_ref <- sum(sapply(split(e, painel$id_municipio), function(u) all(u > 0) || all(u < 0)))
+registrar("C15", "Durbin-Watson com resíduos centrados por município e municípios de mesmo sinal recalculados",
+          max(abs(dwc_ref - het$durbin_watson_centrado[match(names(dwc_ref), het$id_municipio)])) < 1e-8 &&
+            mesmo_ref == hres$municipios_mesmo_sinal && sum(dwc_ref < 0.243) == hres$abaixo_dl_centrado,
+          sprintf("mesmo sinal %d; abaixo de dL com resíduos centrados %d", mesmo_ref, sum(dwc_ref < 0.243)))
+
+# Reespecificação com o logaritmo dos vínculos ativos: RESET e coeficiente do Gini recalculados
+Xp <- cbind(X, log(painel$vinculos_ativos))
+bp_ <- stats::lm.fit(Xp, y)$coefficients; ep_ <- y - Xp %*% bp_
+yh <- as.vector(Xp %*% bp_); Xrp <- cbind(Xp, yh^2, yh^3)
+sqr_u2 <- sum(stats::lm.fit(Xrp, y)$residuals^2); sqr_r2 <- sum(ep_^2)
+F_reset_p <- ((sqr_r2 - sqr_u2) / 2) / (sqr_u2 / (n - ncol(Xp) - 2))
+re <- le("resultados_econometricos/reespecificacao_forma_funcional.csv")
+lin <- re[grepl("porte", re$especificacao) & !grepl("Quadrados", re$especificacao), ]
+registrar("C16", "Reespecificação com o porte do município: RESET e coeficiente do Gini recalculados",
+          abs(F_reset_p - lin$reset_f) < 1e-6 && abs(bp_[4] - lin$coef_gini) < 1e-8,
+          sprintf("RESET calculado %.4f, no arquivo %.4f; Gini %.4f", F_reset_p, lin$reset_f, bp_[4]))
 
 # ============================== D. Documentação conferida com os CSV =============
 doc_res <- readLines(pr("documentacao/03_resultados_modelos.md"), encoding = "UTF-8", warn = FALSE)

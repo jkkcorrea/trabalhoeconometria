@@ -53,3 +53,11 @@ Soma dos pontos recuperáveis dentro do escopo, se tudo for feito: cerca de +23 
 - **Não maquiar a nota.** Resultado que não resiste (H3 com porte) é reportado, não escondido. Nenhuma obra entra sem ser lida.
 - **Reespecificar muda tudo.** Se o porte ou termos quadráticos entrarem no modelo principal, refazer R/04 a R/07, o memorial, as tabelas 3 a 5, o resumo, os slides e a pasta de envio, e regenerar a documentação.
 - **A nota do agente é uma estimativa** feita com a régua configurada; a nota do professor real pode diferir, sobretudo no peso dado ao texto.
+
+## Estado em 24/11/2026
+
+Feito (código, texto e verificação em 26 de 26): teste de White e Goldfeld-Quandt por outras variáveis (critério 6); F geral e intervalos da média com a matriz de White (critério 4); Durbin-Watson com resíduos centrados e explicação de 14 contra 3 (critério 7); exame de resíduos, reespecificação para o RESET e identificação das caudas (critério 8); robustez com porte e sem VAB negativo, mais o parágrafo de endogeneidade (critério 9); apêndice do memorial no artigo (critério 3); PAM fora do painel (critérios 2 e 10).
+
+Achado novo que muda a leitura: o porte do município (ln dos vínculos ativos) explica boa parte da rejeição do RESET (F de 14,49 para 3,98) e eleva o R² ajustado de 0,6433 para 0,6744, mas inverte o sinal do Gini. Se o professor ou o pesquisador adotarem o porte no modelo principal, o ganho técnico é grande e o custo é refazer H3 e a conclusão. Decisão em aberto (A8).
+
+Ainda fora do alcance do código nesta rodada: literatura e discussão (pesquisador), erro agrupado por município (fora do escopo), formatação final no template e limpeza das marcações.

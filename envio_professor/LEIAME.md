@@ -9,7 +9,7 @@ Modelo principal: MQO empilhado para 29 municípios da RMC, 2012 a 2021 (290 obs
 
 ## Conteúdo
 
-- `R/`: scripts 01b a 07 (tratamento, figuras, modelo, autocorrelação, especificação e memorial).
+- `R/`: scripts 02 a 07 (tratamento, figuras, modelo, autocorrelação, especificação e memorial).
 - `resultados_econometricos/`: coeficientes, testes, memorial matricial, projeção e robustez.
 - `figuras_graficos/`: figuras de diagnóstico e de análise exploratória.
 - `documentacao/`: resumo, dados, especificação, resultados, diagnósticos, limitações, fontes e verificação.

@@ -4,13 +4,13 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 64 arquivos |
+| A1 | Arquivos essenciais presentes | APROVADA | 69 arquivos |
 | A1b | Sem arquivos de versões anteriores nos resultados e figuras | APROVADA | nenhum arquivo antigo |
-| A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 21 arquivos varridos |
+| A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 20 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
-| A4 | Código dos scripts idêntico ao da versão de trabalho (só comentários diferem) | APROVADA | 9 scripts idênticos |
+| A4 | Código dos scripts idêntico ao da versão de trabalho (só comentários diferem) | APROVADA | 8 scripts idênticos |
 | A5 | Scripts usam só caminhos relativos | APROVADA | nenhum caminho absoluto |
-| B1 | Painel: 290 linhas, 29 municípios, 10 anos balanceados, sem NA, NaN ou Inf | APROVADA | 290 x 23 |
+| B1 | Painel: 290 linhas, 29 municípios, 10 anos balanceados, sem NA, NaN ou Inf | APROVADA | 290 x 21 |
 | B2 | Gini setorial recomputado a partir da RAIS (fórmula do Guia P2, 87 divisões) | APROVADA | maior diferença 0.00e+00 |
 | C1 | Coeficientes e erro clássico do modelo principal recalculados por álgebra matricial | APROVADA | maior diferença 2.86e-12 |
 | C2 | Erro de White (HC1) recalculado | APROVADA | maior diferença 5.12e-13 |
@@ -24,7 +24,11 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C10 | Projeção de 2021 (cenário base) igual ao ajuste do modelo e correção de viés exp(s2/2) aplicada | APROVADA | desvio do ajuste 1.14e-12; fator exp(s2/2) = 1.00749 |
 | C11 | Intervalo de confiança da Selic (erro de White, gl = n - k) recalculado | APROVADA | IC [0.003022; 0.010062] |
 | C12 | Memorial matricial do modelo principal bate com a álgebra independente | APROVADA | maior diferença nos coeficientes 1.66e-12 |
+| C13 | Teste de White recalculado (n R2 da regressão auxiliar com quadrados e produtos cruzados) | APROVADA | calculado 94.1532 (gl 20); no arquivo 94.1532 (gl 20) |
+| C14 | F geral com erro de White (HC1) recalculado | APROVADA | calculado 92.8340; no arquivo 92.8340 |
+| C15 | Durbin-Watson com resíduos centrados por município e municípios de mesmo sinal recalculados | APROVADA | mesmo sinal 16; abaixo de dL com resíduos centrados 1 |
+| C16 | Reespecificação com o porte do município: RESET e coeficiente do Gini recalculados | APROVADA | RESET calculado 3.9843, no arquivo 3.9843; Gini 0.2579 |
 | D1 | Coeficiente de X2 (erro de White) escrito na documentação igual ao CSV | APROVADA | valor esperado 0,0150 |
 | D2 | Estatística de Shapiro-Wilk escrita na documentação igual ao CSV | APROVADA | valor esperado 0,8618 |
 
-22 de 22 verificações aprovadas.
+26 de 26 verificações aprovadas.

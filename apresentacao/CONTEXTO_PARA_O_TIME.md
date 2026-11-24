@@ -43,10 +43,10 @@ Modelo: MQO com erros robustos de White. R² ajustado 0,643.
 ## 5. Diagnósticos: o que dizer quando perguntarem
 
 - Multicolinearidade: não há (FIV máximo 2,33).
-- Heterocedasticidade: rejeitada (Breusch-Pagan, p = 0,036). Por isso os erros são robustos.
+- Heterocedasticidade: rejeitada pelo Breusch-Pagan (p = 0,036) e pelo White (p < 0,0001). Por isso os erros são robustos (White). O Goldfeld-Quandt só rejeita quando a amostra é ordenada pela industrialização.
 - Normalidade: rejeitada (Shapiro-Wilk, W = 0,8618). Limitação declarada. **[aguardando orientação do professor — item A1]**
-- Forma funcional: o teste RESET rejeita a forma linear. Limitação declarada. **[aguardando orientação do professor — item A2]**
-- Autocorrelação dentro dos municípios: positiva em 14 de 29 municípios. Limitação declarada. **[aguardando orientação do professor — item A3]**
+- Forma funcional: o teste RESET rejeita a forma linear. Com o porte do município no modelo, o F cai de 14,5 para 4,0, mas a rejeição continua. Limitação declarada. **[aguardando orientação do professor — item A2]**
+- Autocorrelação dentro dos municípios: positiva em 14 de 29 municípios, mas com os resíduos centrados na média do município só 1 fica abaixo de dL: grande parte é diferença persistente entre municípios. Limitação declarada. **[aguardando orientação do professor — item A3]**
 - Quebra estrutural: o teste de Chow não encontra quebra em 2017 (p = 0,146). **[aguardando orientação do professor — item A4]**
 
 ## 6. Slide a slide

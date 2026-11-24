@@ -14,7 +14,7 @@
 #
 # Lê:    ./dados_processados/dados_painel_rmc.rds; ./dados_brutos/rais.rds (checagem do Gini)
 # Grava: ./resultados_econometricos/especificacao_reset.csv, especificacao_lm_tendencia.csv,
-#        chow_quebra_periodo.csv, medida_gini_checagem.csv, robustez_x4_definicao_gini.csv, robustez_porte_e_negativos.csv,
+#        chow_quebra_periodo.csv, medida_gini_checagem.csv, robustez_x4_definicao_gini.csv, robustez_porte_e_negativos.csv, reespecificacao_forma_funcional.csv,
 #        projecao_selic_m2.csv, efeito_selic_m2.csv
 #        ./figuras_graficos/diag6_variaveis_no_tempo.png
 # =============================================================================
@@ -190,6 +190,34 @@ robustez_adicional <- purrr::imap_dfr(especificacoes, function(e, rot) {
 readr::write_csv(robustez_adicional, file.path(DIR_RESULTADOS, "robustez_porte_e_negativos.csv"))
 message(sprintf("Correlação entre o Gini setorial e ln(vínculos ativos): %.3f.", cor_gini_porte))
 
+# Forma funcional: o RESET rejeita a forma linear, e a aula de especificação e diagnóstico
+# trata a forma funcional incorreta como erro de especificação. Cada reespecificação abaixo
+# acrescenta termos ao modelo principal e repete os diagnósticos. Os quadrados usam X2 e X3
+# centrados na média, para não criar colinearidade artificial entre o termo e o seu quadrado.
+painel$x2_c <- painel$prop_superior - mean(painel$prop_superior)
+painel$x3_c <- painel$dom_industrial - mean(painel$dom_industrial)
+f_quad <- stats::update(formula_base, . ~ . + I(x2_c^2) + I(x3_c^2))
+reespecificacoes <- list(
+  "Modelo principal" = formula_base,
+  "Mais quadrados de X2 e X3 (centrados na média)" = f_quad,
+  "Mais ln dos vínculos ativos (porte)" = stats::update(formula_base, . ~ . + ln_vinculos_ativos),
+  "Quadrados de X2 e X3 e porte" = stats::update(f_quad, . ~ . + ln_vinculos_ativos)
+)
+tabela_reespecificacao <- purrr::imap_dfr(reespecificacoes, function(f, rot) {
+  m <- stats::lm(f, data = painel)
+  ct <- lmtest::coeftest(m, vcov. = sandwich::vcovHC(m, type = "HC1"))
+  rs <- lmtest::resettest(m, power = 2:3, type = "fitted")
+  sw <- stats::shapiro.test(stats::residuals(m))
+  tibble::tibble(
+    especificacao = rot, n_parametros = length(stats::coef(m)), r2_ajustado = summary(m)$adj.r.squared,
+    aic = stats::AIC(m), reset_f = unname(rs$statistic), reset_p = rs$p.value,
+    shapiro_w = unname(sw$statistic), shapiro_p = sw$p.value, breusch_pagan_p = lmtest::bptest(m)$p.value,
+    coef_gini = ct["gini_setorial", 1], p_gini = ct["gini_setorial", 4],
+    coef_distancia = ct["dist_curitiba_km", 1], p_distancia = ct["dist_curitiba_km", 4]
+  )
+})
+readr::write_csv(tabela_reespecificacao, file.path(DIR_RESULTADOS, "reespecificacao_forma_funcional.csv"))
+
 # -----------------------------------------------------------------------------
 # 5. Projeção de 2021 e efeito da Selic (Modelo 2)
 # -----------------------------------------------------------------------------
@@ -207,17 +235,24 @@ cenarios <- tibble::tibble(
   cenario = c("Selic de 2021", "Selic de 2021 + 1 p.p.", "Selic de 2021 - 1 p.p."),
   selic = unique(base_ref$selic_real)[1] + c(0, 1, -1)
 )
+# Intervalo da média com a matriz de White (HC1): x0' V x0, em vez de s^2 x0'(X'X)^-1 x0.
+V_white <- sandwich::vcovHC(modelo2, type = "HC1")
+t_previsao <- stats::qt(0.975, modelo2$df.residual)
 projecao <- purrr::pmap_dfr(cenarios, function(cenario, selic) {
   nd <- base_ref
   nd$selic_real <- selic
   pr_m <- stats::predict(modelo2, newdata = nd, interval = "confidence", level = 0.95)
   pr_i <- stats::predict(modelo2, newdata = nd, interval = "prediction", level = 0.95)
+  x0 <- stats::model.matrix(stats::delete.response(stats::terms(modelo2)), data = nd)
+  ep_white <- sqrt(rowSums((x0 %*% V_white) * x0))
   tibble::tibble(
     cenario = cenario, selic = selic, id_municipio = nd$id_municipio, nome_municipio = nd$nome_municipio,
     ln_previsto = pr_m[, "fit"],
     salario_previsto_sem_correcao = exp(pr_m[, "fit"]),
     salario_previsto_corrigido = exp(pr_m[, "fit"]) * fator_viés,
     ic_media_inf_ln = pr_m[, "lwr"], ic_media_sup_ln = pr_m[, "upr"],
+    ic_media_inf_ln_white = pr_m[, "fit"] - t_previsao * ep_white,
+    ic_media_sup_ln_white = pr_m[, "fit"] + t_previsao * ep_white,
     ic_individual_inf_ln = pr_i[, "lwr"], ic_individual_sup_ln = pr_i[, "upr"]
   )
 })

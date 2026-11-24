@@ -31,6 +31,11 @@ chow <- res("chow_quebra_periodo.csv")
 gini_chk <- res("medida_gini_checagem.csv")
 rob <- res("robustez_x4_definicao_gini.csv")
 rob2 <- res("robustez_porte_e_negativos.csv")
+hc <- res("testes_heterocedasticidade_complementares.csv")
+frob <- res("f_geral_robusto.csv")
+mres <- res("maiores_residuos.csv")
+het_res <- res("autocorrelacao_heterogeneidade_resumo.csv")
+reesp <- res("reespecificacao_forma_funcional.csv")
 proj <- res("projecao_selic_m2.csv")
 efeito <- res("efeito_selic_m2.csv")
 aut <- res("autocorrelacao_por_municipio.csv")
@@ -92,6 +97,17 @@ fator_vies <- efeito$fator_correcao_vies[1]
 # ---- Robustez do Gini
 tab_rob <- data.frame(Definição = rob$definicao_x4, Coeficiente = f4(rob$coef_x4), `p-valor` = fp(rob$p_valor_x4),
                       `R2 ajustado` = f4(rob$r2_ajustado), AIC = f2(rob$aic), check.names = FALSE)
+tab_hc <- data.frame(Teste = ifelse(is.na(hc$ordenado_por) | hc$ordenado_por == "", hc$teste,
+                                    paste0(hc$teste, ", ordenado por ", hc$ordenado_por)),
+                     Estatística = f2(hc$estatistica), gl = hc$gl, `p-valor` = fp(hc$p_valor),
+                     Decisão = hc$decisao_5pct, check.names = FALSE)
+tab_frob <- data.frame(Matriz = frob$matriz, F = f2(frob$estatistica_f), `gl` = paste(frob$gl_numerador, frob$gl_denominador, sep = "; "),
+                       `p-valor` = fp(frob$p_valor), Decisão = frob$decisao_5pct, check.names = FALSE)
+tab_mres <- data.frame(Município = mres$nome_municipio, Ano = mres$ano, Resíduo = f4(mres$residuo),
+                       `Resíduo / erro-padrão` = f2(mres$residuo_sobre_s), check.names = FALSE)
+tab_reesp <- data.frame(Especificação = reesp$especificacao, `R2 ajustado` = f4(reesp$r2_ajustado), AIC = f2(reesp$aic),
+                        `RESET F` = f2(reesp$reset_f), `RESET p-valor` = fp(reesp$reset_p), `Shapiro-Wilk W` = f4(reesp$shapiro_w),
+                        `Gini: coeficiente (p)` = paste0(f4(reesp$coef_gini), " (", fp(reesp$p_gini), ")"), check.names = FALSE)
 rob2 <- rob2[rob2$termo %in% c("gini_setorial", "dist_curitiba_km", "ln_vinculos_ativos"), ]
 tab_rob2 <- data.frame(Especificação = rob2$especificacao, Termo = rob2$termo, Coeficiente = f4(rob2$coeficiente),
                        `p-valor` = fp(rob2$p_valor), check.names = FALSE)
@@ -227,7 +243,21 @@ gravar("04_diagnosticos.md", c(
   sprintf("Shapiro-Wilk W = %s, p-valor %s: rejeita a normalidade. O gráfico Q-Q (figuras_graficos/diag5_normalidade_qq.png) mostra desvio nas duas caudas. Com 290 observações, a inferência é aproximadamente válida; a limitação é declarada.",
           f4(norm$estatistica[1]), fp(norm$p_valor[1])), "",
   "## Heterocedasticidade", "", md(tab_test), "",
-  "A inferência usa erros-padrão de White (HC1), que não dependem da forma da variância.", ""
+  "A inferência usa erros-padrão de White (HC1), que não dependem da forma da variância.", "",
+  "## Heterocedasticidade: teste de White e Goldfeld-Quandt por outras variáveis", "", md(tab_hc), "",
+  "O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório.", "",
+  "## F geral com erro de White", "", md(tab_frob), "",
+  "O F geral com a matriz de White (HC1) usa F = b'V^-1 b / q para as q = 5 inclinações. A conclusão é a mesma do F clássico.", "",
+  "## Heterogeneidade entre municípios e o Durbin-Watson", "",
+  sprintf("Com os resíduos do modelo empilhado, o Durbin-Watson mediano é %s e %s municípios ficam abaixo de dL. Com os resíduos centrados na média de cada município, a mediana passa a %s e apenas %s município fica abaixo de dL. Em %s dos 29 municípios os dez resíduos têm o mesmo sinal, e %s%% da soma de quadrados dos resíduos está entre municípios. Parte do que o Durbin-Watson lê como autocorrelação é, portanto, diferença persistente entre municípios que o modelo empilhado não capta. Os valores dL e dU da Tabela D.5A são aproximados neste caso, porque X6 não varia no tempo dentro do município.",
+          f4(het_res$durbin_watson_mediano[1]), het_res$abaixo_dl[1], f4(het_res$durbin_watson_centrado_mediano[1]),
+          het_res$abaixo_dl_centrado[1], het_res$municipios_mesmo_sinal[1], f2(100 * het_res$parcela_soma_quadrados_entre_municipios[1])), "",
+  "## Exame dos resíduos", "",
+  "As figuras figuras_graficos/diag1_residuos_vs_ajustados.png, diag2_residuos_por_municipio.png e diag7_residuos_vs_regressores.png mostram os resíduos contra os valores ajustados, por município e contra cada regressor. Os dez maiores resíduos em módulo:", "",
+  md(tab_mres), "",
+  "A cauda positiva dos resíduos vem de Adrianópolis (2012 a 2016) e de Araucária (2012 a 2014), municípios com participação industrial atípica; isso ajuda a explicar a assimetria e a curtose que o Shapiro-Wilk rejeita.", "",
+  "## Reespecificação da forma funcional", "", md(tab_reesp), "",
+  "Os quadrados de X2 e X3 usam as variáveis centradas na média. A inclusão do logaritmo dos vínculos ativos (porte do município) reduz bastante a estatística do RESET, o que indica que parte da não linearidade vem de uma variável omitida. O RESET ainda rejeita em todas as versões. O modelo principal permanece como o definido nas orientações; as versões ampliadas são sensibilidade.", ""
 ))
 
 # ---- 05 limitações
@@ -259,8 +289,7 @@ gravar("06_fontes.md", c(
   "| PIB e VAB municipais | IBGE, SIDRA, tabela 5938 | dados_brutos/pib_sidra.rds |",
   "| Selic (4390) e IPCA (433) | Banco Central, SGS | dados_brutos/macro_bacen.rds |",
   "| Vínculos, escolaridade e CNAE | RAIS, microdados públicos (MTE) | dados_brutos/rais.rds |",
-  "| Malha e distâncias | IBGE | dados_brutos/malha_rmc.rds, distancias.rds |",
-  "| Produção agrícola (PAM) | IBGE, SIDRA, tabela 5457 | dados_brutos/pam_valor_producao.rds |", ""
+  "| Malha e distâncias | IBGE | dados_brutos/malha_rmc.rds, distancias.rds |", ""
 ))
 
 # ---- 07 critérios
@@ -277,13 +306,12 @@ write.csv(amb, file.path(DOC, "ambiente_r.csv"), row.names = FALSE)
 dic <- data.frame(
   variavel = c("id_municipio", "nome_municipio", "ano", "salario_medio_nominal", "salario_medio_real", "ln_salario_real",
                "prop_superior", "dom_industrial", "gini_setorial", "selic_real", "dist_curitiba_km", "x3_negativo",
-               "valor_producao_mil", "ln_producao_agricola", "selic_nominal_ano", "ipca_ano", "indice_ipca_medio",
+               "selic_nominal_ano", "ipca_ano", "indice_ipca_medio",
                "vinculos_ativos", "vinculos_superior", "vinculos_escolaridade_na", "pib", "vab_total_soma", "vab_industria"),
   descricao = c("código IBGE do município (7 dígitos)", "nome do município", "ano", "salário médio nominal (RAIS)",
                 "salário médio real, reais de 2021", "logaritmo natural do salário real", "X2: % dos vínculos com superior completo",
                 "X3: VAB da indústria / VAB total x 100", "X4: Gini da participação das divisões CNAE nos vínculos",
                 "X5: Selic real anual (% a.a.)", "X6: distância a Curitiba (km)", "marca de VAB industrial negativo",
-                "valor da produção agrícola (PAM, mil reais)", "logaritmo da produção agrícola real",
                 "Selic anual", "IPCA anual", "índice de preços médio do ano",
                 "vínculos ativos (RAIS)", "vínculos com superior completo", "vínculos sem escolaridade informada",
                 "PIB municipal (mil reais)", "soma dos quatro VAB setoriais", "VAB da indústria (mil reais)"),
@@ -298,7 +326,7 @@ gravar("../LEIAME.md", c(
   "1. Rode `Rscript R/00_executar_tudo.R` a partir desta pasta; ele executa os scripts 02 a 07 em ordem.",
   "2. Os dados brutos estão em `dados_brutos/` (cache das APIs e da RAIS); os scripts não consultam a internet quando o cache existe.", "",
   "## Conteúdo", "",
-  "- `R/`: scripts 01b a 07 (tratamento, figuras, modelo, autocorrelação, especificação e memorial).",
+  "- `R/`: scripts 02 a 07 (tratamento, figuras, modelo, autocorrelação, especificação e memorial).",
   "- `resultados_econometricos/`: coeficientes, testes, memorial matricial, projeção e robustez.",
   "- `figuras_graficos/`: figuras de diagnóstico e de análise exploratória.",
   "- `documentacao/`: resumo, dados, especificação, resultados, diagnósticos, limitações, fontes e verificação.", "",

@@ -8,7 +8,7 @@ Só métodos ensinados em Econometria I. Dummies de município, painel (efeitos 
 
 ## Estado
 
-Pasta `envio_professor/` regenerada e verificada (22 de 22). Modelo principal: MQO empilhado com erros de White. Pendências em `_Trilha/BACKLOG.md`.
+Pasta `envio_professor/` regenerada e verificada (26 de 26). Modelo principal: MQO empilhado com erros de White. Pendências em `_Trilha/BACKLOG.md`.
 
 ## Estrutura
 
@@ -29,7 +29,7 @@ Pasta `envio_professor/` regenerada e verificada (22 de 22). Modelo principal: M
 | Script | Função |
 |---|---|
 | `01_extracao_dados.R` | Coleta (SIDRA, Banco Central, IBGE, RAIS). Download de cerca de 3,5 GB. Só roda com `INCLUIR_EXTRACAO=sim`. |
-| `01b_extracao_pam.R` | Produção agrícola (PAM), usada só na comparação da Selic. |
+| `01b_extracao_pam.R` | Produção agrícola (PAM). Não é mais usada no painel; fica no projeto como registro e não vai à pasta de envio. |
 | `02_tratamento_painel.R` | Painel e variáveis, com o Gini setorial como X4. |
 | `03_aede_visualizacoes.R` | Figuras, mapas numerados e animações (exige `gifski`, que exige Rust). |
 | `04_modelagem_diagnosticos.R` | Modelo principal (MQO empilhado); erro clássico e de White; VIF; Breusch-Pagan-Godfrey; Goldfeld-Quandt; Shapiro-Wilk e Q-Q. |

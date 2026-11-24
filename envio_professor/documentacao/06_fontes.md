@@ -17,5 +17,4 @@
 | Selic (4390) e IPCA (433) | Banco Central, SGS | dados_brutos/macro_bacen.rds |
 | Vínculos, escolaridade e CNAE | RAIS, microdados públicos (MTE) | dados_brutos/rais.rds |
 | Malha e distâncias | IBGE | dados_brutos/malha_rmc.rds, distancias.rds |
-| Produção agrícola (PAM) | IBGE, SIDRA, tabela 5457 | dados_brutos/pam_valor_producao.rds |
 
