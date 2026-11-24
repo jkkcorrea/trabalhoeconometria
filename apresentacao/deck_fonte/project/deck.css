@@ -1,11 +1,11 @@
 :root {
-  --fundo: #FBFCFE;
-  --fundo2: #EEF3FA;
-  --destaque: #DCE8F6;
-  --tinta: #0F2A4D;
-  --suave: #4B5E7E;
-  --acento: #1B4F9C;
-  --linha: #A9BEDC;
+  --fundo: #FFFFFF;
+  --fundo2: #F6F6F4;
+  --destaque: #F1F0ED;
+  --tinta: #1C1C1C;
+  --suave: #5A5A5A;
+  --acento: #2E2E2E;
+  --linha: #C9C9C6;
 }
 
 section {
@@ -39,7 +39,7 @@ section.destaque {
 h1 {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 400;
-  font-size: 88px;
+  font-size: 104px;
   line-height: 1.1;
   letter-spacing: 0.5px;
   margin: 0 0 48px 0;
@@ -49,7 +49,7 @@ h1 {
 h2 {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 400;
-  font-size: 64px;
+  font-size: 72px;
   line-height: 1.1;
   letter-spacing: 0.5px;
   margin: 0 0 36px 0;
@@ -70,7 +70,7 @@ h3 {
 
 p {
   margin: 0 0 24px 0;
-  font-size: 32px;
+  font-size: 40px;
 }
 
 ul {
@@ -79,12 +79,12 @@ ul {
 }
 
 li {
-  margin: 0 0 20px 0;
-  font-size: 32px;
+  margin: 0 0 24px 0;
+  font-size: 44px;
 }
 
 .lead {
-  font-size: 40px;
+  font-size: 52px;
   font-style: italic;
   line-height: 1.35;
   color: var(--tinta);
@@ -138,7 +138,7 @@ section.destaque p {
 
 table {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 32px;
+  font-size: 38px;
   color: var(--tinta);
 }
 
@@ -160,7 +160,7 @@ td {
 }
 
 .legenda {
-  font-size: 24px;
+  font-size: 26px;
   font-style: italic;
   color: var(--suave);
   margin: 16px 0 0 0;
@@ -178,4 +178,22 @@ td {
 
 .fig-direita {
   flex: 0 0 auto;
+}
+
+.duas p {
+  font-size: 36px;
+}
+
+.duas .lead {
+  font-size: 42px;
+}
+
+.duas li {
+  font-size: 34px;
+  margin: 0 0 18px 0;
+}
+
+.refs li {
+  font-size: 34px;
+  margin: 0 0 22px 0;
 }

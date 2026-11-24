@@ -1,6 +1,6 @@
 # Roteiro da apresentação (rascunho v1, 23/11/2026)
 
-Duração estimada: 12 a 15 minutos, 22 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo claro, azul semelhante ao institucional da UFPR, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
+Duração estimada: 12 a 15 minutos, 22 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo branco, tons de cinza, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
 
 ## Slide 1: título
 Salário médio real formal e estrutura produtiva na RMC, 2012 a 2021. Nome, disciplina (Econometria I, UFPR), data.
@@ -36,7 +36,7 @@ Tabela com cinco blocos (escolaridade, estrutura industrial, diversificação se
 Animação de 15 segundos (figura `animacao1_mapa_renda_rmc.gif`): salário médio real por município, 2012 a 2021, com a mesma escala de cor em todos os anos e Curitiba com contorno preto. Em PowerPoint ou PDF o GIF perde o movimento; usar o mapa estático `mapa1_painel_espacial_rmc.png`.
 
 ## Slide 9: ranking dos salários por município (animação)
-Animação de 15 segundos (figura `animacao2_ranking_salario_municipios.gif`): municípios ordenados do maior ao menor salário em cada ano. Na transição entre anos alguns rótulos se sobrepõem por instantes; se necessário, congelar um ano em PNG.
+Animação de 15 segundos (figura `animacao2_ranking_salario_municipios.gif`): municípios ordenados do maior ao menor salário em cada ano. Cada ano fica parado cerca de um segundo e a troca de posições dura cerca de meio segundo, sem sobreposição de rótulos; se necessário, congelar um ano em PNG. As barras são cinza, no padrão sem azul dos slides.
 
 ## Slide 10: o que o gráfico no tempo mostra
 - Médias dos 29 municípios: salário pico em 2017; Selic pico em 2016 e 2017, depois queda; escolaridade desacelera após 2017.
@@ -61,7 +61,7 @@ R² ajustado = 0,643.
 
 ## Slide 13: leitura dos coeficientes
 - Escolaridade: +1 p.p. de vínculos com superior está associado a salário 1,5% maior.
-- Gini: diversificação maior (Gini menor) está associada a salário maior.
+- Gini: diversificação maior (Gini menor) está associada a salário maior no modelo principal, mas não com o controle do porte do município.
 - Selic: +1 p.p. está associado a salário 0,66% maior (IC 95%: 0,30% a 1,01%).
 - Distância: +10 km está associado a salário 1,6% menor.
 - Associações, não efeitos causais.
@@ -72,14 +72,14 @@ R² ajustado = 0,643.
 |---|---|
 | H1 escolaridade + | confirmada |
 | H2 industrialização + | confirmada |
-| H3 diversificação (Gini −) | confirmada |
+| H3 diversificação (Gini −) | confirmada no modelo principal; não resiste ao controle de porte |
 | H4 Selic (exploratória) | associação positiva; ressalva de 10 valores anuais |
 | H5 distância − | confirmada |
 
 ## Slide 15: diagnósticos
 - FIV máximo 2,33: sem multicolinearidade.
 - Breusch-Pagan rejeita homocedasticidade (p = 0,036): inferência com erros de White.
-- Shapiro-Wilk rejeita normalidade (W = 0,862): figura Q-Q, limitação declarada.
+- Shapiro-Wilk rejeita normalidade (W = 0,8618): figura Q-Q, limitação declarada.
 - RESET rejeita forma linear (p < 0,0001): limitação declarada.
 - Figura: `diag5_normalidade_qq.png`.
 
@@ -88,7 +88,8 @@ R² ajustado = 0,643.
 - Chow em 2017: F = 1,60, p = 0,146 (sem quebra). Em 2016: p = 0,102.
 
 ## Slide 17: robustez e previsão
-- Gini só com divisões com vínculo: −0,638 (p = 0,001), mesmo sinal.
+- Com o porte do município (ln dos vínculos) no modelo, o Gini passa a +0,258 (p = 0,13) e a distância perde a significância: H3 não resiste a esse controle.
+- Sem Araucária em 2012 e 2013: Gini −0,499 (p = 0,0001). Gini só com divisões com vínculo: −0,638 (p = 0,0011).
 - Previsão de 2021: média de R$ 2.622 com a Selic observada; R$ 2.639 com +1 p.p.; R$ 2.605 com −1 p.p. Correção de viés exp(s²/2) = 1,0075.
 
 ## Slide 18: caso de Adrianópolis
@@ -106,6 +107,7 @@ R² ajustado = 0,643.
 
 ## Slide 20: limitações
 - Associações, não causalidade.
+- O Gini acompanha o porte do município; com esse controle, H3 não se mantém.
 - Forma funcional (RESET) e normalidade rejeitadas.
 - Autocorrelação positiva dentro dos municípios.
 - Gini depende do número de divisões com vínculo.

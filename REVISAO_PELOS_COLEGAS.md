@@ -9,7 +9,7 @@ Versão de 23/11/2026. **Tudo aqui é rascunho para apreciação.** O pesquisado
 | Material | Onde | Para que serve |
 |---|---|---|
 | Artigo (rascunho v2) | `artigo/ARTIGO_rascunho_v2.md` e a cópia no Claude Docs | Relatório final. É o material que o professor pediu para receber atenção especial |
-| Slides (22, fundo claro, azul semelhante ao institucional da UFPR, Times New Roman, com duas animações em GIF) | Artefato de Slides, com a fonte em `apresentacao/deck_fonte/project/` | Apresentação oral. As notas do orador trazem as marcações de revisão |
+| Slides (22, fundo branco, tons de cinza, Times New Roman, com duas animações em GIF) | Artefato de Slides, com a fonte em `apresentacao/deck_fonte/project/` | Apresentação oral. As notas do orador trazem as marcações de revisão |
 | Roteiro do time | `apresentacao/CONTEXTO_PARA_O_TIME.md` | Explica os números, as variáveis e cada slide para quem vai apresentar |
 | Roteiro dos slides | `apresentacao/ROTEIRO_SLIDES.md` | Texto de cada slide e as figuras usadas |
 | Referências | `fontes/REFERENCIAS.md` | Lista central com links e o estado de cada fonte |

@@ -34,7 +34,7 @@ A estrutura produtiva de um município da Região Metropolitana de Curitiba (RMC
 
 - **Escolaridade:** mais 1 ponto percentual de vínculos com superior associa-se a salário cerca de 1,5% maior.
 - **Industrialização:** coeficiente positivo e significativo (p < 0,0001).
-- **Gini:** diversificação maior associa-se a salário maior (coeficiente −0,65, p = 0,0001).
+- **Gini:** diversificação maior associa-se a salário maior no modelo principal (coeficiente −0,65, p = 0,0001), **mas não resiste ao controle do porte do município**: com o logaritmo dos vínculos ativos no modelo, o coeficiente passa a +0,26 (p = 0,13). Dizer isso com clareza se perguntarem; é a principal fragilidade técnica (item A8).
 - **Selic real:** associação positiva pequena, de cerca de 0,66% por ponto percentual (IC 95%: 0,30% a 1,01%). Ressalva: só há 10 valores anuais.
 - **Distância:** mais 10 km associa-se a salário cerca de 1,6% menor.
 
@@ -44,7 +44,7 @@ Modelo: MQO com erros robustos de White. R² ajustado 0,643.
 
 - Multicolinearidade: não há (FIV máximo 2,33).
 - Heterocedasticidade: rejeitada (Breusch-Pagan, p = 0,036). Por isso os erros são robustos.
-- Normalidade: rejeitada (Shapiro-Wilk). Limitação declarada. **[aguardando orientação do professor — item A1]**
+- Normalidade: rejeitada (Shapiro-Wilk, W = 0,8618). Limitação declarada. **[aguardando orientação do professor — item A1]**
 - Forma funcional: o teste RESET rejeita a forma linear. Limitação declarada. **[aguardando orientação do professor — item A2]**
 - Autocorrelação dentro dos municípios: positiva em 14 de 29 municípios. Limitação declarada. **[aguardando orientação do professor — item A3]**
 - Quebra estrutural: o teste de Chow não encontra quebra em 2017 (p = 0,146). **[aguardando orientação do professor — item A4]**
@@ -61,7 +61,7 @@ Os slides estão no artefato de Slides (link no registro de pendências). A font
 6. **Variáveis e Gini.** Explicar a fórmula do Gini de forma simples. Mostrar a matriz de correlação (figura `fig1`). Dizer que o Gini é correlacionado com o número de setores (−0,95). **[aguardando orientação do professor — item A6]**
 7. **Descrição dos dados.** Médias: salário R$ 2.651; escolaridade 15,3%; indústria 25,7%; Selic 2,3% a.a.; distância 46 km. Mostrar a distribuição do salário por ano (figura `fig2`).
 8. **Renda no mapa, ano a ano (animação).** Mostrar o GIF do mapa: mesma escala de cor em todos os anos, Curitiba com contorno preto. Vale 15 segundos em repetição; só descrever, sem interpretar causa.
-9. **Ranking dos salários (animação).** Mostrar o GIF do ranking: os 29 municípios do maior ao menor salário em cada ano. Alguns rótulos se sobrepõem por instantes na transição entre anos.
+9. **Ranking dos salários (animação).** Mostrar o GIF do ranking: os 29 municípios do maior ao menor salário em cada ano. Cada ano fica parado cerca de um segundo antes de a ordem mudar.
 10. **O que o gráfico no tempo mostra.** Salário com pico em 2017; Selic alta em 2016 e 2017 e depois queda; escolaridade desacelera depois de 2017. A linha tracejada marca a quebra testada. **[aguardando orientação do professor — item A4]**
 11. **Modelo.** Mostrar a equação. Explicar que não há binárias de município e não há métodos de painel, por escopo da disciplina. **[aguardando orientação do professor — item A7]**
 12. **Resultados principais.** Ler a tabela. Lembrar que os erros são de White.
@@ -69,7 +69,7 @@ Os slides estão no artefato de Slides (link no registro de pendências). A font
 14. **Hipóteses e resultado.** H1, H2, H3, H5 confirmadas nos sinais esperados. H4 (Selic) é exploratória, com ressalva.
 15. **Diagnósticos.** Mostrar o gráfico Q-Q (figura `diag5`). Explicar por que a normalidade rejeitada é limitação. **[aguardando orientação do professor — itens A1 e A2]**
 16. **Autocorrelação e quebra.** Durbin-Watson mediano 0,25; autocorrelação positiva em 14 de 29 municípios. Chow em 2017 e 2016 não rejeita a quebra. **[aguardando orientação do professor — itens A3 e A4]**
-17. **Robustez e previsão.** Gini só com divisões com vínculo: −0,638 (mesmo sinal). Previsão de 2021 dentro da amostra: R$ 2.622, com +1 ponto de Selic R$ 2.639 e com −1 ponto R$ 2.605. **[aguardando orientação do professor — item A5]**
+17. **Robustez e previsão.** Com o controle de porte, o Gini muda de sinal e perde a significância (+0,258; p = 0,13); sem Araucária em 2012 e 2013, o Gini fica em −0,499; só com divisões com vínculo, −0,638. Previsão de 2021 dentro da amostra: R$ 2.622, com +1 ponto de Selic R$ 2.639 e com −1 ponto R$ 2.605. **[aguardando orientação do professor — item A5]**
 18. **Caso de Adrianópolis.** Participação da indústria saltou de 7,1% (2014) para 45,5% (2015). A hipótese de uma fábrica de cimento (inaugurada em dezembro de 2015) é plausível e **não confirmada**. O emprego industrial formal só cresce em 2017. Mostrar a figura `fig3`. **[revisar: decidir se o caso fica nos slides ou só no texto]**
 19. **Contribuição (candidatas).** Quatro candidatas: o Gini discreto das divisões da CNAE, o painel da RMC, a evidência descritiva e o registro dos limites. Tratar como descritiva, nunca causal. **[revisar: pesquisador confirma]**
 20. **Limitações.** Associações, não causas; forma funcional e normalidade rejeitadas; autocorrelação; dependência do Gini; recorte de 2012 a 2021.
@@ -83,9 +83,9 @@ O artigo está em `artigo/ARTIGO_rascunho_v2.md`. Seções:
 - **Resumo e palavras-chave** (100 a 250 palavras, conforme a UFPR). **[a inserir: Abstract em inglês]**
 - **1 Introdução.** Problema, pergunta, objetivo e sinais esperados. **[revisar: motivação e contribuição, a cargo do pesquisador]**
 - **2 Referencial teórico.** Vazio por enquanto. **[a inserir pelo pesquisador: literatura sobre salário, estrutura produtiva e juros]**
-- **3 Metodologia.** Subseções: unidades e período; fontes e variáveis (TABELA 1); estatísticas descritivas (TABELA 2, FIGURAS 1 a 3, esta sobre Adrianópolis); construção do Gini (3.4) e procedimento de tratamento dos dados (3.5).
+- **3 Metodologia.** Subseções: unidades e período; fontes e variáveis (TABELA 1); estatísticas descritivas (TABELA 2, FIGURAS 1 a 4, a 4 sobre Adrianópolis); construção do Gini (3.4) e procedimento de tratamento dos dados (3.5).
 - **4 Modelo e métodos.** Equação (1), testes e diagnósticos, previsão. Os testes têm objetivo declarado.
-- **5 Resultados.** Coeficientes (TABELA 3), hipóteses, diagnósticos (TABELA 4, FIGURA 4), robustez, previsão de 2021 (TABELA 5).
+- **5 Resultados.** Coeficientes (TABELA 3), hipóteses, diagnósticos (TABELA 4, FIGURA 5), robustez, previsão de 2021 (TABELA 5).
 - **6 Discussão.** **[revisar: discussão do pesquisador]**
 - **7 Conclusão.** **[revisar: a cargo do pesquisador]**
 - **Referências.** Algumas marcadas para conferência.

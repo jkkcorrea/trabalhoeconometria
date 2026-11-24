@@ -14,6 +14,7 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 - X2: +0,0150 (p < 0,0001). X3: +0,0055 (p < 0,0001). X4: −0,6548 (p = 0,0001). X5: +0,0065 (p = 0,0003). X6: −0,0016 (p = 0,0033).
 - R² ajustado 0,6433; F geral 105,26 (gl 5 e 284).
 - Diagnósticos: FIV máximo 2,33; Breusch-Pagan rejeita a homocedasticidade (p = 0,0363); RESET rejeita a forma linear (p < 0,0001); Shapiro-Wilk rejeita a normalidade (p < 0,0001); Durbin-Watson rejeita a ausência de autocorrelação positiva em 14 de 29 municípios; Chow não mostra quebra (corte em 2017, p = 0,146).
+- Robustez (R/06): o Gini tem correlação de −0,88 com o logaritmo dos vínculos ativos; com esse controle de porte, o coeficiente do Gini deixa de ser significativo e muda de sinal (decisão pendente, item A8). Sem as duas observações com VAB industrial negativo, o Gini segue em −0,4992.
 - Projeção de 2021 (previsão dentro da amostra), com correção de viés exp(s²/2) = 1,0075.
 
 ## Estrutura do projeto

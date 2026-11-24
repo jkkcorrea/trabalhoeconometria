@@ -691,7 +691,7 @@ renderizar_gif_ranking <- function(dados) {
   grafico <- ggplot(barras, aes(group = id_municipio)) +
     geom_rect(aes(xmin = 0, xmax = salario_medio_real,
                   ymin = posicao - 0.42, ymax = posicao + 0.42),
-              fill = "#2c7fb8", colour = NA) +
+              fill = "#4D4D4D", colour = NA) +
     geom_text(aes(x = 0, y = posicao, label = rotulo_nome),
               hjust = 0, nudge_x = max(dados$salario_medio_real) * 0.01,
               colour = "white", size = 3.4, fontface = "bold") +
@@ -700,7 +700,7 @@ renderizar_gif_ranking <- function(dados) {
     scale_y_reverse(breaks = NULL) +
     scale_x_continuous(labels = fmt_reais, expand = expansion(mult = c(0, 0.18))) +
     labs(
-      title    = "Salário médio real por município da RMC, {round(frame_time)}",
+      title    = "Salário médio real por município da RMC, {closest_state}",
       subtitle = "Municípios ordenados do maior para o menor salário em cada ano",
       x        = "Salário médio real (R$ de 2021)",
       y        = NULL,
@@ -716,7 +716,9 @@ renderizar_gif_ranking <- function(dados) {
       axis.text.y      = element_blank(),
       plot.background  = element_rect(fill = "white", colour = NA)
     ) +
-    gganimate::transition_time(ano) +
+    # Cada ano fica parado por 4 unidades e a troca de posições dura 1: os rótulos só se
+    # sobrepõem na transição curta, e o ano exibido é o do estado mais próximo.
+    gganimate::transition_states(ano, transition_length = 1, state_length = 4) +
     gganimate::ease_aes("cubic-in-out")
 
   animacao <- gganimate::animate(

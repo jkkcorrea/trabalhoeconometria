@@ -33,6 +33,18 @@ Cada ponto percentual a mais da Selic real está associado a um salário 0,66% m
 | 87 divisões (zeros incluídos) | -0,6548 | 0,0001 | 0,6433 | -388,30 |
 | somente divisões com vínculo | -0,6378 | 0,0011 | 0,6356 | -382,07 |
 
+## Robustez adicional: porte do município e VAB da indústria negativo
+
+| Especificação | Termo | Coeficiente | p-valor |
+|---|---|---|---|
+| Modelo 2 mais ln dos vínculos ativos (porte) | gini_setorial | 0,2579 | 0,1293 |
+| Modelo 2 mais ln dos vínculos ativos (porte) | dist_curitiba_km | -0,0007 | 0,1748 |
+| Modelo 2 mais ln dos vínculos ativos (porte) | ln_vinculos_ativos | 0,0579 | < 0,0001 |
+| Modelo 2 sem as 2 observações com VAB da indústria negativo | gini_setorial | -0,4992 | 0,0001 |
+| Modelo 2 sem as 2 observações com VAB da indústria negativo | dist_curitiba_km | -0,0016 | 0,0019 |
+
+O Gini setorial tem correlação de -0,88 com o logaritmo dos vínculos ativos do município: ele acompanha o porte. Com esse controle, o coeficiente do Gini perde a significância e muda de sinal, e o da distância perde a significância. Sem as duas observações de Araucária com VAB da indústria negativo, o sinal e a significância do Gini se mantêm.
+
 A definição com as 87 divisões (zeros incluídos) é a usada no modelo principal. A versão só com as divisões que têm vínculo é apresentada como verificação; a definição final depende de orientação do professor.
 
 Correlação entre o Gini e o número de divisões com vínculo: -0,9497.

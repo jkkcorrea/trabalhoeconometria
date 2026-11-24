@@ -30,6 +30,7 @@ lm_t <- res("especificacao_lm_tendencia.csv")
 chow <- res("chow_quebra_periodo.csv")
 gini_chk <- res("medida_gini_checagem.csv")
 rob <- res("robustez_x4_definicao_gini.csv")
+rob2 <- res("robustez_porte_e_negativos.csv")
 proj <- res("projecao_selic_m2.csv")
 efeito <- res("efeito_selic_m2.csv")
 aut <- res("autocorrelacao_por_municipio.csv")
@@ -91,6 +92,9 @@ fator_vies <- efeito$fator_correcao_vies[1]
 # ---- Robustez do Gini
 tab_rob <- data.frame(Definição = rob$definicao_x4, Coeficiente = f4(rob$coef_x4), `p-valor` = fp(rob$p_valor_x4),
                       `R2 ajustado` = f4(rob$r2_ajustado), AIC = f2(rob$aic), check.names = FALSE)
+rob2 <- rob2[rob2$termo %in% c("gini_setorial", "dist_curitiba_km", "ln_vinculos_ativos"), ]
+tab_rob2 <- data.frame(Especificação = rob2$especificacao, Termo = rob2$termo, Coeficiente = f4(rob2$coeficiente),
+                       `p-valor` = fp(rob2$p_valor), check.names = FALSE)
 
 # ---- Descrição das variáveis (a partir do painel)
 desc <- data.frame(
@@ -155,7 +159,7 @@ gravar("02_especificacao_e_metodos.md", c(
   "ln(salário real)_it = β0 + β1 X2_it + β2 X3_it + β3 X4_it + β4 X5_t + β5 X6_i + u_it", "",
   "Estimação por mínimos quadrados ordinários (MQO) com as 290 observações empilhadas. Inferência com erros-padrão de White (HC1), com t de n − k graus de liberdade (284).", "",
   "## Hipóteses", "",
-  "H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização, controlados os efeitos comuns a todos os municípios.",
+  "H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização.",
   "Ha: pelo menos uma dessas condições afeta o salário.", "",
   "| Hipótese | Variável | Sinal esperado |", "|---|---|---|",
   "| H1 | escolaridade (X2) | positivo |",
@@ -193,6 +197,8 @@ gravar("03_resultados_modelos.md", c(
           f2(efeito$efeito_percentual_por_pp[1]), f4(efeito$efeito_ln_por_pp[1]), f4(efeito$ic95_inf_ln[1]),
           f4(efeito$ic95_sup_ln[1]), efeito$gl[1], fp(efeito$p_valor[1])), "",
   "## Robustez da X4: definição do Gini", "", md(tab_rob), "",
+  "## Robustez adicional: porte do município e VAB da indústria negativo", "", md(tab_rob2), "",
+  sprintf("O Gini setorial tem correlação de %s com o logaritmo dos vínculos ativos do município: ele acompanha o porte. Com esse controle, o coeficiente do Gini perde a significância e muda de sinal, e o da distância perde a significância. Sem as duas observações de Araucária com VAB da indústria negativo, o sinal e a significância do Gini se mantêm.", format(round(rob2$cor_gini_ln_vinculos[1], 2), decimal.mark = ",")), "",
   "A definição com as 87 divisões (zeros incluídos) é a usada no modelo principal. A versão só com as divisões que têm vínculo é apresentada como verificação; a definição final depende de orientação do professor.", "",
   sprintf("Correlação entre o Gini e o número de divisões com vínculo: %s.", f4(gini_chk$valor[1])), "",
   "## Projeção de 2021", "", md(tab_proj), "",

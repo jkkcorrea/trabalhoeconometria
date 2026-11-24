@@ -14,7 +14,7 @@
 #
 # Lê:    ./dados_processados/dados_painel_rmc.rds; ./dados_brutos/rais.rds (checagem do Gini)
 # Grava: ./resultados_econometricos/especificacao_reset.csv, especificacao_lm_tendencia.csv,
-#        chow_quebra_periodo.csv, medida_gini_checagem.csv, robustez_x4_definicao_gini.csv,
+#        chow_quebra_periodo.csv, medida_gini_checagem.csv, robustez_x4_definicao_gini.csv, robustez_porte_e_negativos.csv,
 #        projecao_selic_m2.csv, efeito_selic_m2.csv
 #        ./figuras_graficos/diag6_variaveis_no_tempo.png
 # =============================================================================
@@ -68,7 +68,7 @@ longo <- tidyr::pivot_longer(serie, -ano, names_to = "variavel", values_to = "va
 g_tempo <- ggplot2::ggplot(longo, ggplot2::aes(ano, valor)) +
   ggplot2::geom_line(colour = "#5F7F62", linewidth = 0.8) +
   ggplot2::geom_point(colour = "#5F7F62", size = 1.8) +
-  ggplot2::geom_vline(xintercept = ANO_CORTE - 0.5, linetype = "dashed", colour = "grey40") +
+  ggplot2::geom_vline(xintercept = ANO_CORTE + 0.5, linetype = "dashed", colour = "grey40") +
   ggplot2::facet_wrap(~variavel, scales = "free_y", ncol = 2) +
   ggplot2::labs(title = "Variáveis do modelo ao longo do tempo (média dos 29 municípios)",
                 subtitle = paste0("Linha tracejada: corte do teste de Chow (", ANO_CORTE, ")"),
@@ -166,6 +166,29 @@ robustez_x4 <- purrr::imap_dfr(c(gini_setorial = "87 divisões (zeros incluídos
                  reset_p = lmtest::resettest(m, power = 2:3, type = "fitted")$p.value)
 })
 readr::write_csv(robustez_x4, file.path(DIR_RESULTADOS, "robustez_x4_definicao_gini.csv"))
+
+# Robustez adicional: porte do município e observações com VAB da indústria negativo.
+# O Gini setorial cai quando mais divisões têm vínculo e, por isso, acompanha o porte do
+# município; a primeira especificação acrescenta o logaritmo dos vínculos ativos como controle.
+# A segunda tira as duas observações de Araucária (2012 e 2013) com VAB da indústria negativo.
+painel$ln_vinculos_ativos <- log(painel$vinculos_ativos)
+formula_base <- ln_salario_real ~ prop_superior + dom_industrial + gini_setorial + selic_real + dist_curitiba_km
+especificacoes <- list(
+  "Modelo 2 mais ln dos vínculos ativos (porte)" =
+    list(f = stats::update(formula_base, . ~ . + ln_vinculos_ativos), d = painel),
+  "Modelo 2 sem as 2 observações com VAB da indústria negativo" =
+    list(f = formula_base, d = painel[!as.logical(painel$x3_negativo), ])
+)
+cor_gini_porte <- stats::cor(painel$gini_setorial, painel$ln_vinculos_ativos)
+robustez_adicional <- purrr::imap_dfr(especificacoes, function(e, rot) {
+  m <- stats::lm(e$f, data = e$d)
+  ct <- lmtest::coeftest(m, vcov. = sandwich::vcovHC(m, type = "HC1"))
+  tibble::tibble(especificacao = rot, n = stats::nobs(m), termo = rownames(ct), coeficiente = ct[, 1],
+                 erro_padrao_white = ct[, 2], p_valor = ct[, 4],
+                 r2_ajustado = summary(m)$adj.r.squared, cor_gini_ln_vinculos = cor_gini_porte)
+})
+readr::write_csv(robustez_adicional, file.path(DIR_RESULTADOS, "robustez_porte_e_negativos.csv"))
+message(sprintf("Correlação entre o Gini setorial e ln(vínculos ativos): %.3f.", cor_gini_porte))
 
 # -----------------------------------------------------------------------------
 # 5. Projeção de 2021 e efeito da Selic (Modelo 2)

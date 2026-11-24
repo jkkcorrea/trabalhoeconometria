@@ -2,17 +2,17 @@
 
 **Rascunho v2 (23/11/2026, ajustado ao comentário do professor).** Marcações: [revisar] = interpretação ou texto para o pesquisador confirmar; [a inserir] = referência ou seção ainda não produzida; [aguardando orientação do professor: …] = trecho que depende da resposta do professor (lista e instruções de alteração em `_Trilha/REGISTRO_PENDENCIAS_PROFESSOR.md`). Números vêm de `envio_professor/documentacao/` e `resultados_econometricos/`.
 
-**Versão para apreciação dos colegas.** Orientações de leitura e de retorno em `REVISAO_PELOS_COLEGAS.md`. Os números vêm do código e não devem ser alterados sem conferência; as marcações indicam o que falta e quem decide.
+**Versão para apreciação dos colegas.** Orientações de leitura e de retorno em `REVISAO_PELOS_COLEGAS.md`. Os números vêm do código e não devem ser alterados sem conferência; as marcações indicam o que falta e quem decide. Esta nota e as marcações saem da versão final.
 
 ## Resumo
 
-Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5%. A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001). A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade, e a autocorrelação positiva dentro dos municípios é declarada como limitação. Os resultados são associações, não efeitos causais.
+Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5%. A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001), mas esse resultado deixa de valer quando se controla o porte do município. A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade, e a autocorrelação positiva dentro dos municípios é declarada como limitação. Os resultados são associações, não efeitos causais.
 
 **Palavras-chave:** Salário real. Região Metropolitana de Curitiba. Estrutura produtiva. Gini setorial. Mínimos quadrados ordinários.
 
 ## Abstract
 
-This paper estimates the association between the average formal real wage and the productive structure of the 29 municipalities of the Metropolitan Region of Curitiba (Brazil) from 2012 to 2021, using 290 observations in a stacked panel. Ordinary least squares with White (HC1) standard errors is used. Educational attainment (share of formal jobs with complete higher education) and the industrial share of value added are positively associated with wages, and distance to Curitiba is negatively associated, all significant at 5%. Sectoral diversification of employment, measured by the Gini coefficient of jobs across the 87 CNAE divisions, is associated with higher wages (coefficient of -0.655, p < 0.001). The real Selic rate has a small positive association, of about 0.66% per percentage point. The diagnostics reject linear functional form, normality of residuals and homoskedasticity; positive autocorrelation within municipalities is declared as a limitation. The results are associations, not causal effects. [revisar: tradução a conferir pelo pesquisador.]
+This paper estimates the association between the average formal real wage and the productive structure of the 29 municipalities of the Metropolitan Region of Curitiba (Brazil) from 2012 to 2021, using 290 observations in a stacked panel. Ordinary least squares with White (HC1) standard errors is used. Educational attainment (share of formal jobs with complete higher education) and the industrial share of value added are positively associated with wages, and distance to Curitiba is negatively associated, all significant at 5%. Sectoral diversification of employment, measured by the Gini coefficient of jobs across the 87 CNAE divisions, is associated with higher wages (coefficient of -0.655, p < 0.001), but this result does not hold when municipality size is controlled for. The real Selic rate has a small positive association, of about 0.66% per percentage point. The diagnostics reject linear functional form, normality of residuals and homoskedasticity; positive autocorrelation within municipalities is declared as a limitation. The results are associations, not causal effects. [revisar: tradução a conferir pelo pesquisador.]
 
 **Keywords:** Real wage. Metropolitan Region of Curitiba. Productive structure. Sectoral Gini. Ordinary least squares.
 
@@ -79,7 +79,7 @@ A TABELA 1 resume as variáveis, suas fontes e sua construção.
 
 FONTE: O autor (2026), a partir das fontes indicadas.
 
-A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita, e, com o logaritmo, o coeficiente de cada regressora indica variação relativa do salário [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
+A variável dependente é o logaritmo natural do salário. A escolha tem duas justificativas: o salário é sempre positivo e tem distribuição assimétrica à direita (FIGURA 2), e, com o logaritmo, o coeficiente de cada regressora indica variação relativa do salário [revisar: justificativa completa, com referência a GUJARATI, 2003, p. 207-208 e 449].
 
 ### 3.3 Estatísticas descritivas
 
@@ -99,7 +99,7 @@ A TABELA 2 apresenta as estatísticas descritivas das variáveis.
 
 FONTE: O autor (2026), a partir dos dados do painel.
 
-A FIGURA 1 mostra a evolução das médias anuais das variáveis, e a FIGURA 2 a correlação entre elas.
+A FIGURA 1 mostra a evolução das médias anuais das variáveis, a FIGURA 2 a distribuição do salário entre os municípios em cada ano e a FIGURA 3 a correlação entre as variáveis.
 
 **FIGURA 1 - Médias anuais das variáveis do modelo, RMC, 2012 a 2021**
 
@@ -107,15 +107,23 @@ A FIGURA 1 mostra a evolução das médias anuais das variáveis, e a FIGURA 2 a
 
 FONTE: O autor (2026). A linha tracejada marca a divisão do período usada no teste de Chow.
 
-**FIGURA 2 - Correlação de Pearson entre as variáveis do modelo, RMC, 2012 a 2021**
+**FIGURA 2 - Distribuição do salário médio real formal entre os municípios da RMC, por ano, 2012 a 2021**
+
+[imagem: figuras_graficos/fig2_ridgeplot_salario_anos.png, proporção 1,25; largura 16 cm, altura 12,8 cm; centralizada; a inserir na versão final]
+
+FONTE: O autor (2026), a partir da RAIS (Ministério do Trabalho), deflacionada pelo IPCA (série 433, Banco Central), em R$ de 2021. A cor acompanha o valor do salário no eixo horizontal.
+
+Em todos os anos, a maior parte dos municípios fica entre cerca de R$ 2.000 e R$ 3.000, com uma cauda à direita que chega perto de R$ 4.500 (FIGURA 2), o que mostra a assimetria à direita do salário.
+
+**FIGURA 3 - Correlação de Pearson entre as variáveis do modelo, RMC, 2012 a 2021**
 
 [imagem: figuras_graficos/fig1_matriz_correlacao.png, proporção 1,20; largura 16 cm, altura 13,3 cm; centralizada; a inserir na versão final]
 
 FONTE: O autor (2026). Como cada município aparece dez vezes, as 290 observações não são independentes.
 
-Dois valores merecem nota. Em Araucária, o VAB da indústria é negativo em 2012 (−R$ 560,8 milhões) e 2013 (−R$ 246,4 milhões), como publicado pelo IBGE; o valor é mantido e marcado. Em Adrianópolis, a participação industrial passa de 7,1% (2014) para 45,5% (2015). O salto foi confirmado na fonte e, segundo a pesquisa feita para o trabalho, pode estar relacionado à fábrica de cimento inaugurada no município em dezembro de 2015. Essa relação não está confirmada: o emprego formal industrial só cresce em 2017 (ver `fontes/ADRIANOPOLIS_PESQUISA.md`). A FIGURA 3 mostra Adrianópolis entre os municípios da RMC.
+Dois valores merecem nota. Em Araucária, o VAB da indústria é negativo em 2012 (−R$ 560,8 milhões) e 2013 (−R$ 246,4 milhões), como publicado pelo IBGE; o valor é mantido e marcado. Em Adrianópolis, a participação industrial passa de 7,1% (2014) para 45,5% (2015). O salto foi confirmado na fonte e, segundo a pesquisa feita para o trabalho, pode estar relacionado à fábrica de cimento inaugurada no município em dezembro de 2015. Essa relação não está confirmada: o emprego formal industrial só cresce em 2017 (ver `fontes/ADRIANOPOLIS_PESQUISA.md`). A FIGURA 4 mostra Adrianópolis entre os municípios da RMC.
 
-**FIGURA 3 - Capital humano e dominância industrial, RMC, 2012 a 2021 (painel A: escolaridade; painel B: VAB da indústria)**
+**FIGURA 4 - Capital humano e dominância industrial, RMC, 2012 a 2021 (painel A: escolaridade; painel B: VAB da indústria)**
 
 [imagem: figuras_graficos/fig3_dispersao_capital_humano_industria.png, proporção 1,87; largura 16 cm, altura 8,6 cm; centralizada; a inserir na versão final]
 
@@ -123,7 +131,7 @@ FONTE: O autor (2026), a partir de RAIS, IBGE (SIDRA) e Banco Central. Os triân
 
 ### 3.4 Construção do Gini setorial
 
-Para cada município e ano, cada divisão da CNAE recebe a participação x_i de seus vínculos ativos no total do município; divisões sem vínculo recebem zero. As 87 participações são ordenadas em ordem crescente, e o índice é calculado pela fórmula G = (2/n) Σ i·x_i − (n+1)/n, com n = 87 (HOFFMANN, 2006, p. 340-341; HASEGAWA, 2020, slides 21 e 22). O índice vai de 0 (vínculos igualmente distribuídos entre as divisões) a valores próximos de 1 (máximo de 86/87 = 0,989). A medida é uma adaptação: Hoffmann a aplica a pessoas ou empresas, e aqui as unidades são divisões setoriais. Ela depende fortemente do número de divisões com vínculo (correlação de −0,95). Como verificação, o Gini foi calculado só com as divisões que têm vínculo; o coeficiente é −0,638 (p = 0,001), com o mesmo sinal e significância.
+Para cada município e ano, cada divisão da CNAE recebe a participação x_i de seus vínculos ativos no total do município; divisões sem vínculo recebem zero. As 87 participações são ordenadas em ordem crescente, e o índice é calculado pela fórmula G = (2/n) Σ i·x_i − (n+1)/n, com n = 87 (HOFFMANN, 2006, p. 340-341; HASEGAWA, 2020, slides 21 e 22). O índice vai de 0 (vínculos igualmente distribuídos entre as divisões) a valores próximos de 1 (máximo de 86/87 = 0,989). A medida é uma adaptação: Hoffmann a aplica a pessoas ou empresas, e aqui as unidades são divisões setoriais. Ela depende fortemente do número de divisões com vínculo (correlação de −0,95). Como verificação, o Gini foi calculado só com as divisões que têm vínculo; o coeficiente é −0,638 (p = 0,0011), com o mesmo sinal e significância.
 
 [aguardando orientação do professor: confirmação do n = 87 e do tratamento das divisões como indivíduos. Se o professor orientar outra definição, alterar esta subseção, a TABELA 1 e os resultados da seção 5.]
 
@@ -151,7 +159,7 @@ ln(salário real)_it = β0 + β1 X2_it + β2 X3_it + β3 X4_it + β4 X5_t + β5 
 
 Em que ln(salário real)_it é o logaritmo natural do salário médio real do município i no ano t; X2 é a escolaridade; X3, a industrialização; X4, o Gini setorial; X5, a Selic real anual; X6, a distância a Curitiba; e u_it, o erro. A estimação é feita por mínimos quadrados ordinários com as 290 observações empilhadas, isto é, sem distinguir os municípios: o estimador é β̂ = (X'X)⁻¹ X'y, com k = 6 parâmetros (o intercepto e cinco coeficientes). A variância de β̂ usa a correção de White (HC1), V̂ = [n/(n − k)] (X'X)⁻¹ (Σ û_i² x_i x_i') (X'X)⁻¹, em que x_i é o vetor das variáveis do município e ano i e û_i, o resíduo. A estatística t de cada coeficiente é β̂_j dividido pelo seu erro-padrão de White, comparada à distribuição t com n − k = 284 graus de liberdade; o intervalo de confiança de 95% é β̂_j ± t(0,975; 284) × EP.
 
-O modelo não inclui variáveis binárias de município nem métodos de dados em painel, por estarem fora do escopo da disciplina. [aguardando orientação do professor: confirmação de que o modelo principal não usa binárias de município. Orientação já recebida em 23/11/2026 (D-2026-11-23-01); confirmar por escrito.]
+O modelo não inclui variáveis binárias de município nem métodos de dados em painel, por estarem fora do escopo da disciplina. [aguardando orientação do professor: confirmação de que o modelo principal não usa binárias de município.]
 
 ### 4.2 Testes e diagnósticos
 
@@ -171,9 +179,9 @@ As estatísticas e as regras de decisão de cada teste são as seguintes (n = 29
 - **Goldfeld-Quandt:** F = SQR₂ / SQR₁ entre as duas pontas da amostra ordenada pela distância, omitida a fração central de 0,2; Ha: a variância cresce com a distância.
 - **Shapiro-Wilk:** estatística W calculada sobre os resíduos; rejeita a normalidade se o p-valor for menor que 5%. O gráfico Q-Q compara os quantis dos resíduos com os da normal.
 - **RESET:** F do acréscimo das potências 2 e 3 dos valores ajustados ao modelo, com 2 e 282 graus de liberdade. Rejeita H0 (forma linear correta) se o p-valor for menor que 5%.
-- **Chow:** F = [(SQR_R − SQR₁ − SQR₂) / k] / [(SQR₁ + SQR₂) / (n − 2k)], com SQR_R do modelo para todo o período e SQR₁ e SQR₂ dos modelos de 2012 a 2016 e de 2017 a 2021 (corte em 2017); graus de liberdade 6 e 278. H0: os coeficientes são iguais nos dois períodos.
+- **Chow:** F = [(SQR_R − SQR₁ − SQR₂) / k] / [(SQR₁ + SQR₂) / (n − 2k)], com SQR_R do modelo para todo o período e SQR₁ e SQR₂ dos modelos de 2012 a 2017 e de 2018 a 2021 (corte em 2017; o corte de 2016 compara 2012 a 2016 com 2017 a 2021); graus de liberdade 6 e 278. H0: os coeficientes são iguais nos dois períodos.
 - **Durbin-Watson:** d = Σ_{t=2}^{10} (û_t − û_{t−1})² / Σ_{t=1}^{10} û_t², calculado com os resíduos de cada município. Decisão: d < dL, autocorrelação positiva; dL ≤ d ≤ dU, inconclusivo; d > dU, não se rejeita a ausência de autocorrelação positiva.
-- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo sobre as regressoras e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade.
+- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo de cada município sobre uma constante e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade.
 
 ### 4.3 Previsão
 
@@ -203,7 +211,7 @@ Com erros clássicos, as conclusões são as mesmas: os p-valores são 0,0018 pa
 
 - **H1 (escolaridade, positiva):** confirmada. Coeficiente de +0,0150, p < 0,0001.
 - **H2 (industrialização, positiva):** confirmada. Coeficiente de +0,0055, p < 0,0001.
-- **H3 (diversificação, Gini negativo):** confirmada. Coeficiente de −0,6548, p = 0,0001. Com as divisões com vínculo, −0,638, p = 0,001.
+- **H3 (diversificação, Gini negativo):** confirmada no modelo principal. Coeficiente de −0,6548, p = 0,0001. Com as divisões com vínculo, −0,638, p = 0,0011. Ressalva: com o logaritmo dos vínculos ativos como controle de porte, o coeficiente deixa de ser significativo e muda de sinal (seção 5.4).
 - **H4 (Selic, exploratória):** associação positiva significativa, de +0,0065 (cerca de 0,66% por ponto percentual). Ressalva: a Selic tem 10 valores distintos (um por ano), o que limita a precisão do coeficiente.
 - **H5 (distância, negativa):** confirmada. Coeficiente de −0,0016 por km, p = 0,0033.
 
@@ -229,9 +237,9 @@ A TABELA 4 resume os diagnósticos do modelo principal.
 
 FONTE: O autor (2026). Detalhes por município no APÊNDICE A.
 
-A FIGURA 4 mostra o gráfico Q-Q dos resíduos.
+A FIGURA 5 mostra o gráfico Q-Q dos resíduos.
 
-**FIGURA 4 - Gráfico quantil-quantil dos resíduos do modelo principal**
+**FIGURA 5 - Gráfico quantil-quantil dos resíduos do modelo principal**
 
 [imagem: figuras_graficos/diag5_normalidade_qq.png, proporção 1,40; largura 16 cm, altura 11,4 cm; centralizada; a inserir na versão final]
 
@@ -241,14 +249,26 @@ FONTE: O autor (2026).
 
 - **Heterocedasticidade (rejeitada):** os estimadores de mínimos quadrados continuam não tendenciosos, mas perdem eficiência e os testes t e F usuais podem deixar de valer (HASEGAWA, 2016b; 2017). Por isso a inferência usa erros-padrão de White.
 - **Forma funcional (RESET rejeita):** a relação linear em logaritmo pode omitir termos ou variáveis (HASEGAWA, 2022). Os coeficientes são lidos como aproximações lineares.
-- **Autocorrelação positiva (14 de 29 municípios; 15 inconclusivos):** os estimadores seguem não tendenciosos e consistentes, mas deixam de ser eficientes, a variância residual tende a ser subestimada e os testes t e F perdem validade (HASEGAWA, 2017). Com apenas dez anos por município, o teste de Durbin-Watson tem poder limitado, o que explica o grande número de resultados inconclusivos.
+- **Autocorrelação positiva (14 de 29 municípios; 15 inconclusivos):** os estimadores seguem não tendenciosos e consistentes, mas deixam de ser eficientes, a variância residual tende a ser subestimada e os testes t e F perdem validade (HASEGAWA, 2017). Com apenas dez anos por município, o teste de Durbin-Watson tem poder limitado, o que explica o grande número de resultados inconclusivos. Parte da autocorrelação aparente vem de o modelo empilhado não captar diferenças persistentes entre municípios: em 16 dos 29 municípios os dez resíduos têm o mesmo sinal, o que ajuda a explicar por que o Durbin-Watson aponta 14 municípios e o Breusch-Godfrey apenas 3.
 - **Estabilidade (Chow não rejeita em 2016 nem em 2017):** não há evidência de que os coeficientes mudem entre os dois subperíodos, o que sustenta o uso de um único modelo para todo o período.
 
-A rejeição da normalidade, mostrada na FIGURA 4, é tratada como limitação: com 290 observações, a inferência por erros de White não depende da normalidade [revisar: a relação entre o tamanho da amostra e a validade dos testes, com referência]. A rejeição do RESET e a autocorrelação positiva são limitações do modelo. [aguardando orientação do professor: tratamento da normalidade e da forma funcional rejeitadas, que pode alterar esta subseção.]
+A rejeição da normalidade, mostrada na FIGURA 5, é tratada como limitação: com 290 observações, a inferência por erros de White não depende da normalidade [revisar: a relação entre o tamanho da amostra e a validade dos testes, com referência]. A rejeição do RESET e a autocorrelação positiva são limitações do modelo. [aguardando orientação do professor: tratamento da normalidade e da forma funcional rejeitadas, que pode alterar esta subseção.]
 
 ### 5.4 Robustez
 
-O coeficiente do Gini muda pouco quando se usa só as divisões com vínculo (−0,638, p = 0,001). Essa é a única verificação de robustez feita neste trabalho; as demais definições de variáveis e outras especificações não foram testadas.
+Foram feitas três verificações, resumidas na TABELA 6. Primeira, o Gini calculado só com as divisões que têm vínculo mantém o sinal (−0,638; p = 0,0011). Segunda, sem as duas observações de Araucária com VAB da indústria negativo (N = 288), o coeficiente do Gini passa de −0,6548 para −0,4992 e segue significativo (p = 0,0001), e os demais coeficientes mantêm sinal e significância. Terceira, o Gini setorial tem correlação de −0,88 com o logaritmo dos vínculos ativos do município, isto é, acompanha o porte; ao incluir esse logaritmo como controle, o coeficiente do Gini passa a +0,2579 (p = 0,1293) e o da distância deixa de ser significativo (p = 0,1748), enquanto escolaridade, industrialização e Selic mantêm sinal e significância.
+
+**TABELA 6 - Robustez do Gini e da distância: controle de porte e exclusão de observações**
+
+| Especificação | Gini setorial: coeficiente (p-valor) | Distância: coeficiente (p-valor) | N | R² ajustado |
+|---|---|---|---|---|
+| Modelo principal | −0,6548 (0,0001) | −0,0016 (0,0033) | 290 | 0,6433 |
+| Mais o logaritmo dos vínculos ativos (porte) | +0,2579 (0,1293) | −0,0007 (0,1748) | 290 | 0,6744 |
+| Sem as 2 observações com VAB da indústria negativo | −0,4992 (0,0001) | −0,0016 (0,0019) | 288 | 0,6831 |
+
+FONTE: O autor (2026). Erros-padrão de White (HC1).
+
+Assim, H3 se sustenta no modelo principal, mas não resiste ao controle do porte: a medida pode estar captando o tamanho do município e não apenas a diversificação. [aguardando orientação do professor: decidir se o porte entra no modelo principal.]
 
 ### 5.5 Previsão de 2021
 
@@ -280,7 +300,7 @@ Mais um ponto percentual da indústria no valor adicionado associa-se a salário
 
 ### 6.3 Diversificação setorial (H3)
 
-Um aumento de 0,10 no Gini setorial (emprego mais concentrado em poucas divisões) associa-se a salário cerca de 6,3% menor (coeficiente de −0,6548; p = 0,0001). O sinal se mantém quando o Gini é calculado só com as divisões que têm vínculo (−0,638; p = 0,001). Como o índice cai quando mais divisões têm vínculo (correlação de −0,95 com essa contagem), ele mede sobretudo a diversificação. [a inserir: comparação com o debate sobre especialização e diversificação.]
+Um aumento de 0,10 no Gini setorial (emprego mais concentrado em poucas divisões) associa-se a salário cerca de 6,3% menor (coeficiente de −0,6548; p = 0,0001). O sinal se mantém quando o Gini é calculado só com as divisões que têm vínculo (−0,638; p = 0,0011). Como o índice cai quando mais divisões têm vínculo (correlação de −0,95 com essa contagem), ele acompanha o porte do município. Ao controlar o porte, o coeficiente deixa de ser significativo (seção 5.4), de modo que o resultado não permite afirmar que a diversificação, separada do tamanho do município, se associa ao salário. [a inserir: comparação com o debate sobre especialização e diversificação.]
 
 ### 6.4 Selic real (H4)
 
@@ -292,7 +312,7 @@ Mais dez quilômetros de distância associam-se a salário cerca de 1,6% menor (
 
 ### 6.6 Limitações e pontos de atenção
 
-Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário é robusta às duas definições da variável, mas depende da forma como ela é construída. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas, mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, que não é sustentada pelo emprego formal daquele ano. Além disso, os resultados são associações, não efeitos causais.
+Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário mantém o sinal nas duas definições da variável, mas depende da forma como ela é construída e não resiste ao controle do porte do município. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas, mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, que não é sustentada pelo emprego formal daquele ano. Além disso, os resultados são associações, não efeitos causais.
 
 ### 6.7 Contribuição do trabalho
 
@@ -300,12 +320,12 @@ Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini s
 
 1. Uso do Gini discreto da aula (HOFFMANN, 2006; HASEGAWA, 2020) sobre as 87 divisões da CNAE como medida de diversificação setorial do emprego municipal, com a verificação de que o índice é dominado pelo número de divisões com vínculo.
 2. Painel balanceado dos 29 municípios da RMC, de 2012 a 2021, que combina RAIS, SIDRA, Banco Central e IBGE, com validações automáticas.
-3. Evidência descritiva de que escolaridade, industrialização, diversificação e proximidade de Curitiba se associam a salário médio maior na RMC.
+3. Evidência descritiva de que escolaridade, industrialização e proximidade de Curitiba se associam a salário médio maior na RMC; a diversificação se associa no modelo principal, mas não com o controle de porte.
 4. Registro dos limites do modelo (forma funcional, normalidade e autocorrelação) e do caso de Adrianópolis.
 
 ## 7 CONCLUSÃO
 
-Os resultados indicam associações positivas entre salário real e escolaridade e industrialização, associação negativa entre salário e concentração setorial do emprego, e associação negativa entre salário e distância a Curitiba, no período de 2012 a 2021 e nos 29 municípios da RMC. A Selic real tem associação positiva e pequena. Os resultados não são causais, e os diagnósticos apontam limitações de forma funcional, normalidade e autocorrelação que devem ser consideradas na leitura dos coeficientes. A contribuição do trabalho, na seção 6.7, é descritiva: [revisar: uma frase com a contribuição, a cargo do pesquisador, e os próximos passos possíveis]. [revisar: conclusão e implicações, a cargo do pesquisador.]
+Os resultados indicam associações positivas entre salário real e escolaridade e industrialização, associação negativa entre salário e concentração setorial do emprego, que deixa de ser significativa quando se controla o porte do município, e associação negativa entre salário e distância a Curitiba, no período de 2012 a 2021 e nos 29 municípios da RMC. A Selic real tem associação positiva e pequena. Os resultados não são causais, e os diagnósticos apontam limitações de forma funcional, normalidade e autocorrelação que devem ser consideradas na leitura dos coeficientes. A contribuição do trabalho, na seção 6.7, é descritiva: [revisar: uma frase com a contribuição, a cargo do pesquisador, e os próximos passos possíveis]. [revisar: conclusão e implicações, a cargo do pesquisador.]
 
 ## REFERÊNCIAS
 

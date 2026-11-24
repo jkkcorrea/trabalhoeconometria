@@ -8,7 +8,7 @@ Estimação por mínimos quadrados ordinários (MQO) com as 290 observações em
 
 ## Hipóteses
 
-H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização, controlados os efeitos comuns a todos os municípios.
+H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização.
 Ha: pelo menos uma dessas condições afeta o salário.
 
 | Hipótese | Variável | Sinal esperado |

@@ -8,9 +8,9 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 12 arquivos.
-- Arquivos em `envio_professor/resultados_econometricos/`: 21.
+- Arquivos em `envio_professor/resultados_econometricos/`: 22.
 - Decisões registradas em `_Trilha/DECISOES.md`: 62 (vigentes na última coluna: 53).
-- Pendências em `_Trilha/BACKLOG.md`: 27 abertas e 37 baixadas.
+- Pendências em `_Trilha/BACKLOG.md`: 29 abertas e 38 baixadas.
 
 ## Onde começar
 
@@ -41,7 +41,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `dados_brutos` | 4 KB |  |
 | `dados_processados` | 4 KB |  |
 | `envio_professor` | 4 KB |  |
-| `envio_professor.zip` | 7.2 MB |  |
+| `envio_professor.zip` | 5.6 MB |  |
 | `figuras_graficos` | 4 KB |  |
 | `fontes` | 4 KB |  |
 | `hoffmann2006_cap17_desiguald.pdf` | 18.3 MB |  |
@@ -67,7 +67,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `03_aede_visualizacoes.R` | 38 KB | Script R: Etapa 3: análise exploratória espacial e visualizações |
 | `04_modelagem_diagnosticos.R` | 11 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
 | `05_autocorrelacao_municipios.R` | 7 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
-| `06_especificacao_chow.R` | 13 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
+| `06_especificacao_chow.R` | 14 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Instruções para IA (`instrucoes_ia/`)
@@ -113,7 +113,7 @@ Cada skill é uma pasta com `SKILL.md`.
 |---|---|---|
 | `conferir_numeros.R` | 4 KB | Script R: Uso (na raiz do projeto): Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md |
 | `gerar_catalogo.R` | 6 KB | Script R: Gera CATALOGO_DO_PROJETO.md a partir do conteúdo real das pastas. |
-| `gerar_documentacao.R` | 23 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
+| `gerar_documentacao.R` | 24 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
 | `limpar_comentarios.R` | 8 KB | Script R |
 | `reconstruir_envio.sh` | 2 KB | Script de shell |
 | `verificar_envio.R` | 17 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
@@ -137,10 +137,10 @@ Gerada; não editar à mão.
 | `01_extracao_dados.R` | 36 KB | Script R |
 | `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
 | `02_tratamento_painel.R` | 29 KB | Script R |
-| `03_aede_visualizacoes.R` | 34 KB | Script R |
+| `03_aede_visualizacoes.R` | 35 KB | Script R |
 | `04_modelagem_diagnosticos.R` | 10 KB | Script R |
 | `05_autocorrelacao_municipios.R` | 6 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
-| `06_especificacao_chow.R` | 13 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
+| `06_especificacao_chow.R` | 14 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Pasta de envio: dados processados
@@ -174,6 +174,7 @@ Gerada; não editar à mão.
 | `memorial_modelo_2_previsao.csv` | 323 B | CSV, 2 linhas x 6 colunas: cenario, ln_previsto, ic_media_inf, ic_media_sup, ic_individual_inf, ic_individual_sup |
 | `normalidade_residuos.csv` | 336 B | CSV, 1 linhas x 10 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct, … |
 | `projecao_selic_m2.csv` | 16 KB | CSV, 87 linhas x 11 colunas: cenario, selic, id_municipio, nome_municipio, ln_previsto, salario_previsto_sem_correcao, salario_previsto_corrigido, ic_media_inf_ln, … |
+| `robustez_porte_e_negativos.csv` | 2 KB | CSV, 13 linhas x 8 colunas: especificacao, n, termo, coeficiente, erro_padrao_white, p_valor, r2_ajustado, cor_gini_ln_vinculos |
 | `robustez_x4_definicao_gini.csv` | 372 B | CSV, 2 linhas x 7 colunas: modelo, definicao_x4, coef_x4, p_valor_x4, r2_ajustado, aic, reset_p |
 | `testes_diagnostico.csv` | 665 B | CSV, 2 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct |
 | `vif_tolerancia.csv` | 535 B | CSV, 5 linhas x 5 colunas: modelo, variavel, fiv, tolerancia, decisao_fiv_10 |
@@ -183,7 +184,7 @@ Gerada; não editar à mão.
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
 | `animacao1_mapa_renda_rmc.gif` | 1.1 MB | Animação GIF |
-| `animacao2_ranking_salario_municipios.gif` | 3.0 MB | Animação GIF |
+| `animacao2_ranking_salario_municipios.gif` | 1.3 MB | Animação GIF |
 | `diag1_residuos_vs_ajustados.png` | 137 KB | Figura PNG |
 | `diag2_residuos_por_municipio.png` | 122 KB | Figura PNG |
 | `diag3_residuos_defasados.png` | 118 KB | Figura PNG |
@@ -202,7 +203,7 @@ Gerada; não editar à mão.
 | `00_resumo.md` | 2 KB | Markdown: Resumo |
 | `01_dados_e_variaveis.md` | 2 KB | Markdown: Dados e variáveis |
 | `02_especificacao_e_metodos.md` | 2 KB | Markdown: Especificação e métodos |
-| `03_resultados_modelos.md` | 2 KB | Markdown: Resultados do modelo principal |
+| `03_resultados_modelos.md` | 3 KB | Markdown: Resultados do modelo principal |
 | `04_diagnosticos.md` | 4 KB | Markdown: Diagnósticos do modelo principal |
 | `05_limitacoes.md` | 1 KB | Markdown: Limitações |
 | `06_fontes.md` | 1 KB | Markdown: Fontes e referências |
