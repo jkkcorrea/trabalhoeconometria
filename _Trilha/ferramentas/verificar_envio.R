@@ -47,7 +47,7 @@ esperado <- c("LEIAME.md", paste0("R/", SCRIPTS, ".R"),
 presentes <- sub(paste0("^", DIR, "/"), "", list.files(DIR, recursive = TRUE, full.names = TRUE))
 faltam <- setdiff(esperado, presentes)
 registrar("A1", "Arquivos essenciais presentes", length(faltam) == 0,
-          if (length(faltam)) paste(faltam, collapse = ", ") else sprintf("%d arquivos esperados presentes; %d arquivos na pasta", length(esperado), length(presentes)))
+          if (length(faltam)) paste(faltam, collapse = ", ") else sprintf("%d arquivos esperados presentes; %d arquivos na pasta", length(esperado), length(setdiff(presentes, "documentacao/08_verificacao.md"))))
 
 sobra <- presentes[grepl("^(resultados_econometricos|figuras_graficos|dados_brutos)/", presentes) & !(presentes %in% esperado)]
 registrar("A1b", "Sem arquivos de versões anteriores nos resultados, figuras e dados brutos", length(sobra) == 0,

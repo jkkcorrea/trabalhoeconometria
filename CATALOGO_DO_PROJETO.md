@@ -9,8 +9,8 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 13 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 30.
-- Decisões registradas em `_Trilha/DECISOES.md`: 64 (vigentes na última coluna: 54).
-- Pendências em `_Trilha/BACKLOG.md`: 44 abertas e 49 baixadas.
+- Decisões registradas em `_Trilha/DECISOES.md`: 65 (vigentes na última coluna: 55).
+- Pendências em `_Trilha/BACKLOG.md`: 42 abertas e 51 baixadas.
 
 ## Onde começar
 
