@@ -103,3 +103,17 @@ Concluídos pela sessão: escopo ajustado à orientação do professor (D-2026-1
 - [ ] **P5. Causa do salto industrial em Adrianópolis (2015).** Não é bloqueante: o valor é o publicado pelo IBGE; a causa não está documentada.
 - [ ] **P6. Edição do Gujarati.** Usamos só a 4ª edição (2004). Páginas da 5ª edição ficam como referência não conferida.
 - [ ] **Q. Conferência manual de números da resposta.** A conferência automática (`conferir_numeros.R`) não encontra em CSV: mediana de 47,5 divisões com vínculo (calculada da RAIS), R$ 67,8 milhões (painel, `vab_industria` = 67.762 mil reais) e R$ -560,8 e -246,4 milhões (painel, em mil reais convertido para milhões). Conferidos manualmente nesta data.
+
+## Atualização de 23/11/2026 (tarde)
+
+Concluídos: Adrianópolis registrado com pesquisa na internet e conferência na RAIS (D-2026-11-23-06); rascunho do artigo e roteiro da apresentação (D-2026-11-23-07); Gini fechado conforme a aula e Hoffmann (D-2026-11-23-04); recorte mantido e registrado (D-2026-11-23-02); números do rascunho conferidos (6 sem origem em CSV, todos verificados à mão: páginas, conversão para milhões e 86/87).
+
+Pendentes:
+- [ ] **R1. Revisão do artigo pelo pesquisador**: interpretação teórica, conclusões, referências marcadas [a inserir] e resumo em inglês.
+- [ ] **R2. Gerar o PowerPoint** a partir de `apresentacao/ROTEIRO_SLIDES.md`, depois de revisar o texto. Escolher as figuras dos slides 5 e 15.
+- [ ] **R3. Referências do artigo**: conferir a editora de Hoffmann (2006) e incluir a literatura sobre salário, estrutura produtiva e Selic (nenhuma foi conferida).
+- [ ] **R4. Links das fontes do caso Adrianópolis**: confirmar o link exato da notícia da Agência Estadual de Notícias do Paraná (inauguração em 17/12/2015) e a data de início de produção da Secil.
+- [ ] **R5. Causa do salto de Adrianópolis (2015)**: consultar a nota metodológica do IBGE para o VAB municipal de 2015 e verificar o VAB de construção. Não bloqueante.
+- [ ] **R6. Resposta ao professor**: aguarda aprovação do pesquisador para envio.
+- [ ] **R7. CLAUDE.md** (seções 6 e 13) e prompts originais: atualizar só com pedido do pesquisador (P4 acima).
+
