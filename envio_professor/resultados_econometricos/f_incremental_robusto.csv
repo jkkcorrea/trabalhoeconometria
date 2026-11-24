@@ -1,0 +1,5 @@
+bloco,restricoes,estatistica_f_white,p_valor_white,decisao_5pct
+X2 (capital humano),1,105.05373328041516,3.507740843420969e-21,rejeita H0
+X3 e X4 (estrutura produtiva),2,98.34011128789426,3.528712499523252e-33,rejeita H0
+X5 (macroeconomia),1,13.384401357715856,3.0236848837350425e-4,rejeita H0
+X6 (localização),1,8.78780648322994,0.0032896932755148694,rejeita H0

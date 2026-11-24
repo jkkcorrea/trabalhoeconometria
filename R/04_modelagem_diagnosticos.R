@@ -236,6 +236,23 @@ f_geral_robusto <- function(modelo) {
   ) |> dplyr::mutate(decisao_5pct = decisao(p_valor))
 }
 
+f_incremental_robusto <- function(modelo) {
+  # Wald por bloco com a matriz de White (HC1): F = (R b)'(R V R')^-1 (R b) / q, para cada bloco de regressores.
+  b <- stats::coef(modelo)
+  v <- sandwich::vcovHC(modelo, type = "HC1")
+  gl_res <- modelo$df.residual
+  blocos <- list("X2 (capital humano)" = "prop_superior",
+                 "X3 e X4 (estrutura produtiva)" = c("dom_industrial", "gini_setorial"),
+                 "X5 (macroeconomia)" = "selic_real", "X6 (localização)" = "dist_curitiba_km")
+  purrr::imap_dfr(blocos, function(vars, nome) {
+    i <- match(vars, names(b))
+    f <- as.numeric(t(b[i]) %*% solve(v[i, i, drop = FALSE], b[i])) / length(i)
+    tibble::tibble(bloco = nome, restricoes = length(i), estatistica_f_white = f,
+                   p_valor_white = stats::pf(f, length(i), gl_res, lower.tail = FALSE)) |>
+      dplyr::mutate(decisao_5pct = decisao(p_valor_white))
+  })
+}
+
 exame_residuos <- function(modelo, painel) {
   # Resíduos contra cada regressor (exame visual da forma funcional) e os maiores resíduos.
   s <- sqrt(sum(stats::residuals(modelo)^2) / modelo$df.residual)
@@ -279,6 +296,7 @@ executar_etapa_4 <- function() {
   readr::write_csv(testes_heterocedasticidade_complementares(modelo, painel),
                    file.path(DIR_RESULTADOS, "testes_heterocedasticidade_complementares.csv"))
   readr::write_csv(f_geral_robusto(modelo), file.path(DIR_RESULTADOS, "f_geral_robusto.csv"))
+  readr::write_csv(f_incremental_robusto(modelo), file.path(DIR_RESULTADOS, "f_incremental_robusto.csv"))
   readr::write_csv(exame_residuos(modelo, painel), file.path(DIR_RESULTADOS, "maiores_residuos.csv"))
 
   message("Etapa 4 concluída: coeficientes, heterocedasticidade (inclusive White), normalidade (Shapiro-Wilk), FIV, ANOVA, F robusto e figuras gravados.")

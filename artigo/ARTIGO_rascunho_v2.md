@@ -6,13 +6,13 @@
 
 ## Resumo
 
-Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5%. A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001), mas esse resultado deixa de valer quando se controla o porte do município. A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade; incluir o porte do município reduz a rejeição da forma funcional, mas não a elimina, e a autocorrelação positiva dentro dos municípios é em grande parte diferença persistente entre eles. Os resultados são associações, não efeitos causais.
+Este trabalho estima a associação entre o salário médio real formal e a estrutura produtiva dos 29 municípios da Região Metropolitana de Curitiba entre 2012 e 2021, com 290 observações em painel empilhado. Usa-se mínimos quadrados ordinários com erros-padrão de White (HC1). A escolaridade (proporção de vínculos com ensino superior completo) e a participação industrial no valor adicionado associam-se positivamente ao salário, e a distância a Curitiba, negativamente, todas significativas a 5% no modelo principal (a distância deixa de ser significativa quando se controla o porte do município). A diversificação setorial do emprego, medida pelo Gini da distribuição dos vínculos entre as divisões da CNAE, associa-se a salários maiores (coeficiente de −0,655, p < 0,001), mas esse resultado deixa de valer quando se controla o porte do município. A Selic real tem associação positiva pequena, de cerca de 0,66% por ponto percentual. Os diagnósticos rejeitam a forma funcional linear, a normalidade dos resíduos e a homocedasticidade; incluir o porte do município reduz a rejeição da forma funcional, mas não a elimina, e a autocorrelação positiva dentro dos municípios é em grande parte diferença persistente entre eles. Os resultados são associações, não efeitos causais.
 
 **Palavras-chave:** Salário real. Região Metropolitana de Curitiba. Estrutura produtiva. Gini setorial. Mínimos quadrados ordinários.
 
 ## Abstract
 
-This paper estimates the association between the average formal real wage and the productive structure of the 29 municipalities of the Metropolitan Region of Curitiba (Brazil) from 2012 to 2021, using 290 observations in a stacked panel. Ordinary least squares with White (HC1) standard errors is used. Educational attainment (share of formal jobs with complete higher education) and the industrial share of value added are positively associated with wages, and distance to Curitiba is negatively associated, all significant at 5%. Sectoral diversification of employment, measured by the Gini coefficient of jobs across the 87 CNAE divisions, is associated with higher wages (coefficient of -0.655, p < 0.001), but this result does not hold when municipality size is controlled for. The real Selic rate has a small positive association, of about 0.66% per percentage point. The diagnostics reject linear functional form, normality of residuals and homoskedasticity; controlling for municipality size reduces the rejection of functional form without eliminating it, and the positive autocorrelation within municipalities largely reflects persistent differences between them. The results are associations, not causal effects. [revisar: tradução a conferir pelo pesquisador.]
+This paper estimates the association between the average formal real wage and the productive structure of the 29 municipalities of the Metropolitan Region of Curitiba (Brazil) from 2012 to 2021, using 290 observations in a stacked panel. Ordinary least squares with White (HC1) standard errors is used. Educational attainment (share of formal jobs with complete higher education) and the industrial share of value added are positively associated with wages, and distance to Curitiba is negatively associated, all significant at 5% in the main model (distance is no longer significant when municipality size is controlled for). Sectoral diversification of employment, measured by the Gini coefficient of jobs across the 87 CNAE divisions, is associated with higher wages (coefficient of -0.655, p < 0.001), but this result does not hold when municipality size is controlled for. The real Selic rate has a small positive association, of about 0.66% per percentage point. The diagnostics reject linear functional form, normality of residuals and homoskedasticity; controlling for municipality size reduces the rejection of functional form without eliminating it, and the positive autocorrelation within municipalities largely reflects persistent differences between them. The results are associations, not causal effects. [revisar: tradução a conferir pelo pesquisador.]
 
 **Keywords:** Real wage. Metropolitan Region of Curitiba. Productive structure. Sectoral Gini. Ordinary least squares.
 
@@ -165,7 +165,7 @@ O modelo não inclui variáveis binárias de município nem métodos de dados em
 
 Em cada teste, H0 e Ha são explicitadas e a decisão é tomada a 5%:
 
-- **Multicolinearidade:** fator de inflação da variância (FIV), com limite de 10 (HASEGAWA, 2016a; GUJARATI, 2003, cap. 10) [a confirmar: o limite de 10 não aparece no texto extraído do slide]. Objetivo: verificar se as regressoras são tão correlacionadas que inflacionam os erros-padrão.
+- **Multicolinearidade:** fator de inflação da variância (FIV), com limite de 10 (GUJARATI, 2003, cap. 10, p. 390 do PDF; HASEGAWA, 2016a). Objetivo: verificar se as regressoras são tão correlacionadas que inflacionam os erros-padrão.
 - **Heterocedasticidade:** Breusch-Pagan-Godfrey (HASEGAWA, 2016b; GUJARATI, 2003, cap. 11), com H0 de variância constante e Ha de variância que depende das regressoras, o teste geral de White (regressão auxiliar com os regressores, seus quadrados e produtos cruzados) e Goldfeld-Quandt, com a amostra ordenada pela distância e, como verificação, por cada regressor, e fração central de 0,2 omitida [presunção da modelagem] (HASEGAWA, 2016b).
 - **Normalidade dos resíduos:** Shapiro-Wilk, com H0 de normalidade e Ha de não normalidade, complementado pelo gráfico quantil-quantil (Q-Q). [aguardando orientação do professor: procedimento a adotar quando a normalidade é rejeitada.]
 - **Forma funcional:** RESET de Ramsey (HASEGAWA, 2022; GUJARATI, 2003, cap. 13), com potências 2 e 3 dos valores ajustados, com H0 de forma linear correta. Como o RESET rejeita, o modelo é reestimado com os quadrados de X2 e X3 (centrados na média) e com o logaritmo dos vínculos ativos como controle de porte, e o RESET é repetido (TABELA 7); os resíduos são examinados contra cada regressor (FIGURA 6). [aguardando orientação do professor: tratamento da forma funcional rejeitada.]
@@ -181,7 +181,7 @@ As estatísticas e as regras de decisão de cada teste são as seguintes (n = 29
 - **RESET:** F do acréscimo das potências 2 e 3 dos valores ajustados ao modelo, com 2 e 282 graus de liberdade. Rejeita H0 (forma linear correta) se o p-valor for menor que 5%.
 - **Chow:** F = [(SQR_R − SQR₁ − SQR₂) / k] / [(SQR₁ + SQR₂) / (n − 2k)], com SQR_R do modelo para todo o período e SQR₁ e SQR₂ dos modelos de 2012 a 2017 e de 2018 a 2021 (corte em 2017; o corte de 2016 compara 2012 a 2016 com 2017 a 2021); graus de liberdade 6 e 278. H0: os coeficientes são iguais nos dois períodos.
 - **Durbin-Watson:** d = Σ_{t=2}^{10} (û_t − û_{t−1})² / Σ_{t=1}^{10} û_t², calculado com os resíduos de cada município. Decisão: d < dL, autocorrelação positiva; dL ≤ d ≤ dU, inconclusivo; d > dU, não se rejeita a ausência de autocorrelação positiva.
-- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo de cada município sobre uma constante e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade.
+- **Breusch-Godfrey de ordem 1:** LM da regressão auxiliar do resíduo de cada município sobre uma constante e o resíduo defasado, com distribuição qui-quadrado de 1 grau de liberdade. É uma versão reduzida do teste, sem os regressores, porque a série de cada município tem dez anos; o primeiro resíduo defasado é preenchido com zero (padrão do `lmtest`), e, se for descartado, rejeitam 5 municípios em vez de 3, o que mostra a sensibilidade do teste com dez observações.
 - **White:** LM = n·R² da regressão auxiliar de û² sobre os regressores, seus quadrados e produtos cruzados (20 termos), com distribuição qui-quadrado de 20 graus de liberdade.
 - **F geral com erro de White:** F = b'V⁻¹b / q, com b as q = 5 inclinações e V o bloco correspondente da matriz HC1.
 
@@ -215,7 +215,7 @@ O F geral com a matriz de White (HC1) é 92,83 (gl 5 e 284; p < 0,0001), próxim
 - **H2 (industrialização, positiva):** confirmada. Coeficiente de +0,0055, p < 0,0001.
 - **H3 (diversificação, Gini negativo):** confirmada no modelo principal. Coeficiente de −0,6548, p = 0,0001. Com as divisões com vínculo, −0,638, p = 0,0011. Ressalva: com o logaritmo dos vínculos ativos como controle de porte, o coeficiente deixa de ser significativo e muda de sinal (seção 5.4).
 - **H4 (Selic, exploratória):** associação positiva significativa, de +0,0065 (cerca de 0,66% por ponto percentual). Ressalva: a Selic tem 10 valores distintos (um por ano), o que limita a precisão do coeficiente.
-- **H5 (distância, negativa):** confirmada. Coeficiente de −0,0016 por km, p = 0,0033.
+- **H5 (distância, negativa):** confirmada no modelo principal. Coeficiente de −0,0016 por km, p = 0,0033. Ressalva: com o controle de porte, o coeficiente cai para −0,0007 (p = 0,1748) e deixa de ser significativo (seção 5.4).
 
 [revisar: interpretação econômica de cada sinal, inclusive a leitura da H4 e a relação entre H3 e a diversificação.]
 
@@ -230,7 +230,7 @@ A TABELA 4 resume os diagnósticos do modelo principal.
 | FIV máximo | 2,33 | sem multicolinearidade |
 | Breusch-Pagan-Godfrey | p = 0,0363 | rejeita homocedasticidade |
 | White (20 termos) | 94,15 (gl 20), p < 0,0001 | rejeita homocedasticidade |
-| Goldfeld-Quandt (ordenado pela distância) | p = 0,3885 | não rejeita |
+| Goldfeld-Quandt (ordenado pela distância, unilateral) | p = 0,3885 | não rejeita |
 | Goldfeld-Quandt (ordenado por X3) | F = 1,53 (gl 110 e 110), p = 0,0268 | rejeita |
 | Shapiro-Wilk (resíduos) | W = 0,8618, p < 0,0001 | rejeita normalidade |
 | RESET | F = 14,49 (gl 2 e 282), p < 0,0001 | rejeita forma linear |
@@ -312,7 +312,7 @@ A TABELA 5 apresenta a previsão de 2021 para três cenários da Selic.
 
 FONTE: O autor (2026). Previsão dentro da amostra; correção de viés exp(s²/2) = 1,0075.
 
-Os intervalos da média da previsão com a matriz de White diferem pouco dos clássicos: no cenário base, a média dos municípios tem intervalo de 95% de 7,8089 a 7,8920 em ln, contra 7,8074 a 7,8935 com a matriz clássica. A correção de viés eleva a média em 0,75% em relação à previsão sem correção. A variação de ±1 ponto na Selic altera a previsão média em cerca de 0,66%. [aguardando orientação do professor: uso de exp(s²/2) como correção aproximada.]
+No ponto médio dos regressores de 2021 e no cenário base, o intervalo de 95% da média de ln(salário) vai de 7,8250 a 7,8760 com a matriz de White e de 7,8172 a 7,8838 com a matriz clássica. Em municípios isolados a diferença pode ser maior: em Adrianópolis, o intervalo com White é de 7,7923 a 7,9346, contra 7,8072 a 7,9197 com a matriz clássica, e em 9 dos 29 municípios o intervalo com White é o mais largo. A correção de viés eleva a média em 0,75% em relação à previsão sem correção. A variação de ±1 ponto na Selic altera a previsão média em cerca de 0,66%. [aguardando orientação do professor: uso de exp(s²/2) como correção aproximada.]
 
 ## 6 DISCUSSÃO
 
@@ -336,11 +336,11 @@ Mais um ponto percentual da Selic real associa-se a salário cerca de 0,66% maio
 
 ### 6.5 Distância a Curitiba (H5)
 
-Mais dez quilômetros de distância associam-se a salário cerca de 1,6% menor (coeficiente de −0,0016 por km; p = 0,0033). [a inserir: comparação com a economia regional.]
+Mais dez quilômetros de distância associam-se a salário cerca de 1,6% menor (coeficiente de −0,0016 por km; p = 0,0033). Com o logaritmo dos vínculos ativos como controle, o coeficiente cai para −0,0007 e deixa de ser significativo (p = 0,1748), de modo que a associação com a distância não se separa do porte do município. [a inserir: comparação com a economia regional.]
 
 ### 6.6 Limitações e pontos de atenção
 
-Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário mantém o sinal nas duas definições da variável, mas depende da forma como ela é construída e não resiste ao controle do porte do município. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas, mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, que não é sustentada pelo emprego formal daquele ano. Além disso, os resultados são associações, não efeitos causais.
+Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini setorial e o salário mantém o sinal nas duas definições da variável, mas depende da forma como ela é construída e não resiste ao controle do porte do município. Segundo, a escolaridade, a industrialização e a distância têm sinais estáveis nas estimativas (a significância da distância, porém, não resiste ao controle de porte), mas o modelo linear é rejeitado pelo RESET, e os coeficientes devem ser lidos como aproximações. Terceiro, o salto industrial de Adrianópolis em 2015 é um dado publicado, mas a causa não está confirmada; a fábrica de cimento inaugurada no município em dezembro de 2015 é uma hipótese plausível, que não é sustentada pelo emprego formal daquele ano. Além disso, os resultados são associações, não efeitos causais.
 
 **Endogeneidade e variável omitida.** Há três razões para não ler os coeficientes como efeitos. Primeira, simultaneidade: salário e escolaridade se determinam juntos, porque municípios que pagam mais tendem a atrair trabalhadores mais escolarizados, e o VAB da indústria inclui a massa salarial do setor, o que liga X3 ao salário pela própria definição. Segunda, variável omitida: o porte do município tem correlação de −0,88 com o Gini e se associa ao salário, e sua inclusão muda o resultado de H3 (TABELA 6); outros fatores locais, como a composição por ocupação, não estão no modelo. Terceira, medição: a Selic real tem um só valor por ano e a distância é medida entre centroides. Sem instrumentos nem diferenças entre municípios no modelo, que ficam fora do escopo da disciplina, os resultados são associações. [revisar: interpretação a cargo do pesquisador.]
 
@@ -355,7 +355,7 @@ Três pontos merecem atenção. Primeiro, a associação negativa entre o Gini s
 
 ## 7 CONCLUSÃO
 
-Os resultados indicam associações positivas entre salário real e escolaridade e industrialização, associação negativa entre salário e concentração setorial do emprego, que deixa de ser significativa quando se controla o porte do município, e associação negativa entre salário e distância a Curitiba, no período de 2012 a 2021 e nos 29 municípios da RMC. A Selic real tem associação positiva e pequena. Os resultados não são causais, e os diagnósticos apontam limitações de forma funcional, normalidade e autocorrelação que devem ser consideradas na leitura dos coeficientes. A contribuição do trabalho, na seção 6.7, é descritiva: [revisar: uma frase com a contribuição, a cargo do pesquisador, e os próximos passos possíveis]. [revisar: conclusão e implicações, a cargo do pesquisador.]
+Os resultados indicam associações positivas entre salário real e escolaridade e industrialização, associação negativa entre salário e concentração setorial do emprego, que deixa de ser significativa quando se controla o porte do município, e associação negativa entre salário e distância a Curitiba, que também deixa de ser significativa com esse controle, no período de 2012 a 2021 e nos 29 municípios da RMC. A Selic real tem associação positiva e pequena. Os resultados não são causais, e os diagnósticos apontam limitações de forma funcional, normalidade e autocorrelação que devem ser consideradas na leitura dos coeficientes. A contribuição do trabalho, na seção 6.7, é descritiva: [revisar: uma frase com a contribuição, a cargo do pesquisador, e os próximos passos possíveis]. [revisar: conclusão e implicações, a cargo do pesquisador.]
 
 ## REFERÊNCIAS
 
@@ -455,7 +455,7 @@ Resumo do memorial matricial (arquivo completo em `resultados_econometricos/memo
 
 **QUADRO C.2 - Determinação parcial e multicolinearidade**
 
-| Variável | t | R² parcial | Tolerância | FIV |
+| Variável | t (erro clássico) | R² parcial | Tolerância | FIV |
 |---|---|---|---|---|
 | X2 escolaridade | 11,2380 | 0,3078 | 0,8580 | 1,1655 |
 | X3 industrialização | 11,8368 | 0,3304 | 0,8744 | 1,1436 |
@@ -463,13 +463,28 @@ Resumo do memorial matricial (arquivo completo em `resultados_econometricos/memo
 | X5 Selic real | 3,1535 | 0,0338 | 0,9940 | 1,0060 |
 | X6 distância | −3,4168 | 0,0395 | 0,4518 | 2,2133 |
 
-**QUADRO C.3 - F incremental por bloco de variáveis**
+**QUADRO C.3 - F incremental por bloco de variáveis, com erro clássico e com erro de White**
 
-| Bloco excluído | Restrições | SQR restrita | SQR irrestrita | F | F crítico (5%) | p-valor |
-|---|---|---|---|---|---|---|
-| X2 | 1 | 6,1267 | 4,2408 | 126,2934 | 3,8744 | < 0,0001 |
-| X3 e X4 | 2 | 7,2181 | 4,2408 | 99,6913 | 3,0276 | < 0,0001 |
-| X5 | 1 | 4,3893 | 4,2408 | 9,9445 | 3,8744 | 0,0018 |
-| X6 | 1 | 4,4151 | 4,2408 | 11,6742 | 3,8744 | 0,0007 |
+| Bloco excluído | Restrições | SQR restrita | SQR irrestrita | F (clássico) | F crítico (5%) | p-valor | F (White) | p-valor (White) |
+|---|---|---|---|---|---|---|---|---|
+| X2 | 1 | 6,1267 | 4,2408 | 126,2934 | 3,8744 | < 0,0001 | 105,0537 | < 0,0001 |
+| X3 e X4 | 2 | 7,2181 | 4,2408 | 99,6913 | 3,0276 | < 0,0001 | 98,3401 | < 0,0001 |
+| X5 | 1 | 4,3893 | 4,2408 | 9,9445 | 3,8744 | 0,0018 | 13,3844 | 0,0003 |
+| X6 | 1 | 4,4151 | 4,2408 | 11,6742 | 3,8744 | 0,0007 | 8,7878 | 0,0033 |
+
+O F de White é o de Wald, F = (Rb)'(RVR')⁻¹(Rb)/q, com V a matriz HC1.
+
+**QUADRO C.4 - Erro-padrão clássico e de White (HC1)**
+
+A matriz de White é V = [n/(n − k)] (X'X)⁻¹ (Σ û_i² x_i x_i') (X'X)⁻¹, com n/(n − k) = 290/284 = 1,0211. O erro-padrão de cada coeficiente é a raiz do elemento correspondente da diagonal.
+
+| Termo | EP clássico | EP de White | Razão (White/clássico) |
+|---|---|---|---|
+| Intercepto | 0,13557 | 0,15333 | 1,1310 |
+| X2 escolaridade | 0,00134 | 0,00147 | 1,0964 |
+| X3 industrialização | 0,00047 | 0,00068 | 1,4554 |
+| X4 Gini setorial | 0,16402 | 0,16783 | 1,0233 |
+| X5 Selic real | 0,00207 | 0,00179 | 0,8620 |
+| X6 distância | 0,00046 | 0,00053 | 1,1526 |
 
 FONTE: O autor (2026), a partir de `resultados_econometricos/memorial_modelo_2_*.csv`. Erros clássicos.

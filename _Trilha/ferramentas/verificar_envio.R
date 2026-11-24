@@ -28,6 +28,7 @@ esperado <- c("LEIAME.md", paste0("R/", SCRIPTS, ".R"),
                                         "reespecificacao_forma_funcional.csv", "testes_heterocedasticidade_complementares.csv",
                                         "f_geral_robusto.csv", "maiores_residuos.csv",
                                         "autocorrelacao_heterogeneidade_municipios.csv", "autocorrelacao_heterogeneidade_resumo.csv",
+                                        "f_incremental_robusto.csv", "previsao_media_2021.csv",
                                         "projecao_selic_m2.csv", "efeito_selic_m2.csv",
                                         "memorial_modelo_2.txt", "memorial_modelo_2_anova.csv",
                                         "memorial_modelo_2_coeficientes.csv", "memorial_modelo_2_determinacao_parcial.csv",
@@ -48,8 +49,8 @@ faltam <- setdiff(esperado, presentes)
 registrar("A1", "Arquivos essenciais presentes", length(faltam) == 0,
           if (length(faltam)) paste(faltam, collapse = ", ") else sprintf("%d arquivos", length(esperado)))
 
-sobra <- presentes[grepl("^(resultados_econometricos|figuras_graficos)/", presentes) & !(presentes %in% esperado)]
-registrar("A1b", "Sem arquivos de versões anteriores nos resultados e figuras", length(sobra) == 0,
+sobra <- presentes[grepl("^(resultados_econometricos|figuras_graficos|dados_brutos)/", presentes) & !(presentes %in% esperado)]
+registrar("A1b", "Sem arquivos de versões anteriores nos resultados, figuras e dados brutos", length(sobra) == 0,
           if (length(sobra)) paste(sobra, collapse = ", ") else "nenhum arquivo antigo")
 
 # Métodos fora do escopo ensinado (Econometria I): não podem aparecer nos scripts nem nos documentos.
@@ -275,6 +276,23 @@ lin <- re[grepl("porte", re$especificacao) & !grepl("Quadrados", re$especificaca
 registrar("C16", "Reespecificação com o porte do município: RESET e coeficiente do Gini recalculados",
           abs(F_reset_p - lin$reset_f) < 1e-6 && abs(bp_[4] - lin$coef_gini) < 1e-8,
           sprintf("RESET calculado %.4f, no arquivo %.4f; Gini %.4f", F_reset_p, lin$reset_f, bp_[4]))
+
+# F incremental com a matriz de White: bloco de X3 e X4 recalculado
+bl <- c(3, 4)  # posições de X3 e X4 em b (intercepto é a 1ª)
+f_blk <- as.numeric(t(b[bl]) %*% solve(V_hc1[bl, bl], b[bl])) / length(bl)
+fi <- le("resultados_econometricos/f_incremental_robusto.csv")
+registrar("C17", "F incremental com erro de White (bloco X3 e X4) recalculado",
+          abs(f_blk - fi$estatistica_f_white[grepl("^X3 e X4", fi$bloco)]) < 1e-6,
+          sprintf("calculado %.4f; no arquivo %.4f", f_blk, fi$estatistica_f_white[grepl("^X3 e X4", fi$bloco)]))
+
+# Intervalo da média no ponto médio dos regressores de 2021 (cenário base, matriz de White)
+x2021 <- colMeans(X[painel$ano == 2021, ])
+ep_x <- sqrt(as.numeric(t(x2021) %*% V_hc1 %*% x2021))
+pm <- le("resultados_econometricos/previsao_media_2021.csv")
+base_pm <- pm[pm$cenario == "Selic de 2021", ]
+registrar("C18", "Intervalo da média da previsão (matriz de White, regressores médios de 2021) recalculado",
+          abs((sum(x2021 * b) - qt(0.975, gl) * ep_x) - base_pm$ic_inf_ln_white) < 1e-8,
+          sprintf("limite inferior calculado %.4f; no arquivo %.4f", sum(x2021 * b) - qt(0.975, gl) * ep_x, base_pm$ic_inf_ln_white))
 
 # ============================== D. Documentação conferida com os CSV =============
 doc_res <- readLines(pr("documentacao/03_resultados_modelos.md"), encoding = "UTF-8", warn = FALSE)

@@ -7,7 +7,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 RAIZ="$(pwd)"; D="$RAIZ/envio_professor"; T="$(mktemp -d)"
 [ -f "$RAIZ/CLAUDE.md" ] || { echo "rode a partir da raiz do projeto"; exit 1; }
 Rscript --vanilla _Trilha/ferramentas/limpar_comentarios.R R "$T/limpo" "$T/relatorio.txt" | tail -1
-rm -rf "$D/R"/* "$D/resultados_econometricos"/* "$D/figuras_graficos"/* "$D/dados_processados"/* "$D/documentacao"/*
+rm -rf "$D/R"/* "$D/dados_brutos"/* "$D/resultados_econometricos"/* "$D/figuras_graficos"/* "$D/dados_processados"/* "$D/documentacao"/*
 mkdir -p "$D"/{R,dados_brutos,dados_processados,resultados_econometricos,figuras_graficos,documentacao}
 cp "$T"/limpo/0*.R "$D/R/"
 rm -f "$D/R/01b_extracao_pam.R"

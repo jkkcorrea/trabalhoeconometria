@@ -36,6 +36,8 @@ frob <- res("f_geral_robusto.csv")
 mres <- res("maiores_residuos.csv")
 het_res <- res("autocorrelacao_heterogeneidade_resumo.csv")
 reesp <- res("reespecificacao_forma_funcional.csv")
+finc <- res("f_incremental_robusto.csv")
+pmed <- res("previsao_media_2021.csv")
 proj <- res("projecao_selic_m2.csv")
 efeito <- res("efeito_selic_m2.csv")
 aut <- res("autocorrelacao_por_municipio.csv")
@@ -103,6 +105,11 @@ tab_hc <- data.frame(Teste = ifelse(is.na(hc$ordenado_por) | hc$ordenado_por == 
                      Decisão = hc$decisao_5pct, check.names = FALSE)
 tab_frob <- data.frame(Matriz = frob$matriz, F = f2(frob$estatistica_f), `gl` = paste(frob$gl_numerador, frob$gl_denominador, sep = "; "),
                        `p-valor` = fp(frob$p_valor), Decisão = frob$decisao_5pct, check.names = FALSE)
+tab_finc <- data.frame(Bloco = finc$bloco, Restrições = finc$restricoes, `F (White)` = f2(finc$estatistica_f_white),
+                       `p-valor` = fp(finc$p_valor_white), Decisão = finc$decisao_5pct, check.names = FALSE)
+tab_pmed <- data.frame(Cenário = pmed$cenario, `Selic (% a.a.)` = f2(pmed$selic),
+                       `IC 95% clássico (ln)` = paste0("[", f4(pmed$ic_inf_ln_classico), "; ", f4(pmed$ic_sup_ln_classico), "]"),
+                       `IC 95% com White (ln)` = paste0("[", f4(pmed$ic_inf_ln_white), "; ", f4(pmed$ic_sup_ln_white), "]"), check.names = FALSE)
 tab_mres <- data.frame(Município = mres$nome_municipio, Ano = mres$ano, Resíduo = f4(mres$residuo),
                        `Resíduo / erro-padrão` = f2(mres$residuo_sobre_s), check.names = FALSE)
 tab_reesp <- data.frame(Especificação = reesp$especificacao, `R2 ajustado` = f4(reesp$r2_ajustado), AIC = f2(reesp$aic),
@@ -135,7 +142,7 @@ gravar("00_resumo.md", c(
           f4(anova$r2_ajustado[1]), f2(anova$estatistica_f[1]), anova$gl_denominador[1], fp(anova$p_valor[1])), "",
   "## Diagnósticos", "",
   sprintf("- Multicolinearidade: FIV máximo = %s (limite 10).", f2(max(vif$fiv))),
-  sprintf("- Heterocedasticidade: Breusch-Pagan-Godfrey p = %s (rejeita); Goldfeld-Quandt p = %s (não rejeita). Inferência com erros de White.",
+  sprintf("- Heterocedasticidade: Breusch-Pagan-Godfrey p = %s (rejeita); Goldfeld-Quandt ordenado pela distância p = %s (unilateral, não rejeita; ordenado pela industrialização, rejeita). O teste de White rejeita (ver 04_diagnosticos). Inferência com erros de White.",
           fp(testes$p_valor[grepl("Breusch", testes$teste)]), fp(testes$p_valor[grepl("Goldfeld", testes$teste)])),
   sprintf("- Normalidade dos resíduos: Shapiro-Wilk W = %s, p-valor %s (rejeita).", f4(norm$estatistica[1]), fp(norm$p_valor[1])),
   sprintf("- Forma funcional: RESET F = %s (gl %s), p-valor %s (rejeita).", f2(reset$estatistica_f[1]), reset$gl[1], fp(reset$p_valor[1])),
@@ -191,6 +198,7 @@ gravar("02_especificacao_e_metodos.md", c(
   "| Multicolinearidade (FIV e tolerância) | diagnóstico | cap. 10 |",
   "| Breusch-Pagan-Godfrey | heterocedasticidade | cap. 11, pp. 439 e 440 |",
   "| Goldfeld-Quandt | heterocedasticidade | cap. 11, pp. 436 a 440 |",
+  "| Teste geral de White | heterocedasticidade | cap. 11 e aula de heterocedasticidade |",
   "| Shapiro-Wilk e gráfico Q-Q | normalidade dos resíduos | orientação do professor |",
   "| RESET de Ramsey | forma funcional | cap. 13, pp. 549 a 552 |",
   "| Teste LM para tendência linear | variável omitida (ano) | cap. 13 |",
@@ -247,6 +255,7 @@ gravar("04_diagnosticos.md", c(
   "## Heterocedasticidade: teste de White e Goldfeld-Quandt por outras variáveis", "", md(tab_hc), "",
   "O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordenado pela distância não rejeita, mas tem pouco poder quando a variância não cresce com essa variável; ordenado pela industrialização (X3), ele rejeita. A divergência entre os testes vem do ordenamento escolhido, não de um resultado contraditório.", "",
   "## F geral com erro de White", "", md(tab_frob), "",
+  "## F incremental por bloco, com erro de White", "", md(tab_finc), "",
   "O F geral com a matriz de White (HC1) usa F = b'V^-1 b / q para as q = 5 inclinações. A conclusão é a mesma do F clássico.", "",
   "## Heterogeneidade entre municípios e o Durbin-Watson", "",
   sprintf("Com os resíduos do modelo empilhado, o Durbin-Watson mediano é %s e %s municípios ficam abaixo de dL. Com os resíduos centrados na média de cada município, a mediana passa a %s e apenas %s município fica abaixo de dL. Em %s dos 29 municípios os dez resíduos têm o mesmo sinal, e %s%% da soma de quadrados dos resíduos está entre municípios. Parte do que o Durbin-Watson lê como autocorrelação é, portanto, diferença persistente entre municípios que o modelo empilhado não capta. Os valores dL e dU da Tabela D.5A são aproximados neste caso, porque X6 não varia no tempo dentro do município.",
@@ -256,6 +265,7 @@ gravar("04_diagnosticos.md", c(
   "As figuras figuras_graficos/diag1_residuos_vs_ajustados.png, diag2_residuos_por_municipio.png e diag7_residuos_vs_regressores.png mostram os resíduos contra os valores ajustados, por município e contra cada regressor. Os dez maiores resíduos em módulo:", "",
   md(tab_mres), "",
   "A cauda positiva dos resíduos vem de Adrianópolis (2012 a 2016) e de Araucária (2012 a 2014), municípios com participação industrial atípica; isso ajuda a explicar a assimetria e a curtose que o Shapiro-Wilk rejeita.", "",
+  "## Intervalo da média da previsão de 2021 (ponto médio dos regressores)", "", md(tab_pmed), "",
   "## Reespecificação da forma funcional", "", md(tab_reesp), "",
   "Os quadrados de X2 e X3 usam as variáveis centradas na média. A inclusão do logaritmo dos vínculos ativos (porte do município) reduz bastante a estatística do RESET, o que indica que parte da não linearidade vem de uma variável omitida. O RESET ainda rejeita em todas as versões. O modelo principal permanece como o definido nas orientações; as versões ampliadas são sensibilidade.", ""
 ))
@@ -266,6 +276,8 @@ gravar("05_limitacoes.md", c(
   "- Desenho observacional: os coeficientes indicam associações, não efeitos causais.",
   "- A forma funcional linear é rejeitada pelo RESET; os coeficientes devem ser lidos com essa ressalva.",
   "- A normalidade dos resíduos é rejeitada pelo Shapiro-Wilk. A inferência usa a aproximação de amostras grandes.",
+  "- O porte do município é uma variável omitida relevante: o Gini setorial tem correlação de -0,88 com o logaritmo dos vínculos ativos e, com esse controle, perde a significância e muda de sinal (robustez_porte_e_negativos.csv). Salário e escolaridade podem se determinar juntos, e o VAB da indústria contém a massa salarial; os resultados são associações.",
+  "- O Breusch-Godfrey é aplicado à série de resíduos de cada município (constante e resíduo defasado), versão reduzida, porque a série tem dez anos. Sem preencher com zero o primeiro resíduo defasado, o número de municípios que rejeitam sobe de 3 para 5 (valor em autocorrelacao_heterogeneidade_resumo.csv), o que mostra que o resultado é sensível a esse tratamento com apenas dez observações.",
   "- Autocorrelação dentro dos municípios: o Durbin-Watson e o Breusch-Godfrey indicam autocorrelação em parte dos municípios. Não há correção no modelo principal; a limitação é declarada.",
   "- O Gini (X4) usa as 87 divisões da CNAE como unidades, com zeros incluídos. A aula e Hoffmann aplicam a medida a indivíduos; a adaptação é nossa. O índice depende do número de divisões com vínculo (correlação de −0,95).",
   "- A Selic (X5) tem 10 valores distintos, um por ano. Seu coeficiente trata 290 observações como independentes e tende a superestimar a precisão.",
@@ -295,13 +307,13 @@ gravar("06_fontes.md", c(
 # ---- 07 critérios
 gravar("07_criterios_da_disciplina.md", c(
   "# Critérios de correção", "",
-  "Trabalho de Econometria I (UFPR). O modelo usa apenas métodos da disciplina: MQO, erros-padrão de White, testes t e F, multicolinearidade (FIV), heterocedasticidade (Breusch-Pagan-Godfrey e Goldfeld-Quandt), normalidade (Shapiro-Wilk), forma funcional (RESET e LM), quebra estrutural (Chow), autocorrelação por série (Durbin-Watson e Breusch-Godfrey) e previsão matricial.", "",
+  "Trabalho de Econometria I (UFPR). O modelo usa apenas métodos da disciplina: MQO, erros-padrão de White, testes t e F, multicolinearidade (FIV), heterocedasticidade (Breusch-Pagan-Godfrey, White e Goldfeld-Quandt), normalidade (Shapiro-Wilk), forma funcional (RESET e LM), quebra estrutural (Chow), autocorrelação por série (Durbin-Watson e Breusch-Godfrey) e previsão matricial.", "",
   "Hipóteses formais (H0 e Ha) e critério de decisão a 5% em todos os testes. Resultados com quatro casas decimais. Memorial de cálculo em `memorial_modelo_2_*.csv`."))
 
 # ---- Ambiente e dicionário
 amb <- data.frame(item = c("R", "pacotes principais", "sistema"),
                   valor = c(paste(R.version$major, R.version$minor, sep = "."),
-                            "lmtest, sandwich, car, shapiro.test (base R), ggplot2, dplyr, gganimate", R.version$platform))
+                            paste0(paste(vapply(c("lmtest", "sandwich", "car", "ggplot2", "dplyr", "tidyr", "gganimate", "sf", "geobr"), function(p) paste(p, tryCatch(as.character(utils::packageVersion(p)), error = function(e) "n/d")), character(1)), collapse = ", "), "; shapiro.test (base R)"), R.version$platform))
 write.csv(amb, file.path(DOC, "ambiente_r.csv"), row.names = FALSE)
 dic <- data.frame(
   variavel = c("id_municipio", "nome_municipio", "ano", "salario_medio_nominal", "salario_medio_real", "ln_salario_real",

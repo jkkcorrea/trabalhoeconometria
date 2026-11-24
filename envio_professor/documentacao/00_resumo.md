@@ -20,7 +20,7 @@ R² ajustado = 0,6433; F geral = 105,26 (gl 5 e 284), p-valor < 0,0001.
 ## Diagnósticos
 
 - Multicolinearidade: FIV máximo = 2,33 (limite 10).
-- Heterocedasticidade: Breusch-Pagan-Godfrey p = 0,0363 (rejeita); Goldfeld-Quandt p = 0,3885 (não rejeita). Inferência com erros de White.
+- Heterocedasticidade: Breusch-Pagan-Godfrey p = 0,0363 (rejeita); Goldfeld-Quandt ordenado pela distância p = 0,3885 (unilateral, não rejeita; ordenado pela industrialização, rejeita). O teste de White rejeita (ver 04_diagnosticos). Inferência com erros de White.
 - Normalidade dos resíduos: Shapiro-Wilk W = 0,8618, p-valor < 0,0001 (rejeita).
 - Forma funcional: RESET F = 14,49 (gl 2; 282), p-valor < 0,0001 (rejeita).
 - Autocorrelação por município: mediana do Durbin-Watson = 0,2504; o teste rejeita a ausência de autocorrelação positiva em 14 de 29 municípios.

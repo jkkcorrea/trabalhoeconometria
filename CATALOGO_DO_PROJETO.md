@@ -8,7 +8,7 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 13 arquivos.
-- Arquivos em `envio_professor/resultados_econometricos/`: 28.
+- Arquivos em `envio_professor/resultados_econometricos/`: 30.
 - Decisões registradas em `_Trilha/DECISOES.md`: 62 (vigentes na última coluna: 53).
 - Pendências em `_Trilha/BACKLOG.md`: 44 abertas e 48 baixadas.
 
@@ -24,7 +24,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `CATALOGO_DO_PROJETO.md` | 14 KB | Markdown: Catálogo do projeto |
+| `CATALOGO_DO_PROJETO.md` | 15 KB | Markdown: Catálogo do projeto |
 | `CLAUDE.md` | 18 KB | Markdown: CLAUDE.md do Trabalho de Econometria (núcleo do harness do projeto) |
 | `CONTRIBUIR.md` | 10 KB | Markdown: Como baixar e contribuir com o projeto |
 | `Gujarati_Basic_Econometrics.pdf` | 6.0 MB |  |
@@ -65,9 +65,9 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
 | `02_tratamento_painel.R` | 31 KB | Script R: Etapa 2: tratamento dos dados brutos e construção do painel mestre |
 | `03_aede_visualizacoes.R` | 38 KB | Script R: Etapa 3: análise exploratória espacial e visualizações |
-| `04_modelagem_diagnosticos.R` | 16 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
+| `04_modelagem_diagnosticos.R` | 17 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
 | `05_autocorrelacao_municipios.R` | 9 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
-| `06_especificacao_chow.R` | 16 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
+| `06_especificacao_chow.R` | 17 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Instruções para IA (`instrucoes_ia/`)
@@ -111,12 +111,13 @@ Cada skill é uma pasta com `SKILL.md`.
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
+| `conferir_derivados.sh` | 1 KB | Script de shell |
 | `conferir_numeros.R` | 4 KB | Script R: Uso (na raiz do projeto): Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md |
 | `gerar_catalogo.R` | 6 KB | Script R: Gera CATALOGO_DO_PROJETO.md a partir do conteúdo real das pastas. |
-| `gerar_documentacao.R` | 28 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
+| `gerar_documentacao.R` | 30 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
 | `limpar_comentarios.R` | 8 KB | Script R |
 | `reconstruir_envio.sh` | 2 KB | Script de shell |
-| `verificar_envio.R` | 20 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
+| `verificar_envio.R` | 22 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
 
 ## Trilha de decisões e handoffs (`_Trilha/`)
 
@@ -138,9 +139,9 @@ Gerada; não editar à mão.
 | `01_extracao_dados.R` | 36 KB | Script R |
 | `02_tratamento_painel.R` | 29 KB | Script R |
 | `03_aede_visualizacoes.R` | 35 KB | Script R |
-| `04_modelagem_diagnosticos.R` | 16 KB | Script R |
+| `04_modelagem_diagnosticos.R` | 17 KB | Script R |
 | `05_autocorrelacao_municipios.R` | 8 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
-| `06_especificacao_chow.R` | 16 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
+| `06_especificacao_chow.R` | 17 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Pasta de envio: dados processados
@@ -158,7 +159,7 @@ Gerada; não editar à mão.
 |---|---|---|
 | `anova_f_modelo.csv` | 178 B | CSV, 1 linhas x 7 colunas: modelo, estatistica_f, gl_numerador, gl_denominador, p_valor, r2, r2_ajustado |
 | `autocorrelacao_heterogeneidade_municipios.csv` | 4 KB | CSV, 29 linhas x 8 colunas: id_municipio, nome_municipio, residuo_medio, todos_mesmo_sinal, durbin_watson, durbin_watson_centrado, decisao_dw, decisao_dw_centrado |
-| `autocorrelacao_heterogeneidade_resumo.csv` | 211 B | CSV, 1 linhas x 6 colunas: durbin_watson_mediano, durbin_watson_centrado_mediano, abaixo_dl, abaixo_dl_centrado, municipios_mesmo_sinal, parcela_soma_quadrados_entre_municipios |
+| `autocorrelacao_heterogeneidade_resumo.csv` | 242 B | CSV, 1 linhas x 7 colunas: durbin_watson_mediano, durbin_watson_centrado_mediano, abaixo_dl, abaixo_dl_centrado, municipios_mesmo_sinal, bg_rejeita_sem_preenchimento, parcela_soma_quadrados_entre_municipios |
 | `autocorrelacao_por_municipio.csv` | 10 KB | CSV, 29 linhas x 13 colunas: id_municipio, nome_municipio, n, durbin_watson, decisao_dw_tabela, rho_auxiliar, breusch_godfrey_estatistica, breusch_godfrey_gl, … |
 | `autocorrelacao_resumo.csv` | 162 B | CSV, 1 linhas x 8 colunas: municipios, durbin_watson_mediano, rho_auxiliar_mediano, dw_positiva, dw_inconclusiva, dw_nao_rejeita, dw_negativa, breusch_godfrey_rejeita |
 | `chow_quebra_periodo.csv` | 721 B | CSV, 2 linhas x 12 colunas: modelo, corte, teste, hipotese_nula, hipotese_alternativa, n1, n2, k, … |
@@ -167,6 +168,7 @@ Gerada; não editar à mão.
 | `especificacao_lm_tendencia.csv` | 334 B | CSV, 1 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct |
 | `especificacao_reset.csv` | 353 B | CSV, 1 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica_f, gl, p_valor, decisao_5pct |
 | `f_geral_robusto.csv` | 256 B | CSV, 2 linhas x 7 colunas: modelo, matriz, estatistica_f, gl_numerador, gl_denominador, p_valor, decisao_5pct |
+| `f_incremental_robusto.csv` | 365 B | CSV, 4 linhas x 5 colunas: bloco, restricoes, estatistica_f_white, p_valor_white, decisao_5pct |
 | `maiores_residuos.csv` | 592 B | CSV, 10 linhas x 4 colunas: nome_municipio, ano, residuo, residuo_sobre_s |
 | `medida_gini_checagem.csv` | 145 B | CSV, 3 linhas x 2 colunas: indicador, valor |
 | `memorial_modelo_2.txt` | 11 KB | Texto simples |
@@ -177,6 +179,7 @@ Gerada; não editar à mão.
 | `memorial_modelo_2_fiv.csv` | 613 B | CSV, 5 linhas x 5 colunas: variavel, R2_auxiliar, tolerancia, fiv, decisao |
 | `memorial_modelo_2_previsao.csv` | 323 B | CSV, 2 linhas x 6 colunas: cenario, ln_previsto, ic_media_inf, ic_media_sup, ic_individual_inf, ic_individual_sup |
 | `normalidade_residuos.csv` | 336 B | CSV, 1 linhas x 10 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct, … |
+| `previsao_media_2021.csv` | 484 B | CSV, 3 linhas x 7 colunas: cenario, selic, ln_previsto, ic_inf_ln_classico, ic_sup_ln_classico, ic_inf_ln_white, ic_sup_ln_white |
 | `projecao_selic_m2.csv` | 19 KB | CSV, 87 linhas x 13 colunas: cenario, selic, id_municipio, nome_municipio, ln_previsto, salario_previsto_sem_correcao, salario_previsto_corrigido, ic_media_inf_ln, … |
 | `reespecificacao_forma_funcional.csv` | 1 KB | CSV, 4 linhas x 13 colunas: especificacao, n_parametros, r2_ajustado, aic, reset_f, reset_p, shapiro_w, shapiro_p, … |
 | `robustez_porte_e_negativos.csv` | 2 KB | CSV, 13 linhas x 8 colunas: especificacao, n, termo, coeficiente, erro_padrao_white, p_valor, r2_ajustado, cor_gini_ln_vinculos |
@@ -207,15 +210,15 @@ Gerada; não editar à mão.
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `00_resumo.md` | 2 KB | Markdown: Resumo |
+| `00_resumo.md` | 3 KB | Markdown: Resumo |
 | `01_dados_e_variaveis.md` | 2 KB | Markdown: Dados e variáveis |
 | `02_especificacao_e_metodos.md` | 2 KB | Markdown: Especificação e métodos |
 | `03_resultados_modelos.md` | 3 KB | Markdown: Resultados do modelo principal |
-| `04_diagnosticos.md` | 8 KB | Markdown: Diagnósticos do modelo principal |
-| `05_limitacoes.md` | 1 KB | Markdown: Limitações |
+| `04_diagnosticos.md` | 9 KB | Markdown: Diagnósticos do modelo principal |
+| `05_limitacoes.md` | 2 KB | Markdown: Limitações |
 | `06_fontes.md` | 1 KB | Markdown: Fontes e referências |
-| `07_criterios_da_disciplina.md` | 575 B | Markdown: Critérios de correção |
-| `08_verificacao.md` | 3 KB | Markdown: Verificação do envio |
-| `ambiente_r.csv` | 154 B | CSV, 3 linhas x 2 colunas: item, valor |
+| `07_criterios_da_disciplina.md` | 582 B | Markdown: Critérios de correção |
+| `08_verificacao.md` | 4 KB | Markdown: Verificação do envio |
+| `ambiente_r.csv` | 226 B | CSV, 3 linhas x 2 colunas: item, valor |
 | `dicionario_variaveis.csv` | 1 KB | CSV, 21 linhas x 2 colunas: variavel, descricao |
 

@@ -4,8 +4,8 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 69 arquivos |
-| A1b | Sem arquivos de versões anteriores nos resultados e figuras | APROVADA | nenhum arquivo antigo |
+| A1 | Arquivos essenciais presentes | APROVADA | 71 arquivos |
+| A1b | Sem arquivos de versões anteriores nos resultados, figuras e dados brutos | APROVADA | nenhum arquivo antigo |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 20 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
 | A4 | Código dos scripts idêntico ao da versão de trabalho (só comentários diferem) | APROVADA | 8 scripts idênticos |
@@ -28,7 +28,9 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 | C14 | F geral com erro de White (HC1) recalculado | APROVADA | calculado 92.8340; no arquivo 92.8340 |
 | C15 | Durbin-Watson com resíduos centrados por município e municípios de mesmo sinal recalculados | APROVADA | mesmo sinal 16; abaixo de dL com resíduos centrados 1 |
 | C16 | Reespecificação com o porte do município: RESET e coeficiente do Gini recalculados | APROVADA | RESET calculado 3.9843, no arquivo 3.9843; Gini 0.2579 |
+| C17 | F incremental com erro de White (bloco X3 e X4) recalculado | APROVADA | calculado 98.3401; no arquivo 98.3401 |
+| C18 | Intervalo da média da previsão (matriz de White, regressores médios de 2021) recalculado | APROVADA | limite inferior calculado 7.8250; no arquivo 7.8250 |
 | D1 | Coeficiente de X2 (erro de White) escrito na documentação igual ao CSV | APROVADA | valor esperado 0,0150 |
 | D2 | Estatística de Shapiro-Wilk escrita na documentação igual ao CSV | APROVADA | valor esperado 0,8618 |
 
-26 de 26 verificações aprovadas.
+28 de 28 verificações aprovadas.

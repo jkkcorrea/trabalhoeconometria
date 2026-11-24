@@ -30,6 +30,7 @@ Critério: rejeita-se H0 no coeficiente quando p < 0,05.
 | Multicolinearidade (FIV e tolerância) | diagnóstico | cap. 10 |
 | Breusch-Pagan-Godfrey | heterocedasticidade | cap. 11, pp. 439 e 440 |
 | Goldfeld-Quandt | heterocedasticidade | cap. 11, pp. 436 a 440 |
+| Teste geral de White | heterocedasticidade | cap. 11 e aula de heterocedasticidade |
 | Shapiro-Wilk e gráfico Q-Q | normalidade dos resíduos | orientação do professor |
 | RESET de Ramsey | forma funcional | cap. 13, pp. 549 a 552 |
 | Teste LM para tendência linear | variável omitida (ano) | cap. 13 |

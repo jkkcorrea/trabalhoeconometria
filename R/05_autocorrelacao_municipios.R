@@ -163,6 +163,10 @@ resumo_heterogeneidade <- tibble::tibble(
   abaixo_dl = sum(por_municipio$durbin_watson < DW_DL),
   abaixo_dl_centrado = sum(por_municipio$durbin_watson_centrado < DW_DL),
   municipios_mesmo_sinal = sum(por_municipio$todos_mesmo_sinal),
+  # Breusch-Godfrey sem preencher com zero o primeiro resíduo defasado (lmtest usa fill = 0 por padrão)
+  bg_rejeita_sem_preenchimento = sum(vapply(split(painel$residuo, painel$id_municipio), function(e) {
+    lmtest::bgtest(stats::lm(e ~ 1), order = 1, fill = NA)$p.value < 0.05
+  }, logical(1))),
   parcela_soma_quadrados_entre_municipios = soma_entre / sum(painel$residuo^2)
 )
 readr::write_csv(por_municipio, file.path(DIR_RESULTADOS, "autocorrelacao_heterogeneidade_municipios.csv"))

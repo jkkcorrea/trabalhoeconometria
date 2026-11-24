@@ -84,6 +84,15 @@ O Breusch-Pagan e o White rejeitam a homocedasticidade. O Goldfeld-Quandt ordena
 | clássica | 105,26 | 5; 284 | < 0,0001 | rejeita H0 |
 | White (HC1) | 92,83 | 5; 284 | < 0,0001 | rejeita H0 |
 
+## F incremental por bloco, com erro de White
+
+| Bloco | Restrições | F (White) | p-valor | Decisão |
+|---|---|---|---|---|
+| X2 (capital humano) | 1 | 105,05 | < 0,0001 | rejeita H0 |
+| X3 e X4 (estrutura produtiva) | 2 | 98,34 | < 0,0001 | rejeita H0 |
+| X5 (macroeconomia) | 1 | 13,38 | 0,0003 | rejeita H0 |
+| X6 (localização) | 1 | 8,79 | 0,0033 | rejeita H0 |
+
 O F geral com a matriz de White (HC1) usa F = b'V^-1 b / q para as q = 5 inclinações. A conclusão é a mesma do F clássico.
 
 ## Heterogeneidade entre municípios e o Durbin-Watson
@@ -108,6 +117,14 @@ As figuras figuras_graficos/diag1_residuos_vs_ajustados.png, diag2_residuos_por_
 | Quatro Barras | 2015 | 0,2798 | 2,29 |
 
 A cauda positiva dos resíduos vem de Adrianópolis (2012 a 2016) e de Araucária (2012 a 2014), municípios com participação industrial atípica; isso ajuda a explicar a assimetria e a curtose que o Shapiro-Wilk rejeita.
+
+## Intervalo da média da previsão de 2021 (ponto médio dos regressores)
+
+| Cenário | Selic (% a.a.) | IC 95% clássico (ln) | IC 95% com White (ln) |
+|---|---|---|---|
+| Selic de 2021 | -5,11 | [7,8172; 7,8838] | [7,8250; 7,8760] |
+| Selic de 2021 + 1 p.p. | -4,11 | [7,8273; 7,8867] | [7,8343; 7,8797] |
+| Selic de 2021 - 1 p.p. | -6,11 | [7,8070; 7,8809] | [7,8155; 7,8724] |
 
 ## Reespecificação da forma funcional
 

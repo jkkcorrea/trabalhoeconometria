@@ -258,6 +258,21 @@ projecao <- purrr::pmap_dfr(cenarios, function(cenario, selic) {
 })
 readr::write_csv(projecao, file.path(DIR_RESULTADOS, "projecao_selic_m2.csv"))
 
+# Intervalo de 95% da média de ln(salário) no ponto médio dos regressores de 2021, com a matriz
+# clássica e com a de White. (Média dos limites municipais não é o intervalo da média.)
+previsao_media <- purrr::pmap_dfr(cenarios, function(cenario, selic) {
+  nd <- base_ref
+  nd$selic_real <- selic
+  xm <- colMeans(stats::model.matrix(stats::delete.response(stats::terms(modelo2)), data = nd))
+  ajuste <- sum(xm * stats::coef(modelo2))
+  ep_cl <- sqrt(as.numeric(t(xm) %*% stats::vcov(modelo2) %*% xm))
+  ep_w <- sqrt(as.numeric(t(xm) %*% V_white %*% xm))
+  tibble::tibble(cenario = cenario, selic = selic, ln_previsto = ajuste,
+                 ic_inf_ln_classico = ajuste - t_previsao * ep_cl, ic_sup_ln_classico = ajuste + t_previsao * ep_cl,
+                 ic_inf_ln_white = ajuste - t_previsao * ep_w, ic_sup_ln_white = ajuste + t_previsao * ep_w)
+})
+readr::write_csv(previsao_media, file.path(DIR_RESULTADOS, "previsao_media_2021.csv"))
+
 # Efeito da Selic: coeficiente com erro de White (HC1), gl = n - k; efeito percentual = exp(b) - 1.
 ct_w <- lmtest::coeftest(modelo2, vcov. = sandwich::vcovHC(modelo2, type = "HC1"))
 b_s <- ct_w["selic_real", 1]; ep_s <- ct_w["selic_real", 2]
