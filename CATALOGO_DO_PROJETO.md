@@ -10,7 +10,7 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 - Figuras e animações em `envio_professor/figuras_graficos/`: 12 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 22.
 - Decisões registradas em `_Trilha/DECISOES.md`: 62 (vigentes na última coluna: 53).
-- Pendências em `_Trilha/BACKLOG.md`: 29 abertas e 38 baixadas.
+- Pendências em `_Trilha/BACKLOG.md`: 28 abertas e 39 baixadas.
 
 ## Onde começar
 
@@ -24,7 +24,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `CATALOGO_DO_PROJETO.md` | 13 KB | Markdown: Catálogo do projeto |
+| `CATALOGO_DO_PROJETO.md` | 14 KB | Markdown: Catálogo do projeto |
 | `CLAUDE.md` | 18 KB | Markdown: CLAUDE.md do Trabalho de Econometria (núcleo do harness do projeto) |
 | `CONTRIBUIR.md` | 10 KB | Markdown: Como baixar e contribuir com o projeto |
 | `Gujarati_Basic_Econometrics.pdf` | 6.0 MB |  |
@@ -122,6 +122,7 @@ Cada skill é uma pasta com `SKILL.md`.
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
+| `HANDOFF_artigo-slides_20261123.md` | 4 KB | Markdown: HANDOFF: artigo, slides e roteiro para apreciação dos colegas (23/11/2026) |
 | `HANDOFF_calibracao-envio_20261121.md` | 5 KB | Markdown: HANDOFF: calibração do modelo, fragilidades e pasta de envio (21/11/2026) |
 | `HANDOFF_implantacao-harness_20261114.md` | 1 KB | Markdown: Handoff da frente de implantação do harness (14/11/2026) |
 | `HANDOFF_vscode_20261121.md` | 5 KB | Markdown: HANDOFF — retomada no VS Code (21/11/2026) |

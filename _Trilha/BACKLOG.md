@@ -114,7 +114,7 @@ Pendentes:
 - [ ] **R3. Referências do artigo**: conferir a editora de Hoffmann (2006) e incluir a literatura sobre salário, estrutura produtiva e Selic (nenhuma foi conferida).
 - [ ] **R4. Links das fontes do caso Adrianópolis**: confirmar o link exato da notícia da Agência Estadual de Notícias do Paraná (inauguração em 17/12/2015) e a data de início de produção da Secil.
 - [ ] **R5. Causa do salto de Adrianópolis (2015)**: consultar a nota metodológica do IBGE para o VAB municipal de 2015 e verificar o VAB de construção. Não bloqueante.
-- [ ] **R6. Resposta ao professor**: aguarda aprovação do pesquisador para envio.
+- [x] 23/11/2026 **R6. Resposta ao professor**: enviada (o comentário do professor responde a ela). Arredondamentos menos precisos (W = 0,862; p = 0,001) ficam como estão.
 - [ ] **R7. CLAUDE.md** (seções 6 e 13) e prompts originais: atualizar só com pedido do pesquisador (P4 acima).
 
 ## Atualização de 23/11/2026 (noite): comentário do professor e referências
@@ -133,3 +133,7 @@ Abertos:
 - [ ] **B9. Conferências abertas da correção como professor.** Teste de White ausente (só Breusch-Pagan e Goldfeld-Quandt); erro de White não trata a dependência dentro do município (a Selic tem 10 valores anuais e a distância 29); F geral e intervalos da previsão são clássicos; ANOVA e F incremental só no envio, não no artigo; `00_executar_tudo.R` não roda `01b_extracao_pam.R` e o painel carrega colunas da PAM sem uso.
 - [x] 23/11/2026 **Correções de texto da correção como professor**: períodos do Chow (corte em 2017 = 2012 a 2017 contra 2018 a 2021; linha do gráfico corrigida para 2017,5), descrição do Breusch-Godfrey (constante e resíduo defasado), p = 0,0011 e W = 0,8618, referências internas retiradas do corpo do artigo, H0 do documento de métodos sem "controlados os efeitos comuns".
 
+
+## Pendências consolidadas no fechamento de 23/11/2026
+
+Lista completa e ordem de ataque em `_Trilha/_Handoffs/HANDOFF_artigo-slides_20261123.md`. Em aberto: A1 a A8 (professor); B1, B3, B4 e B5 (pesquisador: literatura, discussão, contribuição e justificativas); B7 (referências a conferir); B8 e B9 (porte do município e conferências técnicas); R1 a R5 e R7 (artigo, PowerPoint, literatura, links e causa de Adrianópolis, `CLAUDE.md`).
