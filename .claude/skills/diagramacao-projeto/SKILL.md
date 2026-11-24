@@ -20,8 +20,8 @@ dados_brutos/*.rds
 dados_processados/dados_painel_rmc.(rds|csv)   ← 29 municípios × 10 anos = 290 obs
         ├─ R/03  → figuras_graficos/ (mapas, GIFs, correlação)
         ├─ R/04  → resultados_econometricos/ + diag1..4
-        ├─ R/05  → robustez (Mundlak, Modelos 3c e 4)
-        ├─ R/06  → calibração (efeito de município, bootstrap)
+        ├─ R/05  → autocorrelação por município (Durbin-Watson, Breusch-Godfrey)
+        ├─ R/06  → especificação, Chow, robustez do Gini e projeção de 2021
         ├─ R/07  → memorial matricial do Modelo 2
         └─ R/08  → fragilidades (forma funcional, Selic, exogeneidade)
         ▼

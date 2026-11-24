@@ -16,8 +16,8 @@
 #      escolaridade informada, em % (0 a 100).
 #   X3 valor adicionado bruto da indústria sobre o valor adicionado bruto total,
 #      em %.
-#   X4 entropia de Shannon da distribuição dos vínculos ativos pelas divisões
-#      da CNAE 2.0.
+#   X4 Gini da participação dos vínculos ativos entre as 87 divisões da CNAE,
+#      com zeros incluídos (fórmula da aula sobre medidas de desigualdade).
 #   X5 Selic real anual pela equação de Fisher, com Selic (série 4390) e IPCA
 #      (série 433) compostos a partir dos valores mensais.
 #   X6 distância, em km, entre o centroide do município e o de Curitiba, em

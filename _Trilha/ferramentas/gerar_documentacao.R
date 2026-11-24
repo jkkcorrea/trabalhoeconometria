@@ -125,9 +125,9 @@ gravar("00_resumo.md", c(
           f2(chow$estatistica_f[grepl("indicado", chow$teste)]), fp(chow$p_valor[grepl("indicado", chow$teste)])), "",
   "## Projeção de 2021 (previsão dentro da amostra)", "", md(tab_proj), "",
   "## Pendências", "",
-  "- Definição final do Gini (X4) após as aulas sobre o índice; a versão atual usa as 87 divisões da CNAE, com zeros, e é verificada também só com as divisões que têm vínculo.",
+  "- Gini (X4): fórmula da aula sobre medidas de desigualdade e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.",
   "- Confirmação de métodos pelo professor: tratamento da forma funcional (RESET) e da normalidade.",
-  "- Recorte temporal: 2012 a 2021. A extensão até anos mais recentes depende da disponibilidade do VAB setorial municipal, que não é publicado para 2022 e 2023; a definição final está pendente.", ""
+  "- Recorte temporal: 2012 a 2021, mantido. Eventuais mudanças de recorte exigiriam reexecutar o pipeline e atualizar a documentação.", ""
 ))
 
 # ---- 01 dados e variáveis
@@ -178,8 +178,6 @@ gravar("02_especificacao_e_metodos.md", c(
   "| Durbin-Watson (tabela D.5A) | autocorrelação, série de cada município | cap. 12, pp. 495 a 499; Apêndice D, p. 995 |",
   "| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, pp. 499 e 500 |",
   "| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | presunção da modelagem |", "",
-  "## Métodos fora do escopo (não usados)", "",
-  "Variáveis binárias de município, métodos de dados em painel (efeitos fixos e aleatórios, teste de Hausman, Mundlak), correção de autocorrelação de painel (Prais-Winsten e Cochrane-Orcutt sobre o painel), Newey-West sobre o painel empilhado, teste das carreiras (não paramétrico), análise de influência (distância de Cook e DFBETAS), Box-Cox, smearing de Duan e bootstrap. Esses métodos foram retirados do trabalho por orientação do professor, ou não se aplicam ao painel empilhado.", "",
   "## Projeção", "",
   "A projeção é uma previsão dentro da amostra para 2021, último ano com todas as variáveis publicadas. Não há previsão para 2026. A previsão é x0'b; o intervalo da média usa x0'(X'X)^-1 x0 σ², e o intervalo individual, σ²(1 + x0'(X'X)^-1 x0).", "",
   sprintf("Viés da retransformação: a média em reais é exp(previsão + s²/2) sob erros normais. Aplicamos o fator exp(s²/2) = %s. Como a normalidade é rejeitada, a correção é aproximada.", f4(fator_vies)), ""
@@ -233,7 +231,7 @@ gravar("05_limitacoes.md", c(
   "- A forma funcional linear é rejeitada pelo RESET; os coeficientes devem ser lidos com essa ressalva.",
   "- A normalidade dos resíduos é rejeitada pelo Shapiro-Wilk. A inferência usa a aproximação de amostras grandes.",
   "- Autocorrelação dentro dos municípios: o Durbin-Watson e o Breusch-Godfrey indicam autocorrelação em parte dos municípios. Não há correção no modelo principal; a limitação é declarada.",
-  "- A definição do Gini (X4) com 87 divisões CNAE, com zeros, é uma adaptação; a versão final depende da orientação do professor. Ela depende do número de divisões com vínculo (correlação de −0,95).",
+  "- O Gini (X4) usa as 87 divisões da CNAE como unidades, com zeros incluídos. A aula e Hoffmann aplicam a medida a indivíduos; a adaptação é nossa. O índice depende do número de divisões com vínculo (correlação de −0,95).",
   "- A Selic (X5) tem 10 valores distintos, um por ano. Seu coeficiente trata 290 observações como independentes e tende a superestimar a precisão.",
   "- A distância a Curitiba (X6) é constante no tempo para cada município (29 valores distintos).",
   "- Adrianópolis (2014 e 2015) tem salto da participação industrial confirmado na fonte; a causa não está documentada.",

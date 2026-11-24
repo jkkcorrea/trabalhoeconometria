@@ -36,7 +36,7 @@ R² ajustado = 0,6433; F geral = 105,26 (gl 5 e 284), p-valor < 0,0001.
 
 ## Pendências
 
-- Definição final do Gini (X4) após as aulas sobre o índice; a versão atual usa as 87 divisões da CNAE, com zeros, e é verificada também só com as divisões que têm vínculo.
+- Gini (X4): fórmula da aula sobre medidas de desigualdade e de Hoffmann (2006, cap. 17), com as 87 divisões da CNAE e zeros incluídos. Verificação complementar só com as divisões que têm vínculo.
 - Confirmação de métodos pelo professor: tratamento da forma funcional (RESET) e da normalidade.
-- Recorte temporal: 2012 a 2021. A extensão até anos mais recentes depende da disponibilidade do VAB setorial municipal, que não é publicado para 2022 e 2023; a definição final está pendente.
+- Recorte temporal: 2012 a 2021, mantido. Eventuais mudanças de recorte exigiriam reexecutar o pipeline e atualizar a documentação.
 

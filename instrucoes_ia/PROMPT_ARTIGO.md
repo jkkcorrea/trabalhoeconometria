@@ -58,17 +58,17 @@ Escreva por último. Conteúdo: objetivo, método, principais resultados (com n�
 Fonte principal: `documentacao/01_dados_e_variaveis.md` e `02_especificacao_e_metodos.md`.
 - Unidade, período, fontes dos dados (SIDRA/IBGE, Banco Central, RAIS) e construção das variáveis (Y, X2 a X6), com unidade de cada uma.
 - Equação do modelo principal, igual à de `02_especificacao_e_metodos.md`.
-- Estimador de referência e por quê: o que está em `04_calibracao.md` e nas decisões vigentes `[PESQUISADOR: confirmar o modelo de referência; hoje é presunção, D-2026-11-21-20]`.
-- Erros-padrão: classico, HC1, Newey-West, agrupado por município, agrupado por município e ano, bootstrap wild cluster. Diga qual é o principal.
+- Modelo principal e por quê: o que está em `00_resumo.md` e em `_Trilha/DECISOES.md`. Confirmar com o pesquisador antes de escrever.
+- Erros-padrão: clássico e de White (HC1). Diga qual é o principal.
 - Testes de diagnóstico usados (multicolinearidade, heterocedasticidade, autocorrelação, forma funcional, quebra estrutural, efeito de município).
 - Tratamento de observações atípicas (Araucária 2012 e 2013, VAB da indústria negativo).
 
 ### 4 Resultados
-Fonte: `documentacao/03_resultados_modelos_classicos.md`, `04_calibracao.md`, `05_fragilidades.md`.
+Fonte: `documentacao/03_resultados_modelos.md`, `04_diagnosticos.md`, `05_limitacoes.md`.
 - Estatísticas descritivas: `dados_processados/estatisticas_descritivas.csv` e figuras `fig2` e `fig3`.
 - Estimativas do Modelo 2 e comparação com os Modelos 3 e 3b: `coeficientes_cinco_matrizes.csv`, `tabela_comparativa_modelos.html`.
 - Diagnósticos: `diagnosticos_modelo_2.csv`, figuras `diag1` a `diag4`.
-- Robustez e calibração: Mundlak, efeitos fixos, bootstrap, Selic real, forma funcional, exogeneidade.
+- Robustez: definição do Gini (87 divisões e divisões com vínculo), Selic real, forma funcional (RESET), normalidade (Shapiro-Wilk).
 - Para cada tabela e figura: título, fonte e uma frase com o que o leitor deve ver. A interpretação econômica dos coeficientes fica `[PESQUISADOR: definir]`.
 
 ### 5 Discussão (se o pesquisador quiser separar da conclusão)
@@ -99,8 +99,6 @@ Nomes exatos em `envio_professor/figuras_graficos/`. Use no máximo as que a se�
 | `fig2_ridgeplot_salario_anos.png` | Resultados (descritivas) | distribuição do salário por ano |
 | `fig3_dispersao_capital_humano_industria.png` | Resultados (descritivas) | relação entre ensino superior, indústria e salário |
 | `diag1` a `diag4` | Resultados (diagnóstico) | resíduos, autocorrelação, normalidade |
-| `robustez_mundlak_coeficientes.png` | Resultados (robustez) | estimadores lado a lado |
-| `calibracao_coeficientes_estimadores.png` | Resultados (robustez) | coeficientes por estimador |
 | `fragilidades_efeito_marginal_superior.png` | Discussão | efeito marginal de X2 |
 | GIFs `animacao1` e `animacao2` | não entram no artigo impresso; servem para os slides | |
 

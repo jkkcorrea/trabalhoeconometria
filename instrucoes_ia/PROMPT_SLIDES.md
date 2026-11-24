@@ -59,7 +59,7 @@ Duração-base: 12 a 15 minutos, 12 a 14 slides.
 | 9 | Capital humano e indústria | Dispersão | `fig3_dispersao_capital_humano_industria.png` |
 | 10 | O modelo | Equação e estimador em uma tela | `02_especificacao_e_metodos.md` |
 | 11 | Resultado principal | Tabela curta dos coeficientes com a matriz principal | `coeficientes_cinco_matrizes.csv`, `tabela_comparativa_modelos.html` |
-| 12 | O modelo se sustenta? | Diagnósticos e robustez (Mundlak, efeitos fixos) | `diag1` a `diag4`, `robustez_mundlak_coeficientes.png`, `calibracao_coeficientes_estimadores.png` |
+| 12 | O modelo se sustenta? | Diagnósticos e robustez do Gini | `diag1`, `diag2`, `diag5`, `robustez_x4_definicao_gini.csv` |
 | 13 | Onde é frágil | Selic real, forma funcional, exogeneidade, Curitiba | `05_fragilidades.md`, `fragilidades_efeito_marginal_superior.png` |
 | 14 | Conclusão e limites | Três frases `[PESQUISADOR: definir]` e limites de `06_limitacoes.md` | — |
 

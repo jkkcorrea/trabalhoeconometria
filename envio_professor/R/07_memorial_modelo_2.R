@@ -191,11 +191,6 @@ LM_bp <- n * R2_bp
 gl_bp <- k - 1
 crit_bp <- stats::qchisq(1 - ALFA, gl_bp)
 p_bp <- stats::pchisq(LM_bp, gl_bp, lower.tail = FALSE)
-# Durbin-Watson: d = soma((e_t - e_t-1)^2)/soma(e_t^2), sobre as 290 linhas ordenadas por município e ano.
-num_dw <- sum(diff(e_m)^2)
-den_dw <- sum(e_m^2)
-d_dw <- num_dw / den_dw
-dw_teste <- lmtest::dwtest(m_lm, alternative = "two.sided")
 # Memorial em texto (quatro casas decimais)
 # -----------------------------------------------------------------------------
 # Matrizes em notação científica com quatro algarismos significativos: a escala das
@@ -283,13 +278,7 @@ linhas <- c(
   sprintf("   R^2 da regressão auxiliar de e^2 sobre X = %s;  LM = n R^2 = %d x %s = %s", fmt4(R2_bp), n, fmt4(R2_bp), fmt4(LM_bp)),
   sprintf("   Qui-quadrado crítico a 5%% com %d gl = %s; p-valor %s. Decisão: %s H0.", gl_bp, fmt4(crit_bp), fmt_p(p_bp), ifelse(LM_bp > crit_bp, "rejeita-se", "não se rejeita")),
   "",
-  "15. Estatística de Durbin-Watson, passo a passo (painel empilhado ordenado por município e ano)",
-  "   H0: sem autocorrelação de primeira ordem   contra   Ha: autocorrelação de primeira ordem (rho diferente de zero, teste bilateral)",
-  sprintf("   soma((e_t - e_t-1)^2) = %s;  soma(e_t^2) = %s;  d = %s", fmt4(num_dw), fmt4(den_dw), fmt4(d_dw)),
-  sprintf("   rho aproximado = 1 - d/2 = %s. p-valor de lmtest::dwtest = %s.", fmt4(1 - d_dw / 2), fmt_p(dw_teste$p.value)),
-  "   A decisão usa o p-valor exato, porque n = 290 não consta nas linhas usuais das tabelas de dL e dU. Como as linhas vizinhas de municípios diferentes entram como defasagem (28 pares), o valor é uma referência; a evidência válida está em calibracao_autocorrelacao.csv.",
-  "",
-  "16. Conferência contra stats::lm() (maior diferença absoluta)",
+  "15. Conferência contra stats::lm() (maior diferença absoluta)",
   paste0("   ", sprintf("%-14s %s", names(conferencias), format(conferencias, scientific = TRUE, digits = 3)))
 )
 writeLines(linhas, file.path(DIR_RESULTADOS, "memorial_modelo_2.txt"), useBytes = TRUE)

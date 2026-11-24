@@ -167,13 +167,7 @@ X6 (distância a Curitiba)                 0,0316                    0,2147
    R^2 da regressão auxiliar de e^2 sobre X = 0,0410;  LM = n R^2 = 290 x 0,0410 = 11,8953
    Qui-quadrado crítico a 5% com 5 gl = 11,0705; p-valor 0,0363. Decisão: rejeita-se H0.
 
-15. Estatística de Durbin-Watson, passo a passo (painel empilhado ordenado por município e ano)
-   H0: sem autocorrelação de primeira ordem   contra   Ha: autocorrelação de primeira ordem (rho diferente de zero, teste bilateral)
-   soma((e_t - e_t-1)^2) = 1,8122;  soma(e_t^2) = 4,2408;  d = 0,4273
-   rho aproximado = 1 - d/2 = 0,7863. p-valor de lmtest::dwtest = < 0,0001.
-   A decisão usa o p-valor exato, porque n = 290 não consta nas linhas usuais das tabelas de dL e dU. Como as linhas vizinhas de municípios diferentes entram como defasagem (28 pares), o valor é uma referência; a evidência válida está em calibracao_autocorrelacao.csv.
-
-16. Conferência contra stats::lm() (maior diferença absoluta)
+15. Conferência contra stats::lm() (maior diferença absoluta)
    coeficientes   4.13e-12
    erros_padrao   2.42e-11
    R2             1.04e-10

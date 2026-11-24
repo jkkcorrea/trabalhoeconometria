@@ -1,19 +1,13 @@
 # =============================================================================
-# Modelos de regressão linear, diagnósticos do modelo clássico e inferência robusta
+# Modelo principal (MQO empilhado) e diagnósticos ensinados
 #
-# Modelo 1: salário médio real (nível) sobre X2
-# Modelo 2: ln do salário médio real sobre X2, X3, X4, X5 e X6
-# Modelo 3: Modelo 2 com indicadora de Curitiba
-# Modelo 3b: Modelo 3 com a interação X3:X6
-#
-# Diagnósticos do Modelo 2: fator de inflação da variância, Breusch-Pagan,
-# White, Durbin-Watson, Breusch-Godfrey, Jarque-Bera, Shapiro-Wilk e RESET.
-# Erros-padrão: clássico, White (HC1), Newey-West, agrupado por município e
-# agrupado por município e ano. Simulação de cenários com o Modelo 2.
+# Modelo: ln do salário médio real sobre X2, X3, X4, X5 e X6, com erros de White (HC1).
+# Diagnósticos: fator de inflação da variância, Breusch-Pagan-Godfrey, Goldfeld-Quandt,
+# Shapiro-Wilk com gráfico Q-Q e ANOVA.
 #
 # Lê:    ./dados_processados/dados_painel_rmc.rds
-# Grava: ./resultados_econometricos/ (tabelas, testes e simulação) e
-#        ./figuras_graficos/diag1 a diag4 (gráficos dos resíduos)
+# Grava: ./resultados_econometricos/ (coeficientes, testes, normalidade, FIV e ANOVA)
+#        ./figuras_graficos/diag1, diag2 e diag5
 # =============================================================================
 
 if (!dir.exists("R") || !dir.exists("dados_processados")) {

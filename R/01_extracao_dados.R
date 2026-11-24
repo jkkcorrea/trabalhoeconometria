@@ -812,7 +812,7 @@ processar_rais_ano <- function(ano, cod_municipios) {
          paste(faltantes, collapse = ", "), ". Confira o código de 6 dígitos na coluna de município.")
   }
 
-  # Vínculos ativos por divisão CNAE 2.0, base do índice de Shannon da Etapa 2.
+  # Vínculos ativos por divisão CNAE 2.0, base do Gini setorial (X4) da Etapa 2.
   cnae_divisao <- ativos |>
     dplyr::count(id_municipio, divisao_cnae, name = "vinculos_ativos") |>
     dplyr::mutate(ano = as.integer(ano), .after = id_municipio) |>

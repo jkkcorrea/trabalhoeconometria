@@ -1,16 +1,16 @@
 # Catálogo do projeto
 
-Gerado por `_Trilha/ferramentas/gerar_catalogo.R` em 21/11/2026. Não edite à mão: rode o script de novo.
+Gerado por `_Trilha/ferramentas/gerar_catalogo.R` em 23/11/2026. Não edite à mão: rode o script de novo.
 
 Projeto: salário médio real formal nos 29 municípios da Região Metropolitana de Curitiba, 2012 a 2021 (290 observações), Econometria I, UFPR.
 
 ## Números do projeto
 
 - Scripts em `R/`: 9.
-- Figuras e animações em `envio_professor/figuras_graficos/`: 15 arquivos.
-- Arquivos em `envio_professor/resultados_econometricos/`: 56.
-- Decisões registradas em `_Trilha/DECISOES.md`: 39 (vigentes na última coluna: 35).
-- Pendências em `_Trilha/BACKLOG.md`: 3 abertas e 24 baixadas.
+- Figuras e animações em `envio_professor/figuras_graficos/`: 12 arquivos.
+- Arquivos em `envio_professor/resultados_econometricos/`: 21.
+- Decisões registradas em `_Trilha/DECISOES.md`: 55 (vigentes na última coluna: 47).
+- Pendências em `_Trilha/BACKLOG.md`: 15 abertas e 34 baixadas.
 
 ## Onde começar
 
@@ -24,11 +24,13 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `CATALOGO_DO_PROJETO.md` | 16 KB | Markdown: Catálogo do projeto |
-| `CLAUDE.md` | 17 KB | Markdown: CLAUDE.md do Trabalho de Econometria (núcleo do harness do projeto) |
+| `CATALOGO_DO_PROJETO.md` | 17 KB | Markdown: Catálogo do projeto |
+| `CLAUDE.md` | 18 KB | Markdown: CLAUDE.md do Trabalho de Econometria (núcleo do harness do projeto) |
 | `CONTRIBUIR.md` | 10 KB | Markdown: Como baixar e contribuir com o projeto |
+| `Gujarati_Basic_Econometrics.pdf` | 6.0 MB |  |
 | `R` | 4 KB |  |
 | `README.md` | 5 KB | Markdown: Salário médio real formal na Região Metropolitana de Curitiba, 2012 a 2021 |
+| `RESPOSTA_AO_PROFESSOR.txt` | 7 KB | Texto simples |
 | `SUMARIO_DO_PROJETO.md` | 4 KB | Markdown: Sumário do projeto |
 | `Trabalhos Referencias` | 4 KB |  |
 | `_Trilha` | 4 KB |  |
@@ -36,15 +38,20 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `dados_brutos` | 4 KB |  |
 | `dados_processados` | 4 KB |  |
 | `envio_professor` | 4 KB |  |
-| `envio_professor.zip` | 8.0 MB |  |
+| `envio_professor.zip` | 7.2 MB |  |
 | `figuras_graficos` | 4 KB |  |
+| `fontes` | 4 KB |  |
+| `hoffmann2006_cap17_desiguald.pdf` | 18.3 MB |  |
 | `instrucoes-claude-opus.md` | 8 KB | Markdown: INSTRUÇÕES DE SISTEMA E COMPORTAMENTO (SYSTEM PROMPT) — CLAUDE OPUS |
 | `instrucoes_ia` | 4 KB |  |
+| `pdfcoffee.com_328786889-econometria-basica-gujarati-pdfpdf-7-pdf-free.pdf` | 24.1 MB |  |
 | `prompt-1-extracao-apis.md` | 7 KB | Markdown: PROMPT 1: Extração Automatizada de Dados via APIs em R (Etapa 1 de 4) |
 | `prompt-2-tratamento-painel.md` | 6 KB | Markdown: CONTEXTO E DIRETRIZES GERAIS |
 | `prompt-3-aede-visualizacoes.md` | 7 KB | Markdown: CONTEXTO E DIRETRIZES DA ETAPA 3 |
 | `prompt-4-modelagem-diagnosticos.md` | 8 KB | Markdown: PROMPT 4: MODELAGEM ECONOMÉTRICA, BATERIA DE DIAGNÓSTICOS DO MCRL E INFERÊNCIA ROBUSTA (UFPR) |
 | `resultados_econometricos` | 4 KB |  |
+| `roteiro_powerpoint.docx` | 32 KB |  |
+| `se305_medidasdesigualdade_.pdf` | 464 KB |  |
 
 ## Scripts do projeto (`R/`, com comentários de processo)
 
@@ -52,13 +59,13 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 |---|---|---|
 | `00_executar_tudo.R` | 2 KB | Script R: Uso, a partir da raiz do projeto:  Rscript R/00_executar_tudo.R |
 | `01_extracao_dados.R` | 48 KB | Script R |
-| `02_tratamento_painel.R` | 30 KB | Script R: Etapa 2: tratamento dos dados brutos e construção do painel mestre |
-| `03_aede_visualizacoes.R` | 36 KB | Script R: Etapa 3: análise exploratória espacial e visualizações |
-| `04_modelagem_diagnosticos.R` | 57 KB | Script R: Etapa 4: modelagem econométrica, diagnósticos do MCRL e inferência robusta |
-| `05_robustez_mundlak.R` | 19 KB | Script R: Etapa 5: robustez da Etapa 4 (lista de alterações, itens B1, B2, B3 e C1) |
-| `06_calibracao_modelo.R` | 29 KB | Script R: Etapa 6: calibração do modelo |
-| `07_memorial_modelo_2.R` | 16 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
-| `08_fragilidades_modelo.R` | 32 KB | Script R: Etapa 8: tratamento das três fragilidades do modelo |
+| `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
+| `02_tratamento_painel.R` | 32 KB | Script R: Etapa 2: tratamento dos dados brutos e construção do painel mestre |
+| `03_aede_visualizacoes.R` | 38 KB | Script R: Etapa 3: análise exploratória espacial e visualizações |
+| `04_modelagem_diagnosticos.R` | 11 KB | Script R: Etapa 4: modelo principal (MQO empilhado) e diagnósticos ensinados |
+| `05_autocorrelacao_municipios.R` | 7 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
+| `06_especificacao_chow.R` | 13 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
+| `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Instruções para IA (`instrucoes_ia/`)
 
@@ -70,6 +77,7 @@ Prompts e regras para os colegas que usam IA. Não contêm texto do artigo.
 | `PROMPT_ARTIGO.md` | 8 KB | Markdown: Prompt para construir o artigo, seção por seção |
 | `PROMPT_SLIDES.md` | 6 KB | Markdown: Prompt para construir a apresentação de slides |
 | `VERIFICACAO_CONTEUDO.md` | 4 KB | Markdown: Verificação: o texto bate com o código? |
+| `roteiro_powerpoint.md` | 9 KB | Markdown |
 
 ## Skills (`.claude/skills/`)
 
@@ -82,9 +90,9 @@ Cada skill é uma pasta com `SKILL.md`.
 | `economia-de-tokens/SKILL.md` | 2 KB | Markdown: Economia de tokens |
 | `escrita-cientifica/SKILL.md` | 3 KB | Markdown: Boas práticas de escrita científica (artigo de Econometria) |
 | `estrutura-artigo-ufpr/SKILL.md` | 4 KB | Markdown: Estrutura de artigo de periódico no padrão UFPR |
-| `formatacao-abnt/SKILL.md` | 6 KB | Markdown: Formatação ABNT para o artigo |
+| `formatacao-abnt/SKILL.md` | 7 KB | Markdown: Formatação ABNT para o artigo |
 | `maximizacao-de-contexto/SKILL.md` | 2 KB | Markdown: Maximizar o contexto útil |
-| `professor-econometria/SKILL.md` | 5 KB | Markdown: Correção do trabalho como professor de Econometria I |
+| `professor-econometria/SKILL.md` | 4 KB | Markdown: Correção do trabalho como professor de Econometria I |
 | `storytelling-graficos/SKILL.md` | 6 KB | Markdown: Storytelling com gráficos estatísticos (orientado à leitura humana) |
 | `sumario-do-projeto/SKILL.md` | 2 KB | Markdown: Sumário e catálogo do projeto |
 
@@ -102,10 +110,10 @@ Cada skill é uma pasta com `SKILL.md`.
 |---|---|---|
 | `conferir_numeros.R` | 4 KB | Script R: Uso (na raiz do projeto): Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md |
 | `gerar_catalogo.R` | 6 KB | Script R: Gera CATALOGO_DO_PROJETO.md a partir do conteúdo real das pastas. |
-| `gerar_documentacao.R` | 65 KB | Script R: Gera a documentação da pasta de envio a partir dos arquivos de resultado. |
-| `limpar_comentarios.R` | 9 KB | Script R |
+| `gerar_documentacao.R` | 23 KB | Script R: Gera envio_professor/documentacao/ e envio_professor/LEIAME.md a partir dos resultados do modelo principal. |
+| `limpar_comentarios.R` | 8 KB | Script R |
 | `reconstruir_envio.sh` | 2 KB | Script de shell |
-| `verificar_envio.R` | 30 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
+| `verificar_envio.R` | 17 KB | Script R: Uso (raiz do projeto): Rscript _Trilha/ferramentas/verificar_envio.R |
 
 ## Trilha de decisões e handoffs (`_Trilha/`)
 
@@ -124,117 +132,79 @@ Gerada; não editar à mão.
 |---|---|---|
 | `00_executar_tudo.R` | 2 KB | Script R: Uso, a partir da raiz do projeto:  Rscript R/00_executar_tudo.R |
 | `01_extracao_dados.R` | 36 KB | Script R |
-| `02_tratamento_painel.R` | 28 KB | Script R |
-| `03_aede_visualizacoes.R` | 33 KB | Script R |
-| `04_modelagem_diagnosticos.R` | 48 KB | Script R |
-| `05_robustez_mundlak.R` | 18 KB | Script R |
-| `06_calibracao_modelo.R` | 29 KB | Script R: Etapa 6: calibração do modelo |
+| `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
+| `02_tratamento_painel.R` | 29 KB | Script R |
+| `03_aede_visualizacoes.R` | 34 KB | Script R |
+| `04_modelagem_diagnosticos.R` | 11 KB | Script R |
+| `05_autocorrelacao_municipios.R` | 6 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
+| `06_especificacao_chow.R` | 13 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
 | `07_memorial_modelo_2.R` | 16 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
-| `08_fragilidades_modelo.R` | 32 KB | Script R: Etapa 8: tratamento das três fragilidades do modelo |
 
 ## Pasta de envio: dados processados
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `dados_painel_rmc.csv` | 82 KB | CSV, 290 linhas x 23 colunas: id_municipio, nome_municipio, ano, salario_medio_nominal, salario_medio_real, ln_salario_real, prop_superior, dom_industrial, … |
-| `dados_painel_rmc.rds` | 22 KB | Objeto R serializado (.rds) |
-| `estatisticas_descritivas.csv` | 948 B | CSV, 8 linhas x 7 colunas: variavel, n, media, desvio_padrao, mediana, minimo, maximo |
-| `matriz_correlacao_explicativas.csv` | 595 B | CSV, 5 linhas x 6 colunas: variavel, prop_superior, dom_industrial, shannon_diversificacao, selic_real, dist_curitiba_km |
+| `dados_painel_rmc.csv` | 83 KB | CSV, 290 linhas x 23 colunas: id_municipio, nome_municipio, ano, salario_medio_nominal, salario_medio_real, ln_salario_real, prop_superior, dom_industrial, … |
+| `dados_painel_rmc.rds` | 23 KB | Objeto R serializado (.rds) |
+| `estatisticas_descritivas.csv` | 821 B | CSV, 7 linhas x 7 colunas: variavel, n, media, desvio_padrao, mediana, minimo, maximo |
+| `matriz_correlacao_explicativas.csv` | 577 B | CSV, 5 linhas x 6 colunas: variavel, prop_superior, dom_industrial, gini_setorial, selic_real, dist_curitiba_km |
 
 ## Pasta de envio: resultados econométricos
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `calibracao_autocorrelacao.csv` | 219 B | CSV, 3 linhas x 3 colunas: modelo, rho_residuos_mesmo_municipio, d_aproximado |
-| `calibracao_bootstrap_wild_cluster.csv` | 1 KB | CSV, 17 linhas x 5 colunas: estimador, termo, estatistica_t, p_bootstrap, replicas |
-| `calibracao_coeficientes.csv` | 7 KB | CSV, 33 linhas x 11 colunas: estimador, termo, estimativa, erro_padrao, estatistica_t, p_valor, ic_inf_95, ic_sup_95, … |
-| `calibracao_goldfeld_quandt.csv` | 445 B | CSV, 3 linhas x 8 colunas: teste, ordenado_por, hipotese_nula, estatistica_f, gl_numerador, gl_denominador, p_valor, p_valor_bilateral |
-| `calibracao_influencia.csv` | 28 KB | CSV, 290 linhas x 8 colunas: id_municipio, nome_municipio, ano, cook, alavancagem, max_dfbetas, cook_acima_4_sobre_n, dfbetas_acima_2_sobre_raiz_n |
-| `calibracao_reset.csv` | 329 B | CSV, 3 linhas x 6 colunas: modelo, estatistica_f, gl1, gl2, p_valor, r2_ajustado |
-| `calibracao_selic_agrupada_por_ano.csv` | 767 B | CSV, 3 linhas x 11 colunas: estimador, termo, estimativa, erro_padrao, estatistica_t, p_valor, ic_inf_95, ic_sup_95, … |
-| `calibracao_testes_painel.csv` | 1001 B | CSV, 7 linhas x 5 colunas: teste, hipotese_nula, estatistica, graus_liberdade, p_valor |
-| `calibracao_variancia_tamanho.csv` | 214 B | CSV, 1 linhas x 6 colunas: modelo, correlacao, inclinacao, estatistica_t, p_valor, leitura |
-| `coeficientes_cinco_matrizes.csv` | 13 KB | CSV, 105 linhas x 7 colunas: modelo, matriz, termo, estimativa, erro_padrao, estatistica_t, p_valor |
-| `diagnosticos_modelo_2.csv` | 2 KB | CSV, 17 linhas x 9 colunas: modelo, bloco, teste, hipotese_nula, estatistica, nome_estatistica, graus_liberdade, p_valor, … |
-| `fiv_modelos_2_3_3b.csv` | 1 KB | CSV, 18 linhas x 5 colunas: modelo, termo, fiv, tolerancia, severa |
-| `fragilidades_box_cox.csv` | 403 B | CSV, 2 linhas x 8 colunas: modelo, lambda_estimado, ic95_inf, ic95_sup, lr_logaritmo, p_logaritmo, lr_nivel, p_nivel |
-| `fragilidades_exogeneidade_coeficientes.csv` | 2 KB | CSV, 11 linhas x 7 colunas: modelo, termo, estimativa, erro_padrao, estatistica_t, p_valor, n |
-| `fragilidades_exogeneidade_teste.csv` | 175 B | CSV, 1 linhas x 5 colunas: teste, estatistica_f, gl_numerador, gl_denominador, p_valor |
-| `fragilidades_fe_quadratico_coeficientes.csv` | 706 B | CSV, 7 linhas x 5 colunas: termo, estimativa, erro_padrao, estatistica_t, p_valor |
-| `fragilidades_fe_quadratico_efeitos_marginais.csv` | 713 B | CSV, 3 linhas x 10 colunas: termo, media_do_regressor, efeito_marginal_medio, erro_padrao, estatistica_t, p_valor, vertice_da_parabola, minimo_observado, … |
-| `fragilidades_fe_quadratico_teste_conjunto.csv` | 157 B | CSV, 1 linhas x 5 colunas: teste, estatistica_f, gl_numerador, gl_denominador, p_valor |
-| `fragilidades_forma_funcional.csv` | 909 B | CSV, 4 linhas x 10 colunas: especificacao, r2_ajustado, aic, bic, reset_regressores_f, reset_regressores_gl, reset_regressores_p, reset_ajustados_f, … |
-| `fragilidades_influencia_sensibilidade.csv` | 7 KB | CSV, 45 linhas x 10 colunas: cenario, observacoes_excluidas, n, municipios, modelo, termo, estimativa, erro_padrao, … |
-| `fragilidades_quebra_curitiba.csv` | 271 B | CSV, 1 linhas x 6 colunas: teste, estatistica_f, gl_numerador, gl_denominador, p_valor, observacao |
-| `fragilidades_reset_modelos_3_3b.csv` | 334 B | CSV, 2 linhas x 7 colunas: modelo, reset_regressores_f, reset_regressores_gl, reset_regressores_p, reset_ajustados_f, reset_ajustados_gl, reset_ajustados_p |
-| `fragilidades_selic_bootstrap_exato_por_ano.csv` | 178 B | CSV, 2 linhas x 4 colunas: modelo, estatistica_t_por_ano, p_bootstrap_exato, combinacoes |
-| `fragilidades_selic_bootstrap_webb.csv` | 220 B | CSV, 2 linhas x 5 colunas: modelo, estatistica_t_por_ano, p_bootstrap_webb, replicas, semente |
-| `fragilidades_selic_decomposicao.csv` | 1 KB | CSV, 5 linhas x 8 colunas: modelo, termo, estimativa, erro_padrao, estatistica_t, p_valor, erro_padrao_por_ano, p_valor_por_ano |
-| `fragilidades_selic_decomposicao_teste_fisher.csv` | 389 B | CSV, 2 linhas x 5 colunas: teste, agrupamento, soma_dos_coeficientes, estatistica_f, p_valor |
-| `fragilidades_selic_sensibilidade.csv` | 2 KB | CSV, 15 linhas x 7 colunas: cenario, n, estimativa, erro_padrao, estatistica_t, p_valor, graus_liberdade |
-| `fragilidades_simulacao_efeitos_fixos.csv` | 982 B | CSV, 6 linhas x 11 colunas: cenario, modelo, municipios, delta_pontos, variacao_pct, ic_inf_pct, ic_sup_pct, minimo_pct, … |
-| `memorial_modelo_2.txt` | 10 KB | Texto simples |
+| `anova_f_modelo.csv` | 178 B | CSV, 1 linhas x 7 colunas: modelo, estatistica_f, gl_numerador, gl_denominador, p_valor, r2, r2_ajustado |
+| `autocorrelacao_por_municipio.csv` | 10 KB | CSV, 29 linhas x 13 colunas: id_municipio, nome_municipio, n, durbin_watson, decisao_dw_tabela, rho_auxiliar, breusch_godfrey_estatistica, breusch_godfrey_gl, … |
+| `autocorrelacao_resumo.csv` | 162 B | CSV, 1 linhas x 8 colunas: municipios, durbin_watson_mediano, rho_auxiliar_mediano, dw_positiva, dw_inconclusiva, dw_nao_rejeita, dw_negativa, breusch_godfrey_rejeita |
+| `chow_quebra_periodo.csv` | 721 B | CSV, 2 linhas x 12 colunas: modelo, corte, teste, hipotese_nula, hipotese_alternativa, n1, n2, k, … |
+| `coeficientes_modelos.csv` | 2 KB | CSV, 12 linhas x 10 colunas: modelo, matriz, termo, estimativa, erro_padrao, estatistica_t, p_valor, ic_inf_95, … |
+| `efeito_selic_m2.csv` | 275 B | CSV, 1 linhas x 9 colunas: termo, efeito_ln_por_pp, efeito_percentual_por_pp, ic95_inf_ln, ic95_sup_ln, gl, p_valor, fator_correcao_vies, … |
+| `especificacao_lm_tendencia.csv` | 334 B | CSV, 1 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct |
+| `especificacao_reset.csv` | 353 B | CSV, 1 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica_f, gl, p_valor, decisao_5pct |
+| `medida_gini_checagem.csv` | 145 B | CSV, 3 linhas x 2 colunas: indicador, valor |
+| `memorial_modelo_2.txt` | 11 KB | Texto simples |
 | `memorial_modelo_2_anova.csv` | 299 B | CSV, 3 linhas x 7 colunas: fonte, graus_liberdade, soma_quadrados, quadrado_medio, estatistica_f, F_critico_5pct, p_valor |
-| `memorial_modelo_2_coeficientes.csv` | 982 B | CSV, 6 linhas x 8 colunas: termo, estimativa, erro_padrao_classico, estatistica_t, p_valor, ic_inf_95, ic_sup_95, graus_liberdade |
-| `memorial_modelo_2_determinacao_parcial.csv` | 786 B | CSV, 5 linhas x 4 colunas: variavel, estatistica_t, r2_parcial, leitura |
-| `memorial_modelo_2_f_incremental.csv` | 626 B | CSV, 4 linhas x 8 colunas: bloco, restricoes, SQR_restrito, SQR_irrestrito, estatistica_f, F_critico_5pct, p_valor, decisao |
-| `memorial_modelo_2_fiv.csv` | 593 B | CSV, 5 linhas x 5 colunas: variavel, R2_auxiliar, tolerancia, fiv, decisao |
+| `memorial_modelo_2_coeficientes.csv` | 1000 B | CSV, 6 linhas x 8 colunas: termo, estimativa, erro_padrao_classico, estatistica_t, p_valor, ic_inf_95, ic_sup_95, graus_liberdade |
+| `memorial_modelo_2_determinacao_parcial.csv` | 802 B | CSV, 5 linhas x 4 colunas: variavel, estatistica_t, r2_parcial, leitura |
+| `memorial_modelo_2_f_incremental.csv` | 628 B | CSV, 4 linhas x 8 colunas: bloco, restricoes, SQR_restrito, SQR_irrestrito, estatistica_f, F_critico_5pct, p_valor, decisao |
+| `memorial_modelo_2_fiv.csv` | 613 B | CSV, 5 linhas x 5 colunas: variavel, R2_auxiliar, tolerancia, fiv, decisao |
 | `memorial_modelo_2_previsao.csv` | 323 B | CSV, 2 linhas x 6 colunas: cenario, ln_previsto, ic_media_inf, ic_media_sup, ic_individual_inf, ic_individual_sup |
-| `modelos_e_testes.rds` | 142 KB | Objeto R serializado (.rds) |
-| `robustez_adicional_coeficientes.csv` | 2 KB | CSV, 15 linhas x 6 colunas: modelo, termo, estimativa, erro_padrao, p_valor, fiv_ajustado |
-| `robustez_adicional_resumo.csv` | 226 B | CSV, 3 linhas x 4 colunas: modelo, n, r2, reset_p |
-| `robustez_modelo_2_sem_x3_negativo.csv` | 2 KB | CSV, 6 linhas x 12 colunas: termo, coef_completo, ep_classico_completo, p_classico_completo, ep_agrupado_completo, p_agrupado_completo, coef_sem_x3neg, ep_classico_sem_x3neg, … |
-| `robustez_mundlak_autocorrelacao_painel.csv` | 186 B | CSV, 1 linhas x 5 colunas: teste, estatistica, gl, p_valor, observacao |
-| `robustez_mundlak_coeficientes.csv` | 2 KB | CSV, 15 linhas x 8 colunas: modelo, termo, estimativa, erro_padrao, estatistica_t, p_valor, ic_inf_95, ic_sup_95 |
-| `robustez_mundlak_tabela.txt` | 3 KB | Texto simples |
-| `robustez_mundlak_teste_mundlak.csv` | 185 B | CSV, 1 linhas x 6 colunas: hipotese, matriz, estatistica_f, gl_numerador, gl_denominador, p_valor |
-| `selic_p_valor_conservador.csv` | 229 B | CSV, 1 linhas x 8 colunas: modelo, termo, matriz, graus_liberdade, estimativa, erro_padrao, estatistica_t, p_valor |
-| `simulacao_cenarios_renda.csv` | 13 KB | CSV, 31 linhas x 24 colunas: cenario, id_municipio, nome_municipio, ano_base, variavel_choque, delta_pontos, valor_antes, valor_depois, … |
-| `tabela_comparativa_modelos.html` | 21 KB | Tabela HTML |
-| `tabela_comparativa_modelos.txt` | 10 KB | Texto simples |
-| `tabela_modelo_2_cinco_matrizes.html` | 19 KB | Tabela HTML |
-| `tabela_modelo_2_cinco_matrizes.txt` | 8 KB | Texto simples |
-| `tabela_modelo_3_cinco_matrizes.html` | 20 KB | Tabela HTML |
-| `tabela_modelo_3_cinco_matrizes.txt` | 10 KB | Texto simples |
-| `tabela_modelo_3b_cinco_matrizes.html` | 21 KB | Tabela HTML |
-| `tabela_modelo_3b_cinco_matrizes.txt` | 11 KB | Texto simples |
-| `tabela_robustez_modelo_2.html` | 17 KB | Tabela HTML |
-| `tabela_robustez_modelo_2.txt` | 7 KB | Texto simples |
-| `teste_f_global_robusto.csv` | 2 KB | CSV, 15 linhas x 7 colunas: modelo, matriz, hipotese, estatistica_f, gl_numerador, gl_denominador, p_valor |
+| `normalidade_residuos.csv` | 336 B | CSV, 1 linhas x 10 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct, … |
+| `projecao_selic_m2.csv` | 16 KB | CSV, 87 linhas x 11 colunas: cenario, selic, id_municipio, nome_municipio, ln_previsto, salario_previsto_sem_correcao, salario_previsto_corrigido, ic_media_inf_ln, … |
+| `robustez_x4_definicao_gini.csv` | 372 B | CSV, 2 linhas x 7 colunas: modelo, definicao_x4, coef_x4, p_valor_x4, r2_ajustado, aic, reset_p |
+| `testes_diagnostico.csv` | 665 B | CSV, 2 linhas x 8 colunas: modelo, teste, hipotese_nula, hipotese_alternativa, estatistica, gl, p_valor, decisao_5pct |
+| `vif_tolerancia.csv` | 535 B | CSV, 5 linhas x 5 colunas: modelo, variavel, fiv, tolerancia, decisao_fiv_10 |
 
 ## Pasta de envio: figuras e animações
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `animacao1_mapa_renda_rmc.gif` | 906 KB | Animação GIF |
+| `animacao1_mapa_renda_rmc.gif` | 1.1 MB | Animação GIF |
 | `animacao2_ranking_salario_municipios.gif` | 3.0 MB | Animação GIF |
-| `calibracao_coeficientes_estimadores.png` | 344 KB | Figura PNG |
-| `diag1_residuos_padronizados_vs_ajustados.png` | 284 KB | Figura PNG |
-| `diag2_acf_residuos.png` | 131 KB | Figura PNG |
-| `diag3_densidade_residuos.png` | 151 KB | Figura PNG |
-| `diag4_qqplot_residuos.png` | 183 KB | Figura PNG |
-| `fig1_matriz_correlacao.png` | 268 KB | Figura PNG |
+| `diag1_residuos_vs_ajustados.png` | 137 KB | Figura PNG |
+| `diag2_residuos_por_municipio.png` | 122 KB | Figura PNG |
+| `diag3_residuos_defasados.png` | 118 KB | Figura PNG |
+| `diag5_normalidade_qq.png` | 98 KB | Figura PNG |
+| `diag6_variaveis_no_tempo.png` | 171 KB | Figura PNG |
+| `fig1_matriz_correlacao.png` | 271 KB | Figura PNG |
 | `fig2_ridgeplot_salario_anos.png` | 437 KB | Figura PNG |
-| `fig3_dispersao_capital_humano_industria.png` | 616 KB | Figura PNG |
-| `fragilidades_efeito_marginal_superior.png` | 184 KB | Figura PNG |
+| `fig3_dispersao_capital_humano_industria.png` | 615 KB | Figura PNG |
 | `legenda_municipios_rmc.png` | 177 KB | Figura PNG |
 | `mapa1_painel_espacial_rmc.png` | 1.2 MB | Figura PNG |
-| `robustez_mundlak_coeficientes.png` | 76 KB | Figura PNG |
-| `robustez_mundlak_dw_por_municipio.png` | 40 KB | Figura PNG |
 
 ## Pasta de envio: documentação validada
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `00_resumo.md` | 3 KB | Markdown: Resumo dos resultados validados |
-| `01_dados_e_variaveis.md` | 7 KB | Markdown: Dados e variáveis |
-| `02_especificacao_e_metodos.md` | 7 KB | Markdown: Especificação e métodos |
-| `03_resultados_modelos_classicos.md` | 14 KB | Markdown: Resultados dos modelos clássicos (script 04 e memorial do script 07) |
-| `04_calibracao.md` | 14 KB | Markdown: Calibração do modelo (scripts 05 e 06) |
-| `05_fragilidades.md` | 14 KB | Markdown: Tratamento das três fragilidades (script 08) |
-| `06_limitacoes.md` | 6 KB | Markdown: Limitações e ressalvas |
-| `07_criterios_da_disciplina.md` | 2 KB | Markdown: Critérios da disciplina e onde estão atendidos |
-| `08_verificacao.md` | 7 KB | Markdown: Registro de verificação |
-| `ambiente_r.csv` | 464 B | CSV, 25 linhas x 2 colunas: componente, versao |
-| `dicionario_variaveis.csv` | 2 KB | CSV, 10 linhas x 5 colunas: Símbolo, Nome no painel, Definição, Fonte, Varia em |
+| `00_resumo.md` | 3 KB | Markdown: Resumo |
+| `01_dados_e_variaveis.md` | 2 KB | Markdown: Dados e variáveis |
+| `02_especificacao_e_metodos.md` | 3 KB | Markdown: Especificação e métodos |
+| `03_resultados_modelos.md` | 2 KB | Markdown: Resultados do modelo principal |
+| `04_diagnosticos.md` | 4 KB | Markdown: Diagnósticos do modelo principal |
+| `05_limitacoes.md` | 1 KB | Markdown: Limitações |
+| `06_fontes.md` | 1016 B | Markdown: Fontes e referências |
+| `07_criterios_da_disciplina.md` | 575 B | Markdown: Critérios de correção |
+| `08_verificacao.md` | 3 KB | Markdown: Verificação do envio |
+| `ambiente_r.csv` | 154 B | CSV, 3 linhas x 2 colunas: item, valor |
+| `dicionario_variaveis.csv` | 1 KB | CSV, 23 linhas x 2 colunas: variavel, descricao |
 

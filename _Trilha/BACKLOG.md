@@ -96,9 +96,10 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 
 Concluídos pela sessão: escopo ajustado à orientação do professor (D-2026-11-23-01); painel sem dummies; modelo principal MQO empilhado; Durbin-Watson e Breusch-Godfrey por município; Shapiro-Wilk e Q-Q; Chow pelo gráfico; projeção com correção de viés; documentação, README e verificação (22 de 22); Hoffmann cap. 17 conferido (D-2026-11-23-03); testes t e F recalculados.
 
-- [ ] **P1. Recorte temporal** (D-2026-11-23-02). Escolher entre 2012 a 2021 (atual), 2016 a 2025 com X3 trocada por emprego industrial, ou 2016 a 2021. A escolha afeta modelo, texto e números.
-- [ ] **P2. Gini (X4).** Definição final após as aulas sobre o índice. Hoje: 87 divisões, com zeros. Verificação: só divisões com vínculo (p = 0,001).
+- [x] 23/11/2026 **P1. Recorte temporal** (D-2026-11-23-02): mantido em 2012 a 2021; pontos de mudança em `REGISTRO_RECORTE_TEMPORAL.md`. Escolher entre 2012 a 2021 (atual), 2016 a 2025 com X3 trocada por emprego industrial, ou 2016 a 2021. A escolha afeta modelo, texto e números.
+- [x] 23/11/2026 **P2. Gini (X4)** (D-2026-11-23-04): fechado conforme a aula e Hoffmann (2006, cap. 17). Definição: 87 divisões CNAE, zeros incluídos. Verificação complementar: só divisões com vínculo.
 - [ ] **P3. Resposta do professor** sobre o tratamento da forma funcional (RESET rejeita) e da normalidade (Shapiro-Wilk rejeita), se ele orientar.
 - [ ] **P4. CLAUDE.md** (seções 6 e 13 mencionam Mundlak, Prais-Winsten e Etapas 05 e 06 antigas). Atualizar só com pedido do pesquisador, por ser arquivo de instruções.
 - [ ] **P5. Causa do salto industrial em Adrianópolis (2015).** Não é bloqueante: o valor é o publicado pelo IBGE; a causa não está documentada.
 - [ ] **P6. Edição do Gujarati.** Usamos só a 4ª edição (2004). Páginas da 5ª edição ficam como referência não conferida.
+- [ ] **Q. Conferência manual de números da resposta.** A conferência automática (`conferir_numeros.R`) não encontra em CSV: mediana de 47,5 divisões com vínculo (calculada da RAIS), R$ 67,8 milhões (painel, `vab_industria` = 67.762 mil reais) e R$ -560,8 e -246,4 milhões (painel, em mil reais convertido para milhões). Conferidos manualmente nesta data.

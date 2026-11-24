@@ -3,7 +3,6 @@
 # Trabalho de Econometria I (UFPR).
 #
 # Modelo principal (Modelo 2): ln(salário real) = b0 + b1 X2 + b2 X3 + b3 X4 + b4 X5 + b5 X6 + u.
-# Sem dummies de município e sem métodos de dados em painel (orientação do professor).
 #
 # Diagnósticos (Gujarati, 4ª ed.; slides da aula):
 #   - multicolinearidade: FIV e tolerância, regra FIV > 10 (Gujarati, cap. 10);

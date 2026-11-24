@@ -22,11 +22,11 @@ Nunca use como fonte: memória do modelo, número de conversa anterior, rascunho
 - [ ] Arredondamento e casas decimais seguem a fonte (quatro casas para coeficientes, como no memorial).
 - [ ] Unidade e escala corretas: X2 e X3 em pontos percentuais (0 a 100), X5 em % a.a., X6 em km, Y em reais de 2021; o coeficiente é de ln(Y), então não é variação em reais.
 - [ ] N correto: 29 municípios, 10 anos, 290 observações (ou o N do modelo em questão, por exemplo sem as observações de `x3_negativo`).
-- [ ] p-valor atribuído à matriz de variância certa (clássica, HC1, Newey-West, agrupada por município, agrupada por município e ano, bootstrap). Dizer qual.
+- [ ] p-valor atribuído à matriz de variância certa (clássica ou HC1). Dizer qual.
 
 **B. Modelo e variáveis**
 - [ ] Nome e definição das variáveis iguais às de `documentacao/01_dados_e_variaveis.md` e `dicionario_variaveis.csv`.
-- [ ] O modelo citado é o certo (Modelo 1, 2, 3, 3b, 3c, 4; efeitos fixos; Mundlak). O que está estimado por MQO empilhado não é chamado de efeitos fixos.
+- [ ] O modelo citado é o principal (MQO empilhado, Modelo 2, com erro de White). Não há outros modelos no trabalho.
 - [ ] Equação escrita igual à de `documentacao/02_especificacao_e_metodos.md`.
 
 **C. Afirmações**

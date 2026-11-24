@@ -1,68 +1,55 @@
 # Sumário do projeto
 
-Atualizado em 21/11/2026. Uma página para entender o projeto. Detalhes: `CATALOGO_DO_PROJETO.md`. Regras para IA: `instrucoes_ia/LEIA_PRIMEIRO.md`.
+Atualizado em 23/11/2026. Números vindos de `envio_professor/documentacao/00_resumo.md`.
 
 ## Pergunta e dados
+Salário médio real formal (ln) de 29 municípios da RMC, 2012 a 2021: 290 observações (painel balanceado, empilhado).
+Regressores: X2 escolaridade (superior completo, %), X3 industrialização (VAB da indústria / VAB total, %), X4 Gini setorial (vínculos entre 87 divisões CNAE, zeros incluídos), X5 Selic real (% a.a.), X6 distância a Curitiba (km).
+Recorte temporal: 2012 a 2021, mantido. Registro de mudanças possíveis: `_Trilha/REGISTRO_RECORTE_TEMPORAL.md`.
 
-Salário médio real formal nos 29 municípios da Região Metropolitana de Curitiba (RMC), 2012 a 2021, painel de 290 observações. Trabalho de Econometria I, UFPR. A pergunta de pesquisa e a teoria são do pesquisador `[PESQUISADOR: definir]`.
+## Modelo principal
+MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variáveis binárias de município e sem métodos de painel (orientação do professor, D-2026-11-23-01).
 
-Fontes: SIDRA/IBGE (PIB e valor adicionado), Banco Central (Selic, série 4390; IPCA, série 433), RAIS (microdados do Ministério do Trabalho), malha municipal do IBGE (`geobr`).
+## Resultados-chave (erro de White)
+- X2: +0,0150 (p < 0,0001). X3: +0,0055 (p < 0,0001). X4: −0,6548 (p = 0,0001). X5: +0,0065 (p = 0,0003). X6: −0,0016 (p = 0,0033).
+- R² ajustado 0,6433; F geral 105,26 (gl 5 e 284).
+- Diagnósticos: FIV máximo 2,33; Breusch-Pagan rejeita a homocedasticidade (p = 0,0363); RESET rejeita a forma linear (p < 0,0001); Shapiro-Wilk rejeita a normalidade (p < 0,0001); Durbin-Watson rejeita a ausência de autocorrelação positiva em 14 de 29 municípios; Chow não mostra quebra (corte em 2017, p = 0,146).
+- Projeção de 2021 (previsão dentro da amostra), com correção de viés exp(s²/2) = 1,0075.
 
-## Modelo
-
-ln(Y) = β1 + β2·X2 + β3·X3 + β4·X4 + β5·X5 + β6·X6 + u
-
-| Variável | O que mede | Unidade |
-|---|---|---|
-| Y | salário médio real formal | R$ de 2021 (modelo em logaritmo) |
-| X2 | vínculos com ensino superior completo | % (0 a 100) |
-| X3 | dominância industrial (VAB da indústria / VAB total) | % |
-| X4 | diversificação setorial (entropia de Shannon na CNAE) | índice |
-| X5 | Selic real anual (equação de Fisher) | % a.a. |
-| X6 | distância do município ao centro de Curitiba | km |
-
-Linha de base: MQO empilhado (Modelo 2). Referência para X2, X3 e X4: efeitos fixos/Mundlak, por presunção da sessão de 21/11/2026 (D-2026-11-21-20), **a confirmar pelo pesquisador**.
-
-## Resultados-chave (fonte: `envio_professor/documentacao/00_resumo.md`)
-
-- MQO empilhado, erro agrupado por município: X2 = 0,0159; X3 = 0,0054; X4 = 0,0762 (p = 0,1541); X5 = 0,0066; X6 = −0,0016 (p = 0,3394).
-- Com efeitos de município: X2 = 0,0086; X3 deixa de ser significativo (−0,0005).
-- O efeito de município é significativo (F = 75,8928) e o MQO empilhado é rejeitado nos testes de Hausman e Mundlak.
-- Selic real: p-valor de 0,0005 a 0,0547, conforme o procedimento de inferência (resultado na fronteira de 5%).
-- O Modelo 2 viola homocedasticidade, ausência de autocorrelação, normalidade e forma funcional; a inferência usa erros robustos e agrupados.
-- Resultados são associações; limites em `envio_professor/documentacao/06_limitacoes.md`.
-
-## Estrutura
-
-| Pasta ou arquivo | Função |
+## Estrutura do projeto
+| O que | Onde |
 |---|---|
-| `R/` | scripts 00 a 08 (com comentários de processo) |
-| `envio_professor/` | pasta de entrega, gerada; scripts sem comentários, dados, resultados, figuras, documentação |
-| `envio_professor/documentacao/` | números, métodos e limitações validados (base para o artigo) |
-| `instrucoes_ia/` | prompts do artigo e dos slides, regras e verificação de conteúdo |
-| `.claude/skills/`, `.claude/agents/` | skills e agentes para IA |
-| `_Trilha/` | decisões, pendências, handoffs e ferramentas |
-| `artigo/`, `apresentacao/` | produção dos colegas (criadas quando necessário) |
+| Resumo para o professor (envio) | `envio_professor/documentacao/00_resumo.md` |
+| Resposta ao professor (rascunho para envio) | `RESPOSTA_AO_PROFESSOR.txt` |
+| Pasta de envio (gerada, não editar à mão) | `envio_professor/` (zip: `envio_professor.zip`) |
+| Scripts de análise (fonte) | `R/00_executar_tudo.R` a `R/07_memorial_modelo_2.R` |
+| Dados brutos (cache das APIs e da RAIS) | `dados_brutos/` |
+| Painel e estatísticas | `dados_processados/` |
+| Resultados (CSV) | `resultados_econometricos/` |
+| Figuras | `figuras_graficos/` |
+| Documentação gerada e verificação | `envio_professor/documentacao/` (gerador: `_Trilha/ferramentas/gerar_documentacao.R`) |
+| Verificação independente | `_Trilha/ferramentas/verificar_envio.R` (resultado em `envio_professor/documentacao/08_verificacao.md`) |
+| Decisões do pesquisador | `_Trilha/DECISOES.md` |
+| Pendências | `_Trilha/BACKLOG.md` |
+| Registro de mudanças do recorte | `_Trilha/REGISTRO_RECORTE_TEMPORAL.md` |
+| Fontes, referências e páginas | `fontes/` (`PAGINAS_DE_REFERENCIA.md`, `VERIFICACAO_CORRECOES.md`, `VERIFICACAO_EDICOES.md`, `OFICIAL_FONTES_DA_DISCIPLINA.md`) |
+| Avaliações internas como professor | `_Trilha/AVALIACAO_PROFESSOR_*.md` (histórico) |
+| Regras do projeto para sessões de IA | `CLAUDE.md` |
+| Catálogo de arquivos (gerado) | `CATALOGO_DO_PROJETO.md` (gerador: `_Trilha/ferramentas/gerar_catalogo.R`) |
+| Roteiros para o artigo e os slides | `instrucoes_ia/` |
+| Arquivos de instruções originais (não editar sem pedido) | `prompt-*.md`, `instrucoes-claude-opus.md`, `roteiro_powerpoint.docx` |
 
-## Como rodar
+## Como reproduzir
+1. `Rscript R/00_executar_tudo.R` (a partir da raiz) roda os scripts 02 a 07.
+2. Entrega completa: `bash _Trilha/ferramentas/reconstruir_envio.sh` (limpa, roda, gera documentação, verifica e gera o zip). A verificação atual passa em 22 de 22.
 
-```
-Rscript R/00_executar_tudo.R                       # scripts 02 a 08
-bash _Trilha/ferramentas/reconstruir_envio.sh      # refaz envio_professor/ e verifica (49 verificações)
-Rscript _Trilha/ferramentas/gerar_catalogo.R       # atualiza o catálogo
-Rscript _Trilha/ferramentas/conferir_numeros.R rascunho.md   # confere números de um texto
-```
+## Pendências (ver `_Trilha/BACKLOG.md`)
+- Recorte temporal: mantido em 2012 a 2021; mudanças registradas no arquivo de registro.
+- Tratamento da forma funcional (RESET) e da normalidade (Shapiro-Wilk), se o professor orientar.
+- Causa do salto industrial de Adrianópolis em 2015 (não documentada na fonte).
+- `CLAUDE.md` seções 6 e 13 ainda descrevem a versão anterior; atualizar só com pedido do pesquisador.
 
-Os dados brutos não vão para o repositório (`.gitignore`); veja `CONTRIBUIR.md`, seção 3.
-
-## Regras em uma linha cada
-
-1. Número só entra se estiver em `envio_professor/`.
-2. O código manda; o texto se corrige.
-3. Interpretação, sinais esperados e referências são do pesquisador; sem fonte, `[a confirmar]`.
-4. `envio_professor/` não se edita à mão.
-5. Ao terminar, envie ao repositório: branch próprio, `git push` e pull request (`CONTRIBUIR.md`). Nada de push direto na `main` nem de `--force`.
-
-## Pendências abertas (ver `_Trilha/BACKLOG.md`)
-
-Sinais esperados (cabe ao pesquisador); confirmação do modelo de referência (D-2026-11-21-20); texto do artigo e slides.
+## Regras
+- Dados brutos e cache não são apagados. Resultados obsoletos vão para `backup_antes_alteracoes/`.
+- Livros e PDFs de terceiros não entram no repositório.
+- Decisões ficam em `_Trilha/DECISOES.md` com identificador `D-AAAA-MM-DD-NN`.

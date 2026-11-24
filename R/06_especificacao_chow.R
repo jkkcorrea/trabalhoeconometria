@@ -2,9 +2,7 @@
 # Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal
 # Trabalho de Econometria I (UFPR).
 #
-# Modelo principal: MQO empilhado (Modelo 2), sem dummies de município e sem
-# métodos de dados em painel (orientação do professor: dummies e painel não são
-# conteúdo de Econometria I).
+# Modelo principal: MQO empilhado (Modelo 2).
 #
 # Conteúdo:
 #   - gráfico das variáveis no tempo (escolha do corte do teste de Chow, orientação do professor);

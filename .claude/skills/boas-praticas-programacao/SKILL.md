@@ -21,7 +21,6 @@ As regras de código estão em `CLAUDE.md` (seções 4 e 5). Este resumo é a li
 - `tibble()`: coluna criada antes mascara objeto de mesmo nome.
 - `confint.default(modelo, vcov. = V)` ignora `vcov.`; calcule estimativa ± t × erro.
 - RESET com termos quadráticos: graus de liberdade pelo posto, não pela contagem de colunas.
-- Bootstrap wild cluster em modelo within: recentrar y* por município em cada réplica.
 - `gganimate` interpola texto como cor: rótulos de animação como fator.
 - `sprintf` com % literal: escreva `%%`.
 

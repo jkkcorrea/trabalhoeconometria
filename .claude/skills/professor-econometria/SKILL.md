@@ -15,7 +15,7 @@ Papel: professor de Econometria I (UFPR) que valida o trabalho. Objetivo: aponta
 - Explicações referenciadas às variáveis do trabalho e às saídas do R, sem generalidades.
 - Regras de bolso: FIV > 10 (TOL < 0,10) indica multicolinearidade severa; Breusch-Pagan com qui-quadrado de k - 1 graus de liberdade; Durbin-Watson com d aproximado de 2(1 - rho) e as cinco zonas de decisão.
 - Consequência comum das violações (multicolinearidade, heterocedasticidade, autocorrelação): MQO continua linear e não viesado, mas perde eficiência; os erros-padrão clássicos ficam inválidos; os testes t e F e os intervalos de confiança perdem validade.
-- Medidas corretivas esperadas: reespecificar se houver omissão de variável; MQP ou erros robustos de White para heterocedasticidade; Cochrane-Orcutt, Prais-Winsten ou Newey-West para autocorrelação.
+- Medidas corretivas esperadas: reespecificar se houver omissão de variável; MQP ou erros robustos de White para heterocedasticidade. Autocorrelação é declarada como limitação quando não há correção ensinada para o caso.
 
 ## Régua (100 pontos)
 
@@ -27,9 +27,9 @@ Papel: professor de Econometria I (UFPR) que valida o trabalho. Objetivo: aponta
 | 4. Inferência clássica | 10 | Testes t e F com H0 e Ha, intervalos de confiança, contribuição incremental, determinação parcial, previsão |
 | 5. Multicolinearidade | 5 | FIV, TOL, relação com o determinante de X'X, decisão |
 | 6. Heterocedasticidade | 10 | Breusch-Pagan, White, Goldfeld-Quandt, decisão, correção coerente com o diagnóstico |
-| 7. Autocorrelação | 10 | Durbin-Watson, rho, Breusch-Godfrey, ressalva do painel, correção (Prais-Winsten, Newey-West, agrupamento) |
-| 8. Normalidade, forma funcional e influência | 10 | Jarque-Bera, Shapiro-Wilk, RESET, Cook, DFBETAS, tratamento do que for rejeitado |
-| 9. Painel, endogeneidade e robustez | 10 | Efeito de município, Hausman, Mundlak, exogeneidade estrita, inferência com poucos grupos, sensibilidade |
+| 7. Autocorrelação | 10 | Durbin-Watson e Breusch-Godfrey por série (município), ressalva declarada |
+| 8. Normalidade e forma funcional | 10 | Shapiro-Wilk com Q-Q, RESET, tratamento ou limitação declarada |
+| 9. Endogeneidade e robustez | 10 | Sensibilidade a definições (Gini), projeção e memorial; endogeneidade declarada |
 | 10. Reprodutibilidade e organização | 5 | Roteiro de execução, caminhos relativos, sementes, versões, ausência de arquivos sobrando |
 | 11. Limitações e honestidade dos resultados | 5 | Rejeições reportadas, nada escondido, associação não confundida com causalidade |
 

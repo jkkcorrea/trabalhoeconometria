@@ -38,10 +38,6 @@ Critério: rejeita-se H0 no coeficiente quando p < 0,05.
 | Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, pp. 499 e 500 |
 | Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | presunção da modelagem |
 
-## Métodos fora do escopo (não usados)
-
-Variáveis binárias de município, métodos de dados em painel (efeitos fixos e aleatórios, teste de Hausman, Mundlak), correção de autocorrelação de painel (Prais-Winsten e Cochrane-Orcutt sobre o painel), Newey-West sobre o painel empilhado, teste das carreiras (não paramétrico), análise de influência (distância de Cook e DFBETAS), Box-Cox, smearing de Duan e bootstrap. Esses métodos foram retirados do trabalho por orientação do professor, ou não se aplicam ao painel empilhado.
-
 ## Projeção
 
 A projeção é uma previsão dentro da amostra para 2021, último ano com todas as variáveis publicadas. Não há previsão para 2026. A previsão é x0'b; o intervalo da média usa x0'(X'X)^-1 x0 σ², e o intervalo individual, σ²(1 + x0'(X'X)^-1 x0).

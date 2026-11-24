@@ -10,13 +10,11 @@
 #   - Durbin-Watson, com as cinco zonas de decisão do Guia P2;
 #   - Breusch-Godfrey de ordem 1 (lmtest::bgtest), qui-quadrado com 1 gl;
 #   - ρ por regressão auxiliar AR(1) sem constante (descritivo).
-# O teste das carreiras (não paramétrico) não é usado (orientação do professor).
 #
 # Tabela de Durbin-Watson: n = 10 e k' = 5, 5%: dL = 0,243 e dU = 2,822 (Gujarati, 4ª ed.,
 # Apêndice D, Tabela D.5A, PDF p. 995).
 #
-# Sem correção de autocorrelação: a correção de painel (Prais-Winsten sobre o painel
-# empilhado) não é conteúdo de Econometria I. A autocorrelação é declarada como limitação.
+# Sem correção de autocorrelação no modelo principal: a autocorrelação é declarada como limitação.
 #
 # Lê:    ./dados_processados/dados_painel_rmc.rds
 # Grava: ./resultados_econometricos/autocorrelacao_por_municipio.csv

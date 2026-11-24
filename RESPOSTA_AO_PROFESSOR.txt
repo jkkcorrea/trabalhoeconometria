@@ -21,7 +21,7 @@ O modelo principal rejeita o teste RESET (F = 14,49; gl 2 e 282; p < 0,0001). De
 Objetivo do teste: verificar se os erros seguem distribuição normal. Essa hipótese garante a validade exata dos testes t e F em amostras pequenas. H0: os resíduos são normais. Usamos o teste de Shapiro-Wilk nos resíduos: W = 0,862, p < 0,0001, o que rejeita H0. O gráfico Q-Q dos resíduos mostra desvio nas caudas. Tratamos a rejeição como limitação; com 290 observações, os testes continuam aproximadamente válidos.
 
 5. Índice de Gini (variável X4)
-Agradecemos a orientação e aguardaremos as aulas sobre o índice. Enquanto isso, a explicação abaixo segue o capítulo 17 de Hoffmann (2006, Medidas de desigualdade, pp. 337 a 341).
+Seguimos a fórmula da aula sobre medidas de desigualdade (slides 21, 22 e 26) e o capítulo 17 de Hoffmann (2006, pp. 337 a 341).
 
 O que mede: a desigualdade na distribuição dos vínculos formais entre as divisões da CNAE de cada município, em cada ano. Cada uma das 87 divisões é uma unidade. A participação x_i de uma divisão é o número de vínculos ativos dela dividido pelo total de vínculos do município. Divisões sem vínculo entram com x_i = 0.
 
@@ -37,7 +37,7 @@ Ressalvas:
 (i) Hoffmann aplica as medidas a distribuições em geral, por exemplo ao número de empregados por empresa, mas as unidades dele são pessoas ou empresas; usar divisões setoriais como unidades, com peso igual, é uma adaptação nossa;
 (ii) divisões sem vínculo entram com zero, o que eleva o Gini sem indicar concentração de empregos.
 
-Como verificação, calculamos o Gini só com as divisões que têm vínculo. O coeficiente fica em −0,638 (p = 0,001), com o mesmo sinal e significância. Definiremos a versão final após as aulas.
+Como verificação, calculamos o Gini só com as divisões que têm vínculo. O coeficiente fica em −0,638 (p = 0,001), com o mesmo sinal e significância.
 
 6. Teste das carreiras
 Retiramos o teste das carreiras porque ele é não paramétrico: não supõe distribuição dos resíduos e usa apenas a sequência de sinais. Mantivemos apenas testes paramétricos (Durbin-Watson e Breusch-Godfrey), aplicados à série de cada município.
