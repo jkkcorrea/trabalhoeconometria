@@ -117,3 +117,15 @@ Pendentes:
 - [ ] **R6. Resposta ao professor**: aguarda aprovação do pesquisador para envio.
 - [ ] **R7. CLAUDE.md** (seções 6 e 13) e prompts originais: atualizar só com pedido do pesquisador (P4 acima).
 
+## Atualização de 23/11/2026 (noite): comentário do professor e referências
+
+Concluídos pela sessão: referências conferidas e arquivo `fontes/REFERENCIAS.md` criado, com os links da fábrica de Adrianópolis (R4, parcial: o `.doc` da AEN não foi lido por inteiro); aulas de Hasegawa citadas (D-2026-11-23-09); autoria do Gujarati corrigida (4ª edição, só Gujarati, 2003); editora de Hoffmann (2006) levantada em catálogos (R3, parcial); resumo em inglês incluído (revisar); metodologia detalhada, estrutura da revisão e da discussão e contribuição candidata no artigo v2 (D-2026-11-23-08); artigo v2 e roteiro para o time (`apresentacao/CONTEXTO_PARA_O_TIME.md`); registro das pendências do professor (`_Trilha/REGISTRO_PENDENCIAS_PROFESSOR.md`).
+
+Abertos:
+- [ ] **B1. Revisão da literatura (seção 2)**: o pesquisador escolhe, lê e registra as obras (candidatas em `_Trilha/AVALIACAO_COMENTARIO_PROFESSOR_20261123.md`). Bloqueia B3 e B4.
+- [ ] **B3. Discussão dialogando com a literatura (seção 6)**: depende de B1.
+- [ ] **B4. Contribuição (seções 6.7 e 7)**: o pesquisador confirma as candidatas.
+- [ ] **B5. Pontos da resposta ao professor** explicados no texto: metodologia redigida; faltam as justificativas que cabem ao pesquisador (itens A1 a A7).
+- [ ] **B6. Slides**: acrescentar slides de literatura e de contribuição depois de B1 e B4.
+- [ ] **B7. Conferências menores**: limite FIV = 10 no slide de multicolinearidade (texto em imagem); editora de Hoffmann (2006); título e data do `.doc` da AEN; datas de acesso dos dados; edição de Gujarati (aulas citam a 5ª).
+- [ ] **R6 (atualizado)**: o comentário do professor indica que a resposta foi enviada; o pesquisador confirma.

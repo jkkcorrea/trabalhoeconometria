@@ -1,6 +1,6 @@
 # Sumário do projeto
 
-Atualizado em 23/11/2026. Números vindos de `envio_professor/documentacao/00_resumo.md`.
+Atualizado em 23/11/2026 (noite). Números vindos de `envio_professor/documentacao/00_resumo.md`.
 
 ## Pergunta e dados
 Salário médio real formal (ln) de 29 municípios da RMC, 2012 a 2021: 290 observações (painel balanceado, empilhado).
@@ -33,6 +33,10 @@ MQO com as observações empilhadas, erros-padrão de White (HC1). Sem variávei
 | Pendências | `_Trilha/BACKLOG.md` |
 | Registro de mudanças do recorte | `_Trilha/REGISTRO_RECORTE_TEMPORAL.md` |
 | Fontes, referências e páginas | `fontes/` (`PAGINAS_DE_REFERENCIA.md`, `VERIFICACAO_CORRECOES.md`, `VERIFICACAO_EDICOES.md`, `OFICIAL_FONTES_DA_DISCIPLINA.md`) |
+| Referências e links (lista central) | `fontes/REFERENCIAS.md` |
+| Artigo (rascunho v2, ajustado ao comentário do professor) | `artigo/ARTIGO_rascunho_v2.md` (v1 fica como registro); versão publicada no Claude Docs |
+| Apresentação (roteiro, fonte dos slides e contexto para o time) | `apresentacao/ROTEIRO_SLIDES.md`, `apresentacao/deck_fonte/project/`, `apresentacao/CONTEXTO_PARA_O_TIME.md` |
+| Pendências que dependem do professor e comentário dele | `_Trilha/REGISTRO_PENDENCIAS_PROFESSOR.md`, `_Trilha/AVALIACAO_COMENTARIO_PROFESSOR_20261123.md` |
 | Avaliações internas como professor | `_Trilha/AVALIACAO_PROFESSOR_*.md` (histórico) |
 | Regras do projeto para sessões de IA | `CLAUDE.md` |
 | Catálogo de arquivos (gerado) | `CATALOGO_DO_PROJETO.md` (gerador: `_Trilha/ferramentas/gerar_catalogo.R`) |

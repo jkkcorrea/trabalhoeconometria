@@ -1,6 +1,6 @@
 # Páginas de referência usadas no projeto
 
-Edição usada: Gujarati, D. N.; Porter, D. C. Basic Econometrics, 4ª edição (McGraw-Hill, 2004). Arquivo local `Gujarati_Basic_Econometrics.pdf` (raiz do projeto), com 1028 páginas e texto completo. As páginas são as do PDF; a página impressa só foi confirmada onde indicado.
+Edição usada: Gujarati, D. N. Basic Econometrics, 4ª edição (McGraw-Hill/Irwin, 2003; a capa do PDF traz só Gujarati como autor, correção de 23/11/2026). Arquivo local `Gujarati_Basic_Econometrics.pdf` (raiz do projeto), com 1028 páginas e texto completo. As páginas são as do PDF; a página impressa só foi confirmada onde indicado.
 
 Único livro de Gujarati usado no trabalho. Não há conferência com outra edição.
 

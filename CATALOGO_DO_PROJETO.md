@@ -9,8 +9,8 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 - Scripts em `R/`: 9.
 - Figuras e animações em `envio_professor/figuras_graficos/`: 12 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 21.
-- Decisões registradas em `_Trilha/DECISOES.md`: 55 (vigentes na última coluna: 47).
-- Pendências em `_Trilha/BACKLOG.md`: 15 abertas e 34 baixadas.
+- Decisões registradas em `_Trilha/DECISOES.md`: 61 (vigentes na última coluna: 52).
+- Pendências em `_Trilha/BACKLOG.md`: 28 abertas e 36 baixadas.
 
 ## Onde começar
 
@@ -24,16 +24,18 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `CATALOGO_DO_PROJETO.md` | 17 KB | Markdown: Catálogo do projeto |
+| `CATALOGO_DO_PROJETO.md` | 13 KB | Markdown: Catálogo do projeto |
 | `CLAUDE.md` | 18 KB | Markdown: CLAUDE.md do Trabalho de Econometria (núcleo do harness do projeto) |
 | `CONTRIBUIR.md` | 10 KB | Markdown: Como baixar e contribuir com o projeto |
 | `Gujarati_Basic_Econometrics.pdf` | 6.0 MB |  |
 | `R` | 4 KB |  |
 | `README.md` | 5 KB | Markdown: Salário médio real formal na Região Metropolitana de Curitiba, 2012 a 2021 |
 | `RESPOSTA_AO_PROFESSOR.txt` | 7 KB | Texto simples |
-| `SUMARIO_DO_PROJETO.md` | 4 KB | Markdown: Sumário do projeto |
+| `SUMARIO_DO_PROJETO.md` | 5 KB | Markdown: Sumário do projeto |
 | `Trabalhos Referencias` | 4 KB |  |
 | `_Trilha` | 4 KB |  |
+| `apresentacao` | 4 KB |  |
+| `artigo` | 4 KB |  |
 | `backup_antes_alteracoes` | 4 KB |  |
 | `dados_brutos` | 4 KB |  |
 | `dados_processados` | 4 KB |  |
@@ -135,10 +137,10 @@ Gerada; não editar à mão.
 | `01b_extracao_pam.R` | 4 KB | Script R: Etapa 1b: produção agrícola municipal (PAM), valor da produção, dos 29 municípios |
 | `02_tratamento_painel.R` | 29 KB | Script R |
 | `03_aede_visualizacoes.R` | 34 KB | Script R |
-| `04_modelagem_diagnosticos.R` | 11 KB | Script R |
+| `04_modelagem_diagnosticos.R` | 10 KB | Script R |
 | `05_autocorrelacao_municipios.R` | 6 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
 | `06_especificacao_chow.R` | 13 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
-| `07_memorial_modelo_2.R` | 16 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
+| `07_memorial_modelo_2.R` | 15 KB | Script R: Etapa 7: memorial de cálculo matricial do Modelo 2 |
 
 ## Pasta de envio: dados processados
 
@@ -196,13 +198,13 @@ Gerada; não editar à mão.
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `00_resumo.md` | 3 KB | Markdown: Resumo |
+| `00_resumo.md` | 2 KB | Markdown: Resumo |
 | `01_dados_e_variaveis.md` | 2 KB | Markdown: Dados e variáveis |
-| `02_especificacao_e_metodos.md` | 3 KB | Markdown: Especificação e métodos |
+| `02_especificacao_e_metodos.md` | 2 KB | Markdown: Especificação e métodos |
 | `03_resultados_modelos.md` | 2 KB | Markdown: Resultados do modelo principal |
 | `04_diagnosticos.md` | 4 KB | Markdown: Diagnósticos do modelo principal |
 | `05_limitacoes.md` | 1 KB | Markdown: Limitações |
-| `06_fontes.md` | 1016 B | Markdown: Fontes e referências |
+| `06_fontes.md` | 1 KB | Markdown: Fontes e referências |
 | `07_criterios_da_disciplina.md` | 575 B | Markdown: Critérios de correção |
 | `08_verificacao.md` | 3 KB | Markdown: Verificação do envio |
 | `ambiente_r.csv` | 154 B | CSV, 3 linhas x 2 colunas: item, valor |

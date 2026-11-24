@@ -1,6 +1,6 @@
 # Roteiro da apresentação (rascunho v1, 23/11/2026)
 
-Duração estimada: 12 a 15 minutos, 14 slides. Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada.
+Duração estimada: 12 a 15 minutos, 18 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada.
 
 ## Slide 1: título
 Salário médio real formal e estrutura produtiva na RMC, 2012 a 2021. Nome, disciplina (Econometria I, UFPR), data.
@@ -98,7 +98,7 @@ R² ajustado = 0,643.
 Escolaridade, industrialização e diversificação setorial associam-se a salários maiores; distância a Curitiba, a salários menores. A Selic real tem associação positiva pequena. [revisar: fechamento a cargo do pesquisador.]
 
 ## Slide 18: referências
-Gujarati e Porter (2004); Hoffmann (2006, cap. 17); Hasegawa (slides de medidas de desigualdade, UFPR); IBGE/SIDRA; Banco Central (SGS); RAIS/MTE; fontes do caso de Adrianópolis (conferir links).
+Gujarati (2003); Hoffmann (2006, cap. 17); Hasegawa (slides de aula, 2016a, 2016b, 2017, 2020, 2022 e 2024, UFPR); IBGE/SIDRA; Banco Central (SGS); RAIS/MTE; fontes do caso de Adrianópolis (conferir links).
 
 ## Pendências desta apresentação
 - Gerar o arquivo PowerPoint a partir deste roteiro, após revisão do texto.
