@@ -137,3 +137,23 @@ Abertos:
 ## Pendências consolidadas no fechamento de 23/11/2026
 
 Lista completa e ordem de ataque em `_Trilha/_Handoffs/HANDOFF_artigo-slides_20261123.md`. Em aberto: A1 a A8 (professor); B1, B3, B4 e B5 (pesquisador: literatura, discussão, contribuição e justificativas); B7 (referências a conferir); B8 e B9 (porte do município e conferências técnicas); R1 a R5 e R7 (artigo, PowerPoint, literatura, links e causa de Adrianópolis, `CLAUDE.md`).
+
+## Plano para a nota 100 (registrado em 23/11/2026)
+
+Detalhe por critério, ganhos e ordem em `_Trilha/PLANO_PARA_NOTA_100.md`. Base: 69/100 pela régua; 55 a 60 efetiva sem literatura e discussão. Teto realista dentro do escopo: cerca de 92 a 95 (estimativa).
+
+- [ ] **N1. Decidir A8 (porte do município) com o professor.** Define H3, o modelo principal e tudo que depende dele.
+- [ ] **N2. Revisão da literatura e fundamentação dos sinais H1 a H5** (critério 1 e peso real do professor). Pesquisador.
+- [ ] **N3. Decidir o papel da Selic (H4):** fundamentar ou tratar como controle macro. Pesquisador e professor.
+- [ ] **N4. Reespecificação para o RESET** (termos quadráticos de X2 e X3, por exemplo) e novo RESET. Código; professor aprova (A2).
+- [ ] **N5. Teste de White** e Goldfeld-Quandt ordenado por outras variáveis; discutir a divergência com o Breusch-Pagan (critério 6).
+- [ ] **N6. F geral robusto e intervalos da previsão com a matriz de White** (critério 4); reescrever H4 com a ressalva da Selic (10 valores).
+- [ ] **N7. Durbin-Watson com resíduos centrados por município**, limite do dL e dU com k = 5, e a explicação 14 × 3 (critério 7). Conferir a afirmação do agente (mediana 1,16; 1 município abaixo de dL), que não foi verificada.
+- [ ] **N8. Exame de resíduos** (por município e por variável) para localizar as caudas (assimetria 1,74; curtose 8,52) (critério 8).
+- [ ] **N9. Parágrafo de endogeneidade** (simultaneidade, variável omitida, medição) na discussão (critério 9).
+- [ ] **N10. Apêndice do artigo com ANOVA, F incremental, determinação parcial e resumo de (X'X)⁻¹**; quatro casas em todo o texto (critério 3).
+- [ ] **N11. PAM:** tirar as colunas do painel final ou incluir `01b_extracao_pam.R` no `00_executar_tudo.R` (critérios 2 e 10).
+- [ ] **N12. Verificador:** incluir os novos arquivos de saída e reconstruir o envio (22 de 22 ou mais).
+- [ ] **N13. Discussão com a literatura, contribuição e considerações finais.** Pesquisador.
+- [ ] **N14. Slides finais, formatação no template UFPR/ABNT e limpeza das marcações.**
+- [ ] **N15. Nova correção com o agente `professor-econometria`** depois de cada bloco; registrar a nova nota aqui.
