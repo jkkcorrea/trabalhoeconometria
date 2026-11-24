@@ -4,11 +4,11 @@ Trabalho de Econometria I (UFPR). Regressão linear múltipla sobre um painel de
 
 ## Escopo
 
-Só métodos das fontes oficiais da disciplina (`fontes/OFICIAL_FONTES_DA_DISCIPLINA.md`). Decisão D-2026-11-22-02. Os métodos fora desse escopo foram removidos do projeto.
+Só métodos ensinados em Econometria I. Dummies de município, painel (efeitos fixos, Hausman, Mundlak), Prais-Winsten e Newey-West no painel, análise de influência e teste das carreiras estão fora do escopo, por orientação do professor. Shapiro-Wilk e gráfico Q-Q para normalidade. Gini (X4) pela fórmula de Hoffmann (2006, cap. 17), em revisão até as aulas sobre o índice.
 
 ## Estado
 
-Pasta `envio_professor/` regenerada e verificada (17 de 17). Antes de escrever o artigo, faltam decisões do pesquisador (ver "O que cabe ao pesquisador"). A avaliação como professor está em `_Trilha/AVALIACAO_PROFESSOR_20261122.md`.
+Pasta `envio_professor/` regenerada e verificada (22 de 22). Modelo principal: MQO empilhado com erros de White. Pendências em `_Trilha/BACKLOG.md`.
 
 ## Estrutura
 
@@ -29,12 +29,13 @@ Pasta `envio_professor/` regenerada e verificada (17 de 17). Antes de escrever o
 | Script | Função |
 |---|---|
 | `01_extracao_dados.R` | Coleta (SIDRA, Banco Central, IBGE, RAIS). Download de cerca de 3,5 GB. Só roda com `INCLUIR_EXTRACAO=sim`. |
+| `01b_extracao_pam.R` | Produção agrícola (PAM), usada só na comparação da Selic. |
 | `02_tratamento_painel.R` | Painel e variáveis, com o Gini setorial como X4. |
 | `03_aede_visualizacoes.R` | Figuras, mapas numerados e animações (exige `gifski`, que exige Rust). |
-| `04_modelagem_diagnosticos.R` | Modelos 2, 3 e 3b; erro clássico e de White; VIF; Breusch-Pagan-Godfrey; Goldfeld-Quandt; ANOVA. |
-| `05_autocorrelacao_municipios.R` | Durbin-Watson, ρ e Breusch-Godfrey por município. |
-| `06_especificacao_chow.R` | RESET, LM de tendência, Chow por período, inferência agregada de X5 e X6 e checagem do Gini. |
-| `07_memorial_modelo_2.R` | Memorial matricial do Modelo 2 com quatro casas decimais. |
+| `04_modelagem_diagnosticos.R` | Modelo principal (MQO empilhado); erro clássico e de White; VIF; Breusch-Pagan-Godfrey; Goldfeld-Quandt; Shapiro-Wilk e Q-Q. |
+| `05_autocorrelacao_municipios.R` | Durbin-Watson e Breusch-Godfrey por município (testes paramétricos). |
+| `06_especificacao_chow.R` | Gráfico das variáveis no tempo; RESET; LM de tendência; Chow (corte de 2017 pelo gráfico, e 2016 para comparação); robustez do Gini; projeção de 2021 com correção de viés exp(s²/2); efeito da Selic. |
+| `07_memorial_modelo_2.R` | Memorial matricial do modelo principal com quatro casas decimais. |
 
 ## Ferramentas (`_Trilha/ferramentas/`)
 
@@ -55,13 +56,11 @@ Linux, R 4.6.2, pacotes em `envio_professor/documentacao/ambiente_r.csv`. Rust (
 
 ## Resultado em uma frase
 
-No Modelo 2, com erro de White, X2 (+0,0150), X3 (+0,0055) e X4 (−0,6548) são significativos a 5%; a Selic e a distância dependem de como se trata a estrutura de 290 observações; RESET rejeita a forma log-linear e Durbin-Watson mostra autocorrelação positiva em 14 de 29 municípios. Detalhes em `envio_professor/documentacao/00_resumo.md`.
+No modelo principal (MQO empilhado, erro de White), escolaridade (+0,0150), industrialização (+0,0055), Gini (−0,6548) e Selic (+0,0065) são significativos a 5%; a distância (−0,0016) também. RESET rejeita a forma linear, Shapiro-Wilk rejeita a normalidade, e Durbin-Watson indica autocorrelação positiva em 14 de 29 municípios. Detalhes em `envio_professor/documentacao/00_resumo.md`.
 
 ## O que cabe ao pesquisador
 
-1. Definir hipóteses e sinais esperados de X2 a X6 antes de escrever a metodologia.
-2. Decidir a leitura da X4: diversidade setorial (sinal invertido) ou outra medida de concentração.
-3. Decidir o estatuto da Selic (X5): associação não significativa fora da amostra de 290 observações, ou retirada do modelo principal.
-4. Decidir como tratar a forma funcional, rejeitada pelo RESET.
-5. Aceitar ou tratar a autocorrelação positiva dentro dos municípios, sem correção ensinada aplicável ao painel.
-6. Redigir o artigo (introdução, revisão, interpretação, conclusão).
+1. Responder ao professor (ver `RESPOSTA_AO_PROFESSOR.txt`) e aguardar as aulas sobre o Gini.
+2. Decidir o recorte temporal (2012 a 2021, ou outro, com as implicações em `_Trilha/DECISOES.md`).
+3. Decidir o tratamento da forma funcional (RESET) e da normalidade, se o professor indicar.
+4. Redigir o artigo (introdução, revisão, interpretação, conclusão).

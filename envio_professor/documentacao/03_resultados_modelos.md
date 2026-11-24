@@ -1,80 +1,49 @@
-# Resultados dos modelos
+# Resultados do modelo principal
 
-Coeficientes com erro de White (HC1) e t com n - k graus de liberdade. Erro clássico em `coeficientes_modelos.csv`.
+## Coeficientes com erro de White (HC1)
 
-## Modelo principal: Modelo 4 com correção de autocorrelação (Prais-Winsten), erro de White
+| Variável | Coeficiente | EP (White) | t | p-valor | IC 95% inferior | IC 95% superior |
+|---|---|---|---|---|---|---|
+| X2 escolaridade (proporção com superior completo, %) | 0,0150 | 0,0015 | 10,25 | < 0,0001 | 0,0122 | 0,0179 |
+| X3 industrialização (VAB da indústria / VAB total, %) | 0,0055 | 0,0007 | 8,13 | < 0,0001 | 0,0042 | 0,0069 |
+| X4 Gini setorial (vínculos entre 87 divisões CNAE) | -0,6548 | 0,1678 | -3,90 | 0,0001 | -0,9851 | -0,3244 |
+| X5 Selic real (% a.a.) | 0,0065 | 0,0018 | 3,66 | 0,0003 | 0,0030 | 0,0101 |
+| X6 distância a Curitiba (km) | -0,0016 | 0,0005 | -2,96 | 0,0033 | -0,0026 | -0,0005 |
+| Intercepto | 8,1064 | 0,1533 | 52,87 | < 0,0001 | 7,8046 | 8,4082 |
 
-Modelo principal do trabalho: dummies de município (Modelo 4) com correção de autocorrelação por Prais-Winsten, ρ comum a todos os municípios [presunção da modelagem], e erros-padrão de White (HC1). O memorial matricial está em `memorial_prais_winsten_m2.csv` (Modelo 2) e `memorial_modelo_4_fwl.csv` (Modelo 4, sem correção). Os coeficientes sem correção ficam abaixo como comparação.
+## Coeficientes com erro clássico (comparação)
 
-| Variável | Coeficiente | EP HC1 | p-valor HC1 |
+| Variável | Coeficiente | EP (clássico) | p-valor (clássico) |
 |---|---|---|---|
-| X2 escolaridade | 0,0067 | 0,0022 | 0,0029 |
-| X3 industrialização | -0,0004 | 0,0009 | 0,6678 |
-| X4 Gini | 0,8409 | 0,5059 | 0,0977 |
-| X5 Selic real | 0,0030 | 0,0009 | 0,0005 |
+| X2 escolaridade (proporção com superior completo, %) | 0,0150 | 0,0013 | < 0,0001 |
+| X3 industrialização (VAB da indústria / VAB total, %) | 0,0055 | 0,0005 | < 0,0001 |
+| X4 Gini setorial (vínculos entre 87 divisões CNAE) | -0,6548 | 0,1640 | < 0,0001 |
+| X5 Selic real (% a.a.) | 0,0065 | 0,0021 | 0,0018 |
+| X6 distância a Curitiba (km) | -0,0016 | 0,0005 | 0,0007 |
+| Intercepto | 8,1064 | 0,1356 | < 0,0001 |
 
-ρ estimado = 0,3677; após a transformação, o ρ dos resíduos cai para 0,0167. Confirmado por memorial matricial (C15).
+## Efeito da Selic
 
-## Modelo 4 sem correção, erro de White (comparação)
+Cada ponto percentual a mais da Selic real está associado a um salário 0,66% maior (efeito ln = 0,0065; IC 95% [0,0030; 0,0101]; gl 284; p-valor 0,0003).
 
-| Termo | Estimativa | Erro-padrão | t | p-valor |
+## Robustez da X4: definição do Gini
+
+| Definição | Coeficiente | p-valor | R2 ajustado | AIC |
 |---|---|---|---|---|
-| Constante | 7,2013 | 0,3621 | 19,89 | < 0,0001 |
-| X2 ensino superior (%) | 0,0084 | 0,0019 | 4,42 | < 0,0001 |
-| X3 dominância industrial (%) | -0,0006 | 0,0007 | -0,83 | 0,4086 |
-| X4 concentração setorial (Gini) | 0,8653 | 0,4387 | 1,97 | 0,0496 |
-| X5 Selic real (% a.a.) | 0,0039 | 0,0008 | 4,80 | < 0,0001 |
+| 87 divisões (zeros incluídos) | -0,6548 | 0,0001 | 0,6433 | -388,30 |
+| somente divisões com vínculo | -0,6378 | 0,0011 | 0,6356 | -382,07 |
 
-O Modelo 4 inclui 28 variáveis dummy de município (uma categoria de referência). Os coeficientes das dummies estão em `resultados_econometricos/coeficientes_modelos.csv`. X6 é constante dentro de cada município e não é identificada neste modelo.
+A definição com as 87 divisões (zeros incluídos) é a usada no modelo principal. A versão só com as divisões que têm vínculo é apresentada como verificação; a definição final depende de orientação do professor.
 
-## Modelo 2 (comparação), erro de White
+Correlação entre o Gini e o número de divisões com vínculo: -0,9497.
 
-| Termo | Estimativa | Erro-padrão | t | p-valor |
-|---|---|---|---|---|
-| Constante | 8,1064 | 0,1533 | 52,87 | < 0,0001 |
-| X2 ensino superior (%) | 0,0150 | 0,0015 | 10,25 | < 0,0001 |
-| X3 dominância industrial (%) | 0,0055 | 0,0007 | 8,13 | < 0,0001 |
-| X4 concentração setorial (Gini) | -0,6548 | 0,1678 | -3,90 | 0,0001 |
-| X5 Selic real (% a.a.) | 0,0065 | 0,0018 | 3,66 | 0,0003 |
-| X6 distância a Curitiba (km) | -0,0016 | 0,0005 | -2,96 | 0,0033 |
+## Projeção de 2021
 
-## Modelo 3, erro de White
+| Cenário | Selic (% a.a.) | Média prevista sem correção (R$) | Média prevista com correção (R$) |
+|---|---|---|---|
+| Selic de 2021 | -5,11 | 2602,47 | 2621,97 |
+| Selic de 2021 + 1 p.p. | -4,11 | 2619,55 | 2639,18 |
+| Selic de 2021 - 1 p.p. | -6,11 | 2585,50 | 2604,87 |
 
-| Termo | Estimativa | Erro-padrão | t | p-valor |
-|---|---|---|---|---|
-| Constante | 8,1137 | 0,1568 | 51,74 | < 0,0001 |
-| X2 ensino superior (%) | 0,0120 | 0,0016 | 7,62 | < 0,0001 |
-| X3 dominância industrial (%) | 0,0056 | 0,0007 | 8,09 | < 0,0001 |
-| X4 concentração setorial (Gini) | -0,6361 | 0,1738 | -3,66 | 0,0003 |
-| X5 Selic real (% a.a.) | 0,0063 | 0,0017 | 3,77 | 0,0002 |
-| X6 distância a Curitiba (km) | -0,0013 | 0,0005 | -2,38 | 0,0182 |
-| Dummy de Curitiba | 0,2023 | 0,0390 | 5,19 | < 0,0001 |
+O fator de correção exp(s²/2) é 1,0075. Com a correção, a previsão média em reais sobe nessa proporção.
 
-## Modelo 3b, erro de White
-
-| Termo | Estimativa | Erro-padrão | t | p-valor |
-|---|---|---|---|---|
-| Constante | 8,1421 | 0,1647 | 49,44 | < 0,0001 |
-| X2 ensino superior (%) | 0,0120 | 0,0016 | 7,43 | < 0,0001 |
-| X3 dominância industrial (%) | 0,0039 | 0,0019 | 2,05 | 0,0412 |
-| X4 concentração setorial (Gini) | -0,6166 | 0,1679 | -3,67 | 0,0003 |
-| X5 Selic real (% a.a.) | 0,0063 | 0,0017 | 3,77 | 0,0002 |
-| X6 distância a Curitiba (km) | -0,0021 | 0,0010 | -2,13 | 0,0345 |
-| Dummy de Curitiba | 0,1911 | 0,0431 | 4,43 | < 0,0001 |
-| X3 x X6 (interação) | 0,0000 | 0,0000 | 1,03 | 0,3043 |
-
-## Significância conjunta (F da ANOVA)
-
-| Modelo | F | gl | p-valor | R2 | R2 ajustado |
-|---|---|---|---|---|---|
-| Modelo 2 | 105,26 | 5; 284 | < 0,0001 | 0,6495 | 0,6433 |
-| Modelo 3 | 95,95 | 6; 283 | < 0,0001 | 0,6704 | 0,6634 |
-| Modelo 3b | 83,27 | 7; 282 | < 0,0001 | 0,6740 | 0,6659 |
-| Modelo 4 | 196,53 | 32; 257 | < 0,0001 | 0,9607 | 0,9558 |
-
-## Leitura dos coeficientes
-
-- X2 é positivo nos dois modelos e significativo a 5%: a associação não depende de comparar municípios diferentes.
-- X3 é positivo entre municípios (Modelo 2) e não significativo dentro deles (Modelo 4).
-- X4 tem sinal negativo no Modelo 2 e positivo no Modelo 4, consistente com a correlação de -0,95 com o número de setores ativos (ver 04_diagnosticos.md).
-- X5 é significativo no Modelo 4, mas a inferência usa 257 graus de liberdade com apenas 10 valores de Selic (ver 04_diagnosticos.md).

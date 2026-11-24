@@ -91,3 +91,14 @@ Concluídos pela sessão: hipóteses aprovadas (D-2026-11-22-03), autocorrelaç�
 - [ ] **N. Confirmação do professor** (texto em `SOLICITACAO_AO_PROFESSOR.txt`): dummies de município; correção com ρ comum no painel; procedimento para normalidade rejeitada; limiares de influência; teste das carreiras com dez observações; Gini de 87 divisões; quebra de 2016; projeção com exp() sem correção.
 - [x] 22/11/2026 **O. Edição do Gujarati.** Decidido usar só a 4ª edição (2004), PDF local com texto completo (D-2026-11-22-13). Outras edições não são usadas no trabalho.
 - [x] 22/11/2026 **P. Modelo de referência.** Decidido: principal Modelo 4 com Prais-Winsten; referência Modelo 2 com Prais-Winsten (D-2026-11-22-12). Com Prais-Winsten, o Modelo 2 perde significância em X3 e X4. Decidir se o texto apresenta o Modelo 2 apenas como referência ou se X6 passa a ser estimada de outra forma.
+
+## Pendências (23/11/2026)
+
+Concluídos pela sessão: escopo ajustado à orientação do professor (D-2026-11-23-01); painel sem dummies; modelo principal MQO empilhado; Durbin-Watson e Breusch-Godfrey por município; Shapiro-Wilk e Q-Q; Chow pelo gráfico; projeção com correção de viés; documentação, README e verificação (22 de 22); Hoffmann cap. 17 conferido (D-2026-11-23-03); testes t e F recalculados.
+
+- [ ] **P1. Recorte temporal** (D-2026-11-23-02). Escolher entre 2012 a 2021 (atual), 2016 a 2025 com X3 trocada por emprego industrial, ou 2016 a 2021. A escolha afeta modelo, texto e números.
+- [ ] **P2. Gini (X4).** Definição final após as aulas sobre o índice. Hoje: 87 divisões, com zeros. Verificação: só divisões com vínculo (p = 0,001).
+- [ ] **P3. Resposta do professor** sobre o tratamento da forma funcional (RESET rejeita) e da normalidade (Shapiro-Wilk rejeita), se ele orientar.
+- [ ] **P4. CLAUDE.md** (seções 6 e 13 mencionam Mundlak, Prais-Winsten e Etapas 05 e 06 antigas). Atualizar só com pedido do pesquisador, por ser arquivo de instruções.
+- [ ] **P5. Causa do salto industrial em Adrianópolis (2015).** Não é bloqueante: o valor é o publicado pelo IBGE; a causa não está documentada.
+- [ ] **P6. Edição do Gujarati.** Usamos só a 4ª edição (2004). Páginas da 5ª edição ficam como referência não conferida.

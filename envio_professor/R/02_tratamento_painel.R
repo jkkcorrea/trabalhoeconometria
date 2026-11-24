@@ -424,8 +424,7 @@ tratar_dados_espaciais <- function(dados_geobr_raw) {
 
   geo |>
     dplyr::transmute(
-      id_municipio, nome_municipio, dist_curitiba_km,
-      dummy_curitiba = as.integer(id_municipio == COD_CURITIBA)
+      id_municipio, nome_municipio, dist_curitiba_km
     ) |>
     dplyr::arrange(id_municipio)
 }
@@ -467,14 +466,13 @@ consolidar_painel_mestre <- function(df_macro, df_pib, df_rais, df_geo) {
       id_municipio, nome_municipio, ano,
       salario_medio_nominal, salario_medio_real, ln_salario_real,
       prop_superior, dom_industrial, gini_setorial,
-      selic_real, dist_curitiba_km, dummy_curitiba, x3_negativo,
+      selic_real, dist_curitiba_km, x3_negativo,
       valor_producao_mil, ln_producao_agricola,
       selic_nominal_ano, ipca_ano, indice_ipca_medio,
       vinculos_ativos, vinculos_superior, vinculos_escolaridade_na,
       pib, vab_total_soma, vab_industria
     ) |>
-    dplyr::mutate(id_municipio = as.character(id_municipio), ano = as.integer(ano),
-                  dummy_curitiba = as.integer(dummy_curitiba)) |>
+    dplyr::mutate(id_municipio = as.character(id_municipio), ano = as.integer(ano)) |>
     dplyr::arrange(id_municipio, ano)
 }
 
@@ -598,15 +596,12 @@ auditar_painel <- function(df_painel) {
   }
   message("[OK] dist_curitiba_km constante no tempo em cada município.")
 
-  # 9.7 Curitiba com distância zero e dummy correta.
+  # 9.7 Curitiba com distância zero.
   curitiba <- df_painel |> dplyr::filter(id_municipio == COD_CURITIBA)
   if (nrow(curitiba) != length(ANOS) || any(curitiba$dist_curitiba_km != 0)) {
     stop("Curitiba (", COD_CURITIBA, ") ausente ou com distância diferente de zero.")
   }
-  if (sum(df_painel$dummy_curitiba) != length(ANOS) || any(curitiba$dummy_curitiba != 1L)) {
-    stop("dummy_curitiba inconsistente.")
-  }
-  message("[OK] Curitiba com distância 0 e dummy_curitiba = 1 só para ela.")
+  message("[OK] Curitiba com distância 0.")
 
   invisible(df_painel)
 }

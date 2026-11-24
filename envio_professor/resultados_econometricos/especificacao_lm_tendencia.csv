@@ -1,2 +1,2 @@
 modelo,teste,hipotese_nula,hipotese_alternativa,estatistica,gl,p_valor,decisao_5pct
-Modelo 2,LM para acréscimo de tendência linear (ano),H0: coeficiente de ano = 0 (sem tendência linear omitida); LM = n R^2 ~ qui-quadrado com 1 gl,Ha: coeficiente de ano diferente de zero (tendência linear omitida),0.37683871646252204,1,0.5392999765699179,não rejeita H0
+Modelo 2 (principal),LM para acréscimo de tendência linear (ano),H0: coeficiente de ano = 0 (LM = n R^2 ~ qui-quadrado com 1 gl),Ha: coeficiente de ano diferente de zero (tendência omitida),0.37683871646252204,1,0.5392999765699179,não rejeita H0

@@ -1,18 +1,31 @@
 # Dados e variáveis
 
-Painel de 29 municípios da Região Metropolitana de Curitiba, de 2012 a 2021 (290 observações).
+Unidades: os 29 municípios da Região Metropolitana de Curitiba (código IBGE 05501), de 2012 a 2021. Painel balanceado com 290 observações.
 
-| Variável | Definição | Fonte |
+## Fontes
+
+| Dado | Origem | Observação |
 |---|---|---|
-| Y: ln do salário médio real | logaritmo do salário médio formal, em R$ de 2021 | RAIS (Ministério do Trabalho); IPCA (série 433 do Banco Central) |
-| X2: ensino superior (%) | vínculos com ensino superior completo, sobre os vínculos com escolaridade informada | RAIS |
-| X3: dominância industrial (%) | VAB da indústria sobre o VAB total, vezes 100 | IBGE, SIDRA (tabela 5938) |
-| X4: concentração setorial (Gini) | Gini da participação de cada divisão CNAE no total de vínculos; 87 divisões, zeros incluídos | RAIS (divisão CNAE) |
-| X5: Selic real (% a.a.) | Selic anual pela equação de Fisher com o IPCA | Banco Central (séries 4390 e 433) |
-| X6: distância a Curitiba (km) | distância entre centroides; Curitiba igual a zero | malha municipal do IBGE (geobr) |
+| Salário médio formal | RAIS (Ministério do Trabalho), microdados públicos | Remuneração média dos vínculos |
+| Escolaridade (X2) | RAIS | Proporção dos vínculos com ensino superior completo |
+| Industrialização (X3) | IBGE, SIDRA, tabela 5938 | VAB da indústria sobre o VAB total |
+| Gini setorial (X4) | RAIS | Vínculos por divisão da CNAE (87 divisões) |
+| Selic real (X5) | Banco Central, SGS (séries 4390 e 433) | Selic acumulada no ano, deflacionada pelo IPCA |
+| Distância a Curitiba (X6) | IBGE, malha municipal | Distância entre centroides, em km; Curitiba = 0 |
+| Deflator | IBGE, IPCA (série 433 do Banco Central) | Salários em reais de 2021 |
 
-O Gini segue a fórmula do Guia P2 (questão 3): G = (2/n) soma(i x x_(i)) - (n+1)/n, com n = 87 divisões. Tratar divisões como indivíduos e o total de 87 divisões são escolhas a confirmar.
+## Variáveis e estatísticas descritivas
 
-A correlação entre o Gini e o número de divisões CNAE com emprego é -0,9497. Ver 04_diagnosticos.md.
+| Variável | Média | Mínimo | Máximo |
+|---|---|---|---|
+| salario_medio_real | 2651,2452 | 1792,6963 | 4501,1183 |
+| ln_salario_real | 7,8609 | 7,4915 | 8,4121 |
+| prop_superior | 15,2523 | 2,7798 | 35,9181 |
+| dom_industrial | 25,6705 | -14,0686 | 67,5915 |
+| gini_setorial | 0,8537 | 0,7328 | 0,9740 |
+| selic_real | 2,2707 | -5,1111 | 7,2824 |
+| dist_curitiba_km | 45,9174 | 0,0000 | 94,8916 |
 
-Estatísticas descritivas: `dados_processados/estatisticas_descritivas.csv`. Correlações: `dados_processados/matriz_correlacao_explicativas.csv`.
+Observação: VAB industrial negativo em Araucária (2012 e 2013), mantido como publicado pelo IBGE e marcado no painel. Adrianópolis tem salto da participação industrial entre 2014 e 2015, confirmado na fonte.
+
+Os salários estão em reais de 2021. O logaritmo natural é usado porque os salários são positivos e a distribuição é assimétrica à direita; o coeficiente de uma variável explicativa então indica variação relativa (%) do salário.

@@ -1,0 +1,62 @@
+Prezado professor,
+
+Agradecemos as orientações. Seguem as respostas ao que foi questionado, com o escopo ajustado ao conteúdo de Econometria I.
+
+OBJETIVO (proposto)
+Estimar a associação entre o salário médio real formal dos municípios da RMC e a escolaridade, a estrutura industrial, a diversificação setorial do emprego, a Selic real e a distância a Curitiba, no período de 2012 a 2021.
+
+MODELO PRINCIPAL
+MQO com as observações empilhadas (29 municípios x 10 anos = 290), sem dummies de município e sem métodos de painel. Erros-padrão de White (HC1). Não estimamos efeitos fixos, efeitos aleatórios nem o teste de Hausman.
+
+1. Dummies de município
+Retiramos as dummies do modelo principal, por se tratarem de conteúdo de Econometria II.
+
+2. Autocorrelação
+Não aplicamos correção de Prais-Winsten, por ser método de painel. Declaramos a autocorrelação como limitação. Como diagnóstico, aplicamos o Durbin-Watson e o Breusch-Godfrey à série de cada município (10 anos), e não ao painel: a mediana do Durbin-Watson é 0,25. Em 14 dos 29 municípios o teste rejeita a ausência de autocorrelação positiva, e em 15 o resultado é inconclusivo.
+
+3. Forma funcional (RESET)
+O modelo principal rejeita o teste RESET (F = 14,49; gl 2 e 282; p < 0,0001). Declaramos isso como limitação da forma funcional e agradecemos a orientação sobre o tratamento adequado.
+
+4. Normalidade e gráfico Q-Q
+Objetivo do teste: verificar se os erros seguem distribuição normal. Essa hipótese garante a validade exata dos testes t e F em amostras pequenas. H0: os resíduos são normais. Usamos o teste de Shapiro-Wilk nos resíduos: W = 0,862, p < 0,0001, o que rejeita H0. O gráfico Q-Q dos resíduos mostra desvio nas caudas. Tratamos a rejeição como limitação; com 290 observações, os testes continuam aproximadamente válidos.
+
+5. Índice de Gini (variável X4)
+Agradecemos a orientação e aguardaremos as aulas sobre o índice. Enquanto isso, a explicação abaixo segue o capítulo 17 de Hoffmann (2006, Medidas de desigualdade, pp. 337 a 341).
+
+O que mede: a desigualdade na distribuição dos vínculos formais entre as divisões da CNAE de cada município, em cada ano. Cada uma das 87 divisões é uma unidade. A participação x_i de uma divisão é o número de vínculos ativos dela dividido pelo total de vínculos do município. Divisões sem vínculo entram com x_i = 0.
+
+Por que o Gini com a CNAE: queríamos uma medida-resumo da estrutura produtiva de cada município, que diga se o emprego está concentrado em poucos setores ou espalhado entre muitos. A CNAE é a classificação oficial de atividades econômicas do IBGE, e a RAIS informa, para cada município e ano, o número de vínculos de cada divisão. Com essa informação, o Gini resume a distribuição dos vínculos entre as divisões em um único número, comparável entre municípios e anos. Usamos o Gini, e não outra medida, porque ele é uma medida de desigualdade de uso geral (Hoffmann, 2006, cap. 17) e porque o cálculo é direto a partir das participações setoriais.
+
+Cálculo: ordenamos as 87 divisões em ordem crescente de x_i e aplicamos G = (2/n) Σ i·x_i − (n+1)/n, com n = 87 (Hoffmann, 2006, cap. 17, pp. 340 e 341). O índice vai de 0, quando os vínculos estão igualmente distribuídos entre as 87 divisões, a um valor próximo de 1, quando todos estão em uma única divisão (com 87 divisões, o máximo é 86/87 = 0,989).
+
+O que observamos: G vai de 0,73 a 0,97 (mediana 0,86). Os municípios têm de 11 a 86 divisões com vínculo (mediana 47,5). O Gini cai à medida que aumenta o número de divisões com vínculo: a correlação entre os dois é de −0,95. Na prática, o X4 mede sobretudo a diversificação setorial (quantos setores têm emprego), e não a desigualdade de tamanho entre setores grandes.
+
+Sinal esperado e obtido: Gini menor significa mais diversificação. No modelo principal, o coeficiente é −0,655 (p = 0,0001), ou seja, mais diversificação está associada a salário maior, como previsto na hipótese H3.
+
+Ressalvas:
+(i) Hoffmann aplica as medidas a distribuições em geral, por exemplo ao número de empregados por empresa, mas as unidades dele são pessoas ou empresas; usar divisões setoriais como unidades, com peso igual, é uma adaptação nossa;
+(ii) divisões sem vínculo entram com zero, o que eleva o Gini sem indicar concentração de empregos.
+
+Como verificação, calculamos o Gini só com as divisões que têm vínculo. O coeficiente fica em −0,638 (p = 0,001), com o mesmo sinal e significância. Definiremos a versão final após as aulas.
+
+6. Teste das carreiras
+Retiramos o teste das carreiras porque ele é não paramétrico: não supõe distribuição dos resíduos e usa apenas a sequência de sinais. Mantivemos apenas testes paramétricos (Durbin-Watson e Breusch-Godfrey), aplicados à série de cada município.
+
+7. Influência
+Uma observação é influente quando a sua retirada altera de forma relevante os coeficientes estimados. Como esse diagnóstico é tratado em modelos de dados em painel e não faz parte do escopo, retiramos a análise de influência do trabalho.
+
+8. Projeção para 2021
+Escolhemos 2021 porque é o último ano com todas as variáveis publicadas (o VAB setorial municipal não está disponível para 2022 e 2023). Não projetamos para 2026 porque não há dados observados das variáveis explicativas para esses anos; uma projeção exigiria hipóteses sobre o comportamento delas.
+Sobre o viés: a previsão do modelo é do logaritmo do salário. Para voltar à média em reais, a conta correta é exp(previsão + s²/2), e não exp(previsão). Usar só exp(previsão) subestima a média, porque a média de uma função exponencial é maior que a exponencial da média. Aplicamos o fator exp(s²/2) = 1,0075 e apresentamos os dois valores. Como a normalidade é rejeitada, a correção é aproximada.
+
+9. Teste de Chow
+O corte foi escolhido pelo gráfico das variáveis médias ao longo do tempo (arquivo figuras_graficos/diag6_variaveis_no_tempo.png): o salário atinge o pico em 2017 e cai depois, a Selic atinge o pico em 2016 e 2017 e depois cai, e o crescimento da escolaridade desacelera a partir de 2017. Com o corte entre 2017 e 2018: F = 1,60 (gl 6 e 278), p = 0,146, sem quebra. Com o corte entre 2016 e 2017, para comparação: F = 1,79, p = 0,102, também sem quebra.
+
+10. Dados de Adrianópolis e Araucária
+A dúvida era se essas observações deveriam ser excluídas por parecerem fora do padrão dos demais municípios.
+(a) Adrianópolis: mantemos a observação. A participação industrial do município passa de 7% (2014) para 45% (2015), porque o VAB industrial publicado pelo IBGE salta de R$ 6,2 milhões para R$ 67,8 milhões. Confirmamos o valor na API do SIDRA (tabela 5938): o cálculo reproduz o valor publicado pelo IBGE, e não identificamos erro de construção.
+(b) Araucária: mantemos as observações. O VAB industrial publicado é negativo em 2012 (R$ -560,8 milhões) e 2013 (R$ -246,4 milhões). Como são dados oficiais do IBGE, não os excluímos; os valores estão marcados no painel.
+
+Permanecemos à disposição.
+
+Atenciosamente,

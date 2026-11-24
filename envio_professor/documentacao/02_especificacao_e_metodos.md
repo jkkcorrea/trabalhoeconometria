@@ -1,40 +1,50 @@
 # Especificação e métodos
 
-Três especificações, todas por MQO sobre o painel empilhado:
+## Modelo
 
-- **Modelo 2 (comparação, com X6):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + b6 X6 + u_it.
-- **Modelos 3 e 3b:** Modelo 2 com a dummy de Curitiba; o 3b acrescenta a interação X3 x X6.
-- **Modelo 4 (principal):** ln(Y_it) = b1 + b2 X2 + b3 X3 + b4 X4 + b5 X5 + dummies de município + u_it.
+ln(salário real)_it = β0 + β1 X2_it + β2 X3_it + β3 X4_it + β4 X5_t + β5 X6_i + u_it
 
-A escolha do Modelo 4 como principal se apoia nos testes da Etapa 6: o F de acréscimo das dummies rejeita e o RESET passa a não rejeitar. A forma funcional não era o problema; a heterogeneidade entre municípios era. Ver 04_diagnosticos.md.
+Estimação por mínimos quadrados ordinários (MQO) com as 290 observações empilhadas. Inferência com erros-padrão de White (HC1), com t de n − k graus de liberdade (284).
 
-Fontes do uso de variáveis dummy: Gujarati, cap. 9 (PDF pp. 332 a 352), e o trabalho de exemplo da disciplina (seção 2.3). Os slides das aulas lidos não tratam de dummies.
+## Hipóteses
 
-## Métodos usados (todos ensinados na disciplina)
+H0 geral: o salário médio real formal de um município não depende da sua escolaridade, da sua estrutura de emprego e da sua localização, controlados os efeitos comuns a todos os municípios.
+Ha: pelo menos uma dessas condições afeta o salário.
 
-| Método | Uso no projeto | Fonte oficial |
+| Hipótese | Variável | Sinal esperado |
 |---|---|---|
-| MQO e álgebra matricial | estimação e memorial | notas de regressão múltipla |
-| t, F, ANOVA, R2 | inferência e teste de acréscimo | notas de regressão múltipla |
-| Variáveis dummy | controle de município (Modelo 4) e de Curitiba | Gujarati, cap. 9 (confirmar no livro) |
-| FIV e tolerância (limite 10) | multicolinearidade | notas de multicolinearidade; Guia P2 |
-| Breusch-Pagan-Godfrey | heterocedasticidade | notas de heterocedasticidade; provas 2023 a 2025 |
-| Goldfeld-Quandt | heterocedasticidade | notas de heterocedasticidade |
-| Erros-padrão de White (HC1) | inferência robusta | notas de heterocedasticidade; Guia P2 |
-| Durbin-Watson e ρ por regressão auxiliar AR(1) | autocorrelação, série de cada município | Gujarati, cap. 12 (PDF pp. 495 a 499); Tabela D.5A (PDF p. 995); Guia P2 (cinco zonas) |
-| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | Gujarati, cap. 12 (PDF pp. 499 e 500); slides autocorrel |
-| Teste das carreiras (runs) | aleatoriedade dos resíduos por município | Gujarati, cap. 12 (PDF p. 493); slides autocorrel pp. 79 a 93 |
-| Prais-Winsten e Cochrane-Orcutt | correção da autocorrelação, ρ comum, dentro de cada município | Gujarati, cap. 12 (PDF pp. 510 a 528); Guia P2 (não aparecem nos slides autocorrel) |
-| Jarque-Bera | normalidade dos resíduos | Gujarati, cap. 5, seção 5.12 (PDF pp. 176 e 177) |
-| Alavancagem e resíduo padronizado | observações atípicas e influentes (sem teste formal) | Gujarati, cap. 13, Outliers, Leverage, and Influence (PDF pp. 568 e 569) |
-| RESET de Ramsey | forma funcional | notas de especificação e diagnóstico |
-| LM para variável omitida | acréscimo de tendência linear | notas de especificação e diagnóstico |
-| Teste de Chow | quebra estrutural por período | notas do teste de Chow |
+| H1 | escolaridade (X2) | positivo |
+| H2 | industrialização (X3) | positivo |
+| H3 | diversificação setorial (X4, Gini invertido) | negativo para o Gini |
+| H4 | Selic real (X5) | exploratória, sem sinal único |
+| H5 | distância a Curitiba (X6) | negativo |
 
-## Métodos removidos do projeto (não ensinados nas fontes oficiais)
+Critério: rejeita-se H0 no coeficiente quando p < 0,05.
 
-Efeitos fixos e aleatórios como estimadores próprios, Mundlak, Hausman, erros agrupados por município, bootstrap e Box-Cox. Newey-West não é aplicado ao painel empilhado: ele corrige erros-padrão de uma série temporal única, e o painel empilhado não atende a essa condição (não aplicado; ver 04_diagnosticos.md). Smearing de Duan também não é usado.
+## Métodos usados
 
-A entropia de Shannon foi removida por engano: ela é ensinada (slides de medidas de desigualdade, pasta `aulas`). A X4 continua sendo o Gini; a entropia fica disponível como medida alternativa.
+| Método | Uso no trabalho | Referência (Gujarati, 4ª ed., PDF) |
+|---|---|---|
+| MQO e álgebra matricial | estimação e memorial | caps. 6 e 7 |
+| Erros-padrão de White (HC1) | inferência | cap. 11, p. 442 em diante |
+| Multicolinearidade (FIV e tolerância) | diagnóstico | cap. 10 |
+| Breusch-Pagan-Godfrey | heterocedasticidade | cap. 11, pp. 439 e 440 |
+| Goldfeld-Quandt | heterocedasticidade | cap. 11, pp. 436 a 440 |
+| Shapiro-Wilk e gráfico Q-Q | normalidade dos resíduos | orientação do professor |
+| RESET de Ramsey | forma funcional | cap. 13, pp. 549 a 552 |
+| Teste LM para tendência linear | variável omitida (ano) | cap. 13 |
+| Teste de Chow | quebra estrutural | cap. 8, pp. 303 a 309 |
+| Durbin-Watson (tabela D.5A) | autocorrelação, série de cada município | cap. 12, pp. 495 a 499; Apêndice D, p. 995 |
+| Breusch-Godfrey (ordem 1) | autocorrelação, série de cada município | cap. 12, pp. 499 e 500 |
+| Retransformação do logaritmo | previsão em reais com correção exp(s²/2) | presunção da modelagem |
 
-Fontes oficiais e IDs no Drive: `06_fontes.md`.
+## Métodos fora do escopo (não usados)
+
+Variáveis binárias de município, métodos de dados em painel (efeitos fixos e aleatórios, teste de Hausman, Mundlak), correção de autocorrelação de painel (Prais-Winsten e Cochrane-Orcutt sobre o painel), Newey-West sobre o painel empilhado, teste das carreiras (não paramétrico), análise de influência (distância de Cook e DFBETAS), Box-Cox, smearing de Duan e bootstrap. Esses métodos foram retirados do trabalho por orientação do professor, ou não se aplicam ao painel empilhado.
+
+## Projeção
+
+A projeção é uma previsão dentro da amostra para 2021, último ano com todas as variáveis publicadas. Não há previsão para 2026. A previsão é x0'b; o intervalo da média usa x0'(X'X)^-1 x0 σ², e o intervalo individual, σ²(1 + x0'(X'X)^-1 x0).
+
+Viés da retransformação: a média em reais é exp(previsão + s²/2) sob erros normais. Aplicamos o fator exp(s²/2) = 1,0075. Como a normalidade é rejeitada, a correção é aproximada.
+

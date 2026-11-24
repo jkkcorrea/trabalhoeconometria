@@ -1,2 +1,0 @@
-teste,hipotese_nula,hipotese_alternativa,gl_numerador,gl_denominador,estatistica_f,p_valor,decisao_5pct
-"F de acréscimo das dummies de município (X2 a X5, sem e com as dummies)","H0: beta(dummies de município) = 0 conjuntamente (modelo restrito, sem dummies)","Ha: ao menos uma dummy de município diferente de zero (modelo irrestrito, com dummies)",28,257,76.12636373009383,7.375166812864999e-108,rejeita H0

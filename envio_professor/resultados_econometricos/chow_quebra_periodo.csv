@@ -1,2 +1,3 @@
-modelo,teste,hipotese_nula,hipotese_alternativa,n1,n2,k,estatistica_f,gl,p_valor,decisao_5pct
-Modelo 2,Chow: quebra estrutural entre 2012-2016 e 2017-2021,H0: beta(2012-2016) = beta(2017-2021) (sem quebra estrutural),Ha: ao menos um coeficiente diferente entre os dois períodos (quebra estrutural),145,145,6,1.7863052872822303,6; 278,0.1018478414994964,não rejeita H0
+modelo,corte,teste,hipotese_nula,hipotese_alternativa,n1,n2,k,estatistica_f,gl,p_valor,decisao_5pct
+Modelo 2 (principal),2012-2017 x 2018-2021,"Chow, corte indicado pelo gráfico",H0: beta(primeiro período) = beta(segundo período) (sem quebra estrutural),Ha: ao menos um coeficiente diferente entre os dois períodos (quebra estrutural),174,116,6,1.602648798577769,6; 278,0.14632838845305654,não rejeita H0
+Modelo 2 (principal),2012-2016 x 2017-2021,"Chow, corte anterior (comparação)",H0: beta(primeiro período) = beta(segundo período) (sem quebra estrutural),Ha: ao menos um coeficiente diferente entre os dois períodos (quebra estrutural),145,145,6,1.7863052872822303,6; 278,0.1018478414994964,não rejeita H0
