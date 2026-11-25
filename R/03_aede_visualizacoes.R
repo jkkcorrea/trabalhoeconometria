@@ -10,6 +10,7 @@
 #        ./figuras_graficos/fig3_dispersao_capital_humano_industria.png
 #        ./figuras_graficos/mapa1_painel_espacial_rmc.png
 #        ./figuras_graficos/animacao1_mapa_renda_rmc.gif
+#        ./figuras_graficos/legenda_municipios_rmc_vertical.png
 #        ./figuras_graficos/legenda_municipios_rmc.png
 #        ./figuras_graficos/animacao2_ranking_salario_municipios.gif
 #
@@ -514,6 +515,15 @@ gravar_legenda <- function(dados) {
   arquivo
 }
 
+# Mesma legenda em duas colunas, para ficar ao lado do mapa e da animação nos slides.
+gravar_legenda_vertical <- function(dados) {
+  arquivo <- file.path(DIR_FIGURAS, "legenda_municipios_rmc_vertical.png")
+  numeracao <- numerar_municipios(dados)
+  grafico <- painel_legenda(numeracao, colunas = 2, titulo = "Legenda: número e município")
+  ggsave(arquivo, grafico, width = 5.4, height = 6.6, units = "in", dpi = 300, bg = "white")
+  arquivo
+}
+
 # Mapa individual de uma variável: barra de cor horizontal abaixo do mapa; escala e seta do norte
 # só no primeiro painel.
 mapa_individual <- function(mapa_ano, contorno_curitiba, pontos, variavel, titulo,
@@ -570,11 +580,11 @@ plotar_mapas_estaticos <- function(dados, mapa_sf) {
   })
 
   grade <- patchwork::wrap_plots(mapas, ncol = 2, nrow = 2)
-  grafico <- (grade / painel_legenda(numeracao)) +
-    patchwork::plot_layout(heights = c(10.2, 2.1)) +
+  # A legenda de número e município não vai no mapa: está em figura própria (legenda_municipios_rmc.png).
+  grafico <- grade +
     patchwork::plot_annotation(
       title    = paste0("Distribuição espacial das variáveis centrais na RMC, ", ultimo_ano),
-      subtitle = "29 municípios da Região Metropolitana de Curitiba, numerados (legenda abaixo); contorno preto destaca Curitiba",
+      subtitle = "29 municípios da Região Metropolitana de Curitiba, numerados (legenda em figura própria); contorno preto destaca Curitiba",
       caption  = paste(FONTE_SALARIO, paste(FONTE_RAIS, FONTE_PIB, FONTE_MALHA), sep = "\n"),
       theme    = theme(
         plot.title    = element_text(face = "bold", size = 15, hjust = 0.5),
@@ -583,7 +593,7 @@ plotar_mapas_estaticos <- function(dados, mapa_sf) {
       )
     )
 
-  ggsave(arquivo, grafico, width = 12, height = 13.2, units = "in", dpi = 300, bg = "white")
+  ggsave(arquivo, grafico, width = 12, height = 11.2, units = "in", dpi = 300, bg = "white")
   arquivo
 }
 
@@ -610,7 +620,7 @@ renderizar_gif_mapa <- function(dados, mapa_sf) {
                                                  barwidth = unit(8, "cm"), barheight = unit(0.4, "cm"))) +
     labs(
       title    = "Rendimento médio real na RMC, {round(frame_time)}",
-      subtitle = "Escala de cor fixa para todos os anos. Contorno preto: Curitiba. Legenda dos números abaixo do mapa.",
+      subtitle = "Escala de cor fixa para todos os anos. Contorno preto: Curitiba. Legenda dos números em figura própria.",
       caption  = paste(FONTE_SALARIO, FONTE_MALHA, sep = "\n")
     ) +
     theme_void(base_size = 13) +
@@ -626,8 +636,8 @@ renderizar_gif_mapa <- function(dados, mapa_sf) {
     gganimate::transition_time(ano) +
     gganimate::ease_aes("linear")
 
-  # Os quadros do mapa são gravados em PNG e recebem, abaixo, a legenda estática de
-  # número e município; o GIF é montado com o gifski a partir dos quadros compostos.
+  # O GIF é montado com o gifski a partir dos quadros do mapa; a legenda de número e município
+  # fica em figura própria (legenda_municipios_rmc_vertical.png), fora da animação.
   dir_quadros <- tempfile("quadros_mapa_")
   dir.create(dir_quadros)
   on.exit(unlink(dir_quadros, recursive = TRUE), add = TRUE)
@@ -639,30 +649,9 @@ renderizar_gif_mapa <- function(dados, mapa_sf) {
   if (length(quadros) != ANIM_FPS * ANIM_DURACAO) {
     stop("Número de quadros inesperado: ", length(quadros), call. = FALSE)
   }
-
-  altura_legenda <- 250
-  arq_legenda <- file.path(dir_quadros, "legenda_fixa.png")
-  ggsave(arq_legenda, painel_legenda(numeracao, colunas = 4), width = ANIM_LARGURA / 100,
-         height = altura_legenda / 100, units = "in", dpi = 100, bg = "white")
-  img_legenda <- png::readPNG(arq_legenda)[, , 1:3, drop = FALSE]
-  if (dim(img_legenda)[2] != ANIM_LARGURA) stop("Largura da legenda diferente da dos quadros.", call. = FALSE)
-
-  quadros_compostos <- file.path(dir_quadros, sprintf("c_%04d.png", seq_along(quadros)))
-  for (i in seq_along(quadros)) {
-    img <- png::readPNG(quadros[i])[, , 1:3, drop = FALSE]
-    png::writePNG(abind_vertical(img, img_legenda), quadros_compostos[i])
-  }
-  gifski::gifski(quadros_compostos, gif_file = arquivo, width = ANIM_LARGURA,
-                 height = ANIM_ALTURA + altura_legenda, delay = 1 / ANIM_FPS, progress = FALSE)
+  gifski::gifski(quadros, gif_file = arquivo, width = ANIM_LARGURA,
+                 height = ANIM_ALTURA, delay = 1 / ANIM_FPS, progress = FALSE)
   arquivo
-}
-
-# Empilha duas imagens (arrays altura x largura x 3) na vertical.
-abind_vertical <- function(topo, base) {
-  out <- array(0, dim = c(dim(topo)[1] + dim(base)[1], dim(topo)[2], 3))
-  out[seq_len(dim(topo)[1]), , ] <- topo
-  out[dim(topo)[1] + seq_len(dim(base)[1]), , ] <- base
-  out
 }
 
 
@@ -773,6 +762,7 @@ gerar_todas_visualizacoes <- function() {
     "mapa1_painel_espacial_rmc.png"                 = function() plotar_mapas_estaticos(dados, mapa_sf),
     "animacao1_mapa_renda_rmc.gif"                  = function() renderizar_gif_mapa(dados, mapa_sf),
     "legenda_municipios_rmc.png"                    = function() gravar_legenda(dados),
+    "legenda_municipios_rmc_vertical.png"           = function() gravar_legenda_vertical(dados),
     "animacao2_ranking_salario_municipios.gif"      = function() renderizar_gif_ranking(dados)
   )
 

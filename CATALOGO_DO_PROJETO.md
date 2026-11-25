@@ -7,7 +7,7 @@ Projeto: salário médio real formal nos 29 municípios da Região Metropolitana
 ## Números do projeto
 
 - Scripts em `R/`: 9.
-- Figuras e animações em `envio_professor/figuras_graficos/`: 13 arquivos.
+- Figuras e animações em `envio_professor/figuras_graficos/`: 14 arquivos.
 - Arquivos em `envio_professor/resultados_econometricos/`: 30.
 - Decisões registradas em `_Trilha/DECISOES.md`: 65 (vigentes na última coluna: 55).
 - Pendências em `_Trilha/BACKLOG.md`: 42 abertas e 51 baixadas.
@@ -41,7 +41,7 @@ Arquivos soltos na raiz (instruções, guias e documentos do projeto).
 | `dados_brutos` | 4 KB |  |
 | `dados_processados` | 4 KB |  |
 | `envio_professor` | 4 KB |  |
-| `envio_professor.zip` | 5.9 MB |  |
+| `envio_professor.zip` | 5.8 MB |  |
 | `figuras_graficos` | 4 KB |  |
 | `fontes` | 4 KB |  |
 | `hoffmann2006_cap17_desiguald.pdf` | 18.3 MB |  |
@@ -138,7 +138,7 @@ Gerada; não editar à mão.
 | `00_executar_tudo.R` | 2 KB | Script R: Uso, a partir da raiz do projeto:  Rscript R/00_executar_tudo.R |
 | `01_extracao_dados.R` | 36 KB | Script R |
 | `02_tratamento_painel.R` | 29 KB | Script R |
-| `03_aede_visualizacoes.R` | 35 KB | Script R |
+| `03_aede_visualizacoes.R` | 34 KB | Script R |
 | `04_modelagem_diagnosticos.R` | 17 KB | Script R |
 | `05_autocorrelacao_municipios.R` | 8 KB | Script R: Etapa 5: autocorrelação dos resíduos, por município (testes paramétricos) |
 | `06_especificacao_chow.R` | 17 KB | Script R: Etapa 6: especificação, estabilidade estrutural e previsão do modelo principal |
@@ -192,7 +192,7 @@ Gerada; não editar à mão.
 
 | Arquivo | Tamanho | O que contém |
 |---|---|---|
-| `animacao1_mapa_renda_rmc.gif` | 1.1 MB | Animação GIF |
+| `animacao1_mapa_renda_rmc.gif` | 896 KB | Animação GIF |
 | `animacao2_ranking_salario_municipios.gif` | 1.3 MB | Animação GIF |
 | `diag1_residuos_vs_ajustados.png` | 137 KB | Figura PNG |
 | `diag2_residuos_por_municipio.png` | 122 KB | Figura PNG |
@@ -204,7 +204,8 @@ Gerada; não editar à mão.
 | `fig2_ridgeplot_salario_anos.png` | 437 KB | Figura PNG |
 | `fig3_dispersao_capital_humano_industria.png` | 614 KB | Figura PNG |
 | `legenda_municipios_rmc.png` | 177 KB | Figura PNG |
-| `mapa1_painel_espacial_rmc.png` | 1.2 MB | Figura PNG |
+| `legenda_municipios_rmc_vertical.png` | 220 KB | Figura PNG |
+| `mapa1_painel_espacial_rmc.png` | 1.0 MB | Figura PNG |
 
 ## Pasta de envio: documentação validada
 

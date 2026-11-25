@@ -4,7 +4,7 @@ Verificação independente. Recalcula por álgebra matricial e pelas fórmulas e
 
 | Id | Verificação | Situação | Detalhe |
 |---|---|---|---|
-| A1 | Arquivos essenciais presentes | APROVADA | 71 arquivos esperados presentes; 71 arquivos na pasta |
+| A1 | Arquivos essenciais presentes | APROVADA | 72 arquivos esperados presentes; 72 arquivos na pasta |
 | A1b | Sem arquivos de versões anteriores nos resultados, figuras e dados brutos | APROVADA | nenhum arquivo antigo |
 | A2 | Nenhum método fora do escopo ensinado nos scripts e documentos | APROVADA | 20 arquivos varridos |
 | A3 | Sem identificadores internos de trabalho nem caminhos pessoais | APROVADA | limpo |
