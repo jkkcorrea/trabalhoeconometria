@@ -143,5 +143,5 @@ Gujarati (2003); Gujarati e Porter (2011, citado nas aulas; não consultado); Ho
 
 ## Pendências desta apresentação
 - Gerar o arquivo PowerPoint a partir deste roteiro, após revisão do texto.
-- Conferir se a figura do slide 25 marca Adrianópolis (hoje só o rótulo de 2021).
+- Conferir se a figura do slide 25 marca Adrianópolis (rótulos de 2021 em cinco municípios de destaque).
 - Confirmar as referências do slide 22.

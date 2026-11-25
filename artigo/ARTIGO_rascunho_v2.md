@@ -127,7 +127,7 @@ Dois valores merecem nota. Em Araucária, o VAB da indústria é negativo em 201
 
 [imagem: figuras_graficos/fig3_dispersao_capital_humano_industria.png, proporção 1,87; largura 16 cm, altura 8,6 cm; centralizada; a inserir na versão final]
 
-FONTE: O autor (2026), a partir de RAIS, IBGE (SIDRA) e Banco Central. Os triângulos vermelhos são os dois valores negativos de Araucária.
+FONTE: O autor (2026), a partir de RAIS, IBGE (SIDRA) e Banco Central. Os triângulos vermelhos são os dois valores negativos de Araucária; os rótulos de 2021 indicam Curitiba, Araucária, São José dos Pinhais, Adrianópolis e Doutor Ulysses.
 
 ### 3.4 Construção do Gini setorial
 
