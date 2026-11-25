@@ -1,6 +1,6 @@
 # Roteiro da apresentação (rascunho v2, 23/11/2026)
 
-Duração estimada: 12 a 15 minutos, 22 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo branco, tons de cinza, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
+Duração estimada: 12 a 15 minutos, 29 slides (o cabeçalho anterior dizia 14; corrigido em 23/11/2026, [revisar]). Uma mensagem por slide. Números do envio (`envio_professor/`). Figuras em `figuras_graficos/`. A versão em PowerPoint ainda não foi gerada; a versão atual é o artefato de Slides (fundo branco, tons de cinza, Times New Roman), com a fonte em `apresentacao/deck_fonte/project/`.
 
 ## Slide 1: título
 Salário médio real formal e estrutura produtiva na RMC, 2012 a 2021. Nome, disciplina (Econometria I, UFPR), data.

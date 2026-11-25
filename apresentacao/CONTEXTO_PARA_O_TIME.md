@@ -51,7 +51,7 @@ Modelo: MQO com erros robustos de White. R² ajustado 0,643.
 
 ## 6. Slide a slide
 
-Os slides estão no artefato de Slides (link no registro de pendências). A fonte está em `apresentacao/deck_fonte/project/`. Tempo estimado: 12 a 15 minutos (22 slides).
+Os slides estão no artefato de Slides (link no registro de pendências). A fonte está em `apresentacao/deck_fonte/project/`. Tempo estimado: 12 a 15 minutos (29 slides, com os gráficos em slides próprios).
 
 1. **Título.** Apresentar o trabalho. Trocar `[Nome do pesquisador]` e `[data da apresentação]` antes de usar.
 2. **Pergunta.** Ler a pergunta em voz alta. Dizer que o trabalho descreve associações.
