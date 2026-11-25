@@ -44,7 +44,7 @@ Datas de acesso dos dados (necessárias para a NBR 6023): **[a confirmar]**; a e
 
 ## 4. Caso de Adrianópolis: fábrica de cimento (Secil Supremo)
 
-Usado em: `fontes/ADRIANOPOLIS_PESQUISA.md`, artigo (§3.3 e §6) e slide 18. A hipótese de que a fábrica explique o salto da participação industrial em 2015 é **plausível e não confirmada**.
+Usado em: `fontes/ADRIANOPOLIS_PESQUISA.md`, artigo (§3.3 e §6) e slides 24 e 25. A hipótese de que a fábrica explique o salto da participação industrial em 2015 é **plausível e não confirmada**.
 
 | Fonte | Link | O que traz | Estado |
 |---|---|---|---|
